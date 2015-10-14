@@ -1,8 +1,8 @@
 package eu.theunitry.fabula;
 
-public class Main {
+public class UNFabula {
 
     public static void main(String[] args) {
-	// write your code here
+        System.out.println("Fabula");
     }
 }
