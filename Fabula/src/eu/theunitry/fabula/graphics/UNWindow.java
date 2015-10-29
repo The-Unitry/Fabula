@@ -11,6 +11,12 @@ public class UNWindow extends UNObject {
     private final int HEIGHT;
     private final JFrame frame;
 
+    /**
+     * UN Window
+     * @param title     Title that will be displayed in dock
+     * @param width     Width
+     * @param height    Height
+     */
     public UNWindow(String title, int width, int height) {
         this.TITLE = title;
         this.WIDTH = width;
@@ -26,6 +32,7 @@ public class UNWindow extends UNObject {
         this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
+        this.frame.setUndecorated(true);
         this.frame.setLocationRelativeTo(null);
     }
 
