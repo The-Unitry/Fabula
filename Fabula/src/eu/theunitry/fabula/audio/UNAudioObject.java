@@ -1,5 +1,7 @@
 package eu.theunitry.fabula.audio;
 
-public class UNAudioObject {
+import eu.theunitry.fabula.objects.UNObject;
+
+public class UNAudioObject extends UNObject {
 
 }

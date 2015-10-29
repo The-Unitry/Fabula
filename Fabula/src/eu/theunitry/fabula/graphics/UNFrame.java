@@ -1,4 +1,6 @@
 package eu.theunitry.fabula.graphics;
 
-public class UNFrame extends UNGraphics {
+import eu.theunitry.fabula.objects.UNObject;
+
+public class UNFrame extends UNObject {
 }
