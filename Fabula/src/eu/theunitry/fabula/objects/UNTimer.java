@@ -4,12 +4,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class UNGameLoop {
+public class UNTimer {
 
     private final Timer gameLoop;
     private final GameLoop actionListener;
 
-    public UNGameLoop() {
+    public UNTimer() {
         this.actionListener = new GameLoop();
         this.gameLoop = new Timer(5, this.actionListener);
     }
