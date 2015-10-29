@@ -4,7 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class UNTimer {
+public class UNTimer
+{
 
     private final Timer gameLoop;
     private final GameLoop actionListener;

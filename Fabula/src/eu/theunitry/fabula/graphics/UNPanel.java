@@ -5,7 +5,8 @@ import eu.theunitry.fabula.objects.UNObject;
 import javax.swing.*;
 import java.awt.*;
 
-public class UNPanel extends UNObject {
+public class UNPanel extends UNObject
+{
 
     private final JPanel panel;
 

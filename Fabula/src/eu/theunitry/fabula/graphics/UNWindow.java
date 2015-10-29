@@ -4,7 +4,8 @@ import eu.theunitry.fabula.objects.UNObject;
 
 import javax.swing.*;
 
-public class UNWindow extends UNObject {
+public class UNWindow extends UNObject
+{
 
     private final String TITLE;
     private final int WIDTH;
