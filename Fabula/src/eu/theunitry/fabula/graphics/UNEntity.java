@@ -1,36 +1,44 @@
 package eu.theunitry.fabula.graphics;
 
-public class UNEntity extends UNGraphicsObject {
+public class UNEntity extends UNGraphicsObject
+{
 
     private int velx;
     private int vely;
     private int gravity;
 
-    public int getVelx() {
+    public int getVelx()
+    {
         return this.velx;
     }
 
-    public void setVelx(int velx) {
+    public void setVelx(int velx)
+    {
         this.velx = velx;
     }
 
-    public int getVely() {
+    public int getVely()
+    {
         return this.vely;
     }
 
-    public void setVely(int vely) {
+    public void setVely(int vely)
+    {
         this.vely = vely;
     }
 
-    public int getGravity() {
+    public int getGravity()
+    {
         return this.gravity;
     }
 
-    public void setGravity(int gravity) {
+    public void setGravity(int gravity)
+    {
         this.gravity = gravity;
     }
 
-    public String showBubble(String text) {
+    public String showBubble(String text)
+    {
         return text;
     }
 }
