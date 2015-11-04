@@ -13,7 +13,7 @@ public class UNGameScreen extends UNObject
 
     private final UNWindow window;
     private UNTimer gameLoop;
-    private UNPanel panel;
+    public UNPanel panel;
 
     public UNGameScreen() {
         this.window = new UNWindow("Fabula", 768, 512);

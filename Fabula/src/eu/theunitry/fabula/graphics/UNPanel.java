@@ -22,7 +22,7 @@ public class UNPanel extends JPanel
 
     public JPanel getPanel()
     {
-        return (JPanel) this;
+        return this;
     }
 
 }

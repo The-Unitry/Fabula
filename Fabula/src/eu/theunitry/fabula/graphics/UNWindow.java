@@ -11,6 +11,7 @@ public class UNWindow extends UNObject
     private final int WIDTH;
     private final int HEIGHT;
     private final JFrame frame;
+    private final static boolean DEBUG = true;
 
     /**
      * UN Window
@@ -35,7 +36,10 @@ public class UNWindow extends UNObject
         this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        this.frame.setUndecorated(true);
+        if(!DEBUG)
+        {
+            this.frame.setUndecorated(true);
+        }
         this.frame.setLocationRelativeTo(null);
     }
 
