@@ -5,23 +5,19 @@ public class UNBlock extends UNGraphicsObject {
     private boolean solid;
     public boolean attribute;
 
-    public boolean getSolid()
-    {
+    public boolean getSolid() {
         return solid;
     }
 
-    public void setSolid(boolean solid)
-    {
+    public void setSolid(boolean solid) {
 
     }
 
-    public boolean getAttribute()
-    {
+    public boolean getAttribute() {
         return attribute;
     }
 
-    public void setAttribute(boolean attribute)
-    {
+    public void setAttribute(boolean attribute) {
 
     }
 }
