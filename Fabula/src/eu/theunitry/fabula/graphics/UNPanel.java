@@ -8,17 +8,20 @@ import java.awt.*;
 public class UNPanel extends JPanel
 {
 
-    public UNPanel() {
+    public UNPanel()
+    {
 
     }
 
     @Override
-    public void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g)
+    {
         super.paintComponent(g);
         g.drawRect(10, 10, 20, 20);
     }
 
-    public JPanel getPanel() {
+    public JPanel getPanel()
+    {
         return (JPanel) this;
     }
 

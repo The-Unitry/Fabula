@@ -6,18 +6,18 @@ public class UNBlock extends UNGraphicsObject {
     public boolean attribute;
 
     public boolean getSolid() {
-        return this.solid;
+        return solid;
     }
 
     public void setSolid(boolean solid) {
-        this.solid = solid;
+
     }
 
     public boolean getAttribute() {
-        return this.attribute;
+        return attribute;
     }
 
     public void setAttribute(boolean attribute) {
-        this.attribute = attribute;
+
     }
 }

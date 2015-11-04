@@ -18,7 +18,8 @@ public class UNWindow extends UNObject
      * @param width     Width
      * @param height    Height
      */
-    public UNWindow(String title, int width, int height) {
+    public UNWindow(String title, int width, int height)
+    {
         this.TITLE = title;
         this.WIDTH = width;
         this.HEIGHT = height;
@@ -28,7 +29,8 @@ public class UNWindow extends UNObject
         this.frame.setVisible(true);
     }
 
-    public void init() {
+    public void init()
+    {
         this.frame.setTitle(this.TITLE);
         this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
@@ -37,23 +39,28 @@ public class UNWindow extends UNObject
         this.frame.setLocationRelativeTo(null);
     }
 
-    public void addPanel(JPanel panel) {
+    public void addPanel(JPanel panel)
+    {
         this.frame.add(panel);
     }
 
-    public void removePanel(JPanel panel) {
+    public void removePanel(JPanel panel)
+    {
         this.frame.remove(panel);
     }
 
-    public JFrame getFrame() {
+    public JFrame getFrame()
+    {
         return this.frame;
     }
 
-    public int getContentWidth() {
+    public int getContentWidth()
+    {
         return this.frame.getContentPane().getWidth();
     }
 
-    public int getContentHeight() {
+    public int getContentHeight()
+    {
         return this.frame.getContentPane().getHeight();
     }
 
