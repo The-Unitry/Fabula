@@ -5,21 +5,21 @@ import eu.theunitry.fabula.objects.UNObject;
 import javax.swing.*;
 import java.awt.*;
 
-public class UNPanel extends UNObject
+public class UNPanel extends JPanel
 {
 
-    private final JPanel panel;
-
     public UNPanel() {
-        this.panel = new JPanel();
+
     }
 
+    @Override
     public void paintComponent(Graphics g) {
-
+        super.paintComponent(g);
+        g.drawRect(10, 10, 20, 20);
     }
 
     public JPanel getPanel() {
-        return this.panel;
+        return (JPanel) this;
     }
 
 }
