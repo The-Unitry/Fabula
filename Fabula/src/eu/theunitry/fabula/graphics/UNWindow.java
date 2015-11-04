@@ -30,6 +30,7 @@ public class UNWindow extends UNObject
         this.frame.setVisible(true);
     }
 
+
     public void init()
     {
         this.frame.setTitle(this.TITLE);
