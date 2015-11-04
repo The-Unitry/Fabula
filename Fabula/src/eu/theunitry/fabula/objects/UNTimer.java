@@ -24,7 +24,7 @@ public class UNTimer
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            gameScreen.panel.revalidate();
+            gameScreen.getPanel().revalidate();
         }
 
     }
