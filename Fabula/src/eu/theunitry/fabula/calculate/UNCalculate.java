@@ -1,10 +1,7 @@
 package eu.theunitry.fabula.calculate;
 
-/**
- * Created by Jeroen on 05-11-2015.
- */
-
-public class UNCalculate{
+public class UNCalculate
+{
 
     private int result;
 
@@ -25,7 +22,6 @@ public class UNCalculate{
                 this.divide(g1, g2);
                 break;
         }
-
         return this.result;
     }
 
@@ -48,5 +44,4 @@ public class UNCalculate{
     {
         this.result = g1 / g2;
     }
-
 }
