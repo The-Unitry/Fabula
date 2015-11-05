@@ -31,7 +31,7 @@ public class UNCalculate{
     private void sum(int g1, int g2)
     {
 
-        result = g1+g2;
+        result = g1 + g2;
 
     }
 
@@ -45,14 +45,14 @@ public class UNCalculate{
     public void multiply(int g1, int g2)
     {
 
-        result = g1*g2;
+        result = g1 * g2;
 
     }
 
     public void divide(int g1, int g2)
     {
 
-        result = g1/g2;
+        result = g1 / g2;
 
     }
 
