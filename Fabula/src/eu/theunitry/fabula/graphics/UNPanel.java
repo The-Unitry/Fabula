@@ -22,7 +22,7 @@ public class UNPanel extends JPanel
     @Override
     public void paintComponent(Graphics g)
     {
-        g.drawImage(getBackgroundImage(), 0, 0, this);
+        g.drawImage(getBackgroundImage(), 0, 0, 768, 512, this);
         layerObjects(g);
         layerHUD();
     }
