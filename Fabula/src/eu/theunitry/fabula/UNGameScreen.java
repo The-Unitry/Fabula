@@ -24,7 +24,7 @@ public class UNGameScreen extends UNObject
         this.launcher = new UNLauncher();
         this.splash = new UNPanel();
         try {
-            this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash.png")));
+            this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
