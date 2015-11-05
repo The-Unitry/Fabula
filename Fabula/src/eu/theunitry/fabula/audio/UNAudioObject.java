@@ -1,8 +1,13 @@
 package eu.theunitry.fabula.audio;
 
 import eu.theunitry.fabula.objects.UNObject;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+import kuusisto.tinysound.Music;
+
+import javax.sound.sampled.*;
+import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
 
 public abstract class UNAudioObject extends UNObject
 {
@@ -10,23 +15,21 @@ public abstract class UNAudioObject extends UNObject
     private double volume;
     private String src;
     private boolean playing;
-    private MediaPlayer sound;
+    private Clip sound;
 
     public UNAudioObject(){}
 
     public UNAudioObject(String src) {
-        this.setSrc("res/audio/" + src);
-        this.setVolume(1);
-        this.setPlaying(false);
+        this.setSrc(src);
         this.updateSound(this.getSrc());
+        this.setPlaying(false);
     }
 
     public void updateSound(String src) {
-        Media media = new Media(src);
-        sound = new MediaPlayer(media);
+        //new Music().lo;
     }
 
-    public MediaPlayer getSound() {
+    public Clip getSound() {
         return this.sound;
     }
 
@@ -35,7 +38,7 @@ public abstract class UNAudioObject extends UNObject
     }
 
     public void setSrc(String src) {
-        this.src = "res/audio/" + src;
+        this.src = "/audio/" + src;
     }
 
     public double getVolume() {
@@ -44,17 +47,11 @@ public abstract class UNAudioObject extends UNObject
 
     public void setVolume(double volume) {
         this.volume = volume;
-        this.getSound().setVolume(this.getVolume());
     }
 
     public void play() {
-        this.getSound().play();
+        this.getSound().start();
         this.setPlaying(true);
-    }
-
-    public void pause() {
-        this.getSound().pause();
-        this.setPlaying(false);
     }
 
     public void stop() {
