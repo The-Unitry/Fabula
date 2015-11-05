@@ -16,13 +16,30 @@ public class UNPanel extends JPanel
     @Override
     public void paintComponent(Graphics g)
     {
-        super.paintComponent(g);
-        g.drawRect(10, 10, 20, 20);
+        layerBackground();
+        layerBackgroundEffects();
+        layerBackObjects();
+        layerFrontObject();
     }
 
-    public JPanel getPanel()
+    public void layerBackground()
     {
-        return this;
+
+    }
+
+    public void layerBackgroundEffects()
+    {
+
+    }
+
+    public void layerBackObjects()
+    {
+
+    }
+
+    public void layerFrontObject()
+    {
+
     }
 
 }
