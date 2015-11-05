@@ -11,9 +11,12 @@ public class UNLauncher extends JPanel
     public UNLauncher()
     {
         label = new JLabel("Fabula");
-        this.setBackground(Color.black);
+        this.setBackground(new Color(255,82,44));
+        label.setForeground(Color.white);
+        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
         this.add(label);
-        System.out.println("test");
+
+        // TODO: Add buttons & background
     }
 
     public JPanel getPanel() {
