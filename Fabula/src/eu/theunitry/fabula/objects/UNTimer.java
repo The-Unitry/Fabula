@@ -29,7 +29,8 @@ public class UNTimer
 
     }
 
-    public UNGameScreen getGameScreen() {
+    public UNGameScreen getGameScreen()
+    {
         return this.gameScreen;
     }
 

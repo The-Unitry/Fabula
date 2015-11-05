@@ -1,6 +1,9 @@
 package eu.theunitry.fabula.graphics;
 
 import eu.theunitry.fabula.objects.UNObject;
+import java.io.*;
+import java.net.URL;
+import javax.sound.sampled.*;
 
 import javax.swing.*;
 
@@ -16,8 +19,8 @@ public class UNWindow extends UNObject
     /**
      * UN Window
      * @param title     Title that will be displayed in dock
-     * @param width     Width
-     * @param height    Height
+     * @param width     Width of window
+     * @param height    Height of window
      */
     public UNWindow(String title, int width, int height)
     {
@@ -37,10 +40,7 @@ public class UNWindow extends UNObject
         this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        if(!DEBUG)
-        {
-            this.frame.setUndecorated(true);
-        }
+        if(!DEBUG) this.frame.setUndecorated(true);
         this.frame.setLocationRelativeTo(null);
     }
 
