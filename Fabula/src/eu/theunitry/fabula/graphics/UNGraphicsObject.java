@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 
-public class UNGraphicsObject extends UNObject implements MouseListener, MouseMotionListener
+public abstract class UNGraphicsObject extends UNObject implements MouseListener, MouseMotionListener
 {
 
     private int x;
@@ -19,13 +19,13 @@ public class UNGraphicsObject extends UNObject implements MouseListener, MouseMo
     private int width, height;
     private int xOffset, yOffset;
 
-    public UNGraphicsObject(int x, int y, Image image, boolean clickable, Rectangle hitbox, int width, int height)
+    public UNGraphicsObject(int x, int y, Image image, boolean clickable, int width, int height)
     {
         this.x = x;
         this.y = y;
         this.image = image;
         this.clickable = clickable;
-        this.hitbox = hitbox;
+        this.hitbox = new Rectangle(x, y, width, height);
         this.mouseHold = false;
         this.width = width;
         this.height = height;
@@ -102,11 +102,6 @@ public class UNGraphicsObject extends UNObject implements MouseListener, MouseMo
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-
-    }
-
-    @Override
     public void mousePressed(MouseEvent e)
     {
         Point mousePos = MouseInfo.getPointerInfo().getLocation();
@@ -126,16 +121,6 @@ public class UNGraphicsObject extends UNObject implements MouseListener, MouseMo
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-
-    }
-
-    @Override
     public void mouseDragged(MouseEvent e)
     {
         if(mouseHold)
@@ -144,10 +129,5 @@ public class UNGraphicsObject extends UNObject implements MouseListener, MouseMo
             this.setX((int)mousePos.getX() - this.xOffset);
             this.setY((int) mousePos.getY() - this.yOffset);
         }
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
     }
 }
