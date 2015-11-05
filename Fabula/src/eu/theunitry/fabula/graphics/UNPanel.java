@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public class UNPanel extends JPanel
 {
-
     private Image backgroundImage;
     private ArrayList<UNGraphicsObject> objects;
     private ArrayList hud;
@@ -37,7 +36,6 @@ public class UNPanel extends JPanel
     {
         return this.backgroundImage;
     }
-
     public void layerObjects(Graphics g)
     {
         for (UNGraphicsObject object : objects)
@@ -45,10 +43,8 @@ public class UNPanel extends JPanel
             g.drawImage(object.getImage(), object.getX(), object.getY(), this);
         }
     }
-
     public void layerHUD()
     {
         //TODO: HUDObjects?
     }
-
 }

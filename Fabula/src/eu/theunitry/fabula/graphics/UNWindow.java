@@ -13,7 +13,7 @@ public class UNWindow extends UNObject
     private final String TITLE;
     private final int WIDTH;
     private final int HEIGHT;
-    private final JFrame frame;
+    public JFrame frame;
     private final static boolean DEBUG = true;
 
     /**
@@ -28,7 +28,6 @@ public class UNWindow extends UNObject
         this.WIDTH = width;
         this.HEIGHT = height;
         this.frame = new JFrame();
-
         this.init();
         this.frame.setVisible(true);
     }

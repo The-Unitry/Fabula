@@ -13,6 +13,11 @@ public class UNLauncher extends JPanel
         label = new JLabel("Fabula");
         this.setBackground(Color.black);
         this.add(label);
-
+        System.out.println("test");
     }
+
+    public JPanel getPanel() {
+        return this;
+    }
+
 }
