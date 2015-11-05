@@ -12,6 +12,8 @@ public abstract class UNAudioObject extends UNObject
     private boolean playing;
     private MediaPlayer sound;
 
+    public UNAudioObject(){}
+
     public UNAudioObject(String src) {
         this.setSrc("res/audio/" + src);
         this.setVolume(1);
