@@ -101,8 +101,6 @@ public abstract class UNGraphicsObject extends UNObject implements MouseListener
         this.height = height;
     }
 
-    // Mouse Actions
-
     @Override
     public void mousePressed(MouseEvent e)
     {
@@ -129,7 +127,7 @@ public abstract class UNGraphicsObject extends UNObject implements MouseListener
         {
             Point mousePos = MouseInfo.getPointerInfo().getLocation();
             this.setX((int)mousePos.getX() - this.xOffset);
-            this.setY((int)mousePos.getY() - this.yOffset);
+            this.setY((int) mousePos.getY() - this.yOffset);
         }
     }
 }
