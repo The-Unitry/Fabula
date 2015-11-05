@@ -1,7 +1,5 @@
 package eu.theunitry.fabula;
 
-import eu.theunitry.fabula.graphics.UNWindow;
-
 public class UNFabula
 {
 
