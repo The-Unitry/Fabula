@@ -25,35 +25,28 @@ public class UNCalculate{
                 this.divide(g1, g2);
                 break;
         }
-        return result;
+
+        return this.result;
     }
 
     private void sum(int g1, int g2)
     {
-
-        result = g1 + g2;
-
+        this.result = g1 + g2;
     }
 
-    public void subtract(int g1, int g2)
+    private void subtract(int g1, int g2)
     {
-
-        result = g1 - g2;
-
+        this.result = g1 - g2;
     }
 
-    public void multiply(int g1, int g2)
+    private void multiply(int g1, int g2)
     {
-
-        result = g1 * g2;
-
+        this.result = g1 * g2;
     }
 
-    public void divide(int g1, int g2)
+    private void divide(int g1, int g2)
     {
-
-        result = g1 / g2;
-
+        this.result = g1 / g2;
     }
 
 }
