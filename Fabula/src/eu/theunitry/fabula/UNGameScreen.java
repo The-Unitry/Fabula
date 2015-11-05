@@ -22,6 +22,7 @@ public class UNGameScreen extends UNObject
         music.play(true);
 
         this.window.addPanel(launcher);
+        this.window.getFrame().setVisible(true);
     }
 
 }
