@@ -19,51 +19,62 @@ public abstract class UNAudioObject extends UNObject
 
     public UNAudioObject(){}
 
-    public UNAudioObject(String src) {
+    public UNAudioObject(String src)
+    {
         this.setSrc(src);
         this.updateSound(this.getSrc());
         this.setPlaying(false);
     }
 
-    public void updateSound(String src) {
+    public void updateSound(String src)
+    {
         //new Music().lo;
     }
 
-    public Clip getSound() {
+    public Clip getSound()
+    {
         return this.sound;
     }
 
-    public String getSrc() {
+    public String getSrc()
+    {
         return this.src;
     }
 
-    public void setSrc(String src) {
+    public void setSrc(String src)
+    {
         this.src = "/audio/" + src;
     }
 
-    public double getVolume() {
+    public double getVolume()
+    {
         return this.volume;
     }
 
-    public void setVolume(double volume) {
+    public void setVolume(double volume)
+    {
         this.volume = volume;
     }
 
-    public void play() {
+    public void play()
+    {
         this.getSound().start();
         this.setPlaying(true);
     }
 
-    public void stop() {
+    public void stop()
+    {
         this.getSound().stop();
         this.setPlaying(false);
     }
 
-    private void setPlaying(boolean playing) {
+    private void setPlaying(boolean playing)
+    {
         this.playing = playing;
     }
 
-    public boolean getPlaying() {
+    public boolean getPlaying()
+    {
         return this.playing;
     }
 
