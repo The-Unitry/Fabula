@@ -18,7 +18,7 @@ public class UNWindow extends UNObject
 
     /**
      * UN Window
-     * @param title     Title that will be displayed in dock
+     * @param title     Title that will be displayed in title-bar & dock
      * @param width     Width of window
      * @param height    Height of window
      */
@@ -37,9 +37,8 @@ public class UNWindow extends UNObject
     {
         this.frame.setTitle(this.TITLE);
         this.frame.setSize(this.WIDTH, this.HEIGHT);
-        this.frame.setDefaultCloseOperation(this.frame.EXIT_ON_CLOSE);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
-        if(!DEBUG) this.frame.setUndecorated(true);
         this.frame.setLocationRelativeTo(null);
     }
 
