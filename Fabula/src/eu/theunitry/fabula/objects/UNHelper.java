@@ -19,22 +19,43 @@ public class UNHelper
             {
                 switch (animationID){
                     case 0:
+                        //Idle animation
                         break;
                     case 1:
+                        //Flapping animation
                         break;
                     case 2:
+                        //Questioning face
+                        break;
+                    case 3:
+                        //Happy face
+                        break;
+                    case 4:
+                        //Sad face
+                        break;
+                    default:
+                        //Return to default animation
                         break;
                 }
             }
         }
         else {
             //Run animation one time.
-            switch (animationID) {
+            switch (animationID){
                 case 0:
+                    //Idle animation
                     break;
                 case 1:
+                    //Flapping animation
                     break;
                 case 2:
+                    //Questioning face
+                    break;
+                case 3:
+                    //Happy face
+                    break;
+                case 4:
+                    //Sad face
                     break;
             }
         }
