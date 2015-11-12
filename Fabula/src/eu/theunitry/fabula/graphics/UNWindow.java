@@ -14,7 +14,6 @@ public class UNWindow extends UNObject
     private final int WIDTH;
     private final int HEIGHT;
     public JFrame frame;
-    private final static boolean DEBUG = true;
 
     /**
      * UN Window
