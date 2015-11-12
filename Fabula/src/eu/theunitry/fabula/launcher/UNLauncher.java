@@ -16,35 +16,41 @@ public class UNLauncher extends JPanel
     public UNLauncher()
     {
         this.color = new UNColor();
+        this.label = new JLabel("Fabula");
+        this.startBtn = new JButton("Start");
 
-        this.setBackground(color.getPrimaryColor());
-        this.setLayout(new BorderLayout());
-        this.setBorder(new EmptyBorder(20, 20, 20, 20));
-
-        label = new JLabel("Fabula");
-        label.setForeground(Color.white);
-        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
-        label.setHorizontalAlignment(JLabel.CENTER);
-
-        startBtn = new JButton("Start");
-        startBtn.setPreferredSize(new Dimension(200,100));
-
-        /* Remove default styling */
-        startBtn.setFocusPainted(false);
-        startBtn.setBorderPainted(false);
-
-        startBtn.setBackground(Color.white);
-        startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        startBtn.setForeground(color.getPrimaryColor());
-        startBtn.setOpaque(true);
-
-
+        this.setStyling();
+        
         this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }
 
     public JPanel getPanel() {
         return this;
+    }
+
+    private void setStyling()
+    {
+        /* Panel styling */
+        this.setBackground(color.getPrimaryColor());
+        this.setLayout(new BorderLayout());
+        this.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        /* Label styling */
+        label.setForeground(Color.white);
+        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
+        label.setHorizontalAlignment(JLabel.CENTER);
+
+        /* Button styling */
+        startBtn.setPreferredSize(new Dimension(200,100));
+        startBtn.setBackground(Color.white);
+        startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        startBtn.setForeground(color.getPrimaryColor());
+        startBtn.setOpaque(true);
+
+        /* Reset default styling */
+        startBtn.setFocusPainted(false);
+        startBtn.setBorderPainted(false);
     }
 
 }
