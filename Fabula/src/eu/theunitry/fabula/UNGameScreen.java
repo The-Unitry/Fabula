@@ -23,6 +23,7 @@ public class UNGameScreen extends UNObject
         this.window = new UNWindow("Fabula", 768, 512);
         this.launcher = new UNLauncher();
         this.splash = new UNPanel(this.window.getFrame());
+        this.splash.setHudEnabled(false);
         try {
             this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));
         } catch (IOException e) {
