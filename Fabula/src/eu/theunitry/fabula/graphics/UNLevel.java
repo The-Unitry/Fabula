@@ -1,19 +1,19 @@
 package eu.theunitry.fabula.graphics;
 
-/**
- * Created by Wesley on 11/11/2015.
- */
 public class UNLevel extends UNPanel {
-    public boolean playerWin = false;
 
-    public void win()
+    private boolean playerHasWon = false;
+
+    public boolean hasPlayerWon()
     {
-        if (playerWin = true);
-        {
-            /** hud.helperText.setText = "Goed gedaan!"; */
-            playerWin = false;
-        }
+        return playerHasWon;
     }
+
+    public void setPlayerHasWon(boolean playerHasWon)
+    {
+        this.playerHasWon = playerHasWon;
+    }
+
 }
 
 
