@@ -11,12 +11,13 @@ public class UNColor
         this.setPrimaryColor(new Color(255,82,44));
     }
 
-
-    public Color getPrimaryColor() {
+    public Color getPrimaryColor()
+    {
         return PRIMARY_COLOR;
     }
 
-    public void setPrimaryColor(Color primaryColor) {
+    public void setPrimaryColor(Color primaryColor)
+    {
         PRIMARY_COLOR = primaryColor;
     }
 }

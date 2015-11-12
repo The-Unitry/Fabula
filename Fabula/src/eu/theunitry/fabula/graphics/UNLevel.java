@@ -1,13 +1,19 @@
 package eu.theunitry.fabula.graphics;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
-public class UNLevel extends UNPanel {
+public abstract class UNLevel extends UNPanel
+{
 
     private boolean playerHasWon = false;
+    private String question;
+    private ArrayList<String> mistakeList;
 
-    public UNLevel(JFrame frame) {
+    public UNLevel(JFrame frame)
+    {
         super(frame);
+        this.mistakeList = new ArrayList<>();
     }
 
     public boolean hasPlayerWon()
@@ -20,6 +26,15 @@ public class UNLevel extends UNPanel {
         this.playerHasWon = playerHasWon;
     }
 
+    public String getQuestion()
+    {
+        return question;
+    }
+
+    public void setQuestion(String question)
+    {
+        this.question = question;
+    }
 }
 
 
