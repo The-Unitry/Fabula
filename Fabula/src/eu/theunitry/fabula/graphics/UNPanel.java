@@ -21,6 +21,7 @@ public class UNPanel extends JPanel
     private JFrame frame;
     private boolean hudEnabled;
     private String question;
+    private String help;
 
     public UNPanel(JFrame frame)
     {
@@ -96,6 +97,16 @@ public class UNPanel extends JPanel
     public String getQuestion()
     {
         return question;
+    }
+
+    public void setHelp()
+    {
+        this.help = help;
+    }
+
+    public String getHelp()
+    {
+        return help;
     }
 
     public class MouseHandler implements MouseListener, MouseMotionListener {
