@@ -17,11 +17,12 @@ public class UNLauncher extends JPanel
         label = new JLabel("Fabula");
         label.setForeground(Color.white);
         label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
+        label.setHorizontalAlignment(JLabel.CENTER);
 
         startBtn = new JButton("Start");
         startBtn.setPreferredSize(new Dimension(200,100));
 
-        this.add(label);
+        this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }
 
