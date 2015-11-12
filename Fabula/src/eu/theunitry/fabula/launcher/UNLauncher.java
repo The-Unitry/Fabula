@@ -36,6 +36,7 @@ public class UNLauncher extends JPanel
         startBtn.setBackground(Color.white);
         startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         startBtn.setForeground(color.getPrimaryColor());
+        startBtn.setOpaque(true);
 
 
         this.add(label, BorderLayout.CENTER);
