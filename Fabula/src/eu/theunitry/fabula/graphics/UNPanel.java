@@ -3,11 +3,14 @@ package eu.theunitry.fabula.graphics;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.objects.UNObject;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class UNPanel extends JPanel
@@ -15,15 +18,21 @@ public class UNPanel extends JPanel
     private Image backgroundImage;
     private ArrayList<UNGraphicsObject> objects;
     private ArrayList hud;
+    private JFrame frame;
+    private boolean hudEnabled;
+    private String question;
 
-    public UNPanel()
+    public UNPanel(JFrame frame)
     {
+        this.frame = frame;
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
 
         MouseHandler mouseHandler = new MouseHandler();
         this.addMouseListener(mouseHandler);
         this.addMouseMotionListener(mouseHandler);
+        hudEnabled = true;
+        question = "";
     }
 
     @Override
@@ -31,7 +40,7 @@ public class UNPanel extends JPanel
     {
         g.drawImage(getBackgroundImage(), 0, 0, 768, 512, this);
         layerObjects(g);
-        layerHUD();
+        layerHUD(g);
     }
 
     public void setBackgroundImage(Image backgroundImage)
@@ -43,6 +52,7 @@ public class UNPanel extends JPanel
     {
         return this.backgroundImage;
     }
+
     public void layerObjects(Graphics g)
     {
         for (UNGraphicsObject object : objects)
@@ -50,9 +60,42 @@ public class UNPanel extends JPanel
             g.drawImage(object.getImage(), object.getX(), object.getY(), this);
         }
     }
-    public void layerHUD()
+
+    public void layerHUD(Graphics g)
     {
-        //TODO: HUDObjects?
+        if (hudEnabled)
+        {
+            g.fillRect(0, 0, 768, 64);
+            g.fillRect(0, 416, 575, 96);
+            g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
+            g.setColor(Color.white);
+            g.drawString("Level 1/5", 11, 38);
+
+            g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
+            int stringLen = (int)
+                    g.getFontMetrics().getStringBounds(question, g).getWidth();
+            g.drawString(question, 754 - stringLen, 38);
+            try {
+                g.drawImage(ImageIO.read(new File("res/tuiltje.png")), 610, 329, 21 * 5, 29 * 5, this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setHudEnabled(boolean hudEnabled)
+    {
+        this.hudEnabled = hudEnabled;
+    }
+
+    public void setQuestion(String question)
+    {
+        this.question = question;
+    }
+
+    public String getQuestion()
+    {
+        return question;
     }
 
     public class MouseHandler implements MouseListener, MouseMotionListener {
@@ -63,8 +106,8 @@ public class UNPanel extends JPanel
                 if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight()) {
                     object.setMouseHold(true);
 
-                    object.setXOffset((int) e.getX() - object.getX());
-                    object.setYOffset((int) e.getY() - object.getY());
+                    object.setXOffset(e.getX() - object.getX());
+                    object.setYOffset(e.getY() - object.getY());
                 }
             }
         }
@@ -82,8 +125,8 @@ public class UNPanel extends JPanel
         {
             for (UNGraphicsObject object : objects) {
                 if (object.getMouseHold()) {
-                    object.setX((int) e.getX() - object.getXOffset());
-                    object.setY((int) e.getY() - object.getYOffset());
+                    object.setX(e.getX() - object.getXOffset());
+                    object.setY(e.getY() - object.getYOffset());
                 }
             }
         }
