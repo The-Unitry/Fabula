@@ -20,6 +20,14 @@ public class UNTimer
         this.gameLoop.start();
     }
 
+    public void start() {
+        this.gameLoop.start();
+    }
+
+    public void stop() {
+        this.gameLoop.stop();
+    }
+
     public class GameLoop implements ActionListener {
 
         @Override
