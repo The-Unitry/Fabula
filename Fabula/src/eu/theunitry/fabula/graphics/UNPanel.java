@@ -34,6 +34,7 @@ public class UNPanel extends JPanel
         this.addMouseMotionListener(mouseHandler);
         hudEnabled = true;
         question = "";
+        help = "";
     }
 
     @Override
@@ -71,6 +72,7 @@ public class UNPanel extends JPanel
             g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
             g.setColor(Color.white);
             g.drawString("Level 1/5", 11, 38);
+            g.drawString("Kan ik jou helpen?", 11, 455);
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
             int stringLen = (int)
@@ -99,7 +101,7 @@ public class UNPanel extends JPanel
         return question;
     }
 
-    public void setHelp()
+    public void setHelp(String help)
     {
         this.help = help;
     }
