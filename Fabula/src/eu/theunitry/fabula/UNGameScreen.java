@@ -15,14 +15,15 @@ public class UNGameScreen extends UNObject
 {
 
     private UNWindow window;
-    private UNLauncher launcher;
+    private UNPanel launcher;
     private UNPanel splash;
 
     public UNGameScreen()
     {
         this.window = new UNWindow("Fabula", 768, 512);
-        this.launcher = new UNLauncher();
+        this.launcher = new UNPanel(this.window.getFrame());
         this.splash = new UNPanel(this.window.getFrame());
+        this.splash.setHudEnabled(false);
         try {
             this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));
         } catch (IOException e) {
