@@ -1,6 +1,7 @@
 package eu.theunitry.fabula.launcher;
 
 import eu.theunitry.fabula.graphics.UNColor;
+import eu.theunitry.fabula.objects.UNButtonListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -47,6 +48,7 @@ public class UNLauncher extends JPanel
         startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         startBtn.setForeground(color.getPrimaryColor());
         startBtn.setOpaque(true);
+        startBtn.addActionListener(new UNButtonListener());
 
         /* Reset default styling */
         startBtn.setFocusPainted(false);
