@@ -15,13 +15,13 @@ public class UNGameScreen extends UNObject
 {
 
     private UNWindow window;
-    private UNPanel launcher;
+    private UNLauncher launcher;
     private UNPanel splash;
 
     public UNGameScreen()
     {
         this.window = new UNWindow("Fabula", 768, 512);
-        this.launcher = new UNPanel(this.window.getFrame());
+        this.launcher = new UNLauncher();
         this.splash = new UNPanel(this.window.getFrame());
         this.splash.setHudEnabled(false);
         try {
