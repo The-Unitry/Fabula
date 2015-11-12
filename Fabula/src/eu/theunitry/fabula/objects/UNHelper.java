@@ -18,6 +18,8 @@ public class UNHelper
     private UNTimer animationTimerLoop, animationTimerOnce;
     private UNGameScreen gameScreen;
     private ArrayList<Image> animIdle, animFlapping, animSad, animHappy, animQuestioning;
+    private int imageIndex;
+    private Image image;
 
     public UNHelper(/** UNHud hud **/ UNGameScreen gameScreen)
     {
@@ -28,6 +30,7 @@ public class UNHelper
         animSad = new ArrayList<Image>();
         animHappy = new ArrayList<Image>();
         animQuestioning = new ArrayList<Image>();
+        imageIndex = 0;
         try {
             //IDLE
             animIdle.add(0, ImageIO.read(new File("res/animations/tuiltje/idle/idle0.png")));
@@ -89,6 +92,12 @@ public class UNHelper
                         switch (animationID){
                             case 0:
                                 //Idle animation
+                                if (imageIndex < animIdle.size()) {
+                                    imageIndex++;
+                                } else {
+                                    imageIndex = 0;
+                                }
+                                setImage(animIdle.get(imageIndex));
                                 break;
                             case 1:
                                 //Flapping animation
@@ -122,6 +131,16 @@ public class UNHelper
                 }
             };
         }
+    }
+
+    public void setImage(Image image)
+    {
+        this.image = image;
+    }
+
+    public Image getImage()
+    {
+        return this.image;
     }
 
     public UNGameScreen getGameScreen()

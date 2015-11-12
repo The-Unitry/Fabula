@@ -79,7 +79,7 @@ public class UNPanel extends JPanel
                     g.getFontMetrics().getStringBounds(question, g).getWidth();
             g.drawString(question, 754 - stringLen, 38);
             try {
-                g.drawImage(ImageIO.read(new File("res/tuiltje.png")), 610, 329, 21 * 5, 29 * 5, this);
+                g.drawImage(ImageIO.read(new File("res/animations/tuiltje/idle/idle0.png")), 610, 329, 21 * 5, 29 * 5, this);
             } catch (IOException e) {
                 e.printStackTrace();
             }
