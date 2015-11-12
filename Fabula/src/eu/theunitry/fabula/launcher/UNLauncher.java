@@ -1,5 +1,7 @@
 package eu.theunitry.fabula.launcher;
 
+import eu.theunitry.fabula.graphics.UNColor;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -9,12 +11,15 @@ public class UNLauncher extends JPanel
 
     private JLabel label;
     private JButton startBtn;
+    private UNColor color;
 
     public UNLauncher()
     {
-        this.setBackground(new Color(255,82,44));
+        this.color = new UNColor();
+
+        this.setBackground(color.getPrimaryColor());
         this.setLayout(new BorderLayout());
-        this.setBorder(new EmptyBorder(10, 10, 10, 10));
+        this.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         label = new JLabel("Fabula");
         label.setForeground(Color.white);
@@ -30,7 +35,7 @@ public class UNLauncher extends JPanel
 
         startBtn.setBackground(Color.white);
         startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        startBtn.setForeground(Color.white);
+        startBtn.setForeground(color.getPrimaryColor());
 
 
         this.add(label, BorderLayout.CENTER);
