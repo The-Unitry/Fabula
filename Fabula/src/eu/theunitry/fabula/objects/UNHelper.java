@@ -14,7 +14,7 @@ public class UNHelper
     public void animateHelper(int animationID, boolean loopInfinite)
     {
         if (loopInfinite){
-            //Run selected animation over and over again, until .
+            //Run selected animation over and over again, until loopInfinite is no longer true .
             while (loopInfinite)
             {
                 switch (animationID){
