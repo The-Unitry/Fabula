@@ -47,7 +47,7 @@ public class UNPanel extends JPanel
         if (hudEnabled)
         {
             helper = new UNHelper(gameScreen);
-            helper.animateHelper(0, true);
+            helper.animateHelper(0, false);
             helper.setImage(gameScreen.getSprites().get(0));
         }
     }
@@ -93,7 +93,7 @@ public class UNPanel extends JPanel
             g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
             int stringLen = (int) g.getFontMetrics().getStringBounds(question, g).getWidth();
             g.drawString(question, 754 - stringLen, 38);
-            g.drawImage(helper.getImage(), 610, 329, 21 * 5, 29 * 5, this);
+            g.drawImage(helper.getImage(), 610, 329, helper.getImage().getWidth(this) * 5, helper.getImage().getHeight(this) * 5, this);
         }
     }
 

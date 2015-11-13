@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.Timer;
 
 public class UNHelper
@@ -22,6 +23,7 @@ public class UNHelper
     private ArrayList<Image> animIdle, animFlapping, animSad, animHappy, animQuestioning;
     private int imageIndex;
     private Image image;
+    private int state;
 
     public UNHelper(/** UNHud hud **/ UNGameScreen gameScreen)
     {
@@ -33,6 +35,7 @@ public class UNHelper
         animHappy = new ArrayList<Image>();
         animQuestioning = new ArrayList<Image>();
         imageIndex = 0;
+        state = 0;
         //IDLE
         animIdle.add(0, gameScreen.getSprites().get(0));
         animIdle.add(1, gameScreen.getSprites().get(1));
@@ -80,23 +83,41 @@ public class UNHelper
 
     public void animateHelper(int animationID, boolean loopInfinite)
     {
-        animationTimerLoop = new Timer(1000, new ActionListener()
+        this.state = animationID;
+        animationTimerLoop = new Timer(100, new ActionListener()
         {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                switch (animationID){
+                switch (state){
                     case 0:
                         //Idle animation
-                        setImage(animIdle.get(imageIndex));
+                        setImage(animIdle.get(Math.max(imageIndex, 0)));
                         if (imageIndex < animIdle.size() - 1) {
                             imageIndex++;
                         } else {
-                            imageIndex = 0;
+                            imageIndex = -100;
+                            if (new Random().nextInt(2) == 0)
+                            {
+                                state = 1;
+                            }
                         }
                         break;
                     case 1:
                         //Flapping animation
+                        setImage(animFlapping.get(imageIndex));
+                        if (imageIndex < animFlapping.size() - 1) {
+                            imageIndex++;
+                        } else {
+                            if (loopInfinite)
+                            {
+                                imageIndex = 0;
+                            }
+                            else
+                            {
+                                state = 0;
+                            }
+                        }
                         break;
                     case 2:
                         //Questioning face
@@ -109,65 +130,12 @@ public class UNHelper
                         break;
                     default:
                         //Return to default animation
+                        setImage(animIdle.get(0));
                         break;
-                }
-                if (!loopInfinite)
-                {
-                    //animationTimerLoop.stop();
                 }
             }
         });
         animationTimerLoop.start();
-        /*if (loopInfinite){
-            animationTimerLoop = new UNTimer(gameScreen, 10)
-            {
-                class GameLoop implements ActionListener {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        animationTimerLoop.start();
-                        switch (animationID){
-                            case 0:
-                                //Idle animation
-                                if (imageIndex < animIdle.size()) {
-                                    imageIndex++;
-                                } else {
-                                    imageIndex = 0;
-                                }
-                                setImage(animIdle.get(imageIndex));
-                                break;
-                            case 1:
-                                //Flapping animation
-                                break;
-                            case 2:
-                                //Questioning face
-                                break;
-                            case 3:
-                                //Happy face
-                                break;
-                            case 4:
-                                //Sad face
-                                break;
-                            default:
-                                //Return to default animation
-                                break;
-                        }
-                    }
-
-                }
-            };
-            animationTimerLoop.start();
-        }
-        else {
-            animationTimerOnce = new UNTimer(gameScreen, 10) {
-                class GameLoop implements ActionListener {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        animationTimerOnce.stop();
-                    }
-
-                }
-            };
-        }*/
     }
 
     public void setImage(Image image)
