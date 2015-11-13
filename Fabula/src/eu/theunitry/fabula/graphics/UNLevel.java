@@ -1,5 +1,7 @@
 package eu.theunitry.fabula.graphics;
 
+import eu.theunitry.fabula.UNGameScreen;
+
 import javax.swing.*;
 import java.util.ArrayList;
 
@@ -10,9 +12,9 @@ public abstract class UNLevel extends UNPanel
     private String question;
     private ArrayList<String> mistakeList;
 
-    public UNLevel(JFrame frame)
+    public UNLevel(UNGameScreen gameScreen, boolean hudEnabled)
     {
-        super(frame);
+        super(gameScreen, hudEnabled);
         this.mistakeList = new ArrayList<>();
     }
 

@@ -8,6 +8,7 @@ import kuusisto.tinysound.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +22,20 @@ public class UNGameScreen extends UNObject
     private UNPanel splash;
     private JPanel currentPanel;
     private ArrayList<Music> music;
+    private ArrayList<Image> sprites, backgrounds;
 
     public UNGameScreen()
     {
+        music = new ArrayList<Music>();
+        sprites = new ArrayList<Image>();
+        backgrounds = new ArrayList<Image>();
+        TinySound.init();
+        preload();
+
         this.window = new UNWindow("Fabula", 768, 512);
         this.launcher = new UNLauncher(this);
-        this.splash = new UNPanel(this.window.getFrame());
-        this.splash.setHudEnabled(false);
+        this.splash = new UNPanel(this, false);
+
         try {
             this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));
         } catch (IOException e) {
@@ -37,10 +45,6 @@ public class UNGameScreen extends UNObject
         this.window.addPanel(splash);
         this.window.getFrame().setVisible(true);
 
-        music = new ArrayList<Music>();
-        TinySound.init();
-        music.add(0, TinySound.loadMusic("audio/intro.wav"));
-        music.add(1, TinySound.loadMusic("audio/song2.wav"));
         music.get(0).play(true);
 
         this.window.removePanel(splash);
@@ -65,6 +69,78 @@ public class UNGameScreen extends UNObject
     {
         music.get(0).stop();
         music.get(index).play(loop);
+    }
+
+    public ArrayList<Image> getSprites()
+    {
+        return this.sprites;
+    }
+
+    public ArrayList<Image> getBackgrounds()
+    {
+        return this.backgrounds;
+    }
+
+    public void preload()
+    {
+        //MUSIC PRELOAD
+        music.add(0, TinySound.loadMusic("audio/intro.wav"));
+        music.add(1, TinySound.loadMusic("audio/song2.wav"));
+
+        try
+        {
+            //BACKGROUND PRELOAD
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/forest.png")));
+
+            //SPRITE PRELOAD
+            //TUILTJE IDLE
+            sprites.add(0, ImageIO.read(new File("res/animations/tuiltje/idle/idle0.png")));
+            sprites.add(1, ImageIO.read(new File("res/animations/tuiltje/idle/idle1.png")));
+            sprites.add(2, ImageIO.read(new File("res/animations/tuiltje/idle/idle2.png")));
+            sprites.add(3, ImageIO.read(new File("res/animations/tuiltje/idle/idle3.png")));
+            sprites.add(4, ImageIO.read(new File("res/animations/tuiltje/idle/idle4.png")));
+            sprites.add(5, ImageIO.read(new File("res/animations/tuiltje/idle/idle5.png")));
+            //TUILTJE FLAPPING
+            sprites.add(6, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping0.png")));
+            sprites.add(7, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping1.png")));
+            sprites.add(8, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping2.png")));
+            sprites.add(9, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping3.png")));
+            sprites.add(10, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping4.png")));
+            sprites.add(11, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping5.png")));
+            //TUILTJE SAD
+            sprites.add(12, ImageIO.read(new File("res/animations/tuiltje/sad/sad0.png")));
+            sprites.add(13, ImageIO.read(new File("res/animations/tuiltje/sad/sad1.png")));
+            sprites.add(14, ImageIO.read(new File("res/animations/tuiltje/sad/sad2.png")));
+            sprites.add(15, ImageIO.read(new File("res/animations/tuiltje/sad/sad3.png")));
+            sprites.add(16, ImageIO.read(new File("res/animations/tuiltje/sad/sad4.png")));
+            sprites.add(17, ImageIO.read(new File("res/animations/tuiltje/sad/sad5.png")));
+            //TUILTJE HAPPY
+            sprites.add(18, ImageIO.read(new File("res/animations/tuiltje/happy/happy0.png")));
+            sprites.add(19, ImageIO.read(new File("res/animations/tuiltje/happy/happy1.png")));
+            sprites.add(20, ImageIO.read(new File("res/animations/tuiltje/happy/happy2.png")));
+            sprites.add(21, ImageIO.read(new File("res/animations/tuiltje/happy/happy3.png")));
+            sprites.add(22, ImageIO.read(new File("res/animations/tuiltje/happy/happy4.png")));
+            sprites.add(23, ImageIO.read(new File("res/animations/tuiltje/happy/happy5.png")));
+            sprites.add(24, ImageIO.read(new File("res/animations/tuiltje/happy/happy6.png")));
+            sprites.add(25, ImageIO.read(new File("res/animations/tuiltje/happy/happy7.png")));
+            sprites.add(26, ImageIO.read(new File("res/animations/tuiltje/happy/happy8.png")));
+            sprites.add(27, ImageIO.read(new File("res/animations/tuiltje/happy/happy9.png")));
+            //TUILTJE QUESTIONING
+            sprites.add(28, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning0.png")));
+            sprites.add(29, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning1.png")));
+            sprites.add(30, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning2.png")));
+            sprites.add(31, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning3.png")));
+            sprites.add(32, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning4.png")));
+            sprites.add(33, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning5.png")));
+            sprites.add(34, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning6.png")));
+            sprites.add(35, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning7.png")));
+            sprites.add(36, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning8.png")));
+            sprites.add(37, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning9.png")));
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
 }

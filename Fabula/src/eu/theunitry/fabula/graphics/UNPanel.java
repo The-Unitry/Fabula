@@ -1,14 +1,13 @@
 package eu.theunitry.fabula.graphics;
 
 import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.objects.UNHelper;
 import eu.theunitry.fabula.objects.UNObject;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,16 +17,26 @@ public class UNPanel extends JPanel
     private Image backgroundImage;
     private ArrayList<UNGraphicsObject> objects;
     private ArrayList hud;
-    private JFrame frame;
+    private UNGameScreen gameScreen;
     private boolean hudEnabled;
     private String question;
     private String help;
+    private UNHelper helper;
+    private Timer timer;
 
-    public UNPanel(JFrame frame)
+    public UNPanel(UNGameScreen gameScreen, boolean hudEnabled)
     {
-        this.frame = frame;
+        this.gameScreen = gameScreen;
+        this.hudEnabled = hudEnabled;
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
+        timer = new Timer(1, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getPanel().repaint();
+            }
+        });
+        timer.start();
 
         MouseHandler mouseHandler = new MouseHandler();
         this.addMouseListener(mouseHandler);
@@ -35,6 +44,12 @@ public class UNPanel extends JPanel
         hudEnabled = true;
         question = "";
         help = "";
+        if (hudEnabled)
+        {
+            helper = new UNHelper(gameScreen);
+            helper.animateHelper(0, true);
+            helper.setImage(gameScreen.getSprites().get(0));
+        }
     }
 
     @Override
@@ -72,17 +87,13 @@ public class UNPanel extends JPanel
             g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
             g.setColor(Color.white);
             g.drawString("Level 1/5", 11, 38);
+            g.setFont(new Font("Minecraftia", Font.PLAIN, 12));
             g.drawString("Kan ik jou helpen?", 11, 455);
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
-            int stringLen = (int)
-                    g.getFontMetrics().getStringBounds(question, g).getWidth();
+            int stringLen = (int) g.getFontMetrics().getStringBounds(question, g).getWidth();
             g.drawString(question, 754 - stringLen, 38);
-            try {
-                g.drawImage(ImageIO.read(new File("res/animations/tuiltje/idle/idle0.png")), 610, 329, 21 * 5, 29 * 5, this);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            g.drawImage(helper.getImage(), 610, 329, 21 * 5, 29 * 5, this);
         }
     }
 
@@ -109,6 +120,11 @@ public class UNPanel extends JPanel
     public String getHelp()
     {
         return help;
+    }
+
+    public JPanel getPanel()
+    {
+        return this;
     }
 
     public class MouseHandler implements MouseListener, MouseMotionListener {

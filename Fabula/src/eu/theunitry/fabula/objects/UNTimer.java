@@ -10,13 +10,13 @@ public class UNTimer
 {
 
     private final Timer gameLoop;
-    private final GameLoop actionListener;
+    //private final GameLoop actionListener;
     private final UNGameScreen gameScreen;
 
     public UNTimer(UNGameScreen gameScreen, int ms) {
         this.gameScreen = gameScreen;
-        this.actionListener = new GameLoop();
-        this.gameLoop = new Timer(ms, this.actionListener);
+        //this.actionListener = new GameLoop();
+        this.gameLoop = new Timer(ms, new GameLoop());
         this.gameLoop.start();
     }
 

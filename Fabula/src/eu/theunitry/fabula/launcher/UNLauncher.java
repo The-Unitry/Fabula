@@ -33,13 +33,10 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                UNPanel panel = new UNPanel(gameScreen.getWindow().getFrame());
+                UNPanel panel = new UNPanel(gameScreen, true);
                 gameScreen.toggleMusic(1, true);
-                try {
-                    panel.setBackgroundImage(ImageIO.read(new File("res/backgrounds/forest.png")));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                panel.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+
                 gameScreen.switchPanel(panel);
             }
         });

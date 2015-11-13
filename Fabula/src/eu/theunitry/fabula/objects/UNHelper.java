@@ -9,13 +9,15 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javax.swing.Timer;
 
 public class UNHelper
 {
     // private UNHud hud;
     private int animationID;
     private boolean loopInfinite;
-    private UNTimer animationTimerLoop, animationTimerOnce;
+    private Timer animationTimerLoop;
+    private UNTimer animationTimerOnce;
     private UNGameScreen gameScreen;
     private ArrayList<Image> animIdle, animFlapping, animSad, animHappy, animQuestioning;
     private int imageIndex;
@@ -31,58 +33,92 @@ public class UNHelper
         animHappy = new ArrayList<Image>();
         animQuestioning = new ArrayList<Image>();
         imageIndex = 0;
-        try {
-            //IDLE
-            animIdle.add(0, ImageIO.read(new File("res/animations/tuiltje/idle/idle0.png")));
-            animIdle.add(1, ImageIO.read(new File("res/animations/tuiltje/idle/idle1.png")));
-            animIdle.add(2, ImageIO.read(new File("res/animations/tuiltje/idle/idle2.png")));
-            animIdle.add(3, ImageIO.read(new File("res/animations/tuiltje/idle/idle3.png")));
-            animIdle.add(4, ImageIO.read(new File("res/animations/tuiltje/idle/idle4.png")));
-            animIdle.add(5, ImageIO.read(new File("res/animations/tuiltje/idle/idle5.png")));
-            //FLAPPING
-            animFlapping.add(0, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping0.png")));
-            animFlapping.add(1, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping1.png")));
-            animFlapping.add(2, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping2.png")));
-            animFlapping.add(3, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping3.png")));
-            animFlapping.add(4, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping4.png")));
-            animFlapping.add(5, ImageIO.read(new File("res/animations/tuiltje/flapping/flapping5.png")));
-            //SAD
-            animSad.add(0, ImageIO.read(new File("res/animations/tuiltje/sad/sad0.png")));
-            animSad.add(1, ImageIO.read(new File("res/animations/tuiltje/sad/sad1.png")));
-            animSad.add(2, ImageIO.read(new File("res/animations/tuiltje/sad/sad2.png")));
-            animSad.add(3, ImageIO.read(new File("res/animations/tuiltje/sad/sad3.png")));
-            animSad.add(4, ImageIO.read(new File("res/animations/tuiltje/sad/sad4.png")));
-            animSad.add(5, ImageIO.read(new File("res/animations/tuiltje/sad/sad5.png")));
-            //HAPPY
-            animHappy.add(0, ImageIO.read(new File("res/animations/tuiltje/happy/happy0.png")));
-            animHappy.add(1, ImageIO.read(new File("res/animations/tuiltje/happy/happy1.png")));
-            animHappy.add(2, ImageIO.read(new File("res/animations/tuiltje/happy/happy2.png")));
-            animHappy.add(3, ImageIO.read(new File("res/animations/tuiltje/happy/happy3.png")));
-            animHappy.add(4, ImageIO.read(new File("res/animations/tuiltje/happy/happy4.png")));
-            animHappy.add(5, ImageIO.read(new File("res/animations/tuiltje/happy/happy5.png")));
-            animHappy.add(6, ImageIO.read(new File("res/animations/tuiltje/happy/happy6.png")));
-            animHappy.add(7, ImageIO.read(new File("res/animations/tuiltje/happy/happy7.png")));
-            animHappy.add(8, ImageIO.read(new File("res/animations/tuiltje/happy/happy8.png")));
-            animHappy.add(9, ImageIO.read(new File("res/animations/tuiltje/happy/happy9.png")));
-            //QUESTIONING
-            animQuestioning.add(0, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning0.png")));
-            animQuestioning.add(1, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning1.png")));
-            animQuestioning.add(2, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning2.png")));
-            animQuestioning.add(3, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning3.png")));
-            animQuestioning.add(4, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning4.png")));
-            animQuestioning.add(5, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning5.png")));
-            animQuestioning.add(6, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning6.png")));
-            animQuestioning.add(7, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning7.png")));
-            animQuestioning.add(8, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning8.png")));
-            animQuestioning.add(9, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning9.png")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //IDLE
+        animIdle.add(0, gameScreen.getSprites().get(0));
+        animIdle.add(1, gameScreen.getSprites().get(1));
+        animIdle.add(2, gameScreen.getSprites().get(2));
+        animIdle.add(3, gameScreen.getSprites().get(3));
+        animIdle.add(4, gameScreen.getSprites().get(4));
+        animIdle.add(5, gameScreen.getSprites().get(5));
+        //FLAPPING
+        animFlapping.add(0, gameScreen.getSprites().get(6));
+        animFlapping.add(1, gameScreen.getSprites().get(7));
+        animFlapping.add(2, gameScreen.getSprites().get(8));
+        animFlapping.add(3, gameScreen.getSprites().get(9));
+        animFlapping.add(4, gameScreen.getSprites().get(10));
+        animFlapping.add(5, gameScreen.getSprites().get(11));
+        //SAD
+        animSad.add(0, gameScreen.getSprites().get(12));
+        animSad.add(1, gameScreen.getSprites().get(13));
+        animSad.add(2, gameScreen.getSprites().get(14));
+        animSad.add(3, gameScreen.getSprites().get(15));
+        animSad.add(4, gameScreen.getSprites().get(16));
+        animSad.add(5, gameScreen.getSprites().get(17));
+        //HAPPY
+        animHappy.add(0, gameScreen.getSprites().get(18));
+        animHappy.add(1, gameScreen.getSprites().get(19));
+        animHappy.add(2, gameScreen.getSprites().get(20));
+        animHappy.add(3, gameScreen.getSprites().get(21));
+        animHappy.add(4, gameScreen.getSprites().get(22));
+        animHappy.add(5, gameScreen.getSprites().get(23));
+        animHappy.add(6, gameScreen.getSprites().get(24));
+        animHappy.add(7, gameScreen.getSprites().get(25));
+        animHappy.add(8, gameScreen.getSprites().get(26));
+        animHappy.add(9, gameScreen.getSprites().get(27));
+        //QUESTIONING
+        animQuestioning.add(0, gameScreen.getSprites().get(28));
+        animQuestioning.add(1, gameScreen.getSprites().get(29));
+        animQuestioning.add(2, gameScreen.getSprites().get(30));
+        animQuestioning.add(3, gameScreen.getSprites().get(31));
+        animQuestioning.add(4, gameScreen.getSprites().get(32));
+        animQuestioning.add(5, gameScreen.getSprites().get(33));
+        animQuestioning.add(6, gameScreen.getSprites().get(34));
+        animQuestioning.add(7, gameScreen.getSprites().get(35));
+        animQuestioning.add(8, gameScreen.getSprites().get(36));
+        animQuestioning.add(9, gameScreen.getSprites().get(37));
     }
 
     public void animateHelper(int animationID, boolean loopInfinite)
     {
-        if (loopInfinite){
+        animationTimerLoop = new Timer(1000, new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                switch (animationID){
+                    case 0:
+                        //Idle animation
+                        setImage(animIdle.get(imageIndex));
+                        if (imageIndex < animIdle.size() - 1) {
+                            imageIndex++;
+                        } else {
+                            imageIndex = 0;
+                        }
+                        break;
+                    case 1:
+                        //Flapping animation
+                        break;
+                    case 2:
+                        //Questioning face
+                        break;
+                    case 3:
+                        //Happy face
+                        break;
+                    case 4:
+                        //Sad face
+                        break;
+                    default:
+                        //Return to default animation
+                        break;
+                }
+                if (!loopInfinite)
+                {
+                    //animationTimerLoop.stop();
+                }
+            }
+        });
+        animationTimerLoop.start();
+        /*if (loopInfinite){
             animationTimerLoop = new UNTimer(gameScreen, 10)
             {
                 class GameLoop implements ActionListener {
@@ -119,6 +155,7 @@ public class UNHelper
 
                 }
             };
+            animationTimerLoop.start();
         }
         else {
             animationTimerOnce = new UNTimer(gameScreen, 10) {
@@ -130,7 +167,7 @@ public class UNHelper
 
                 }
             };
-        }
+        }*/
     }
 
     public void setImage(Image image)
