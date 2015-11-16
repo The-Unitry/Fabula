@@ -19,16 +19,18 @@ public class Level0 extends UNLevel {
     private ArrayList<UNGraphicsObject> apples;
     private JButton button;
     private boolean winning;
-    private int touch;
+    private int need, touch;
     private UNColor color;
     private String lastHelp;
 
     public Level0(UNGameScreen gameScreen, boolean hudEnabled) {
         super(gameScreen, hudEnabled);
 
-        setQuestion("Vertrek met 3 appels in de mand");
-        addHelp("Jammer! Je moet 3 appels in de mand stoppen");
-        addHelp("Helaas! Er moeten 3 appels in de mand zitten");
+        need = 3 + new Random().nextInt(3);
+
+        setQuestion("Vertrek met " + need + " appels in de mand");
+        addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
+        addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
         winning = false;
@@ -37,13 +39,16 @@ public class Level0 extends UNLevel {
         apples = new ArrayList<UNGraphicsObject>();
         color = new UNColor();
 
-        basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 64, 64);
+        basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
 
-        apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 100, 100, gameScreen.getSprites().get(38), true, 32, 32));
-        apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 140, 190, gameScreen.getSprites().get(38), true, 32, 32));
-        apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 20, 240, gameScreen.getSprites().get(38), true, 32, 32));
-        apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 300, 300, gameScreen.getSprites().get(38), true, 32, 32));
+        for (int i = 0; i < 5; i++){
+            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 + new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites().get(38), true, 32, 32));
+        }
+
         apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        if (new Random().nextInt(2) == 1) {
+            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+        }
 
         addObject(basket);
         for (UNGraphicsObject apple : apples) {
@@ -52,8 +57,6 @@ public class Level0 extends UNLevel {
 
         button = new JButton("Vertrek");
 
-        //button.setPreferredSize(new Dimension(150, 50));
-        //button.setLocation(606, 64);
         this.setLayout(null);
         button.setBounds(618, 64, 150, 50);
         button.setBackground(new Color(51, 51, 51));
@@ -86,10 +89,10 @@ public class Level0 extends UNLevel {
                             lastHelp = getHelp();
                         } else {
                             getHelper().setState(4);
-                            if (touch < 3) {
-                                setHelp("Jammer, er moest" + ((3 - touch == 1) ? "" : "en") + " nog " + (3 - touch) + " appel" + ((3 - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " + (3 - touch)  + " is 3");
+                            if (touch < need) {
+                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) + " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " + (need - touch)  + " is " + need);
                             } else {
-                                setHelp("Jammer, er moest" + ((touch - 3 == 1) ? "" : "en") + " " + (touch - 3) + " appel" + ((touch - 3 == 1) ? "" : "s")  + " af. Want " + touch + " min " + (touch - 3)  + " is 3");
+                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) + " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " + (touch - need)  + " is " + need);
                             }
                             for (UNGraphicsObject apple : apples) {
                                 apple.setClickable(false);
@@ -112,7 +115,7 @@ public class Level0 extends UNLevel {
                         touch++;
                     }
                 }
-                winning = (touch == 3);
+                winning = (touch == need);
             }
         });
         timer.start();
