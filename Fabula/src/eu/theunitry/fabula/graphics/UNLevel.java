@@ -10,12 +10,14 @@ public abstract class UNLevel extends UNPanel
 
     private boolean playerHasWon = false;
     private String question;
-    private ArrayList<String> mistakeList;
+    private ArrayList<String> helpList;
+    private int mistakes;
 
     public UNLevel(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
-        this.mistakeList = new ArrayList<>();
+        this.helpList = new ArrayList<String>();
+        mistakes = 0;
     }
 
     public boolean hasPlayerWon()
@@ -36,6 +38,26 @@ public abstract class UNLevel extends UNPanel
     public void setQuestion(String question)
     {
         this.question = question;
+    }
+
+    public void addHelp(String help)
+    {
+        helpList.add(help);
+    }
+
+    public ArrayList<String> getHelpList()
+    {
+        return helpList;
+    }
+
+    public void addMistake()
+    {
+        mistakes++;
+    }
+
+    public int getMistakes()
+    {
+        return mistakes;
     }
 }
 

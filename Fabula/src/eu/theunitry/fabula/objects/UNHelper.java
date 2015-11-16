@@ -21,6 +21,7 @@ public class UNHelper
     private UNTimer animationTimerOnce;
     private UNGameScreen gameScreen;
     private ArrayList<Image> animIdle, animFlapping, animSad, animHappy, animQuestioning;
+    private boolean questioningDone;
     private int imageIndex;
     private Image image;
     private int state;
@@ -35,7 +36,8 @@ public class UNHelper
         animHappy = new ArrayList<Image>();
         animQuestioning = new ArrayList<Image>();
         imageIndex = 0;
-        state = 0;
+        state = 2;
+        questioningDone = false;
         //IDLE
         animIdle.add(0, gameScreen.getSprites().get(0));
         animIdle.add(1, gameScreen.getSprites().get(1));
@@ -79,9 +81,95 @@ public class UNHelper
         animQuestioning.add(7, gameScreen.getSprites().get(35));
         animQuestioning.add(8, gameScreen.getSprites().get(36));
         animQuestioning.add(9, gameScreen.getSprites().get(37));
+
+        animationTimerLoop = new Timer(50, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animate();
+            }
+        });
+        animationTimerLoop.start();
     }
 
-    public void animateHelper(int animationID, boolean loopInfinite)
+    public void animate() {
+        switch (state) {
+            case 0:
+                //Idle animation
+                setImage(animIdle.get(Math.max(imageIndex, 0)));
+                if (imageIndex < animIdle.size() - 1) {
+                    imageIndex++;
+                } else {
+                    imageIndex = -(new Random().nextInt(100));
+                }
+                if (imageIndex < 0) {
+                    if (new Random().nextInt(100) == 0) {
+                        imageIndex = 0;
+                        state = 1;
+                    }
+                }
+                break;
+            case 1:
+                //Flapping animation
+                setImage(animFlapping.get(imageIndex));
+                if (imageIndex < animFlapping.size() - 1) {
+                    imageIndex++;
+                } else {
+                    imageIndex = -(new Random().nextInt(50));
+                    state = 0;
+                }
+                break;
+            case 2:
+                //Questioning face
+                setImage(animQuestioning.get(imageIndex));
+                if (imageIndex < animQuestioning.size() - 1) {
+                    if (imageIndex != 5 || questioningDone) {
+                        if (imageIndex == 5 && questioningDone) {
+                            questioningDone = !questioningDone;
+                        }
+                        imageIndex++;
+                    }
+                } else {
+                    imageIndex = -(new Random().nextInt(100));
+                    state = 0;
+                }
+                break;
+            case 3:
+                //Happy face
+                if (imageIndex < 5) {
+                    setImage(animHappy.get(imageIndex));
+                } else {
+                    setImage(animHappy.get(Math.max(imageIndex - 40, 5)));
+                }
+                if (imageIndex < animHappy.size() + 40 - 1) {
+                    imageIndex++;
+                } else {
+                    imageIndex = -(new Random().nextInt(50));
+                    state = 0;
+                }
+                break;
+            case 4:
+                //Sad face
+                if (imageIndex < 3) {
+                    setImage(animSad.get(imageIndex));
+                } else {
+                    setImage(animSad.get(Math.max(imageIndex - 40, 3)));
+                }
+                if (imageIndex < animSad.size() + 40 - 1) {
+                    imageIndex++;
+                } else {
+                    imageIndex = -(new Random().nextInt(50));
+                    state = 0;
+                }
+                break;
+        }
+    }
+
+    public void setState(int state) {
+        imageIndex = 0;
+        this.state = state;
+    }
+
+    /*public void animateHelper(int animationID, boolean loopInfinite)
     {
         this.state = animationID;
         animationTimerLoop = new Timer(100, new ActionListener()
@@ -136,7 +224,7 @@ public class UNHelper
             }
         });
         animationTimerLoop.start();
-    }
+    }*/
 
     public void setImage(Image image)
     {
@@ -151,5 +239,10 @@ public class UNHelper
     public UNGameScreen getGameScreen()
     {
         return this.gameScreen;
+    }
+
+    public void setQuestioningDone(boolean questioningDone)
+    {
+        this.questioningDone = questioningDone;
     }
 }

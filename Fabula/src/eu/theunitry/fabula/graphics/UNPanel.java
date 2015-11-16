@@ -3,6 +3,7 @@ package eu.theunitry.fabula.graphics;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.objects.UNHelper;
 import eu.theunitry.fabula.objects.UNObject;
+import kuusisto.tinysound.TinySound;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -18,11 +19,10 @@ public class UNPanel extends JPanel
     private ArrayList<UNGraphicsObject> objects;
     private ArrayList hud;
     private UNGameScreen gameScreen;
-    private boolean hudEnabled;
-    private String question;
-    private String help;
+    private boolean hudEnabled, helperDoneTalking;
+    private String question, questionDraw, help, helpDraw;
     private UNHelper helper;
-    private Timer timer;
+    private Timer timer, timerText;
 
     public UNPanel(UNGameScreen gameScreen, boolean hudEnabled)
     {
@@ -30,24 +30,47 @@ public class UNPanel extends JPanel
         this.hudEnabled = hudEnabled;
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                getPanel().repaint();
-            }
-        });
-        timer.start();
+        if (hudEnabled) {
+            timer = new Timer(1, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    getPanel().repaint();
+                }
+            });
+            timerText = new Timer(100, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (helpDraw.length() < getHelp().length()) {
+                        helpDraw += getHelp().charAt(helpDraw.length());
+                        helperDoneTalking = false;
+                    } else {
+                        if (!helperDoneTalking) {
+                            helperDoneTalking = true;
+                            gameScreen.getSounds().get(0).stop();
+                        }
+                    }
+                    if (questionDraw.length() < getQuestion().length()) {
+                        questionDraw += getQuestion().charAt(questionDraw.length());
+                    } else {
+                        getHelper().setQuestioningDone(true);
+                    }
+                }
+            });
+            timer.start();
+            timerText.start();
+        }
 
         MouseHandler mouseHandler = new MouseHandler();
         this.addMouseListener(mouseHandler);
         this.addMouseMotionListener(mouseHandler);
-        hudEnabled = true;
         question = "";
+        questionDraw = "";
         help = "";
+        helpDraw = "";
+        helperDoneTalking = true;
         if (hudEnabled)
         {
             helper = new UNHelper(gameScreen);
-            helper.animateHelper(0, false);
             helper.setImage(gameScreen.getSprites().get(0));
         }
     }
@@ -74,7 +97,7 @@ public class UNPanel extends JPanel
     {
         for (UNGraphicsObject object : objects)
         {
-            g.drawImage(object.getImage(), object.getX(), object.getY(), this);
+            g.drawImage(object.getImage(), object.getX(), object.getY(), object.getWidth(), object.getHeight(), this);
         }
     }
 
@@ -83,17 +106,25 @@ public class UNPanel extends JPanel
         if (hudEnabled)
         {
             g.fillRect(0, 0, 768, 64);
-            g.fillRect(0, 416, 575, 96);
-            g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
+            if (!getHelp().isEmpty()) {
+                g.fillRect(0, 416, 575, 96);
+            }
+
             g.setColor(Color.white);
+
+            g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
             g.drawString("Level 1/5", 11, 38);
-            g.setFont(new Font("Minecraftia", Font.PLAIN, 12));
-            g.drawString("Kan ik jou helpen?", 11, 455);
+
+            if (!getHelp().isEmpty()) {
+                g.setFont(new Font("Minecraftia", Font.PLAIN, 12));
+                g.drawString(this.helpDraw, 11, 455);
+            }
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
-            int stringLen = (int) g.getFontMetrics().getStringBounds(question, g).getWidth();
-            g.drawString(question, 754 - stringLen, 38);
-            g.drawImage(helper.getImage(), 610, 329, helper.getImage().getWidth(this) * 5, helper.getImage().getHeight(this) * 5, this);
+            int stringLen = (int) g.getFontMetrics().getStringBounds(questionDraw, g).getWidth();
+            g.drawString(questionDraw, 754 - stringLen, 38);
+
+            g.drawImage(helper.getImage(), 590, 329, helper.getImage().getWidth(this) * 5, helper.getImage().getHeight(this) * 5, this);
         }
     }
 
@@ -115,6 +146,8 @@ public class UNPanel extends JPanel
     public void setHelp(String help)
     {
         this.help = help;
+        this.helpDraw = "";
+        gameScreen.getSounds().get(0).play();
     }
 
     public String getHelp()
@@ -127,16 +160,34 @@ public class UNPanel extends JPanel
         return this;
     }
 
+    public void addObject(UNGraphicsObject object)
+    {
+        objects.add(object);
+    }
+
+    public UNHelper getHelper()
+    {
+        return this.helper;
+    }
+
+    public boolean getHelperDoneTalking()
+    {
+        return helperDoneTalking;
+    }
+
     public class MouseHandler implements MouseListener, MouseMotionListener {
         @Override
         public void mousePressed(MouseEvent e)
         {
             for (UNGraphicsObject object : objects) {
-                if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight()) {
-                    object.setMouseHold(true);
+                if (object.getClickable()) {
+                    if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight()) {
+                        object.setMouseHold(true);
 
-                    object.setXOffset(e.getX() - object.getX());
-                    object.setYOffset(e.getY() - object.getY());
+                        object.setXOffset(e.getX() - object.getX());
+                        object.setYOffset(e.getY() - object.getY());
+                        break;
+                    }
                 }
             }
         }

@@ -1,5 +1,6 @@
 package eu.theunitry.fabula.launcher;
 
+import eu.theunitry.fabula.Level0;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNPanel;
@@ -33,9 +34,9 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                UNPanel panel = new UNPanel(gameScreen, true);
-                gameScreen.toggleMusic(1, true);
-                panel.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+                UNPanel panel = new Level0(gameScreen, true);
+                gameScreen.switchMusic(1, true);
+                gameScreen.getMusic().get(1).setVolume(0.1);
 
                 gameScreen.switchPanel(panel);
             }

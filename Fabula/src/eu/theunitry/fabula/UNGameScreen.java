@@ -22,14 +22,17 @@ public class UNGameScreen extends UNObject
     private UNPanel splash;
     private JPanel currentPanel;
     private ArrayList<Music> music;
+    private ArrayList<Sound> sounds;
     private ArrayList<Image> sprites, backgrounds;
 
     public UNGameScreen()
     {
         music = new ArrayList<Music>();
+        sounds = new ArrayList<Sound>();
         sprites = new ArrayList<Image>();
         backgrounds = new ArrayList<Image>();
         TinySound.init();
+        //TinySound.setGlobalVolume(0);
         preload();
 
         this.window = new UNWindow("Fabula", 768, 512);
@@ -46,6 +49,7 @@ public class UNGameScreen extends UNObject
         this.window.getFrame().setVisible(true);
 
         music.get(0).play(true);
+        music.get(0).setVolume(0.1);
 
         this.window.removePanel(splash);
         this.window.addPanel(launcher);
@@ -65,10 +69,20 @@ public class UNGameScreen extends UNObject
         return this.window;
     }
 
-    public void toggleMusic(int index, boolean loop)
+    public void switchMusic(int index, boolean loop)
     {
         music.get(0).stop();
         music.get(index).play(loop);
+    }
+
+    public ArrayList<Music> getMusic()
+    {
+        return this.music;
+    }
+
+    public ArrayList<Sound> getSounds()
+    {
+        return this.sounds;
     }
 
     public ArrayList<Image> getSprites()
@@ -86,6 +100,9 @@ public class UNGameScreen extends UNObject
         //MUSIC PRELOAD
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
+
+        //SOUND PRELOAD
+        sounds.add(0, TinySound.loadSound("audio/gibberish.wav"));
 
         try
         {
@@ -136,6 +153,9 @@ public class UNGameScreen extends UNObject
             sprites.add(35, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning7.png")));
             sprites.add(36, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning8.png")));
             sprites.add(37, ImageIO.read(new File("res/animations/tuiltje/questioning/questioning9.png")));
+            //LEVEL0
+            sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
+            sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
         }
         catch (IOException e)
         {

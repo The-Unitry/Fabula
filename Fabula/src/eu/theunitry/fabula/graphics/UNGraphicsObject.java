@@ -26,7 +26,18 @@ public class UNGraphicsObject
             this.y = y;
             this.image = image;
             this.clickable = clickable;
-            this.hitbox = new Rectangle(x, y, width, height);
+            this.mouseHold = false;
+            this.width = width;
+            this.height = height;
+        }
+
+        public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
+        {
+            this.frame = frame;
+            this.x = x;
+            this.y = y;
+            this.image = image;
+            this.clickable = clickable;
             this.mouseHold = false;
             this.width = image.getWidth(null);
             this.height = image.getHeight(null);
@@ -50,7 +61,7 @@ public class UNGraphicsObject
 
         public void setY(int y)
         {
-            y = Math.max(0, Math.min(frame.getContentPane().getHeight() - this.getHeight(), y));
+            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
             this.y = y;
         }
 
@@ -76,12 +87,7 @@ public class UNGraphicsObject
 
         public Rectangle getHitbox()
         {
-            return this.hitbox;
-        }
-
-        public void setHitbox(Rectangle hitbox)
-        {
-            this.hitbox = hitbox;
+            return new Rectangle(x, y, width, height);
         }
 
         public int getWidth()
