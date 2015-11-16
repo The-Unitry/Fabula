@@ -105,6 +105,7 @@ public class UNPanel extends JPanel
     {
         if (hudEnabled)
         {
+            g.setColor(new Color(51, 51, 51));
             g.fillRect(0, 0, 768, 64);
             if (!getHelp().isEmpty()) {
                 g.fillRect(0, 416, 575, 96);

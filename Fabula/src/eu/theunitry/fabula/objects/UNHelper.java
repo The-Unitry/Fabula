@@ -169,63 +169,6 @@ public class UNHelper
         this.state = state;
     }
 
-    /*public void animateHelper(int animationID, boolean loopInfinite)
-    {
-        this.state = animationID;
-        animationTimerLoop = new Timer(100, new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                switch (state){
-                    case 0:
-                        //Idle animation
-                        setImage(animIdle.get(Math.max(imageIndex, 0)));
-                        if (imageIndex < animIdle.size() - 1) {
-                            imageIndex++;
-                        } else {
-                            imageIndex = -100;
-                            if (new Random().nextInt(2) == 0)
-                            {
-                                state = 1;
-                            }
-                        }
-                        break;
-                    case 1:
-                        //Flapping animation
-                        setImage(animFlapping.get(imageIndex));
-                        if (imageIndex < animFlapping.size() - 1) {
-                            imageIndex++;
-                        } else {
-                            if (loopInfinite)
-                            {
-                                imageIndex = 0;
-                            }
-                            else
-                            {
-                                state = 0;
-                            }
-                        }
-                        break;
-                    case 2:
-                        //Questioning face
-                        break;
-                    case 3:
-                        //Happy face
-                        break;
-                    case 4:
-                        //Sad face
-                        break;
-                    default:
-                        //Return to default animation
-                        setImage(animIdle.get(0));
-                        break;
-                }
-            }
-        });
-        animationTimerLoop.start();
-    }*/
-
     public void setImage(Image image)
     {
         this.image = image;

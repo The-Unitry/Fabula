@@ -21,15 +21,18 @@ public class Level0 extends UNLevel {
     private boolean winning;
     private int touch;
     private UNColor color;
+    private String lastHelp;
 
     public Level0(UNGameScreen gameScreen, boolean hudEnabled) {
         super(gameScreen, hudEnabled);
 
         setQuestion("Vertrek met 3 appels in de mand");
         addHelp("Jammer! Je moet 3 appels in de mand stoppen");
+        addHelp("Helaas! Er moeten 3 appels in de mand zitten");
         setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
         winning = false;
+        lastHelp = "";
 
         apples = new ArrayList<UNGraphicsObject>();
         color = new UNColor();
@@ -51,8 +54,8 @@ public class Level0 extends UNLevel {
 
         //button.setPreferredSize(new Dimension(150, 50));
         //button.setLocation(606, 64);
-        button.setLayout(null);
-        button.setBounds(606, 64, 150, 50);
+        this.setLayout(null);
+        button.setBounds(618, 64, 150, 50);
         button.setBackground(new Color(51, 51, 51));
         button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
         button.setForeground(Color.white);
@@ -77,7 +80,10 @@ public class Level0 extends UNLevel {
                         addMistake();
                         if (getMistakes() < 3) {
                             getHelper().setState(4);
-                            setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                            while(lastHelp == getHelp()) {
+                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                            }
+                            lastHelp = getHelp();
                         } else {
                             getHelper().setState(4);
                             if (touch < 3) {
