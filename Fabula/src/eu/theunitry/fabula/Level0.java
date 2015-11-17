@@ -4,6 +4,8 @@ package eu.theunitry.fabula;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.graphics.UNLevel;
+import eu.theunitry.fabula.graphics.UNPanel;
+import eu.theunitry.fabula.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,10 +33,11 @@ public class Level0 extends UNLevel {
         setQuestion("Vertrek met " + need + " appels in de mand");
         addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
+        setHelp("Sleep het aantal appels in de mand");
         setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
         winning = false;
-        lastHelp = "";
+        lastHelp = getHelp();
 
         apples = new ArrayList<UNGraphicsObject>();
         color = new UNColor();
@@ -71,14 +74,23 @@ public class Level0 extends UNLevel {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (button.getText() == "Door") {
+                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
+                        gameScreen.addLevel();
+                        gameScreen.switchPanel(new Level0(gameScreen, true));
+                    } else {
+                        gameScreen.switchPanel(new UNLauncher(gameScreen));
+                    }
+                }
                 if (getHelperDoneTalking()) {
                     if (winning) {
                         getHelper().setState(3);
-                        setHelp("Goed gedaan! Dat wordt smikkelen en smullen");
+                        setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
                         for (UNGraphicsObject apple : apples) {
                             apple.setClickable(false);
                         }
-                        getPanel().remove(button);
+                        //getPanel().remove(button);
+                        button.setText("Door");
                     } else {
                         addMistake();
                         if (getMistakes() < 3) {
@@ -97,7 +109,8 @@ public class Level0 extends UNLevel {
                             for (UNGraphicsObject apple : apples) {
                                 apple.setClickable(false);
                             }
-                            getPanel().remove(button);
+                            //getPanel().remove(button);
+                            button.setText("Door");
                         }
                     }
                 }

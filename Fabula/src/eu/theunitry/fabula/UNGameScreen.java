@@ -24,6 +24,7 @@ public class UNGameScreen extends UNObject
     private ArrayList<Music> music;
     private ArrayList<Sound> sounds;
     private ArrayList<Image> sprites, backgrounds;
+    private int level, levelMax;
 
     public UNGameScreen()
     {
@@ -55,12 +56,16 @@ public class UNGameScreen extends UNObject
         this.window.addPanel(launcher);
         currentPanel = launcher;
         this.window.getFrame().setVisible(true);
+
+        level = 1;
+        levelMax = 5;
     }
 
     public void switchPanel(JPanel panel)
     {
         this.window.removePanel(currentPanel);
         this.window.addPanel(panel);
+        currentPanel = panel;
         this.window.getFrame().setVisible(true);
     }
 
@@ -93,6 +98,26 @@ public class UNGameScreen extends UNObject
     public ArrayList<Image> getBackgrounds()
     {
         return this.backgrounds;
+    }
+
+    public int getLevel()
+    {
+        return level;
+    }
+
+    public int getLevelMax()
+    {
+        return levelMax;
+    }
+
+    public void addLevel()
+    {
+        level++;
+    }
+
+    public void resetProgress()
+    {
+        level = 0;
     }
 
     public void preload()
