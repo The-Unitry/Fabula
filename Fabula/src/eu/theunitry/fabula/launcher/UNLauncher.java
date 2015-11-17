@@ -34,7 +34,6 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                gameScreen.resetProgress();
                 UNPanel panel = new Level0(gameScreen, true);
                 gameScreen.switchMusic(1, true);
                 gameScreen.getMusic().get(1).setVolume(0.1);

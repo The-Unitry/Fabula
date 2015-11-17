@@ -22,7 +22,7 @@ public class UNPanel extends JPanel
     private boolean hudEnabled, helperDoneTalking;
     private String question, questionDraw, help, helpDraw;
     private UNHelper helper;
-    private Timer timer, timerText, timerQuestion;
+    private Timer timer, timerText;
 
     public UNPanel(UNGameScreen gameScreen, boolean hudEnabled)
     {
@@ -49,11 +49,6 @@ public class UNPanel extends JPanel
                             gameScreen.getSounds().get(0).stop();
                         }
                     }
-                }
-            });
-            timerQuestion = new Timer(50, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
                     if (questionDraw.length() < getQuestion().length()) {
                         questionDraw += getQuestion().charAt(questionDraw.length());
                     } else {
@@ -63,7 +58,6 @@ public class UNPanel extends JPanel
             });
             timer.start();
             timerText.start();
-            timerQuestion.start();
         }
 
         MouseHandler mouseHandler = new MouseHandler();
@@ -120,7 +114,7 @@ public class UNPanel extends JPanel
             g.setColor(Color.white);
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
-            g.drawString("Level " + gameScreen.getLevel() + "/" + gameScreen.getLevelMax(), 11, 38);
+            g.drawString("Level 1/5", 11, 38);
 
             if (!getHelp().isEmpty()) {
                 g.setFont(new Font("Minecraftia", Font.PLAIN, 12));
