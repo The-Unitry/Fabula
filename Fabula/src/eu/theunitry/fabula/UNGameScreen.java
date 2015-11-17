@@ -122,6 +122,17 @@ public class UNGameScreen extends UNObject
 
     public void preload()
     {
+        //FONT PRELOAD
+        try
+        {
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/Minecraftia.ttf")));
+        }
+        catch (IOException|FontFormatException e)
+        {
+            e.printStackTrace();
+        }
+
         //MUSIC PRELOAD
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
