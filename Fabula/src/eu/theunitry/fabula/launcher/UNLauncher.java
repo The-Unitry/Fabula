@@ -1,18 +1,15 @@
 package eu.theunitry.fabula.launcher;
 
-import eu.theunitry.fabula.Level0;
+import eu.theunitry.fabula.levels.Level0;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNPanel;
 import eu.theunitry.fabula.objects.UNButtonListener;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
 
 public class UNLauncher extends JPanel
 {
