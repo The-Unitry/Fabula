@@ -75,8 +75,11 @@ public class Level0 extends UNLevel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
+                    gameScreen.getSounds().get(0).stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        gameScreen.addLevel();
+                        if (winning) {
+                            gameScreen.addLevel();
+                        }
                         gameScreen.switchPanel(new Level0(gameScreen, true));
                     } else {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));

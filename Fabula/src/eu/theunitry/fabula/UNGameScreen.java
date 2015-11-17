@@ -32,9 +32,6 @@ public class UNGameScreen extends UNObject
         sounds = new ArrayList<Sound>();
         sprites = new ArrayList<Image>();
         backgrounds = new ArrayList<Image>();
-        TinySound.init();
-        //TinySound.setGlobalVolume(0);
-        preload();
 
         this.window = new UNWindow("Fabula", 768, 512);
         this.launcher = new UNLauncher(this);
@@ -48,6 +45,10 @@ public class UNGameScreen extends UNObject
 
         this.window.addPanel(splash);
         this.window.getFrame().setVisible(true);
+
+        TinySound.init();
+        //TinySound.setGlobalVolume(0);
+        preload();
 
         music.get(0).play(true);
         music.get(0).setVolume(0.1);
@@ -117,7 +118,7 @@ public class UNGameScreen extends UNObject
 
     public void resetProgress()
     {
-        level = 0;
+        level = 1;
     }
 
     public void preload()
