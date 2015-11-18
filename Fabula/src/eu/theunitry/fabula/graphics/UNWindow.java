@@ -39,6 +39,7 @@ public class UNWindow extends UNObject
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
+        this.frame.setUndecorated(true);
     }
 
     public void addPanel(JPanel panel)
