@@ -47,7 +47,6 @@ public class UNGameScreen extends UNObject
         this.window.getFrame().setVisible(true);
 
         TinySound.init();
-        //TinySound.setGlobalVolume(0);
         preload();
 
         music.get(0).play(true);
