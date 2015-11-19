@@ -54,18 +54,18 @@ public class UNGameScreen extends UNObject
 
         this.window.removePanel(splash);
         this.window.addPanel(launcher);
-        currentPanel = launcher;
+        this.currentPanel = launcher;
         this.window.getFrame().setVisible(true);
 
-        level = 1;
-        levelMax = 5;
+        this.level = 1;
+        this.levelMax = 5;
     }
 
     public void switchPanel(JPanel panel)
     {
         this.window.removePanel(currentPanel);
         this.window.addPanel(panel);
-        currentPanel = panel;
+        this.currentPanel = panel;
         this.window.getFrame().setVisible(true);
     }
 
@@ -112,17 +112,19 @@ public class UNGameScreen extends UNObject
 
     public void addLevel()
     {
-        level++;
+        this.level++;
     }
 
     public void resetProgress()
     {
-        level = 1;
+        this.level = 1;
     }
 
     public void preload()
     {
-        //FONT PRELOAD
+        /**
+         * Font Preload
+         */
         try
         {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
@@ -133,13 +135,21 @@ public class UNGameScreen extends UNObject
             e.printStackTrace();
         }
 
-        //MUSIC PRELOAD
+        /**
+         * Music Preload
+         */
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
 
-        //SOUND PRELOAD
+        /**
+         * Sound Effects Preload
+         */
         sounds.add(0, TinySound.loadSound("audio/gibberish.wav"));
 
+
+        /**
+         * Sprites Preload
+         */
         try
         {
             //BACKGROUND PRELOAD
