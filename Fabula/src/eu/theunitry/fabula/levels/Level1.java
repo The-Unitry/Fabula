@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level0 extends UNLevel
+public class Level1 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;
@@ -30,7 +30,7 @@ public class Level0 extends UNLevel
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level0(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level1(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
@@ -40,7 +40,7 @@ public class Level0 extends UNLevel
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(1));
 
         this.winning = false;
         this.lastHelp = getHelp();
