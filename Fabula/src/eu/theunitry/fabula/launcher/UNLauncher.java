@@ -57,24 +57,24 @@ public class UNLauncher extends JPanel
         /**
          * Label Styling
          */
-        label.setForeground(Color.white);
-        label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
-        label.setHorizontalAlignment(JLabel.CENTER);
+        this.label.setForeground(Color.white);
+        this.label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
+        this.label.setHorizontalAlignment(JLabel.CENTER);
 
         /**
          * Button Styling
          */
-        startBtn.setPreferredSize(new Dimension(200,100));
-        startBtn.setBackground(Color.white);
-        startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        startBtn.setForeground(UNColor.PRIMARY_COLOR);
-        startBtn.setOpaque(true);
+        this.startBtn.setPreferredSize(new Dimension(200,100));
+        this.startBtn.setBackground(Color.white);
+        this.startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        this.startBtn.setForeground(UNColor.PRIMARY_COLOR);
+        this.startBtn.setOpaque(true);
 
         /**
          * Default Styling Reset
          */
-        startBtn.setFocusPainted(false);
-        startBtn.setBorderPainted(false);
+        this.startBtn.setFocusPainted(false);
+        this.startBtn.setBorderPainted(false);
     }
 
 }
