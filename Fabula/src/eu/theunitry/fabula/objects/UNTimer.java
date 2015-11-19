@@ -8,14 +8,11 @@ import javax.swing.Timer;
 
 public class UNTimer
 {
-
     private final Timer gameLoop;
-    //private final GameLoop actionListener;
     private final UNGameScreen gameScreen;
 
     public UNTimer(UNGameScreen gameScreen, int ms) {
         this.gameScreen = gameScreen;
-        //this.actionListener = new GameLoop();
         this.gameLoop = new Timer(ms, new GameLoop());
         this.gameLoop.start();
     }
@@ -28,18 +25,16 @@ public class UNTimer
         this.gameLoop.stop();
     }
 
-    public class GameLoop implements ActionListener {
-
+    public class GameLoop implements ActionListener
+    {
         @Override
         public void actionPerformed(ActionEvent e) {
 
         }
-
     }
 
     public UNGameScreen getGameScreen()
     {
         return this.gameScreen;
     }
-
 }

@@ -11,24 +11,15 @@ import java.nio.file.Paths;
 
 public abstract class UNAudioObject extends UNObject
 {
-
     private double volume;
     private String src;
     private boolean playing;
     private Clip sound;
 
-    public UNAudioObject(){}
-
     public UNAudioObject(String src)
     {
         this.setSrc(src);
-        this.updateSound(this.getSrc());
         this.setPlaying(false);
-    }
-
-    public void updateSound(String src)
-    {
-        //new Music().lo;
     }
 
     public Clip getSound()
@@ -73,7 +64,7 @@ public abstract class UNAudioObject extends UNObject
         this.playing = playing;
     }
 
-    public boolean getPlaying()
+    public boolean isPlaying()
     {
         return this.playing;
     }

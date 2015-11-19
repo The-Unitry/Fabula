@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 public class UNGameScreen extends UNObject
 {
-
     private UNWindow window;
     private UNLauncher launcher;
     private UNPanel splash;
@@ -208,5 +207,4 @@ public class UNGameScreen extends UNObject
             e.printStackTrace();
         }
     }
-
 }

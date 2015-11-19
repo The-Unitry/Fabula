@@ -9,7 +9,6 @@ import javax.swing.*;
 
 public class UNWindow extends UNObject
 {
-
     private final String TITLE;
     private final int WIDTH;
     private final int HEIGHT;
@@ -30,7 +29,6 @@ public class UNWindow extends UNObject
         this.init();
         this.frame.setVisible(true);
     }
-
 
     public void init()
     {
@@ -66,5 +64,4 @@ public class UNWindow extends UNObject
     {
         return this.frame.getContentPane().getHeight();
     }
-
 }

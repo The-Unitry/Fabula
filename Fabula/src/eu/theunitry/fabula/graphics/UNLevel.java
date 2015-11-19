@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 public abstract class UNLevel extends UNPanel
 {
-
     private boolean playerHasWon = false;
     private String question;
     private ArrayList<String> helpList;
@@ -17,7 +16,7 @@ public abstract class UNLevel extends UNPanel
     {
         super(gameScreen, hudEnabled);
         this.helpList = new ArrayList<String>();
-        mistakes = 0;
+        this.mistakes = 0;
     }
 
     public boolean hasPlayerWon()
@@ -52,7 +51,7 @@ public abstract class UNLevel extends UNPanel
 
     public void addMistake()
     {
-        mistakes++;
+        this.mistakes++;
     }
 
     public int getMistakes()

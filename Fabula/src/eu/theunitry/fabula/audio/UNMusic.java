@@ -5,9 +5,8 @@ import javax.sound.sampled.LineEvent;
 
 public class UNMusic extends UNAudioObject
 {
-
-
-    public UNMusic(String src) {
+    public UNMusic(String src)
+    {
         super(src);
     }
 }

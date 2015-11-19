@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 
 public class UNButtonListener implements ActionListener
 {
-
     private JButton buttonPressed;
 
     @Override
@@ -15,7 +14,7 @@ public class UNButtonListener implements ActionListener
         this.setButtonPressed((JButton) e.getSource());
     }
 
-    public JButton getButtonPressed()
+    public JButton isButtonPressed()
     {
         return buttonPressed;
     }

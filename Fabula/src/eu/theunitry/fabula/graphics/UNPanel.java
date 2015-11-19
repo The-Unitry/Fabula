@@ -177,7 +177,7 @@ public class UNPanel extends JPanel
         return this.helper;
     }
 
-    public boolean getHelperDoneTalking()
+    public boolean isHelperDoneTalking()
     {
         return helperDoneTalking;
     }

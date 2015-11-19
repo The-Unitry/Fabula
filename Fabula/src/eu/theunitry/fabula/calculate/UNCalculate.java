@@ -20,5 +20,4 @@ public class UNCalculate
                 return 0;
         }
     }
-
 }

@@ -14,7 +14,6 @@ import javax.swing.Timer;
 
 public class UNHelper
 {
-    // private UNHud hud;
     private int animationID;
     private boolean loopInfinite;
     private Timer animationTimerLoop;
@@ -26,40 +25,52 @@ public class UNHelper
     private Image image;
     private int state;
 
-    public UNHelper(/** UNHud hud **/ UNGameScreen gameScreen)
+    public UNHelper(UNGameScreen gameScreen)
     {
-        // this.hud = hud;
         this.gameScreen = gameScreen;
-        animIdle = new ArrayList<Image>();
-        animFlapping = new ArrayList<Image>();
-        animSad = new ArrayList<Image>();
-        animHappy = new ArrayList<Image>();
-        animQuestioning = new ArrayList<Image>();
-        imageIndex = 0;
-        state = 2;
-        questioningDone = false;
-        //IDLE
+        this.animIdle = new ArrayList<Image>();
+        this.animFlapping = new ArrayList<Image>();
+        this.animSad = new ArrayList<Image>();
+        this.animHappy = new ArrayList<Image>();
+        this.animQuestioning = new ArrayList<Image>();
+        this.imageIndex = 0;
+        this.state = 2;
+        this.questioningDone = false;
+
+
+        /**
+         * Idle
+         */
         animIdle.add(0, gameScreen.getSprites().get(0));
         animIdle.add(1, gameScreen.getSprites().get(1));
         animIdle.add(2, gameScreen.getSprites().get(2));
         animIdle.add(3, gameScreen.getSprites().get(3));
         animIdle.add(4, gameScreen.getSprites().get(4));
         animIdle.add(5, gameScreen.getSprites().get(5));
-        //FLAPPING
+
+        /**
+         * Flapping
+         */
         animFlapping.add(0, gameScreen.getSprites().get(6));
         animFlapping.add(1, gameScreen.getSprites().get(7));
         animFlapping.add(2, gameScreen.getSprites().get(8));
         animFlapping.add(3, gameScreen.getSprites().get(9));
         animFlapping.add(4, gameScreen.getSprites().get(10));
         animFlapping.add(5, gameScreen.getSprites().get(11));
-        //SAD
+
+        /**
+         * Sad
+         */
         animSad.add(0, gameScreen.getSprites().get(12));
         animSad.add(1, gameScreen.getSprites().get(13));
         animSad.add(2, gameScreen.getSprites().get(14));
         animSad.add(3, gameScreen.getSprites().get(15));
         animSad.add(4, gameScreen.getSprites().get(16));
         animSad.add(5, gameScreen.getSprites().get(17));
-        //HAPPY
+
+        /**
+         * Happy
+         */
         animHappy.add(0, gameScreen.getSprites().get(18));
         animHappy.add(1, gameScreen.getSprites().get(19));
         animHappy.add(2, gameScreen.getSprites().get(20));
@@ -70,7 +81,10 @@ public class UNHelper
         animHappy.add(7, gameScreen.getSprites().get(25));
         animHappy.add(8, gameScreen.getSprites().get(26));
         animHappy.add(9, gameScreen.getSprites().get(27));
-        //QUESTIONING
+
+        /**
+         * Questioning
+         */
         animQuestioning.add(0, gameScreen.getSprites().get(28));
         animQuestioning.add(1, gameScreen.getSprites().get(29));
         animQuestioning.add(2, gameScreen.getSprites().get(30));
@@ -94,7 +108,6 @@ public class UNHelper
     public void animate() {
         switch (state) {
             case 0:
-                //Idle animation
                 setImage(animIdle.get(Math.max(imageIndex, 0)));
                 if (imageIndex < animIdle.size() - 1) {
                     imageIndex++;
@@ -109,7 +122,6 @@ public class UNHelper
                 }
                 break;
             case 1:
-                //Flapping animation
                 setImage(animFlapping.get(imageIndex));
                 if (imageIndex < animFlapping.size() - 1) {
                     imageIndex++;
@@ -119,7 +131,6 @@ public class UNHelper
                 }
                 break;
             case 2:
-                //Questioning face
                 setImage(animQuestioning.get(imageIndex));
                 if (imageIndex < animQuestioning.size() - 1) {
                     if (imageIndex != 5 || questioningDone) {
@@ -134,7 +145,6 @@ public class UNHelper
                 }
                 break;
             case 3:
-                //Happy face
                 if (imageIndex < 5) {
                     setImage(animHappy.get(imageIndex));
                 } else {
@@ -148,7 +158,6 @@ public class UNHelper
                 }
                 break;
             case 4:
-                //Sad face
                 if (imageIndex < 3) {
                     setImage(animSad.get(imageIndex));
                 } else {
