@@ -26,7 +26,7 @@ public class Level1 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 0
+     * Level 1
      * @param gameScreen
      * @param hudEnabled
      */
@@ -82,57 +82,54 @@ public class Level1 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level0(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
-                }
-                if (isHelperDoneTalking()) {
+        button.addActionListener(e -> {
+            if (button.getText() == "Door") {
+                gameScreen.getSounds().get(0).stop();
+                if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                     if (winning) {
-                        getHelper().setState(3);
-                        setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
-                        for (UNGraphicsObject apple : apples) {
+                        gameScreen.addLevel();
+                    }
+                    gameScreen.switchPanel(new Level0(gameScreen, true));
+                } else {
+                    gameScreen.switchPanel(new UNLauncher(gameScreen));
+                }
+            }
+            if (isHelperDoneTalking()) {
+                if (winning) {
+                    getHelper().setState(3);
+                    setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
+                    for (UNGraphicsObject apple : apples) {
+                        apple.setClickable(false);
+                    }
+                    button.setText("Door");
+                } else {
+                    addMistake();
+                    if (getMistakes() < 3) {
+                        getHelper().setState(4);
+                        while(lastHelp.equals(getHelp())) {
+                            setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                        }
+                        lastHelp = getHelp();
+                    } else {
+                        getHelper().setState(4);
+                        if (touch < need) {
+                            setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
+                                    " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                    (need - touch)  + " is " + need
+                            );
+                        } else {
+                            setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
+                                    " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                    (touch - need)  + " is " + need
+                            );
+                        }
+
+                        for (UNGraphicsObject apple : apples)
+                        {
                             apple.setClickable(false);
                         }
+
                         button.setText("Door");
-                    } else {
-                        addMistake();
-                        if (getMistakes() < 3) {
-                            getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
-                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                            }
-                            lastHelp = getHelp();
-                        } else {
-                            getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                        (need - touch)  + " is " + need
-                                );
-                            } else {
-                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                        (touch - need)  + " is " + need
-                                );
-                            }
-
-                            for (UNGraphicsObject apple : apples)
-                            {
-                                apple.setClickable(false);
-                            }
-
-                            button.setText("Door");
-                        }
                     }
                 }
             }
@@ -140,17 +137,14 @@ public class Level1 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox().intersects(apple.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject apple : apples) {
+                if (basket.getHitbox().intersects(apple.getHitbox())) {
+                    touch++;
                 }
-                winning = (touch == need);
             }
+            winning = (touch == need);
         });
 
         timer.start();

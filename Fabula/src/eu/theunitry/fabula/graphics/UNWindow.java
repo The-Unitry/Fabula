@@ -38,6 +38,8 @@ public class UNWindow extends UNObject
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
         this.frame.setUndecorated(true);
+        ImageIcon img = new ImageIcon("res/icons/icon.png");
+        this.frame.setIconImage(img.getImage());
     }
 
     public void addPanel(JPanel panel)
