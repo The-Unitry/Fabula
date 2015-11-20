@@ -143,7 +143,7 @@ public class UNGameScreen extends UNObject
         /**
          * Sound Effects Preload
          */
-        sounds.add(0, TinySound.loadSound("audio/gibberish.wav"));
+        sounds.add(0, TinySound.loadSound("audio/jelmer.wav"));
 
 
         /**
