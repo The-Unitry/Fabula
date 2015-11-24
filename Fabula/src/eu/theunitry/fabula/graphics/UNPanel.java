@@ -24,6 +24,11 @@ public class UNPanel extends JPanel
     private UNHelper helper;
     private Timer timer, timerText, timerQuestion;
 
+    /**
+     * UNPanel
+     * @param gameScreen
+     * @param hudEnabled
+     */
     public UNPanel(UNGameScreen gameScreen, boolean hudEnabled)
     {
         this.gameScreen = gameScreen;
@@ -135,11 +140,19 @@ public class UNPanel extends JPanel
         }
     }
 
+    /**
+     * setHudEnabled
+     * @param hudEnabled
+     */
     public void setHudEnabled(boolean hudEnabled)
     {
         this.hudEnabled = hudEnabled;
     }
 
+    /**
+     * setQuestion
+     * @param question
+     */
     public void setQuestion(String question)
     {
         this.question = question;
@@ -150,6 +163,10 @@ public class UNPanel extends JPanel
         return question;
     }
 
+    /**
+     * setHelp
+     * @param help
+     */
     public void setHelp(String help)
     {
         this.help = help;
@@ -167,6 +184,10 @@ public class UNPanel extends JPanel
         return this;
     }
 
+    /**
+     * addObject
+     * @param object
+     */
     public void addObject(UNGraphicsObject object)
     {
         objects.add(object);
