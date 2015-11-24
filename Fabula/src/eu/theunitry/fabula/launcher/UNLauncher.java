@@ -1,6 +1,7 @@
 package eu.theunitry.fabula.launcher;
 
 import eu.theunitry.fabula.levels.Level0;
+import eu.theunitry.fabula.levels.Level3;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNPanel;
