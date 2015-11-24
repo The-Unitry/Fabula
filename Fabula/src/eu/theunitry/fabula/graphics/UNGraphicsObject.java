@@ -15,7 +15,7 @@ public class UNGraphicsObject
     private Rectangle hitbox;
     private boolean mouseHold;
     private int width, height;
-    private int xOffset, yOffset;
+    private int xOffset, yOffset, angle;
 
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable, int width, int height)
     {
@@ -27,6 +27,7 @@ public class UNGraphicsObject
         this.mouseHold = false;
         this.width = width;
         this.height = height;
+        this.angle = 0;
     }
 
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
@@ -39,6 +40,7 @@ public class UNGraphicsObject
         this.mouseHold = false;
         this.width = image.getWidth(null);
         this.height = image.getHeight(null);
+        this.angle = 0;
     }
 
     public int getX()
@@ -108,7 +110,8 @@ public class UNGraphicsObject
         this.height = height;
     }
 
-    public void setMouseHold(boolean mouseHold) {
+    public void setMouseHold(boolean mouseHold)
+    {
         this.mouseHold = mouseHold;
     }
 
@@ -116,19 +119,35 @@ public class UNGraphicsObject
         return this.mouseHold;
     }
 
-    public void setXOffset(int xOffset) {
+    public void setXOffset(int xOffset)
+    {
         this.xOffset = xOffset;
     }
 
-    public int getXOffset() {
+    public int getXOffset()
+    {
         return this.xOffset;
     }
 
-    public void setYOffset(int yOffset) {
+    public void setYOffset(int yOffset)
+    {
         this.yOffset = yOffset;
     }
 
-    public int getYOffset() {
+    public int getYOffset()
+    {
         return this.yOffset;
+    }
+
+    public void setAngle(int angle)
+    {
+        this.angle = angle;
+        this.angle -= 360 * (Math.floor(this.angle / 360));
+        this.angle += 360 * (Math.ceil(Math.abs(this.angle / 360)));
+    }
+
+    public int getAngle()
+    {
+        return this.angle;
     }
 }

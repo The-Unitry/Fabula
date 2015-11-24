@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,6 +98,7 @@ public class UNPanel extends JPanel
     @Override
     public void paintComponent(Graphics g)
     {
+        Graphics2D gd2 = (Graphics2D) g;
         g.drawImage(getBackgroundImage(), 0, 0, 768, 512, this);
         layerObjects(g);
         layerHUD(g);
@@ -115,7 +118,16 @@ public class UNPanel extends JPanel
     {
         for (UNGraphicsObject object : objects)
         {
-            g.drawImage(object.getImage(), object.getX(), object.getY(), object.getWidth(), object.getHeight(), this);
+            BufferedImage image = (BufferedImage) object.getImage();
+            Graphics2D g2d = (Graphics2D) g;
+            AffineTransform at = new AffineTransform();
+
+            at.translate(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2);
+            at.rotate(Math.toRadians(object.getAngle()));
+            at.scale((double) 1 / image.getWidth() * object.getWidth(), (double) 1 / image.getHeight() * object.getHeight());
+            at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+
+            g2d.drawImage(image, at, null);
         }
     }
 
