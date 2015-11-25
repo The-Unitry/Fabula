@@ -211,17 +211,17 @@ public class Level6 extends UNLevel
                                 else
                                 {
                                     getHelper().setState(4);
-                                    /*if (touch < need) {
-                                        setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                                " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                                (need - touch)  + " is " + need
-                                        );
-                                    } else {
-                                        setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                                " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                                (touch - need)  + " is " + need
-                                        );
-                                    }*/
+                                    setHelp("Jammer, het was " + answer + ". Want " + snowballTexts.get(0) + " plus " +
+                                            snowballTexts.get(1)  + " plus " + snowballTexts.get(2) + " is " + answer
+                                    );
+                                    removeObject(snowballAnswers.get(0));
+                                    removeObject(snowballAnswers.get(1));
+                                    removeObject(snowballAnswers.get(2));
+
+                                    for (JLabel possibleAnswer : answers)
+                                    {
+                                        remove(possibleAnswer);
+                                    }
 
                                     button.setText("Door");
                                 }

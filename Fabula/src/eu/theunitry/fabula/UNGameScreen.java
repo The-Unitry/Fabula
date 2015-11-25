@@ -152,7 +152,7 @@ public class UNGameScreen extends UNObject
         try
         {
             //BACKGROUND PRELOAD
-            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/forest.png")));
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/snow.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
 
             //SPRITE PRELOAD

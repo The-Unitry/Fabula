@@ -135,11 +135,11 @@ public class UNPanel extends JPanel
     {
         if (hudEnabled)
         {
-            g.setColor(new Color(51, 51, 51));
+            g.setColor(new Color(51, 51, 51, 230));
             g.fillRect(0, 0, 768, 64);
             if (!getHelp().isEmpty())
             {
-                g.fillRect(0, 416, 575, 96);
+                g.fillRect(0, 464, 575, 48);
             }
 
             g.setColor(Color.white);
@@ -150,7 +150,7 @@ public class UNPanel extends JPanel
             if (!getHelp().isEmpty())
             {
                 g.setFont(new Font("Minecraftia", Font.PLAIN, 12));
-                g.drawString(this.helpDraw, 11, 455);
+                g.drawString(this.helpDraw, 11, 492);
             }
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 15));
