@@ -14,11 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level7 extends UNLevel
+public class Level8 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject chest;
-    private ArrayList<UNGraphicsObject> coins;
+    private ArrayList<UNGraphicsObject> nuggets;
     private JButton button;
     private boolean winning;
     private int need, touch;
@@ -30,7 +30,7 @@ public class Level7 extends UNLevel
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level7(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level8(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
@@ -40,30 +40,30 @@ public class Level7 extends UNLevel
         this.addHelp("Jammer! Je moet " + need + " muntjes in de schatkist stoppen");
         this.addHelp("Helaas! Er moeten " + need + " muntjes in de schatkist zitten");
         this.setHelp("Sleep het aantal muntjes in de schatkist");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.coins = new ArrayList<UNGraphicsObject>();
+        this.nuggets = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(50), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 625, 233, gameScreen.getSprites().get(50), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
-            coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
+            nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                     new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(49), true, 32, 32)
+                    .get(52), true, 32, 32)
             );
         }
 
-        this.coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(49), true, 32, 32));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(52), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(49), true, 32, 32));
+            nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(52), true, 32, 32));
         }
 
         this.addObject(chest);
-        for (UNGraphicsObject apple : coins) {
+        for (UNGraphicsObject apple : nuggets) {
             addObject(apple);
         }
 
@@ -91,7 +91,7 @@ public class Level7 extends UNLevel
                         if (winning) {
                             gameScreen.addLevel();
                         }
-                        gameScreen.switchPanel(new Level7(gameScreen, true));
+                        gameScreen.switchPanel(new Level8(gameScreen, true));
                     } else {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }
@@ -100,7 +100,7 @@ public class Level7 extends UNLevel
                     if (winning) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, nu zijn we rijk!");
-                        for (UNGraphicsObject apple : coins) {
+                        for (UNGraphicsObject apple : nuggets) {
                             apple.setClickable(false);
                         }
                         button.setText("Door");
@@ -126,7 +126,7 @@ public class Level7 extends UNLevel
                                 );
                             }
 
-                            for (UNGraphicsObject apple : coins)
+                            for (UNGraphicsObject apple : nuggets)
                             {
                                 apple.setClickable(false);
                             }
@@ -144,7 +144,7 @@ public class Level7 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
-                for (UNGraphicsObject apple : coins) {
+                for (UNGraphicsObject apple : nuggets) {
                     if (chest.getHitbox().intersects(apple.getHitbox())) {
                         touch++;
                     }

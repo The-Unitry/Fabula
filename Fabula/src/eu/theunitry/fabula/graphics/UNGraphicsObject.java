@@ -59,7 +59,7 @@ public class UNGraphicsObject
 
     public void setY(int y)
     {
-        y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
+        y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 80 - this.getHeight(), y));
         this.y = y;
     }
 

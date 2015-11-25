@@ -155,6 +155,8 @@ public class UNGameScreen extends UNObject
             backgrounds.add(0, ImageIO.read(new File("res/backgrounds/forest.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
             backgrounds.add(2, ImageIO.read(new File("res/backgrounds/space.png")));
+            backgrounds.add(3, ImageIO.read(new File("res/backgrounds/underwater.png")));
+            backgrounds.add(4, ImageIO.read(new File("res/backgrounds/mine.png")));
 
             //SPRITE PRELOAD
             //TUILTJE IDLE
@@ -213,6 +215,12 @@ public class UNGameScreen extends UNObject
             sprites.add(46, ImageIO.read(new File("res/sprites/ufoBlue.png")));
             sprites.add(47, ImageIO.read(new File("res/sprites/ufoGreen.png")));
             sprites.add(48, ImageIO.read(new File("res/sprites/ufoPink.png")));
+            //LEVEL7
+            sprites.add(49, ImageIO.read(new File("res/sprites/muntje.png")));
+            sprites.add(50, ImageIO.read(new File("res/sprites/kist_open.png")));
+            sprites.add(51, ImageIO.read(new File("res/sprites/kist_dicht.png")));
+            //LEVEL8
+            sprites.add(52, ImageIO.read(new File("res/sprites/klomp.png")));
         }
         catch (IOException e)
         {
