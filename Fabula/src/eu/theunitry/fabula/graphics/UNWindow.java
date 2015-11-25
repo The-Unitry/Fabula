@@ -32,13 +32,13 @@ public class UNWindow extends UNObject
 
     public void init()
     {
+        ImageIcon img = new ImageIcon("res/icons/icon.png");
         this.frame.setTitle(this.TITLE);
         this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
         this.frame.setUndecorated(true);
-        ImageIcon img = new ImageIcon("res/icons/icon.png");
         this.frame.setIconImage(img.getImage());
     }
 
