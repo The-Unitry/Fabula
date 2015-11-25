@@ -13,7 +13,7 @@ public class UNGraphicsObject
     private Image image;
     private boolean clickable;
     private Rectangle hitbox;
-    private boolean mouseHold;
+    private boolean mouseClick, mouseHold;
     private int width, height;
     private int xOffset, yOffset, angle;
 
@@ -50,7 +50,10 @@ public class UNGraphicsObject
 
     public void setX(int x)
     {
-        x = Math.max(0, Math.min(frame.getContentPane().getWidth() - this.getWidth(), x));
+        if (getClickable())
+        {
+            x = Math.max(0, Math.min(frame.getContentPane().getWidth() - this.getWidth(), x));
+        }
         this.x = x;
     }
 
@@ -61,7 +64,10 @@ public class UNGraphicsObject
 
     public void setY(int y)
     {
-        y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
+        if (getClickable())
+        {
+            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
+        }
         this.y = y;
     }
 
@@ -108,6 +114,16 @@ public class UNGraphicsObject
     public void setHeight(int height)
     {
         this.height = height;
+    }
+
+    public void setMouseClick(boolean mouseClick)
+    {
+        this.mouseClick = mouseClick;
+    }
+
+    public boolean getMouseClick()
+    {
+        return this.mouseClick;
     }
 
     public void setMouseHold(boolean mouseHold)

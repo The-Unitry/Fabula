@@ -46,6 +46,7 @@ public class UNGameScreen extends UNObject
         this.window.getFrame().setVisible(true);
 
         TinySound.init();
+        TinySound.setGlobalVolume(0);
         preload();
 
         music.get(0).play(true);
@@ -152,7 +153,7 @@ public class UNGameScreen extends UNObject
         try
         {
             //BACKGROUND PRELOAD
-            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/forest.png")));
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/snow.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
 
             //SPRITE PRELOAD
@@ -202,6 +203,8 @@ public class UNGameScreen extends UNObject
             //LEVEL0
             sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
             sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
+            //LEVEL6
+            sprites.add(40, ImageIO.read(new File("res/sprites/snowball.png")));
         }
         catch (IOException e)
         {

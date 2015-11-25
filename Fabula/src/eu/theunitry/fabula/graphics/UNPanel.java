@@ -198,6 +198,11 @@ public class UNPanel extends JPanel
         objects.add(object);
     }
 
+    public void removeObject(UNGraphicsObject object)
+    {
+        objects.remove(object);
+    }
+
     public UNHelper getHelper()
     {
         return this.helper;
@@ -215,9 +220,12 @@ public class UNPanel extends JPanel
         {
             for (UNGraphicsObject object : objects)
             {
-                if (object.getClickable())
+                if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight())
                 {
-                    if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight()) {
+                    object.setMouseClick(true);
+
+                    if (object.getClickable())
+                    {
                         object.setMouseHold(true);
 
                         object.setXOffset(e.getX() - object.getX());
