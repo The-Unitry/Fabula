@@ -1,6 +1,5 @@
 package eu.theunitry.fabula.levels;
 
-
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNGraphicsObject;
@@ -37,9 +36,9 @@ public class Level7 extends UNLevel
         this.need = 1 + new Random().nextInt(4);
         this.need2 = 1 + new Random().nextInt(10);
 
-        this.setQuestion("Hoeveel is " + need + " keer " + need2 + "?");
-        this.addHelp("Jammer! Je moet " + need + " muntjes in de schatkist stoppen");
-        this.addHelp("Helaas! Er moeten " + need + " muntjes in de schatkist zitten");
+        this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
+        this.addHelp("Jammer! Je moet " + (need + need2) + " muntjes in de schatkist stoppen");
+        this.addHelp("Helaas! Er moeten " + (need + need2) + " muntjes in de schatkist zitten");
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
@@ -49,16 +48,13 @@ public class Level7 extends UNLevel
         this.coins = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(42), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.getSprites().get(41), false, 96, 96);
+        this.chest.setHitbox(0, 60, 96, 1);
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 10; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites().get(42), true, 32, 32)
+                new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.getSprites().get(42), false, 32, 32)
             );
-        }
-
-        if (new Random().nextInt(2) == 1) {
-           coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(42), true, 32, 32));
         }
 
         this.addObject(chest);
@@ -95,6 +91,7 @@ public class Level7 extends UNLevel
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }
                 }
+
                 if (isHelperDoneTalking()) {
                     if (winning) {
                         getHelper().setState(3);
@@ -113,15 +110,15 @@ public class Level7 extends UNLevel
                             lastHelp = getHelp();
                         } else {
                             getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " muntje" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                        (need - touch)  + " is " + need
+                            if (touch < need + need2) {
+                                setHelp("Jammer, er moest" + ((need + need2 - touch == 1) ? "" : "en") + " nog " + (need + need2 - touch) +
+                                        " muntje" + ((need + need2 - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                        (need + need2 - touch)  + " is " + need
                                 );
                             } else {
-                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " muntje" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                        (touch - need)  + " is " + need
+                                setHelp("Jammer, er moest" + ((touch - need + need2 == 1) ? "" : "en") + " " + (touch - need + need2) +
+                                        " muntje" + ((touch - need + need2 == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                        (touch - need + need2)  + " is " + need + need2
                                 );
                             }
 
@@ -139,7 +136,7 @@ public class Level7 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(15, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
@@ -148,7 +145,18 @@ public class Level7 extends UNLevel
                         touch++;
                     }
                 }
-                winning = (touch == need);
+                winning = (touch == (need + need2));
+
+                for(UNGraphicsObject coin : coins)
+                {
+                    if(!coin.getMouseHold() && !chest.getHitbox(true).intersects(coin.getHitbox())) {
+                        coin.setY(coin.getY() + 1);
+                    }
+                        if(coin.getY() > 64)
+                        {
+                            coin.setClickable(true);
+                        }
+                }
             }
         });
 
