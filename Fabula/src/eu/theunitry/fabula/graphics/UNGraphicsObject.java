@@ -119,6 +119,11 @@ public class UNGraphicsObject
         }
     }
 
+    public Rectangle getHitbox()
+    {
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
+    }
+
     public int getWidth()
     {
         return this.width;
