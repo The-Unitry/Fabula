@@ -33,7 +33,7 @@ public class Level7 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 1 + new Random().nextInt(4);
+        this.need = 1 + new Random().nextInt(10);
         this.need2 = 1 + new Random().nextInt(10);
 
         this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
@@ -51,7 +51,7 @@ public class Level7 extends UNLevel
         this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.getSprites().get(41), false, 96, 96);
         this.chest.setHitbox(0, 60, 96, 1);
 
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < 20; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                 new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.getSprites().get(42), false, 32, 32)
             );
@@ -113,12 +113,12 @@ public class Level7 extends UNLevel
                             if (touch < need + need2) {
                                 setHelp("Jammer, er moest" + ((need + need2 - touch == 1) ? "" : "en") + " nog " + (need + need2 - touch) +
                                         " muntje" + ((need + need2 - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                        (need + need2 - touch)  + " is " + need
+                                        (need + need2 - touch)  + " is " + (need + need2)
                                 );
                             } else {
                                 setHelp("Jammer, er moest" + ((touch - need + need2 == 1) ? "" : "en") + " " + (touch - need + need2) +
                                         " muntje" + ((touch - need + need2 == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                        (touch - need + need2)  + " is " + need + need2
+                                        (touch - need + need2)  + " is " + (need + need2)
                                 );
                             }
 
