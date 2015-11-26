@@ -2,10 +2,9 @@ package eu.theunitry.fabula.graphics;
 
 import eu.theunitry.fabula.UNGameScreen;
 
-import javax.swing.*;
 import java.util.ArrayList;
 
-public abstract class UNLevel extends UNPanel
+public abstract class UNLevel extends UNView
 {
     private boolean playerHasWon = false;
     private String question;

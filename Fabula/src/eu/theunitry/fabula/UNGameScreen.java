@@ -1,6 +1,6 @@
 package eu.theunitry.fabula;
 
-import eu.theunitry.fabula.graphics.UNPanel;
+import eu.theunitry.fabula.graphics.UNView;
 import eu.theunitry.fabula.graphics.UNWindow;
 import eu.theunitry.fabula.launcher.UNLauncher;
 import eu.theunitry.fabula.objects.UNObject;
@@ -18,7 +18,7 @@ public class UNGameScreen extends UNObject
 {
     private UNWindow window;
     private UNLauncher launcher;
-    private UNPanel splash;
+    private UNView splash;
     private JPanel currentPanel;
     private ArrayList<Music> music;
     private ArrayList<Sound> sounds;
@@ -34,7 +34,7 @@ public class UNGameScreen extends UNObject
 
         this.window = new UNWindow("Fabula", 768, 512);
         this.launcher = new UNLauncher(this);
-        this.splash = new UNPanel(this, false);
+        this.splash = new UNView(this, false);
 
         try {
             this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));

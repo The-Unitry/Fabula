@@ -15,7 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UNPanel extends JPanel
+public class UNView extends JPanel
 {
     private Image backgroundImage;
     private ArrayList<UNGraphicsObject> objects;
@@ -26,7 +26,7 @@ public class UNPanel extends JPanel
     private UNHelper helper;
     private Timer timer, timerText, timerQuestion;
 
-    public UNPanel(UNGameScreen gameScreen, boolean hudEnabled)
+    public UNView(UNGameScreen gameScreen, boolean hudEnabled)
     {
         this.gameScreen = gameScreen;
         this.hudEnabled = hudEnabled;
