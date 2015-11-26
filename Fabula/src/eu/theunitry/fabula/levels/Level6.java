@@ -17,7 +17,7 @@ import java.util.Random;
 public class Level6 extends UNLevel
 {
     private Timer timer;
-    private ArrayList<UNGraphicsObject> snowballs, snowballAnswers, trees, reindeers;
+    private ArrayList<UNGraphicsObject> snowballs, snowballAnswers, trees, reindeers, snow;
     private double imageIndex;
     private JButton button;
     private boolean questionDone, winning;
@@ -41,6 +41,10 @@ public class Level6 extends UNLevel
         snowballAnswers = new ArrayList<UNGraphicsObject>();
         trees = new ArrayList<UNGraphicsObject>();
         reindeers = new ArrayList<UNGraphicsObject>();
+        snow = new ArrayList<UNGraphicsObject>();
+
+        gameScreen.getMusic().get(2).play(true);
+        gameScreen.getMusic().get(2).setVolume(0.1);
 
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -69,8 +73,14 @@ public class Level6 extends UNLevel
             trees.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), gameScreen.getSprites().get((new Random().nextInt(2) == 1) ? 41 : 42), false, 13 * 3, 29 * 3));
         }
 
+        for (int i = 0; i < 100; i++)
+        {
+            snow.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), new Random().nextInt(gameScreen.getWindow().getContentHeight()), gameScreen.getSprites().get(46), false, 5, 5));
+        }
+
         reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -100, 310, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
         reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -50, 330, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
+
         for (UNGraphicsObject reindeer : reindeers)
         {
             addObject(reindeer);
@@ -126,6 +136,11 @@ public class Level6 extends UNLevel
             possibleAnswer.setHorizontalAlignment(SwingConstants.CENTER);
         }
 
+        for (UNGraphicsObject snowflake : snow)
+        {
+            addObject(snowflake);
+        }
+
         this.button = new JButton("Vertrek");
 
         this.setLayout(null);
@@ -161,6 +176,22 @@ public class Level6 extends UNLevel
         timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                for (UNGraphicsObject snowflake : snow)
+                {
+                    snowflake.setY(snowflake.getY() + 1);
+                    if (new Random().nextInt(2) == 0) {
+                        snowflake.setX(snowflake.getX() - 1);
+                    }
+                    if (snowflake.getY() > gameScreen.getWindow().getContentHeight())
+                    {
+                        snowflake.setY(snowflake.getY() - gameScreen.getWindow().getContentHeight());
+                    }
+                    if (snowflake.getX() < 0)
+                    {
+                        snowflake.setX(snowflake.getX() + gameScreen.getWindow().getContentWidth());
+                    }
+                }
+
                 if (!questionDone)
                 {
                     for (UNGraphicsObject snowball : snowballs)
@@ -171,7 +202,7 @@ public class Level6 extends UNLevel
                             snowball.setWidth(snowball.getWidth() + 1);
                             snowball.setHeight(snowball.getWidth());
                             snowball.setXOffset(snowball.getImage().getWidth(null) / 2);
-                            snowball.setY(290 + snowball.getHeight() / 128);
+                            snowball.setY(290 - snowball.getHeight() / 256);
                             snowball.setYOffset(snowball.getImage().getHeight(null) / 2);
                         }
                         if (snowball.getX() < gameScreen.getWindow().getContentWidth() || snowballs.indexOf(snowball) < 2)
@@ -190,6 +221,8 @@ public class Level6 extends UNLevel
                         }
                         else
                         {
+                            gameScreen.getMusic().get(2).stop();
+                            gameScreen.getMusic().get(1).play(true);
                             questionDone = true;
                             setHelp("Klik op het antwoord");
                             lastHelp = getHelp();
@@ -205,7 +238,7 @@ public class Level6 extends UNLevel
                             }
                         }
 
-                        snowballTexts.get(snowballs.indexOf(snowball)).setBounds(snowball.getX(), snowball.getY(), snowball.getWidth(), 100);
+                        snowballTexts.get(snowballs.indexOf(snowball)).setBounds(snowball.getX(), 290 - snowball.getHeight() / 128, snowball.getWidth(), 100);
                     }
                     if (reindeerIndex < 2)
                     {
@@ -257,9 +290,14 @@ public class Level6 extends UNLevel
                                     {
                                         remove(possibleAnswer);
                                     }
+                                    gameScreen.getMusic().get(2).play(true);
                                     snowballs.get(0).setX(-800);
                                     snowballs.get(1).setX(-1100);
                                     snowballs.get(2).setX(-1400);
+                                    for (UNGraphicsObject snow : snowballs) {
+                                        snow.setWidth(8);
+                                        snow.setHeight(8);
+                                    }
                                 }
                                 else
                                 {
