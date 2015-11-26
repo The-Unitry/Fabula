@@ -125,7 +125,8 @@ public class UNPanel extends JPanel
             at.translate(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2);
             at.rotate(Math.toRadians(object.getAngle()));
             at.scale((double) 1 / image.getWidth() * object.getWidth(), (double) 1 / image.getHeight() * object.getHeight());
-            at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+            //at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
+            at.translate(-object.getXOffset(), -object.getYOffset());
 
             g2d.drawImage(image, at, null);
         }
@@ -224,12 +225,12 @@ public class UNPanel extends JPanel
                 {
                     object.setMouseClick(true);
 
-                    if (object.getClickable())
+                    if (object.isClickable())
                     {
                         object.setMouseHold(true);
 
-                        object.setXOffset(e.getX() - object.getX());
-                        object.setYOffset(e.getY() - object.getY());
+                        object.setMouseXOffset(e.getX() - object.getX());
+                        object.setMouseYOffset(e.getY() - object.getY());
                         break;
                     }
                 }
@@ -252,8 +253,8 @@ public class UNPanel extends JPanel
             {
                 if (object.getMouseHold())
                 {
-                    object.setX(e.getX() - object.getXOffset());
-                    object.setY(e.getY() - object.getYOffset());
+                    object.setX(e.getX() - object.getMouseXOffset());
+                    object.setY(e.getY() - object.getMouseYOffset());
                 }
             }
         }

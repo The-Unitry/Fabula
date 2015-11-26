@@ -15,7 +15,7 @@ public class UNGraphicsObject
     private Rectangle hitbox;
     private boolean mouseClick, mouseHold;
     private int width, height;
-    private int xOffset, yOffset, angle;
+    private int xOffset, yOffset, mouseXOffset, mouseYOffset, angle;
 
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable, int width, int height)
     {
@@ -28,6 +28,8 @@ public class UNGraphicsObject
         this.width = width;
         this.height = height;
         this.angle = 0;
+        this.xOffset = image.getWidth(null) / 2;
+        this.yOffset = image.getHeight(null) / 2;
     }
 
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
@@ -41,6 +43,8 @@ public class UNGraphicsObject
         this.width = image.getWidth(null);
         this.height = image.getHeight(null);
         this.angle = 0;
+        this.xOffset = this.width / 2;
+        this.yOffset = this.height / 2;
     }
 
     public int getX()
@@ -50,7 +54,7 @@ public class UNGraphicsObject
 
     public void setX(int x)
     {
-        if (getClickable())
+        if (isClickable())
         {
             x = Math.max(0, Math.min(frame.getContentPane().getWidth() - this.getWidth(), x));
         }
@@ -64,7 +68,7 @@ public class UNGraphicsObject
 
     public void setY(int y)
     {
-        if (getClickable())
+        if (isClickable())
         {
             y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
         }
@@ -81,7 +85,7 @@ public class UNGraphicsObject
         this.image = image;
     }
 
-    public boolean getClickable()
+    public boolean isClickable()
     {
         return this.clickable;
     }
@@ -121,7 +125,7 @@ public class UNGraphicsObject
         this.mouseClick = mouseClick;
     }
 
-    public boolean getMouseClick()
+    public boolean isMouseClick()
     {
         return this.mouseClick;
     }
@@ -153,6 +157,25 @@ public class UNGraphicsObject
     public int getYOffset()
     {
         return this.yOffset;
+    }
+    public void setMouseXOffset(int mouseXOffset)
+    {
+        this.mouseXOffset = mouseXOffset;
+    }
+
+    public int getMouseXOffset()
+    {
+        return this.mouseXOffset;
+    }
+
+    public void setMouseYOffset(int mouseYOffset)
+    {
+        this.mouseYOffset = mouseYOffset;
+    }
+
+    public int getMouseYOffset()
+    {
+        return this.mouseYOffset;
     }
 
     public void setAngle(int angle)

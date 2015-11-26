@@ -17,7 +17,7 @@ import java.util.Random;
 public class Level6 extends UNLevel
 {
     private Timer timer;
-    private ArrayList<UNGraphicsObject> snowballs;
+    private ArrayList<UNGraphicsObject> snowballs, snowballAnswers, trees, reindeers;
     private double imageIndex;
     private JButton button;
     private boolean questionDone, winning;
@@ -25,7 +25,7 @@ public class Level6 extends UNLevel
     private UNColor color;
     private String lastHelp;
     private ArrayList<JLabel> snowballTexts, answers;
-    private ArrayList<UNGraphicsObject> snowballAnswers;
+    private double reindeerIndex;
 
     /**
      * Level 6
@@ -39,6 +39,8 @@ public class Level6 extends UNLevel
         snowballTexts = new ArrayList<JLabel>();
         answers = new ArrayList<JLabel>();
         snowballAnswers = new ArrayList<UNGraphicsObject>();
+        trees = new ArrayList<UNGraphicsObject>();
+        reindeers = new ArrayList<UNGraphicsObject>();
 
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -56,10 +58,23 @@ public class Level6 extends UNLevel
         this.winning = false;
         this.questionDone = false;
         this.lastHelp = getHelp();
+        this.reindeerIndex = 0;
 
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -300, 250, gameScreen.getSprites().get(40), false, 96, 96));
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -800, 250, gameScreen.getSprites().get(40), false, 96, 96));
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -1300, 250, gameScreen.getSprites().get(40), false, 96, 96));
+        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -300, 250, gameScreen.getSprites().get(40), false, 32, 32));
+        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -600, 250, gameScreen.getSprites().get(40), false, 32, 32));
+        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -900, 250, gameScreen.getSprites().get(40), false, 32, 32));
+
+        for (int i = 0; i < 55; i++)
+        {
+            trees.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), gameScreen.getSprites().get((new Random().nextInt(2) == 1) ? 41 : 42), false, 13 * 3, 29 * 3));
+        }
+
+        reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -100, 310, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
+        reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -50, 330, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
+        for (UNGraphicsObject reindeer : reindeers)
+        {
+            addObject(reindeer);
+        }
 
         snowballAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 96, 250, gameScreen.getSprites().get(40), false, 96, 96));
         snowballAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 96, 250, gameScreen.getSprites().get(40), false, 96, 96));
@@ -71,19 +86,26 @@ public class Level6 extends UNLevel
 
         if (new Random().nextInt(2) == 0) {
             answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer - (1 + new Random().nextInt(2)))));
-            answers.add(new JLabel(Integer.toString(answer + (1 + new Random().nextInt(2)))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
         } else if (new Random().nextInt(2) == 0) {
-            answers.add(new JLabel(Integer.toString(answer - (1 + new Random().nextInt(2)))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
             answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer + (1 + new Random().nextInt(2)))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
         } else {
-            answers.add(new JLabel(Integer.toString(answer - (1 + new Random().nextInt(2)))));
-            answers.add(new JLabel(Integer.toString(answer + (1 + new Random().nextInt(2)))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
             answers.add(new JLabel(Integer.toString(answer)));
         }
 
         this.color = new UNColor();
+
+        for (UNGraphicsObject tree : trees)
+        {
+            tree.setXOffset(6);
+            tree.setYOffset(28);
+            addObject(tree);
+        }
 
         for (UNGraphicsObject snowball : snowballs) {
             addObject(snowball);
@@ -144,9 +166,27 @@ public class Level6 extends UNLevel
                     for (UNGraphicsObject snowball : snowballs)
                     {
                         snowball.setAngle(snowball.getAngle() + 2);
+                        if (new Random().nextInt(10) == 0)
+                        {
+                            snowball.setWidth(snowball.getWidth() + 1);
+                            snowball.setHeight(snowball.getWidth());
+                            snowball.setXOffset(snowball.getImage().getWidth(null) / 2);
+                            snowball.setY(290 + snowball.getHeight() / 128);
+                            snowball.setYOffset(snowball.getImage().getHeight(null) / 2);
+                        }
                         if (snowball.getX() < gameScreen.getWindow().getContentWidth() || snowballs.indexOf(snowball) < 2)
                         {
                             snowball.setX(snowball.getX() + 1);
+                            for (UNGraphicsObject tree : trees)
+                            {
+                                if (snowball.getHitbox().intersects(tree.getHitbox()))
+                                {
+                                    if (tree.getAngle() < 85 + new Random().nextInt(10))
+                                    {
+                                        tree.setAngle(tree.getAngle() + 2);
+                                    }
+                                }
+                            }
                         }
                         else
                         {
@@ -167,12 +207,25 @@ public class Level6 extends UNLevel
 
                         snowballTexts.get(snowballs.indexOf(snowball)).setBounds(snowball.getX(), snowball.getY(), snowball.getWidth(), 100);
                     }
+                    if (reindeerIndex < 2)
+                    {
+                        reindeerIndex += 0.1;
+                    }
+                    else
+                    {
+                        reindeerIndex = 0;
+                    }
+                    for (UNGraphicsObject reindeer : reindeers)
+                    {
+                        reindeer.setImage(gameScreen.getSprites().get(43 + (int) Math.round(reindeerIndex)));
+                        reindeer.setX(reindeer.getX() + 1);
+                    }
                 }
                 else
                 {
                     for (UNGraphicsObject snowball : snowballAnswers)
                     {
-                        if (snowball.getMouseClick() && !winning && isHelperDoneTalking())
+                        if (snowball.isMouseClick() && !winning && isHelperDoneTalking())
                         {
                             snowball.setMouseClick(false);
                             if (Integer.valueOf(answers.get(snowballAnswers.indexOf(snowball)).getText()) == answer)
@@ -205,8 +258,8 @@ public class Level6 extends UNLevel
                                         remove(possibleAnswer);
                                     }
                                     snowballs.get(0).setX(-800);
-                                    snowballs.get(1).setX(-1300);
-                                    snowballs.get(2).setX(-1800);
+                                    snowballs.get(1).setX(-1100);
+                                    snowballs.get(2).setX(-1400);
                                 }
                                 else
                                 {
