@@ -57,6 +57,10 @@ public class UNGraphicsObject
         if (isClickable())
         {
             x = Math.max(0, Math.min(frame.getContentPane().getWidth() - this.getWidth(), x));
+            if (y > frame.getContentPane().getHeight() - 152 - this.getHeight())
+            {
+                x = Math.min(575 - this.getWidth(), x);
+            }
         }
         this.x = x;
     }
@@ -70,7 +74,11 @@ public class UNGraphicsObject
     {
         if (isClickable())
         {
-            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
+            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 46 - this.getHeight(), y));
+            if (x > 575 - this.getWidth())
+            {
+                y = Math.min(frame.getContentPane().getHeight() - 152 - this.getHeight(), y);
+            }
         }
         this.y = y;
     }
