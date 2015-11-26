@@ -139,7 +139,6 @@ public class UNGameScreen extends UNObject
          */
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
-        music.add(2, TinySound.loadMusic("audio/avalange.wav"));
 
         /**
          * Sound Effects Preload
@@ -153,7 +152,7 @@ public class UNGameScreen extends UNObject
         try
         {
             //BACKGROUND PRELOAD
-            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/snow.png")));
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/underwater.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
 
             //SPRITE PRELOAD
@@ -204,12 +203,9 @@ public class UNGameScreen extends UNObject
             sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
             sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
             sprites.add(40, ImageIO.read(new File("res/sprites/snowball.png")));
-            sprites.add(41, ImageIO.read(new File("res/sprites/snowtree.png")));
-            sprites.add(42, ImageIO.read(new File("res/sprites/snowtree2.png")));
-            sprites.add(43, ImageIO.read(new File("res/sprites/reindeer0.png")));
-            sprites.add(44, ImageIO.read(new File("res/sprites/reindeer1.png")));
-            sprites.add(45, ImageIO.read(new File("res/sprites/reindeer2.png")));
-            sprites.add(46, ImageIO.read(new File("res/sprites/snow.png")));
+            //LEVEL7
+            sprites.add(41, ImageIO.read(new File("res/sprites/kist_open.png")));
+            sprites.add(42, ImageIO.read(new File("res/sprites/muntje.png")));
         }
         catch (IOException e)
         {

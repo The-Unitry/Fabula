@@ -21,7 +21,7 @@ public class Level7 extends UNLevel
     private ArrayList<UNGraphicsObject> coins;
     private JButton button;
     private boolean winning;
-    private int need, touch;
+    private int need, need2, touch;
     private UNColor color;
     private String lastHelp;
 
@@ -34,13 +34,14 @@ public class Level7 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 3 + new Random().nextInt(3);
+        this.need = 1 + new Random().nextInt(4);
+        this.need2 = 1 + new Random().nextInt(10);
 
-        this.setQuestion("Stop " + need + " muntjes in de schatkist");
+        this.setQuestion("Hoeveel is " + need + " keer " + need2 + "?");
         this.addHelp("Jammer! Je moet " + need + " muntjes in de schatkist stoppen");
         this.addHelp("Helaas! Er moeten " + need + " muntjes in de schatkist zitten");
-        this.setHelp("Sleep het aantal muntjes in de schatkist");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
+        this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
         this.winning = false;
         this.lastHelp = getHelp();
@@ -48,23 +49,21 @@ public class Level7 extends UNLevel
         this.coins = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(50), false, 96, 96);
+        // this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(42), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(49), true, 32, 32)
+                new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites().get(42), true, 32, 32)
             );
         }
 
-        this.coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(49), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(49), true, 32, 32));
+           coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(42), true, 32, 32));
         }
 
         this.addObject(chest);
-        for (UNGraphicsObject apple : coins) {
-            addObject(apple);
+        for (UNGraphicsObject coin : coins) {
+            addObject(coin);
         }
 
         this.button = new JButton("Vertrek");
@@ -100,8 +99,8 @@ public class Level7 extends UNLevel
                     if (winning) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, nu zijn we rijk!");
-                        for (UNGraphicsObject apple : coins) {
-                            apple.setClickable(false);
+                        for (UNGraphicsObject coin : coins) {
+                            coin.setClickable(false);
                         }
                         button.setText("Door");
                     } else {
@@ -126,9 +125,9 @@ public class Level7 extends UNLevel
                                 );
                             }
 
-                            for (UNGraphicsObject apple : coins)
+                            for (UNGraphicsObject coin : coins)
                             {
-                                apple.setClickable(false);
+                                coin.setClickable(false);
                             }
 
                             button.setText("Door");
@@ -144,8 +143,8 @@ public class Level7 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
-                for (UNGraphicsObject apple : coins) {
-                    if (chest.getHitbox().intersects(apple.getHitbox())) {
+                for (UNGraphicsObject coin : coins) {
+                    if (chest.getHitbox().intersects(coin.getHitbox())) {
                         touch++;
                     }
                 }

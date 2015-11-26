@@ -1,6 +1,6 @@
 package eu.theunitry.fabula.launcher;
 
-import eu.theunitry.fabula.levels.Level6;
+import eu.theunitry.fabula.levels.Level7;
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNView;
@@ -29,7 +29,7 @@ public class UNLauncher extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 gameScreen.resetProgress();
-                UNView panel = new Level6(gameScreen, true);
+                UNView panel = new Level7(gameScreen, true);
                 gameScreen.switchMusic(1, true);
                 gameScreen.getMusic().get(1).setVolume(0.1);
 
