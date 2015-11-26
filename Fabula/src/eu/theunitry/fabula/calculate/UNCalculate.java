@@ -2,8 +2,13 @@ package eu.theunitry.fabula.calculate;
 
 public class UNCalculate
 {
-    private int result;
-
+    /**
+     * Calculate
+     * @param g1
+     * @param g2
+     * @param operator
+     * @return
+     */
     public static int calculate(int g1, int g2, char operator)
     {
         switch (operator)
