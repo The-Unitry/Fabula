@@ -30,6 +30,7 @@ public class UNGraphicsObject
         this.angle = 0;
         this.xOffset = image.getWidth(null) / 2;
         this.yOffset = image.getHeight(null) / 2;
+        this.hitbox = new Rectangle(x, y, width, height);
     }
 
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
@@ -45,6 +46,7 @@ public class UNGraphicsObject
         this.angle = 0;
         this.xOffset = this.width / 2;
         this.yOffset = this.height / 2;
+        this.hitbox = new Rectangle(x, y, width, height);
     }
 
     public int getX()
@@ -103,9 +105,18 @@ public class UNGraphicsObject
         this.clickable = clickable;
     }
 
-    public Rectangle getHitbox()
+    public void setHitbox(int xOffset, int yOffset, int width, int height)
     {
-        return new Rectangle(x, y, width, height);
+        hitbox = new Rectangle(getX() + xOffset, getY() + yOffset, width, height);
+    }
+
+    public Rectangle getHitbox(boolean solid)
+    {
+        if (solid) {
+            return hitbox;
+        } else {
+            return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        }
     }
 
     public int getWidth()

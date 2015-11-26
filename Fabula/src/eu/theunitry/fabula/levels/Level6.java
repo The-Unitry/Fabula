@@ -210,7 +210,7 @@ public class Level6 extends UNLevel
                             snowball.setX(snowball.getX() + 1);
                             for (UNGraphicsObject tree : trees)
                             {
-                                if (snowball.getHitbox().intersects(tree.getHitbox()))
+                                if (snowball.getHitbox(false).intersects(tree.getHitbox(false)))
                                 {
                                     if (tree.getAngle() < 85 + new Random().nextInt(10))
                                     {

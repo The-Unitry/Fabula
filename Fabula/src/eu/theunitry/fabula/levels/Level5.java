@@ -145,7 +145,7 @@ public class Level5 extends UNLevel
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
                 for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox().intersects(apple.getHitbox())) {
+                    if (basket.getHitbox(false).intersects(apple.getHitbox(false))) {
                         touch++;
                     }
                 }

@@ -49,7 +49,7 @@ public class Level7 extends UNLevel
         this.coins = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        // this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(42), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 490, 360, gameScreen.getSprites().get(42), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
