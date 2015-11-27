@@ -1,11 +1,11 @@
-package eu.theunitry.fabula.levels;
+package eu.theunitry.fabula.Fabula.levels;
 
 
-import eu.theunitry.fabula.graphics.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level5 extends UNLevel
+public class Level0 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;
@@ -26,11 +26,11 @@ public class Level5 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 5
+     * Level 0
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level5(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level0(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
@@ -91,7 +91,7 @@ public class Level5 extends UNLevel
                         if (winning) {
                             gameScreen.addLevel();
                         }
-                        gameScreen.switchPanel(new Level5(gameScreen, true));
+                        gameScreen.switchPanel(new Level0(gameScreen, true));
                     } else {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }
@@ -145,7 +145,7 @@ public class Level5 extends UNLevel
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
                 for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox(false).intersects(apple.getHitbox(false))) {
+                    if (basket.getHitbox().intersects(apple.getHitbox())) {
                         touch++;
                     }
                 }
