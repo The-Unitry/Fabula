@@ -42,7 +42,6 @@ public class Level7 extends UNLevel
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
-        this.winning = false;
         this.lastHelp = getHelp();
 
         this.coins = new ArrayList<UNGraphicsObject>();

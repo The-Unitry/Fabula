@@ -13,13 +13,12 @@ import java.awt.event.ActionEvent;
 
 public class UNLauncher extends JPanel
 {
-    private UNGameScreen gameScreen;
     private JLabel label;
     private JButton startBtn;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
-        this.gameScreen = gameScreen;
+        UNGameScreen gameScreen1 = gameScreen;
         this.label = new JLabel("Fabula");
         this.startBtn = new JButton("Start");
 

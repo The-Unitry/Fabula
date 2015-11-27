@@ -2,17 +2,12 @@ package eu.theunitry.fabula.graphics;
 
 import eu.theunitry.fabula.UNGameScreen;
 import eu.theunitry.fabula.objects.UNHelper;
-import eu.theunitry.fabula.objects.UNObject;
-import kuusisto.tinysound.TinySound;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class UNView extends JPanel
@@ -221,7 +216,11 @@ public class UNView extends JPanel
         {
             for (UNGraphicsObject object : objects)
             {
-                if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight())
+                if (e.getX() > object.getX()
+                    && e.getY() > object.getY()
+                    && e.getX() < object.getX() + object.getWidth()
+                    && e.getY() < object.getY() + object.getHeight()
+                    )
                 {
                     object.setMouseClick(true);
 

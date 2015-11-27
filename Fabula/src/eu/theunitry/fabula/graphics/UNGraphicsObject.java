@@ -17,6 +17,16 @@ public class UNGraphicsObject
     private int width, height;
     private int xOffset, yOffset, mouseXOffset, mouseYOffset, angle;
 
+    /**
+     * GraphicsObject
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     * @param width
+     * @param height
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable, int width, int height)
     {
         this.frame = frame;
@@ -33,6 +43,14 @@ public class UNGraphicsObject
         this.hitbox = new Rectangle(x, y, width, height);
     }
 
+    /**
+     * Graphics Object (without height & width)
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
     {
         this.frame = frame;
@@ -105,6 +123,13 @@ public class UNGraphicsObject
         this.clickable = clickable;
     }
 
+    /**
+     * Set hitbox
+     * @param xOffset
+     * @param yOffset
+     * @param width
+     * @param height
+     */
     public void setHitbox(int xOffset, int yOffset, int width, int height)
     {
         hitbox = new Rectangle(getX() + xOffset, getY() + yOffset, width, height);
@@ -159,7 +184,8 @@ public class UNGraphicsObject
         this.mouseHold = mouseHold;
     }
 
-    public boolean getMouseHold() {
+    public boolean getMouseHold()
+    {
         return this.mouseHold;
     }
 
