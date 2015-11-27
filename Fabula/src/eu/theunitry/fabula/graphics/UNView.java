@@ -1,7 +1,6 @@
 package eu.theunitry.fabula.graphics;
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.objects.UNHelper;
+import eu.theunitry.fabula.fabula.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +9,10 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+/**
+ * UNView is a JPanel that is used to display UNGraphicObjects,
+ * this is also where timers are created.
+ */
 public class UNView extends JPanel
 {
     private Image backgroundImage;
@@ -18,7 +21,7 @@ public class UNView extends JPanel
     private UNGameScreen gameScreen;
     private boolean hudEnabled, helperDoneTalking;
     private String question, questionDraw, help, helpDraw;
-    private UNHelper helper;
+    private Helper helper;
     private Timer timer, timerText, timerQuestion;
 
     /**
@@ -90,7 +93,7 @@ public class UNView extends JPanel
         helperDoneTalking = true;
         if (hudEnabled)
         {
-            helper = new UNHelper(gameScreen);
+            helper = new Helper(gameScreen);
             helper.setImage(gameScreen.getSprites().get(0));
         }
     }
@@ -204,7 +207,7 @@ public class UNView extends JPanel
         objects.remove(object);
     }
 
-    public UNHelper getHelper()
+    public Helper getHelper()
     {
         return this.helper;
     }

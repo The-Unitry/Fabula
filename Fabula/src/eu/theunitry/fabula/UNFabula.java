@@ -1,4 +1,4 @@
-/*
+/**
 
     ______    _           _
     |  ___|  | |         | |
@@ -9,10 +9,12 @@
 
     © The Unitry, 2015
     
-*/
+**/
 
 
 package eu.theunitry.fabula;
+
+import eu.theunitry.fabula.graphics.UNGameScreen;
 
 public class UNFabula
 {

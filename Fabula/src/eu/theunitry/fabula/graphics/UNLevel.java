@@ -1,9 +1,11 @@
 package eu.theunitry.fabula.graphics;
 
-import eu.theunitry.fabula.UNGameScreen;
-
 import java.util.ArrayList;
 
+/**
+ * All levels extends from this abstract UNLevel class.
+ * It inherits from UNView, which means that it contains UNGraphicObjects
+ */
 public abstract class UNLevel extends UNView
 {
     private boolean playerHasWon = false;
@@ -58,8 +60,3 @@ public abstract class UNLevel extends UNView
         return mistakes;
     }
 }
-
-
-
-
-

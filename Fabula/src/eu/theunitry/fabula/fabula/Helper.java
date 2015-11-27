@@ -1,18 +1,16 @@
-package eu.theunitry.fabula.objects;
+package eu.theunitry.fabula.fabula;
 
-import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.graphics.UNGameScreen;
+import eu.theunitry.fabula.objects.UNTimer;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
-public class UNHelper
+public class Helper
 {
     private int animationID;
     private boolean loopInfinite;
@@ -25,7 +23,7 @@ public class UNHelper
     private Image image;
     private int state;
 
-    public UNHelper(UNGameScreen gameScreen)
+    public Helper(UNGameScreen gameScreen)
     {
         this.gameScreen = gameScreen;
         this.animIdle = new ArrayList<Image>();

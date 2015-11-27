@@ -1,7 +1,7 @@
 package eu.theunitry.fabula.levels;
 
 
-import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.graphics.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.graphics.UNLevel;

@@ -9,6 +9,10 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Paths;
 
+/**
+ * This class is deprecated because we are now using an external
+ * library.
+ */
 public abstract class UNAudioObject extends UNObject
 {
     private double volume;
@@ -16,6 +20,10 @@ public abstract class UNAudioObject extends UNObject
     private boolean playing;
     private Clip sound;
 
+    /**
+     * UNAudioObject
+     * @param src
+     */
     public UNAudioObject(String src)
     {
         this.setSrc(src);

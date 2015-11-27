@@ -1,17 +1,14 @@
 package eu.theunitry.fabula.levels;
 
 
-import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.graphics.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
 import eu.theunitry.fabula.objects.UNTimer;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 

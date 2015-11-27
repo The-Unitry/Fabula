@@ -1,7 +1,7 @@
 package eu.theunitry.fabula.launcher;
 
 import eu.theunitry.fabula.levels.Level7;
-import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.graphics.UNGameScreen;
 import eu.theunitry.fabula.graphics.UNColor;
 import eu.theunitry.fabula.graphics.UNView;
 import eu.theunitry.fabula.objects.UNButtonListener;
@@ -11,6 +11,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * UNLauncher is the main menu which loads levels & settings.
+ * Later, we will add support to switch between levels.
+ */
 public class UNLauncher extends JPanel
 {
     private JLabel label;

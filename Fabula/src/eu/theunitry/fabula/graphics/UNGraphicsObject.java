@@ -5,7 +5,12 @@ import eu.theunitry.fabula.objects.UNObject;
 import javax.swing.*;
 import java.awt.*;
 
-public class UNGraphicsObject
+/**
+ * The UNGraphicsObject class is used for objects that are displayed inside an UNView.
+ * By default, the objects has a hitbox that can be used for collision detection.
+ * Also, it can display an image. Later we will add support for spritesheets.
+ */
+public class UNGraphicsObject extends UNObject
 {
     private JFrame frame;
     private int x;

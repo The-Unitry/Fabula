@@ -7,6 +7,9 @@ import javax.sound.sampled.*;
 
 import javax.swing.*;
 
+/**
+ * UNWindow is our variant of JFrame, which it is based upon.
+ */
 public class UNWindow extends UNObject
 {
     private final String TITLE;

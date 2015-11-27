@@ -1,7 +1,5 @@
-package eu.theunitry.fabula;
+package eu.theunitry.fabula.graphics;
 
-import eu.theunitry.fabula.graphics.UNView;
-import eu.theunitry.fabula.graphics.UNWindow;
 import eu.theunitry.fabula.launcher.UNLauncher;
 import eu.theunitry.fabula.objects.UNObject;
 import kuusisto.tinysound.*;
@@ -13,7 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * UNGameScreen is the frame where the game is displayed.
+ */
 public class UNGameScreen extends UNObject
 {
     private UNWindow window;
