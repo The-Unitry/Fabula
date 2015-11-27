@@ -21,6 +21,11 @@ public class UNView extends JPanel
     private UNHelper helper;
     private Timer timer, timerText, timerQuestion;
 
+    /**
+     * UNView
+     * @param gameScreen
+     * @param hudEnabled
+     */
     public UNView(UNGameScreen gameScreen, boolean hudEnabled)
     {
         this.gameScreen = gameScreen;
