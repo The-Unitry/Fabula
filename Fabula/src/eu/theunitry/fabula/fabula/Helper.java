@@ -1,7 +1,7 @@
-package eu.theunitry.fabula.fabula;
+package eu.theunitry.fabula.Fabula;
 
-import eu.theunitry.fabula.graphics.UNGameScreen;
-import eu.theunitry.fabula.objects.UNTimer;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.objects.UNTimer;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;

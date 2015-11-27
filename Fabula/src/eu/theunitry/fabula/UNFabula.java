@@ -14,7 +14,7 @@
 
 package eu.theunitry.fabula;
 
-import eu.theunitry.fabula.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 
 public class UNFabula
 {
