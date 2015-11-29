@@ -1,20 +1,18 @@
-package eu.theunitry.fabula.graphics;
+package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.objects.UNHelper;
-import eu.theunitry.fabula.objects.UNObject;
-import kuusisto.tinysound.TinySound;
+import eu.theunitry.fabula.Fabula.Helper;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * UNView is a JPanel that is used to display UNGraphicObjects,
+ * this is also where timers are created.
+ */
 public class UNView extends JPanel
 {
     private Image backgroundImage;
@@ -23,9 +21,14 @@ public class UNView extends JPanel
     private UNGameScreen gameScreen;
     private boolean hudEnabled, helperDoneTalking;
     private String question, questionDraw, help, helpDraw;
-    private UNHelper helper;
+    private Helper helper;
     private Timer timer, timerText, timerQuestion;
 
+    /**
+     * UNView
+     * @param gameScreen
+     * @param hudEnabled
+     */
     public UNView(UNGameScreen gameScreen, boolean hudEnabled)
     {
         this.gameScreen = gameScreen;
@@ -90,7 +93,7 @@ public class UNView extends JPanel
         helperDoneTalking = true;
         if (hudEnabled)
         {
-            helper = new UNHelper(gameScreen);
+            helper = new Helper(gameScreen);
             helper.setImage(gameScreen.getSprites().get(0));
         }
     }
@@ -204,7 +207,7 @@ public class UNView extends JPanel
         objects.remove(object);
     }
 
-    public UNHelper getHelper()
+    public Helper getHelper()
     {
         return this.helper;
     }
@@ -221,7 +224,11 @@ public class UNView extends JPanel
         {
             for (UNGraphicsObject object : objects)
             {
-                if (e.getX() > object.getX() && e.getY() > object.getY() && e.getX() < object.getX() + object.getWidth() && e.getY() < object.getY() + object.getHeight())
+                if (e.getX() > object.getX()
+                    && e.getY() > object.getY()
+                    && e.getX() < object.getX() + object.getWidth()
+                    && e.getY() < object.getY() + object.getHeight()
+                    )
                 {
                     object.setMouseClick(true);
 

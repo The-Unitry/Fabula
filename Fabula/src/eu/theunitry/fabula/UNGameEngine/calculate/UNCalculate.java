@@ -1,5 +1,9 @@
-package eu.theunitry.fabula.calculate;
+package eu.theunitry.fabula.UNGameEngine.calculate;
 
+/**
+ * UNCalculate is used for basic operations. Later we will add support
+ * for more advanced calculations.
+ */
 public class UNCalculate
 {
     /**

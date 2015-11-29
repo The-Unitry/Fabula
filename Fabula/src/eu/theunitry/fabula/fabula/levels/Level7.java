@@ -1,10 +1,10 @@
-package eu.theunitry.fabula.levels;
+package eu.theunitry.fabula.Fabula.levels;
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,7 +42,6 @@ public class Level7 extends UNLevel
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
-        this.winning = false;
         this.lastHelp = getHelp();
 
         this.coins = new ArrayList<UNGraphicsObject>();

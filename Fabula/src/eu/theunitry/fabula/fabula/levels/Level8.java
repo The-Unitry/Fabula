@@ -1,11 +1,11 @@
-package eu.theunitry.fabula.levels;
+package eu.theunitry.fabula.Fabula.levels;
 
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,11 +14,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level0 extends UNLevel
+public class Level8 extends UNLevel
 {
     private Timer timer;
-    private UNGraphicsObject basket;
-    private ArrayList<UNGraphicsObject> apples;
+    private UNGraphicsObject chest;
+    private ArrayList<UNGraphicsObject> nuggets;
     private JButton button;
     private boolean winning;
     private int need, touch;
@@ -30,40 +30,40 @@ public class Level0 extends UNLevel
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level0(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level8(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
         this.need = 3 + new Random().nextInt(3);
 
-        this.setQuestion("Vertrek met " + need + " appels in de mand");
-        this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
-        this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
-        this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setQuestion("Stop " + need + " muntjes in de schatkist");
+        this.addHelp("Jammer! Je moet " + need + " muntjes in de schatkist stoppen");
+        this.addHelp("Helaas! Er moeten " + need + " muntjes in de schatkist zitten");
+        this.setHelp("Sleep het aantal muntjes in de schatkist");
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.apples = new ArrayList<UNGraphicsObject>();
+        this.nuggets = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 625, 233, gameScreen.getSprites().get(50), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
+            nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                     new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(38), true, 32, 32)
+                    .get(52), true, 32, 32)
             );
         }
 
-        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(52), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+            nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(52), true, 32, 32));
         }
 
-        this.addObject(basket);
-        for (UNGraphicsObject apple : apples) {
+        this.addObject(chest);
+        for (UNGraphicsObject apple : nuggets) {
             addObject(apple);
         }
 
@@ -71,7 +71,7 @@ public class Level0 extends UNLevel
 
         this.setLayout(null);
         this.button.setBounds(618, 64, 150, 50);
-        this.button.setBackground(new Color(51, 51, 51));
+        this.button.setBackground(new Color(51, 51, 51, 230));
         this.button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
         this.button.setForeground(Color.white);
         this.button.setOpaque(true);
@@ -91,7 +91,7 @@ public class Level0 extends UNLevel
                         if (winning) {
                             gameScreen.addLevel();
                         }
-                        gameScreen.switchPanel(new Level0(gameScreen, true));
+                        gameScreen.switchPanel(new Level8(gameScreen, true));
                     } else {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }
@@ -99,8 +99,8 @@ public class Level0 extends UNLevel
                 if (isHelperDoneTalking()) {
                     if (winning) {
                         getHelper().setState(3);
-                        setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
-                        for (UNGraphicsObject apple : apples) {
+                        setHelp("Goed gedaan, nu zijn we rijk!");
+                        for (UNGraphicsObject apple : nuggets) {
                             apple.setClickable(false);
                         }
                         button.setText("Door");
@@ -116,17 +116,17 @@ public class Level0 extends UNLevel
                             getHelper().setState(4);
                             if (touch < need) {
                                 setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                        " muntje" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
                                         (need - touch)  + " is " + need
                                 );
                             } else {
                                 setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                        " muntje" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
                                         (touch - need)  + " is " + need
                                 );
                             }
 
-                            for (UNGraphicsObject apple : apples)
+                            for (UNGraphicsObject apple : nuggets)
                             {
                                 apple.setClickable(false);
                             }
@@ -144,8 +144,8 @@ public class Level0 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
-                for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox().intersects(apple.getHitbox())) {
+                for (UNGraphicsObject apple : nuggets) {
+                    if (chest.getHitbox().intersects(apple.getHitbox())) {
                         touch++;
                     }
                 }

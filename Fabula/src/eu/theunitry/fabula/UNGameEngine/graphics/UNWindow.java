@@ -1,12 +1,12 @@
-package eu.theunitry.fabula.graphics;
+package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.objects.UNObject;
-import java.io.*;
-import java.net.URL;
-import javax.sound.sampled.*;
+import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 
 import javax.swing.*;
 
+/**
+ * UNWindow is our variant of JFrame, which it is based upon.
+ */
 public class UNWindow extends UNObject
 {
     private final String TITLE;

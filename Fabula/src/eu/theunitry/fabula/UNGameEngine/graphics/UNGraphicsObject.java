@@ -1,11 +1,16 @@
-package eu.theunitry.fabula.graphics;
+package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.objects.UNObject;
+import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class UNGraphicsObject
+/**
+ * The UNGraphicsObject class is used for objects that are displayed inside an UNView.
+ * By default, the objects has a hitbox that can be used for collision detection.
+ * Also, it can display an image. Later we will add support for spritesheets.
+ */
+public class UNGraphicsObject extends UNObject
 {
     private JFrame frame;
     private int x;
@@ -17,6 +22,16 @@ public class UNGraphicsObject
     private int width, height;
     private int xOffset, yOffset, mouseXOffset, mouseYOffset, angle;
 
+    /**
+     * GraphicsObject
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     * @param width
+     * @param height
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable, int width, int height)
     {
         this.frame = frame;
@@ -33,6 +48,14 @@ public class UNGraphicsObject
         this.hitbox = new Rectangle(x, y, width, height);
     }
 
+    /**
+     * Graphics Object (without height & width)
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
     {
         this.frame = frame;
@@ -105,6 +128,13 @@ public class UNGraphicsObject
         this.clickable = clickable;
     }
 
+    /**
+     * Set hitbox
+     * @param xOffset
+     * @param yOffset
+     * @param width
+     * @param height
+     */
     public void setHitbox(int xOffset, int yOffset, int width, int height)
     {
         hitbox = new Rectangle(getX() + xOffset, getY() + yOffset, width, height);
@@ -159,7 +189,8 @@ public class UNGraphicsObject
         this.mouseHold = mouseHold;
     }
 
-    public boolean getMouseHold() {
+    public boolean getMouseHold()
+    {
         return this.mouseHold;
     }
 
