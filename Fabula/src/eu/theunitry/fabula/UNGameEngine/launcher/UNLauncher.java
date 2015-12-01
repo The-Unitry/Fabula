@@ -32,7 +32,7 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new UNLevelLoader(1, gameScreen);
+                new UNLevelLoader(currentLevel, gameScreen);
             }
         });
 

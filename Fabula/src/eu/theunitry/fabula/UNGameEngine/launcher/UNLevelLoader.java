@@ -9,10 +9,18 @@ public class UNLevelLoader
     public UNLevelLoader(int level, UNGameScreen gameScreen)
     {
         gameScreen.resetProgress();
-        UNView panel = new Level1(gameScreen, true);
+
+
         gameScreen.switchMusic(1, true);
         gameScreen.getMusic().get(1).setVolume(0.1);
 
-        gameScreen.switchPanel(panel);
+        switch (level)
+        {
+            case 1:
+                UNView panel = new Level1(gameScreen, true);
+                gameScreen.switchPanel(panel);
+            default:
+                break;
+        }
     }
 }
