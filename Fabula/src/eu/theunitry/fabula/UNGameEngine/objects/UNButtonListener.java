@@ -1,10 +1,14 @@
-package eu.theunitry.fabula.objects;
+package eu.theunitry.fabula.UNGameEngine.objects;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UNButtonListener implements ActionListener
+/**
+ * UNButtonListener is used for adding an action
+ * to when a button is pressed.
+ */
+public class UNButtonListener extends UNObject implements ActionListener
 {
     private JButton buttonPressed;
 

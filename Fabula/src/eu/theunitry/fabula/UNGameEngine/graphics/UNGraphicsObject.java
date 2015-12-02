@@ -1,11 +1,16 @@
-package eu.theunitry.fabula.graphics;
+package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.objects.UNObject;
+import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class UNGraphicsObject
+/**
+ * The UNGraphicsObject class is used for objects that are displayed inside an UNView.
+ * By default, the objects has a hitbox that can be used for collision detection.
+ * Also, it can display an image. Later we will add support for spritesheets.
+ */
+public class UNGraphicsObject extends UNObject
 {
     private JFrame frame;
     private int x;
@@ -15,8 +20,18 @@ public class UNGraphicsObject
     private Rectangle hitbox;
     private boolean mouseClick, mouseHold;
     private int width, height;
-    private int xOffset, yOffset, angle;
+    private int xOffset, yOffset, mouseXOffset, mouseYOffset, angle;
 
+    /**
+     * GraphicsObject
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     * @param width
+     * @param height
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable, int width, int height)
     {
         this.frame = frame;
@@ -28,8 +43,19 @@ public class UNGraphicsObject
         this.width = width;
         this.height = height;
         this.angle = 0;
+        this.xOffset = image.getWidth(null) / 2;
+        this.yOffset = image.getHeight(null) / 2;
+        this.hitbox = new Rectangle(x, y, width, height);
     }
 
+    /**
+     * Graphics Object (without height & width)
+     * @param frame
+     * @param x
+     * @param y
+     * @param image
+     * @param clickable
+     */
     public UNGraphicsObject(JFrame frame, int x, int y, Image image, boolean clickable)
     {
         this.frame = frame;
@@ -41,6 +67,9 @@ public class UNGraphicsObject
         this.width = image.getWidth(null);
         this.height = image.getHeight(null);
         this.angle = 0;
+        this.xOffset = this.width / 2;
+        this.yOffset = this.height / 2;
+        this.hitbox = new Rectangle(x, y, width, height);
     }
 
     public int getX()
@@ -50,9 +79,13 @@ public class UNGraphicsObject
 
     public void setX(int x)
     {
-        if (getClickable())
+        if (isClickable())
         {
             x = Math.max(0, Math.min(frame.getContentPane().getWidth() - this.getWidth(), x));
+            if (y > frame.getContentPane().getHeight() - 152 - this.getHeight())
+            {
+                x = Math.min(575 - this.getWidth(), x);
+            }
         }
         this.x = x;
     }
@@ -64,9 +97,13 @@ public class UNGraphicsObject
 
     public void setY(int y)
     {
-        if (getClickable())
+        if (isClickable())
         {
-            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 154 - this.getHeight(), y));
+            y = Math.max(64, Math.min(frame.getContentPane().getHeight() - 46 - this.getHeight(), y));
+            if (x > 575 - this.getWidth())
+            {
+                y = Math.min(frame.getContentPane().getHeight() - 152 - this.getHeight(), y);
+            }
         }
         this.y = y;
     }
@@ -81,7 +118,7 @@ public class UNGraphicsObject
         this.image = image;
     }
 
-    public boolean getClickable()
+    public boolean isClickable()
     {
         return this.clickable;
     }
@@ -91,9 +128,30 @@ public class UNGraphicsObject
         this.clickable = clickable;
     }
 
+    /**
+     * Set hitbox
+     * @param xOffset
+     * @param yOffset
+     * @param width
+     * @param height
+     */
+    public void setHitbox(int xOffset, int yOffset, int width, int height)
+    {
+        hitbox = new Rectangle(getX() + xOffset, getY() + yOffset, width, height);
+    }
+
+    public Rectangle getHitbox(boolean solid)
+    {
+        if (solid) {
+            return hitbox;
+        } else {
+            return new Rectangle(getX(), getY(), getWidth(), getHeight());
+        }
+    }
+
     public Rectangle getHitbox()
     {
-        return new Rectangle(x, y, width, height);
+        return new Rectangle(getX(), getY(), getWidth(), getHeight());
     }
 
     public int getWidth()
@@ -121,7 +179,7 @@ public class UNGraphicsObject
         this.mouseClick = mouseClick;
     }
 
-    public boolean getMouseClick()
+    public boolean isMouseClick()
     {
         return this.mouseClick;
     }
@@ -131,7 +189,8 @@ public class UNGraphicsObject
         this.mouseHold = mouseHold;
     }
 
-    public boolean getMouseHold() {
+    public boolean getMouseHold()
+    {
         return this.mouseHold;
     }
 
@@ -153,6 +212,25 @@ public class UNGraphicsObject
     public int getYOffset()
     {
         return this.yOffset;
+    }
+    public void setMouseXOffset(int mouseXOffset)
+    {
+        this.mouseXOffset = mouseXOffset;
+    }
+
+    public int getMouseXOffset()
+    {
+        return this.mouseXOffset;
+    }
+
+    public void setMouseYOffset(int mouseYOffset)
+    {
+        this.mouseYOffset = mouseYOffset;
+    }
+
+    public int getMouseYOffset()
+    {
+        return this.mouseYOffset;
     }
 
     public void setAngle(int angle)

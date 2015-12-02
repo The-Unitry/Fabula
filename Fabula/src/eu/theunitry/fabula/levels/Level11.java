@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level5 extends UNLevel
+public class Level11 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;
@@ -26,11 +26,11 @@ public class Level5 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 5
+     * Level 0
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level5(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level11(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
@@ -91,7 +91,7 @@ public class Level5 extends UNLevel
                         if (winning) {
                             gameScreen.addLevel();
                         }
-                        gameScreen.switchPanel(new Level5(gameScreen, true));
+                        gameScreen.switchPanel(new Level0(gameScreen, true));
                     } else {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }

@@ -1,11 +1,11 @@
 package eu.theunitry.fabula.levels;
 
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;

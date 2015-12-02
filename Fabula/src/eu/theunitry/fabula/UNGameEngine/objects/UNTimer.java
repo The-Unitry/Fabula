@@ -1,12 +1,17 @@
-package eu.theunitry.fabula.objects;
+package eu.theunitry.fabula.UNGameEngine.objects;
 
-import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
-public class UNTimer
+/**
+ * This is an extension of the Timer class. We use this
+ * to add time to the UNGameScreen. It makes it very easy to add
+ * a timer to objects.
+ */
+public class UNTimer extends UNObject
 {
     private final Timer gameLoop;
     private final UNGameScreen gameScreen;

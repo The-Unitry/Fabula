@@ -1,9 +1,7 @@
-package eu.theunitry.fabula;
+package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.graphics.UNView;
-import eu.theunitry.fabula.graphics.UNWindow;
-import eu.theunitry.fabula.launcher.UNLauncher;
-import eu.theunitry.fabula.objects.UNObject;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 import kuusisto.tinysound.*;
 
 import javax.imageio.ImageIO;
@@ -13,7 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * UNGameScreen is the frame where the game is displayed.
+ */
 public class UNGameScreen extends UNObject
 {
     private UNWindow window;
@@ -152,7 +152,7 @@ public class UNGameScreen extends UNObject
         try
         {
             //BACKGROUND PRELOAD
-            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/snow.png")));
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/underwater.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
 
             //SPRITE PRELOAD
@@ -203,6 +203,9 @@ public class UNGameScreen extends UNObject
             sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
             sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
             sprites.add(40, ImageIO.read(new File("res/sprites/snowball.png")));
+            //LEVEL7
+            sprites.add(41, ImageIO.read(new File("res/sprites/kist_open.png")));
+            sprites.add(42, ImageIO.read(new File("res/sprites/muntje.png")));
         }
         catch (IOException e)
         {

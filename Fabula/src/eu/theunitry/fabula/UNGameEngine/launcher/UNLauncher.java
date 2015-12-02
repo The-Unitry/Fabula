@@ -1,25 +1,27 @@
-package eu.theunitry.fabula.launcher;
+package eu.theunitry.fabula.UNGameEngine.launcher;
 
-import eu.theunitry.fabula.levels.Level6;
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNView;
-import eu.theunitry.fabula.objects.UNButtonListener;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
+/**
+ * UNLauncher is the main menu which loads levels & settings.
+ * Later, we will add support to switch between levels.
+ */
 public class UNLauncher extends JPanel
 {
-    private UNGameScreen gameScreen;
     private JLabel label;
     private JButton startBtn;
+    private int currentLevel = 1;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
-        this.gameScreen = gameScreen;
+        UNGameScreen gameScreen1 = gameScreen;
         this.label = new JLabel("Fabula");
         this.startBtn = new JButton("Start");
 
@@ -28,21 +30,21 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                gameScreen.resetProgress();
-                UNView panel = new Level6(gameScreen, true);
-                gameScreen.switchMusic(1, true);
-                gameScreen.getMusic().get(1).setVolume(0.1);
-
-                gameScreen.switchPanel(panel);
+                new UNLevelLoader(currentLevel, gameScreen);
             }
         });
-        
+
         this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }
 
     public JPanel getPanel() {
         return this;
+    }
+
+    public void foo()
+    {
+        System.out.println("Bar");
     }
 
     private void setStyling()
