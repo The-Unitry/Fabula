@@ -1,9 +1,7 @@
 package eu.theunitry.fabula.UNGameEngine.launcher;
 
-import eu.theunitry.fabula.Fabula.levels.*;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
 import javax.swing.*;

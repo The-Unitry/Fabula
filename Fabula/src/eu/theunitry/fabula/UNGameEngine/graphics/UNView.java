@@ -1,6 +1,6 @@
 package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.Fabula.Helper;
+import eu.theunitry.fabula.helper.Helper;
 
 import javax.swing.*;
 import java.awt.*;
