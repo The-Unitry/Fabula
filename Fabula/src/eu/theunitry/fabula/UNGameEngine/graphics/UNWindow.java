@@ -23,6 +23,9 @@ public class UNWindow extends UNObject
     public UNWindow(String title, int width, int height)
     {
         this.TITLE = title;
+
+
+
         this.WIDTH = width;
         this.HEIGHT = height;
         this.frame = new JFrame();

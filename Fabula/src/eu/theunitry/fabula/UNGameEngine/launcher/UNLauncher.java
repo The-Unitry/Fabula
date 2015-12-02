@@ -1,29 +1,25 @@
-package eu.theunitry.fabula.UNGameEngine.launcher;
+package eu.theunitry.fabula.launcher;
 
-import eu.theunitry.fabula.Fabula.levels.*;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
-import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
+import eu.theunitry.fabula.levels.Level3;
+import eu.theunitry.fabula.UNGameScreen;
+import eu.theunitry.fabula.graphics.UNColor;
+import eu.theunitry.fabula.graphics.UNView;
+import eu.theunitry.fabula.objects.UNButtonListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-/**
- * UNLauncher is the main menu which loads levels & settings.
- * Later, we will add support to switch between levels.
- */
 public class UNLauncher extends JPanel
 {
+    private UNGameScreen gameScreen;
     private JLabel label;
     private JButton startBtn;
-    private int currentLevel = 1;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
-        UNGameScreen gameScreen1 = gameScreen;
+        this.gameScreen = gameScreen;
         this.label = new JLabel("Fabula");
         this.startBtn = new JButton("Start");
 
@@ -32,21 +28,21 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new UNLevelLoader(currentLevel, gameScreen);
+                gameScreen.resetProgress();
+                UNView panel = new Level3(gameScreen, true);
+                gameScreen.switchMusic(1, true);
+                gameScreen.getMusic().get(1).setVolume(0.1);
+
+                gameScreen.switchPanel(panel);
             }
         });
-
+        
         this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }
 
     public JPanel getPanel() {
         return this;
-    }
-
-    public void foo()
-    {
-        System.out.println("Bar");
     }
 
     private void setStyling()
