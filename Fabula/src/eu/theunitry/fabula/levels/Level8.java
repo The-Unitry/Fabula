@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.Fabula.levels;
+package eu.theunitry.fabula.levels;
 
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;

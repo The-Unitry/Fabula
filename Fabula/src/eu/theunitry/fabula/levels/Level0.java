@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.Fabula.levels;
+package eu.theunitry.fabula.levels;
 
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level11 extends UNLevel
+public class Level0 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;
@@ -30,7 +30,7 @@ public class Level11 extends UNLevel
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level11(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level0(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
