@@ -26,7 +26,8 @@ public class Level2 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 0
+     * Level 2
+     * Blobfish
      * @param gameScreen
      * @param hudEnabled
      */

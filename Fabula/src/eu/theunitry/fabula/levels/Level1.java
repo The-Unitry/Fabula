@@ -26,7 +26,7 @@ public class Level1 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 0
+     * Level 1
      * @param gameScreen
      * @param hudEnabled
      */
