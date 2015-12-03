@@ -17,7 +17,7 @@ public class UNLauncher extends JPanel
 {
     private JLabel label;
     private JButton startBtn;
-    private int currentLevel = 12;
+    private int currentLevel = 12;      // The current level, this is temporary because the progress will be saved locally.
 
     public UNLauncher(UNGameScreen gameScreen)
     {
