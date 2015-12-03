@@ -17,7 +17,7 @@ public class UNLauncher extends JPanel
 {
     private JLabel label;
     private JButton startBtn;
-    private int currentLevel = 1;
+    private int currentLevel = 12;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
