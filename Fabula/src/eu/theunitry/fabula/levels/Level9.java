@@ -34,13 +34,13 @@ public class Level9 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 7 - new Random().nextInt(3);
+        this.need = 5 - new Random().nextInt(2);
 
-        this.setQuestion("De diamant weegt " + need + " kilogram");
+        this.setQuestion("De diamant weegt " + need + " kilo. 1 gewichtje weegt 1 kilo");
         this.addHelp("Jammer! Je moet " + need + " gewichtjes op de plank hebben");
         this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan");
         this.addHelp("net niet goed, weet je zeker dat er " + need + " op de plank staan?");
-        this.setHelp("haal het juiste aantal gewichtjes van de plank");
+        this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(2));
 
         this.winning = false;
@@ -49,24 +49,24 @@ public class Level9 extends UNLevel
         this.weights = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(36), false, 96, 96);
-        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(36), false, 32, 32);
+        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 565, 280, gameScreen.getSprites().get(45), false, 160, 32);
+        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(43), false, 32, 32);
 
-        for (int i =0; i <7; i++) {
+        for (int i =0; i <5; i++) {
             weights.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 550 +
                     new Random().nextInt(150), 250, gameScreen.getSprites()
-                    .get(42), true, 32, 32));
+                    .get(44), true, 32, 32));
         }
 
 
         this.addObject(plank);
-        for (UNGraphicsObject apple : weights) {
-            addObject(apple);
+        for (UNGraphicsObject weight : weights) {
+            addObject(weight);
         }
 
         this.addObject(diamond);
 
-        this.button = new JButton("Vertrek");
+        this.button = new JButton("Wegen");
 
         this.setLayout(null);
         this.button.setBounds(618, 64, 150, 50);
@@ -99,8 +99,8 @@ public class Level9 extends UNLevel
                     if (winning) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, de diamant is van ons");
-                        for (UNGraphicsObject apple : weights) {
-                            apple.setClickable(false);
+                        for (UNGraphicsObject weight : weights) {
+                            weight.setClickable(false);
                         }
                         button.setText("Door");
                     } else {
@@ -115,7 +115,7 @@ public class Level9 extends UNLevel
                             getHelper().setState(4);
                             if (touch < need) {
                                 setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " gewicht" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                        " gewichtjes" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
                                         (need - touch)  + " is " + need
                                 );
                             } else {
@@ -125,9 +125,9 @@ public class Level9 extends UNLevel
                                 );
                             }
 
-                            for (UNGraphicsObject apple : weights)
+                            for (UNGraphicsObject weight : weights)
                             {
-                                apple.setClickable(false);
+                                weight.setClickable(false);
                             }
 
                             button.setText("Door");
@@ -143,8 +143,8 @@ public class Level9 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
-                for (UNGraphicsObject apple : weights) {
-                    if (plank.getHitbox().intersects(apple.getHitbox())) {
+                for (UNGraphicsObject weight : weights) {
+                    if (plank.getHitbox().intersects(weight.getHitbox())) {
                         touch++;
                     }
                 }
