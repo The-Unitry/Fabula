@@ -1,10 +1,10 @@
 package eu.theunitry.fabula.levels;
 
-import eu.theunitry.fabula.UNGameScreen;
-import eu.theunitry.fabula.graphics.UNColor;
-import eu.theunitry.fabula.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.graphics.UNLevel;
-import eu.theunitry.fabula.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,13 +49,13 @@ public class Level9 extends UNLevel
         this.weights = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
-        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(44), false, 32, 32);
+        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(36), false, 96, 96);
+        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(36), false, 32, 32);
 
         for (int i =0; i <7; i++) {
             weights.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 550 +
                     new Random().nextInt(150), 250, gameScreen.getSprites()
-                    .get(41), true, 32, 32));
+                    .get(42), true, 32, 32));
         }
 
 
@@ -98,7 +98,7 @@ public class Level9 extends UNLevel
                 if (isHelperDoneTalking()) {
                     if (winning) {
                         getHelper().setState(3);
-                        setHelp("Goed gedaan, de diamand is voor ons");
+                        setHelp("Goed gedaan, de diamant is van ons");
                         for (UNGraphicsObject apple : weights) {
                             apple.setClickable(false);
                         }
