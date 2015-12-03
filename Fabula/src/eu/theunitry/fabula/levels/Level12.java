@@ -140,17 +140,14 @@ public class Level12 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox().intersects(apple.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject apple : apples) {
+                if (basket.getHitbox().intersects(apple.getHitbox())) {
+                    touch++;
                 }
-                winning = (touch == need);
             }
+            winning = (touch == need);
         });
 
         timer.start();
