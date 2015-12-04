@@ -21,7 +21,7 @@ public class Level3 extends UNLevel
     private UNGraphicsObject moon;
     private JButton button;
     private boolean questionDone, winning, rotationDone;
-    private int answer, fakeAnswer1, fakeAnswer2, touch, g1, g2, g3;
+    private int answer, fakeAnswer1, fakeAnswer2, touch, g1, g2, g3, randomUnity;
     private UNColor color;
     private String lastHelp;
     private ArrayList<JLabel> ufosText, answers;
@@ -45,8 +45,8 @@ public class Level3 extends UNLevel
         gameScreen.getMusic().get(1).play(true);
         gameScreen.getMusic().get(1).setVolume(0.1);
 
-        int randomUnity = new Random().nextInt(4);
-        if (randomUnity == 1){
+        this.randomUnity = new Random().nextInt(4);
+        if (this.randomUnity == 1){
             this.moon = new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 100, 50, gameScreen.getSprites().get(46), false, 96, 96);
         }
         else{
@@ -58,9 +58,6 @@ public class Level3 extends UNLevel
         ufosText.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         ufosText.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         ufosText.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
-        this.answer = Integer.parseInt(ufosText.get(0).getText())
-                + Integer.parseInt(ufosText.get(1).getText())
-                + Integer.parseInt(ufosText.get(2).getText());
 
         this.setBackgroundImage(gameScreen.getBackgrounds().get(2));
 
@@ -78,25 +75,21 @@ public class Level3 extends UNLevel
             stars.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), 0, gameScreen.getSprites().get(50), false, 7, 7));
         }
 
-
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 246, 330, gameScreen.getSprites().get(47), false, 96, 96));
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 276, 226, gameScreen.getSprites().get(48), false, 96, 96));
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() - gameScreen.getWindow().getContentWidth() / 3 - 306, 330, gameScreen.getSprites().get(49), false, 96, 96));
 
-        g1 = new Random().nextInt(4) + 1;
-        g2 = new Random().nextInt(4) + 1;
-        g3 = new Random().nextInt(4) + 1;
-        answer = g1 + g2 + g3;
-        fakeAnswer1 = answer + new Random().nextInt(4) + 1;
-        fakeAnswer2 = answer - new Random().nextInt(4) - 1;
-        answers.add(new JLabel(Integer.toString(answer)));
-        answers.add(new JLabel(Integer.toString(fakeAnswer1)));
-        answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+        this.g1 = new Random().nextInt(4) + 1;
+        this.g2 = new Random().nextInt(4) + 1;
+        this.g3 = new Random().nextInt(4) + 1;
+        this.answer = this.g1 + this.g2 + this.g3;
+        this.fakeAnswer1 = this.answer + new Random().nextInt(4) + 1;
+        this.fakeAnswer2 = this.answer - new Random().nextInt(4) - 1;
+        this.answers.add(new JLabel(Integer.toString(answer)));
+        this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+        this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
 
-
-
-
-        this.setQuestion("Wat is " + g1 + " plus " + g2  + " plus " + g3 + " ?");
+        this.setQuestion("Wat is " + this.g1 + " plus " + this.g2  + " plus " + this.g3 + " ?");
         this.addHelp("Jammer! Probeer het nog eens");
         this.addHelp("Helaas! Probeer het nog een keer!");
         this.setHelp("Klik op de UFO met het goede antwoord.");
@@ -238,7 +231,7 @@ public class Level3 extends UNLevel
                             else
                             {
                                 addMistake();
-                                if (getMistakes() < 3)
+                                if (getMistakes() < 2)
                                 {
                                     getHelper().setState(4);
                                     while (lastHelp == getHelp())
@@ -275,10 +268,6 @@ public class Level3 extends UNLevel
                                     removeObject(ufoAnswers.get(1));
                                     removeObject(ufoAnswers.get(2));
 
-                                    for (JLabel possibleAnswer : answers)
-                                    {
-                                        remove(possibleAnswer);
-                                    }
                                     add(button);
                                     button.setText("Doorgaan");
                                 }
