@@ -215,6 +215,14 @@ public class UNGameScreen extends UNObject
             sprites.add(48, ImageIO.read(new File("res/sprites/ufoGreen.png")));
             sprites.add(49, ImageIO.read(new File("res/sprites/ufoPink.png")));
             sprites.add(50, ImageIO.read(new File("res/sprites/snowball.png")));
+            //LEVEL7
+            sprites.add(51, ImageIO.read(new File("res/sprites/kist_dicht.png")));
+            sprites.add(52, ImageIO.read(new File("res/sprites/kist_open.png")));
+            sprites.add(53, ImageIO.read(new File("res/sprites/muntje.png")));
+            //LEVEL8
+            sprites.add(54, ImageIO.read(new File("res/sprites/klomp.png")));
+            sprites.add(55, ImageIO.read(new File("res/sprites/pickaxe.png")));
+
         }
         catch (IOException e)
         {
