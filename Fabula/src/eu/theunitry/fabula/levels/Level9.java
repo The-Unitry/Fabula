@@ -34,7 +34,7 @@ public class Level9 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 5 - new Random().nextInt(2);
+        this.need = 10 - new Random().nextInt(8);
 
         this.setQuestion("De diamant weegt " + need + " kilo. 1 gewichtje weegt 1 kilo");
         this.addHelp("Jammer! Je moet " + need + " gewichtjes op de plank hebben");
@@ -50,9 +50,11 @@ public class Level9 extends UNLevel
         this.color = new UNColor();
 
         this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 565, 280, gameScreen.getSprites().get(45), false, 160, 32);
+        this.plank.setHitbox(0, 0, 160, 1);
+
         this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(43), false, 32, 32);
 
-        for (int i =0; i <5; i++) {
+        for (int i = 0; i <10; i++) {
             weights.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 550 +
                     new Random().nextInt(150), 250, gameScreen.getSprites()
                     .get(44), true, 32, 32));
@@ -120,7 +122,7 @@ public class Level9 extends UNLevel
                                 );
                             } else {
                                 setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " gewicht" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                        " gewicht" + ((touch - need == 1) ? "" : "jes")  + " af. Want " + touch + " min " +
                                         (touch - need)  + " is " + need
                                 );
                             }
@@ -149,6 +151,17 @@ public class Level9 extends UNLevel
                     }
                 }
                 winning = (touch == need);
+
+                for(UNGraphicsObject weight : weights)
+                {
+                    if(!weight.getMouseHold() && !plank.getHitbox(true).intersects(weight.getHitbox())) {
+                        weight.setY(weight.getY() + 1);
+                    }
+                    if(weight.getY() > 160)
+                    {
+                        weight.setClickable(true);
+                    }
+                }
             }
         });
 
