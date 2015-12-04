@@ -37,8 +37,8 @@ public class Level7 extends UNLevel
         this.need2 = 1 + new Random().nextInt(10);
 
         this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
-        this.addHelp("Jammer! Je moet " + (need + need2) + " muntjes in de schatkist stoppen");
-        this.addHelp("Helaas! Er moeten " + (need + need2) + " muntjes in de schatkist zitten");
+        this.addHelp("Jammer! Dit is niet goed! Doe het nog eens over!");
+        this.addHelp("Helaas! Dit is niet het juiste aantal, probeer het nog eens!");
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
 
@@ -47,12 +47,12 @@ public class Level7 extends UNLevel
         this.coins = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.getSprites().get(41), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.getSprites().get(52), false, 96, 96);
         this.chest.setHitbox(0, 60, 96, 1);
 
         for (int i = 0; i < 20; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.getSprites().get(42), false, 32, 32)
+                new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.getSprites().get(53), false, 32, 32)
             );
         }
 
@@ -115,9 +115,9 @@ public class Level7 extends UNLevel
                                         (need + need2 - touch)  + " is " + (need + need2)
                                 );
                             } else {
-                                setHelp("Jammer, er moest" + ((touch - need + need2 == 1) ? "" : "en") + " " + (touch - need + need2) +
-                                        " muntje" + ((touch - need + need2 == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                        (touch - need + need2)  + " is " + (need + need2)
+                                setHelp("Jammer, er moest" + ((touch - need - need2 == 1) ? "" : "en") + " " + (touch - need - need2) +
+                                        " muntje" + ((touch - need - need2 == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                        (touch + need - need2)  + " is " + (need - need2)
                                 );
                             }
 

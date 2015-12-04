@@ -43,8 +43,8 @@ public class Level6 extends UNLevel
         reindeers = new ArrayList<UNGraphicsObject>();
         snow = new ArrayList<UNGraphicsObject>();
 
-        gameScreen.getMusic().get(2).play(true);
-        gameScreen.getMusic().get(2).setVolume(0.1);
+//        gameScreen.getMusic().get(2).play(true);
+//        gameScreen.getMusic().get(2).setVolume(0.1);
 
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));

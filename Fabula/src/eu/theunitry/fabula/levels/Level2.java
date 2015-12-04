@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level1 extends UNLevel
+public class Level2 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;
@@ -26,11 +26,12 @@ public class Level1 extends UNLevel
     private String lastHelp;
 
     /**
-     * Level 1
+     * Level 2
+     * Blobfish
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level1(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level2(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
