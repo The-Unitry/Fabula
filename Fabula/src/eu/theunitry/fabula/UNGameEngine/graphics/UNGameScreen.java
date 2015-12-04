@@ -154,6 +154,7 @@ public class UNGameScreen extends UNObject
             //BACKGROUND PRELOAD
             backgrounds.add(0, ImageIO.read(new File("res/backgrounds/underwater.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
+            backgrounds.add(2, ImageIO.read(new File("res/backgrounds/space.png")));
 
             //SPRITE PRELOAD
             //TUILTJE IDLE
@@ -203,9 +204,17 @@ public class UNGameScreen extends UNObject
             sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
             sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
             sprites.add(40, ImageIO.read(new File("res/sprites/snowball.png")));
-            //LEVEL7
-            sprites.add(41, ImageIO.read(new File("res/sprites/kist_open.png")));
-            sprites.add(42, ImageIO.read(new File("res/sprites/muntje.png")));
+            //LEVEL3
+            sprites.add(41, ImageIO.read(new File("res/sprites/rocket0.png")));
+            sprites.add(42, ImageIO.read(new File("res/sprites/rocket1.png")));
+            sprites.add(43, ImageIO.read(new File("res/sprites/rocket2.png")));
+            sprites.add(44, ImageIO.read(new File("res/sprites/rocket3.png")));
+            sprites.add(45, ImageIO.read(new File("res/sprites/moon0.png")));
+            sprites.add(46, ImageIO.read(new File("res/sprites/moon1.png")));
+            sprites.add(47, ImageIO.read(new File("res/sprites/ufoBlue.png")));
+            sprites.add(48, ImageIO.read(new File("res/sprites/ufoGreen.png")));
+            sprites.add(49, ImageIO.read(new File("res/sprites/ufoPink.png")));
+            sprites.add(50, ImageIO.read(new File("res/sprites/snowball.png")));
         }
         catch (IOException e)
         {
