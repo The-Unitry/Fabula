@@ -19,10 +19,10 @@ public class Level8 extends UNLevel
     private JButton button;
     private UNColor color;
     private String lastHelp;
-    private int answer, firstInt, secondInt;
-    private boolean questionDone, winning;
+    private int answer, firstInt, secondInt, fakeAnswer1, fakeAnswer2, fakeAnswer3, fakeAnswer4, newRand;
+    private boolean questionDone, winning, buttonClicked;
     private ArrayList<JLabel> nuggetTexts, answers;
-    private ArrayList<UNGraphicsObject> nuggets, nuggetAnswers;
+    private ArrayList<UNGraphicsObject> nuggets, nuggetAnswers, pickaxes;
 
     /**
      * Level 8
@@ -40,21 +40,23 @@ public class Level8 extends UNLevel
         this.answers = new ArrayList<JLabel>();
         this.firstInt = 1 + new Random().nextInt(5);
         this.secondInt = 1 + new Random().nextInt(5);
+        this.pickaxes = new ArrayList<UNGraphicsObject>();
+        this.newRand = new Random().nextInt(4) + 1;
 
         this.setQuestion("Hoeveel is " + firstInt + " * " + secondInt + "?");
         this.addHelp("Dit is niet goed! Sleep het houweel naar het goede antwoord.");
         this.addHelp("Helaas, probeer het opnieuw!");
         this.addHelp("Dit is niet juist.");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
 
         this.winning = false;
         this.questionDone = false;
+        this.buttonClicked = false;
         this.lastHelp = getHelp();
         this.color = new UNColor();
 
-
         this.setLayout(null);
-        this.button = new JButton("Vertrek");
+        this.button = new JButton("Nakijken");
         this.button.setBounds(618, 64, 150, 50);
         this.button.setBackground(new Color(51, 51, 51));
         this.button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
@@ -67,38 +69,83 @@ public class Level8 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 350, 350, gameScreen.getSprites().get(43), true, 64, 64));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 20, 368, gameScreen.getSprites().get(54), true, 96, 96));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 70, 300, gameScreen.getSprites().get(54), true, 72, 72));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 110, 240, gameScreen.getSprites().get(54), true, 64, 64));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 240, gameScreen.getSprites().get(54), true, 48, 48));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 350, gameScreen.getSprites().get(54), true, 84, 84));
 
         for(UNGraphicsObject nugget : nuggets)
         {
-            addObject(nugget);
+            this.addObject(nugget);
             nugget.setClickable(false);
         }
 
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 235, 368, gameScreen.getSprites().get(54), false, 96, 96));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 185, 300, gameScreen.getSprites().get(54), false, 72, 72));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 148, 240, gameScreen.getSprites().get(54), false, 64, 64));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 38, 240, gameScreen.getSprites().get(54), false, 48, 48));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 35, 350, gameScreen.getSprites().get(54), false, 84, 84));
+
         this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.answer = Integer.parseInt(this.nuggetTexts.get(0).getText())
+                        + Integer.parseInt(this.nuggetTexts.get(1).getText())
+                        + Integer.parseInt(this.nuggetTexts.get(2).getText())
+                        + Integer.parseInt(this.nuggetTexts.get(3).getText())
+                        + Integer.parseInt(this.nuggetTexts.get(4).getText());
 
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 96, 250, gameScreen.getSprites().get(43), false, 96, 96));
+        this.answer = this.firstInt * this.secondInt;
+        this.fakeAnswer1 = this.answer + new Random().nextInt(4) + 1;
+        this.fakeAnswer2 = this.answer - new Random().nextInt(5) + 1;
+        this.fakeAnswer3 = this.answer - new Random().nextInt(1) + 1;
+        this.fakeAnswer4 = this.answer - new Random().nextInt(3) + 1;
 
-        if (new Random().nextInt(2) == 0)
+        if (newRand == 1)
         {
-            answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer4)));
         }
-        else if (new Random().nextInt(2) == 0)
+        else if (newRand == 2)
         {
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer4)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+        }
+        else if (newRand == 3)
+        {
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer4)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+        }
+        else if (newRand == 4)
+        {
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer4)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
         }
         else
         {
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer4)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
         }
 
-        this.answer = Integer.parseInt(nuggetTexts.get(0).getText());
+        this.pickaxes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150, 340, gameScreen.getSprites().get(55), true, 56, 56));
 
         for (JLabel nuggetText : nuggetTexts)
         {
@@ -118,6 +165,7 @@ public class Level8 extends UNLevel
         this.button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                buttonClicked = true;
                 if(button.getText() == "Door")
                 {
                     gameScreen.getSounds().get(0).stop();
@@ -146,76 +194,43 @@ public class Level8 extends UNLevel
             {
                 if(!questionDone)
                 {
-                    for(UNGraphicsObject nugget : nuggets) {
-                        questionDone = true;
-                        setHelp("Sleep het houweel naar de juist goudklomp.");
-                        lastHelp = getHelp();
+                    questionDone = true;
+                    setHelp("Sleep het houweel naar de juist goudklomp.");
+                    lastHelp = getHelp();
 
-                        addObject(nuggetAnswers.get(0));
-                        addObject(nuggetAnswers.get(0));
+                    addObject(nuggetAnswers.get(0));
+                    addObject(nuggetAnswers.get(1));
+                    addObject(nuggetAnswers.get(2));
+                    addObject(nuggetAnswers.get(3));
+                    addObject(nuggetAnswers.get(4));
 
-                        for (JLabel possibleAnswer : answers) {
-                            add(possibleAnswer);
-                            possibleAnswer.setBounds(nuggetAnswers.get(answers.indexOf(possibleAnswer)).getX(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getY(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
-                        }
-                        nuggetTexts.get(nuggets.indexOf(nugget)).setBounds(nugget.getX(), 290 - nugget.getHeight() / 128, nugget.getWidth(), 100);
+                    for (JLabel possibleAnswer : answers)
+                    {
+                        add(possibleAnswer);
+                        possibleAnswer.setBounds(nuggetAnswers.get(answers.indexOf(possibleAnswer)).getX(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getY(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
+                    }
+
+                    for(UNGraphicsObject pickaxe : pickaxes)
+                    {
+                        addObject(pickaxe);
                     }
                 }
                 else
                 {
-                    for(UNGraphicsObject nugget : nuggetAnswers)
-                    {
-                        if(nugget.isMouseClick() && !winning && isHelperDoneTalking())
-                        {
-                            nugget.setMouseClick(false);
-                            if(Integer.valueOf(answers.get(nuggetAnswers.indexOf(nugget)).getText()) == answer)
-                            {
-                                add(button);
-                                getHelper().setState(3);
-                                setHelp("Dat is helemaal goed!");
-                                button.setText("Door");
-                                winning = true;
-                            }
-                            else
-                            {
-                                addMistake();
-                                if(getMistakes() < 3)
-                                {
-                                    getHelper().setState(4);
-                                    while(lastHelp == getHelp())
-                                    {
-                                        setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                    if(buttonClicked) {
+                        for (UNGraphicsObject nugget : nuggetAnswers) {
+                            for (UNGraphicsObject pickaxe : pickaxes) {
+                                if (pickaxe.getHitbox().intersects(nugget.getHitbox()) && !winning && isHelperDoneTalking()) {
+                                    nugget.setMouseClick(false);
+                                    if (Integer.valueOf(answers.get(nuggetAnswers.indexOf(nugget)).getText()) == answer) {
+                                        add(button);
+                                        getHelper().setState(3);
+                                        setHelp("Goed gedaan! Dit is het juiste antwoord!");
+                                        button.setText("Door");
+                                        buttonClicked = false;
+                                    } else {
+                                        setHelp("Dit is niet juist, probeer het nog eens.");
                                     }
-                                    lastHelp = getHelp();
-                                    questionDone = false;
-
-                                    removeObject(nuggetAnswers.get(0));
-
-                                    for(JLabel possibleAnswer : answers)
-                                    {
-                                        remove(possibleAnswer);
-                                    }
-
-                                    nuggets.get(0).setX(-800);
-
-                                    for(UNGraphicsObject nug : nuggets)
-                                    {
-                                        nug.setWidth(8);
-                                        nug.setHeight(8);
-                                    }
-                                }
-                                else
-                                {
-                                    getHelper().setState(4);
-                                    setHelp("FOUT KUT JONG");
-                                    removeObject(nuggetAnswers.get(0));
-
-                                    for(JLabel possibleAnswer : answers)
-                                    {
-                                        remove(possibleAnswer);
-                                    }
-
-                                    button.setText("Door");
                                 }
                             }
                         }
