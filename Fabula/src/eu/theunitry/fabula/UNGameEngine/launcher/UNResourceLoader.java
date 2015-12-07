@@ -68,6 +68,7 @@ public class UNResourceLoader
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
             backgrounds.add(2, ImageIO.read(new File("res/backgrounds/space.png")));
             backgrounds.add(3, ImageIO.read(new File("res/backgrounds/supermarket.png")));
+            backgrounds.add(4, ImageIO.read(new File("res/backgrounds/jungle.png")));
 
             /**
              * Tuiltje - Idle
@@ -170,6 +171,14 @@ public class UNResourceLoader
             sprites.add(59, ImageIO.read(new File("res/sprites/sinaasappel.png")));
             sprites.add(60, ImageIO.read(new File("res/sprites/banaan.png")));
             sprites.add(61, ImageIO.read(new File("res/sprites/kassa.png")));
+
+            /**
+             * Level 12
+             */
+            sprites.add(62, ImageIO.read(new File("res/sprites/aap_bruin.png")));
+            sprites.add(63, ImageIO.read(new File("res/sprites/aap_wit.png")));
+            sprites.add(64, ImageIO.read(new File("res/sprites/kooi.png")));
+
         }
         catch (IOException e)
         {
