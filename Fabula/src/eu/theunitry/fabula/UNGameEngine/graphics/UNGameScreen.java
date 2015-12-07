@@ -139,7 +139,6 @@ public class UNGameScreen extends UNObject
          */
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
-        music.add(2, TinySound.loadMusic("audio/avalange.wav"));
 
         /**
          * Sound Effects Preload
@@ -153,11 +152,10 @@ public class UNGameScreen extends UNObject
         try
         {
             //BACKGROUND PRELOAD
-            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/snow.png")));
+            backgrounds.add(0, ImageIO.read(new File("res/backgrounds/underwater.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
-            backgrounds.add(2, ImageIO.read(new File("res/backgrounds/desert.png")));
-            backgrounds.add(3, ImageIO.read(new File("res/backgrounds/desert.png")));
-            backgrounds.add(4, ImageIO.read(new File("res/backgrounds/desert.png")));
+            backgrounds.add(2, ImageIO.read(new File("res/backgrounds/space.png")));
+//            backgrounds.add(3, ImageIO.read(new File("res/backgrounds/supermarket.png")));
 
             //SPRITE PRELOAD
             //TUILTJE IDLE
@@ -207,13 +205,31 @@ public class UNGameScreen extends UNObject
             sprites.add(38, ImageIO.read(new File("res/sprites/apple.png")));
             sprites.add(39, ImageIO.read(new File("res/sprites/basket.png")));
             sprites.add(40, ImageIO.read(new File("res/sprites/snowball.png")));
+            //LEVEL3
+            sprites.add(41, ImageIO.read(new File("res/sprites/rocket0.png")));
+            sprites.add(42, ImageIO.read(new File("res/sprites/rocket1.png")));
+            sprites.add(43, ImageIO.read(new File("res/sprites/rocket2.png")));
+            sprites.add(44, ImageIO.read(new File("res/sprites/rocket3.png")));
+            sprites.add(45, ImageIO.read(new File("res/sprites/moon0.png")));
+            sprites.add(46, ImageIO.read(new File("res/sprites/moon1.png")));
+            sprites.add(47, ImageIO.read(new File("res/sprites/ufoBlue.png")));
+            sprites.add(48, ImageIO.read(new File("res/sprites/ufoGreen.png")));
+            sprites.add(49, ImageIO.read(new File("res/sprites/ufoPink.png")));
+            sprites.add(50, ImageIO.read(new File("res/sprites/snowball.png")));
             //LEVEL7
-            sprites.add(41, ImageIO.read(new File("res/sprites/snowtree.png")));
-            sprites.add(42, ImageIO.read(new File("res/sprites/snowtree2.png")));
-            sprites.add(43, ImageIO.read(new File("res/sprites/reindeer0.png")));
-            sprites.add(44, ImageIO.read(new File("res/sprites/reindeer1.png")));
-            sprites.add(45, ImageIO.read(new File("res/sprites/reindeer2.png")));
-            sprites.add(46, ImageIO.read(new File("res/sprites/snow.png")));
+            sprites.add(51, ImageIO.read(new File("res/sprites/kist_dicht.png")));
+            sprites.add(52, ImageIO.read(new File("res/sprites/kist_open.png")));
+            sprites.add(53, ImageIO.read(new File("res/sprites/muntje.png")));
+            //LEVEL8
+            sprites.add(54, ImageIO.read(new File("res/sprites/klomp.png")));
+            sprites.add(55, ImageIO.read(new File("res/sprites/pickaxe.png")));
+            //LEVEL11
+//            sprites.add(56, ImageIO.read(new File("res/sprites/appel.png")));
+//            sprites.add(57, ImageIO.read(new File("res/sprites/peer.png")));
+//            sprites.add(58, ImageIO.read(new File("res/sprites/druif.png")));
+//            sprites.add(59, ImageIO.read(new File("res/sprites/sinaasappel.png")));
+//            sprites.add(60, ImageIO.read(new File("res/sprites/banaan.png")));
+//            sprites.add(61, ImageIO.read(new File("res/sprites/kassa.png")));
         }
         catch (IOException e)
         {
