@@ -34,7 +34,7 @@ public class Level11 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 3 + new Random().nextInt(3);
+        this.need = 3 + new Random().nextInt(10);
 
         this.setQuestion("Koop voor " + need + " euro aan fruit");
         this.addHelp("Jammer! Je moet voor " + need + " euro aan fruit kopen");
