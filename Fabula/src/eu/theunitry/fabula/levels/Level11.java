@@ -39,7 +39,7 @@ public class Level11 extends UNLevel
         this.setQuestion("Koop voor " + need + " euro aan fruit");
         this.addHelp("Jammer! Je moet voor " + need + " euro aan fruit kopen");
         this.addHelp("Helaas! Je moet voor " + need + " euro aan fruit inslaan");
-        this.setHelp("Sleep het aantal fruit wat je kan betalen naar de kassa");
+        this.setHelp("Sleep het aantal fruit wat je kan betalen  naar de kassa");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
 
         this.winning = false;
