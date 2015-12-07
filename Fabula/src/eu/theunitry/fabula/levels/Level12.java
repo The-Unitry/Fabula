@@ -40,7 +40,7 @@ public class Level12 extends UNLevel
         this.addHelp("Jammer! Je moet een totaal gewicht van " + need + " kilogram hebben");
         this.addHelp("Helaas! Er moet een gewicht van " + need + " kilogram in de kooi zitten");
         this.setHelp("Sleep de aapjes in de kooi");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
 
         this.winning = false;
         this.lastHelp = getHelp();
