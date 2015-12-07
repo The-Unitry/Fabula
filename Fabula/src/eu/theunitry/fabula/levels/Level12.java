@@ -50,19 +50,19 @@ public class Level12 extends UNLevel
 
         this.color = new UNColor();
 
-        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
+        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(64), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                     new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(38), true, 32, 32)
+                    .get(63), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                     new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(38), true, 32, 32)
+                    .get(62), true, 32, 32)
             );
         }
 
