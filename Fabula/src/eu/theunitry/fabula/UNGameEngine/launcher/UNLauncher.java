@@ -41,11 +41,6 @@ public class UNLauncher extends JPanel
         return this;
     }
 
-    public void foo()
-    {
-        System.out.println("Bar");
-    }
-
     private void setStyling()
     {
         /**
