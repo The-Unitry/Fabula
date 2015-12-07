@@ -6,7 +6,7 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 
 public class UNLevelLoader
 {
-    private int currentLevel = 1;      // The current level, this is temporary because the progress will be saved locally.
+    private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
 
     public UNLevelLoader(UNGameScreen gameScreen)
     {
@@ -54,9 +54,9 @@ public class UNLevelLoader
                 gameScreen.switchPanel(panel9);
                 break;
             case 10:
-                //UNView panel10 = new Level10(gameScreen, true);
-                //gameScreen.switchPanel(panel10);
-                //break;
+                UNView panel10 = new Level10(gameScreen, true);
+                gameScreen.switchPanel(panel10);
+                break;
             case 11:
                 UNView panel11 = new Level11(gameScreen, true);
                 gameScreen.switchPanel(panel11);
