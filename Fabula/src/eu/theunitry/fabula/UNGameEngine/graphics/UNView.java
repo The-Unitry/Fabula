@@ -1,6 +1,6 @@
 package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.helper.Helper;
+import eu.theunitry.fabula.fabula.Helper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -139,7 +139,7 @@ public class UNView extends JPanel
     {
         if (hudEnabled)
         {
-            g.setColor(new Color(51, 51, 51, 230));
+            g.setColor(UNColor.HUD_COLOR);
             g.fillRect(0, 0, 768, 64);
             if (!getHelp().isEmpty())
             {

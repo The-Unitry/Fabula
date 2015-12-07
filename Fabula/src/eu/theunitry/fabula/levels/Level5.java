@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.levels;
+package eu.theunitry.fabula.fabula.levels;
 
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
@@ -22,7 +22,6 @@ public class Level5 extends UNLevel
     private JButton button;
     private boolean winning;
     private int need, touch;
-    private UNColor color;
     private String lastHelp;
 
     /**
@@ -40,13 +39,12 @@ public class Level5 extends UNLevel
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
         this.apples = new ArrayList<UNGraphicsObject>();
-        this.color = new UNColor();
 
         this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
 
@@ -71,7 +69,7 @@ public class Level5 extends UNLevel
 
         this.setLayout(null);
         this.button.setBounds(618, 64, 150, 50);
-        this.button.setBackground(new Color(51, 51, 51));
+        this.button.setBackground(UNColor.HUD_COLOR);
         this.button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
         this.button.setForeground(Color.white);
         this.button.setOpaque(true);

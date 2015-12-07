@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.helper;
+package eu.theunitry.fabula.fabula;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.objects.UNTimer;

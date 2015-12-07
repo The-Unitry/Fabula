@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.levels;
+package eu.theunitry.fabula.fabula.levels;
 
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
@@ -43,8 +43,8 @@ public class Level6 extends UNLevel
         reindeers = new ArrayList<UNGraphicsObject>();
         snow = new ArrayList<UNGraphicsObject>();
 
-//        gameScreen.getMusic().get(2).play(true);
-//        gameScreen.getMusic().get(2).setVolume(0.1);
+        gameScreen.getMusic().get(2).play(true);
+        gameScreen.getMusic().get(2).setVolume(0.1);
 
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -265,7 +265,7 @@ public class Level6 extends UNLevel
                             {
                                 add(button);
                                 getHelper().setState(3);
-                                setHelp("Mooi hoor! Jij kan goed rekenen");
+                                setHelp("Mooi hoor! Jij kan goed rekenen!");
                                 button.setText("Door");
                                 winning = true;
                             }
