@@ -155,7 +155,7 @@ public class UNGameScreen extends UNObject
             backgrounds.add(0, ImageIO.read(new File("res/backgrounds/underwater.png")));
             backgrounds.add(1, ImageIO.read(new File("res/backgrounds/moon.png")));
             backgrounds.add(2, ImageIO.read(new File("res/backgrounds/space.png")));
-//            backgrounds.add(3, ImageIO.read(new File("res/backgrounds/supermarket.png")));
+            backgrounds.add(3, ImageIO.read(new File("res/backgrounds/supermarket.png")));
 
             //SPRITE PRELOAD
             //TUILTJE IDLE
@@ -224,12 +224,12 @@ public class UNGameScreen extends UNObject
             sprites.add(54, ImageIO.read(new File("res/sprites/klomp.png")));
             sprites.add(55, ImageIO.read(new File("res/sprites/pickaxe.png")));
             //LEVEL11
-//            sprites.add(56, ImageIO.read(new File("res/sprites/appel.png")));
-//            sprites.add(57, ImageIO.read(new File("res/sprites/peer.png")));
-//            sprites.add(58, ImageIO.read(new File("res/sprites/druif.png")));
-//            sprites.add(59, ImageIO.read(new File("res/sprites/sinaasappel.png")));
-//            sprites.add(60, ImageIO.read(new File("res/sprites/banaan.png")));
-//            sprites.add(61, ImageIO.read(new File("res/sprites/kassa.png")));
+            sprites.add(56, ImageIO.read(new File("res/sprites/appel.png")));
+            sprites.add(57, ImageIO.read(new File("res/sprites/peer.png")));
+            sprites.add(58, ImageIO.read(new File("res/sprites/druif.png")));
+            sprites.add(59, ImageIO.read(new File("res/sprites/sinaasappel.png")));
+            sprites.add(60, ImageIO.read(new File("res/sprites/banaan.png")));
+            sprites.add(61, ImageIO.read(new File("res/sprites/kassa.png")));
         }
         catch (IOException e)
         {
