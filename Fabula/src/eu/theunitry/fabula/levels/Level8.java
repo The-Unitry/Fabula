@@ -47,7 +47,7 @@ public class Level8 extends UNLevel
         this.addHelp("Dit is niet goed! Sleep het houweel naar het goede antwoord.");
         this.addHelp("Helaas, probeer het opnieuw!");
         this.addHelp("Dit is niet juist.");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
 
         this.winning = false;
         this.questionDone = false;
@@ -70,10 +70,10 @@ public class Level8 extends UNLevel
         this.button.setBorderPainted(false);
 
         this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 20, 368, gameScreen.getSprites().get(54), true, 96, 96));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 70, 300, gameScreen.getSprites().get(54), true, 72, 72));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 90, 310, gameScreen.getSprites().get(54), true, 48, 48));
         this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 110, 240, gameScreen.getSprites().get(54), true, 64, 64));
         this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 240, gameScreen.getSprites().get(54), true, 48, 48));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 350, gameScreen.getSprites().get(54), true, 84, 84));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 245, 380, gameScreen.getSprites().get(54), true, 84, 84));
 
         for(UNGraphicsObject nugget : nuggets)
         {
@@ -82,10 +82,10 @@ public class Level8 extends UNLevel
         }
 
         this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 235, 368, gameScreen.getSprites().get(54), false, 96, 96));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 185, 300, gameScreen.getSprites().get(54), false, 72, 72));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 165, 310, gameScreen.getSprites().get(54), false, 48, 48));
         this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 148, 240, gameScreen.getSprites().get(54), false, 64, 64));
         this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 38, 240, gameScreen.getSprites().get(54), false, 48, 48));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 35, 350, gameScreen.getSprites().get(54), false, 84, 84));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 12, 380, gameScreen.getSprites().get(54), false, 84, 84));
 
         this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -145,7 +145,7 @@ public class Level8 extends UNLevel
             this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
         }
 
-        this.pickaxes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150, 340, gameScreen.getSprites().get(55), true, 56, 56));
+        this.pickaxes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 250, 300, gameScreen.getSprites().get(55), true, 56, 56));
 
         for (JLabel nuggetText : nuggetTexts)
         {
@@ -162,9 +162,11 @@ public class Level8 extends UNLevel
             possibleAnswer.setHorizontalAlignment(SwingConstants.CENTER);
         }
 
-        this.button.addActionListener(new ActionListener() {
+        this.button.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e)
+            {
                 buttonClicked = true;
                 if(button.getText() == "Door")
                 {
@@ -195,7 +197,7 @@ public class Level8 extends UNLevel
                 if(!questionDone)
                 {
                     questionDone = true;
-                    setHelp("Sleep het houweel naar de juist goudklomp.");
+                    setHelp("Sleep het houweel naar het juiste goudklomp.");
                     lastHelp = getHelp();
 
                     addObject(nuggetAnswers.get(0));
@@ -218,18 +220,31 @@ public class Level8 extends UNLevel
                 else
                 {
                     if(buttonClicked) {
-                        for (UNGraphicsObject nugget : nuggetAnswers) {
-                            for (UNGraphicsObject pickaxe : pickaxes) {
-                                if (pickaxe.getHitbox().intersects(nugget.getHitbox()) && !winning && isHelperDoneTalking()) {
-                                    nugget.setMouseClick(false);
-                                    if (Integer.valueOf(answers.get(nuggetAnswers.indexOf(nugget)).getText()) == answer) {
-                                        add(button);
-                                        getHelper().setState(3);
-                                        setHelp("Goed gedaan! Dit is het juiste antwoord!");
-                                        button.setText("Door");
-                                        buttonClicked = false;
-                                    } else {
-                                        setHelp("Dit is niet juist, probeer het nog eens.");
+                        for(UNGraphicsObject nugget : nuggetAnswers)
+                        {
+                            for(UNGraphicsObject pickaxe : pickaxes)
+                            {
+                                if(!winning && isHelperDoneTalking())
+                                {
+                                    if(pickaxe.getHitbox().intersects(nugget.getHitbox()) && buttonClicked)
+                                    {
+                                        if (Integer.valueOf(answers.get(nuggetAnswers.indexOf(nugget)).getText()) == answer) {
+                                            add(button);
+                                            getHelper().setState(3);
+                                            setHelp("Goed gedaan! Dit is het juiste antwoord!");
+                                            button.setText("Door");
+                                            buttonClicked = false;
+                                            winning = true;
+                                            pickaxe.setClickable(false);
+                                        }
+                                        else
+                                        {
+                                            button.setText("Door");
+                                            buttonClicked = false;
+                                            pickaxe.setClickable(false);
+                                            getHelper().setState(4);
+                                            setHelp("Dit is niet juist, probeer het nog eens.");
+                                        }
                                     }
                                 }
                             }
