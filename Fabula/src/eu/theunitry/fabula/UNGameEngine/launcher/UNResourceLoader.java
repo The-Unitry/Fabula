@@ -10,6 +10,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class is used for loading all resources. It should be replaced later with
+ * a more dynamic way of loading, since we are repeating ourselves a lot here.
+ */
 public class UNResourceLoader
 {
     public ArrayList<Music> music;
