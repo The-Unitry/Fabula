@@ -1,4 +1,4 @@
-package eu.theunitry.fabula.UNGameEngine.graphics;
+package eu.theunitry.fabula.UNGameEngine.launcher;
 
 import kuusisto.tinysound.Music;
 import kuusisto.tinysound.Sound;

@@ -1,6 +1,7 @@
 package eu.theunitry.fabula.UNGameEngine.graphics;
 
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 import kuusisto.tinysound.*;
 
