@@ -86,7 +86,8 @@ public class Level5 extends UNLevel
         this.setBirds(new ArrayList<UNGraphicsObject>());
         this.getBirds().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 70, 80, this.getGameScreen().getSprites().get(spriteBird), false, 12 * 3, 6 * 3));
 
-        for (UNGraphicsObject bird : this.getBirds()) {
+        for (UNGraphicsObject bird : this.getBirds())
+        {
             this.addObject(bird);
         }
 
@@ -105,44 +106,62 @@ public class Level5 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (button.getText() == "Door")
+                {
                     getGameScreen().getSounds().get(0).stop();
-                    if (getGameScreen().getLevel() < getGameScreen().getLevelMax()) {
-                        if (isWinning()) {
+                    if (getGameScreen().getLevel() < getGameScreen().getLevelMax())
+                    {
+                        if (isWinning())
+                        {
                             getGameScreen().addLevel();
                         }
                         getGameScreen().switchPanel(new Level5(getGameScreen(), true));
-                    } else {
+                    }
+                    else
+                    {
                         getGameScreen().switchPanel(new UNLauncher(getGameScreen()));
                     }
                 }
-                if (isHelperDoneTalking()) {
-                    if (getImageIndex1() + getImageIndex2() + getImageIndex3() == getNeed()) {
+                if (isHelperDoneTalking())
+                {
+                    if (getImageIndex1() + getImageIndex2() + getImageIndex3() == getNeed())
+                    {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, we kunnen er weer tegen aan!");
                         setWinning(true);
                         getBucket().setClickable(false);
                         button.setText("Door");
-                    } else {
+                    }
+                    else
+                    {
                         addMistake();
-                        if (getMistakes() < 3) {
+                        if (getMistakes() < 3)
+                        {
                             getHelper().setState(4);
-                            while(getLastHelp() == getHelp()) {
+                            while(getLastHelp() == getHelp())
+                            {
                                 setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                             }
                             setLastHelp(getHelp());
-                        } else {
+                        }
+                        else
+                        {
                             getHelper().setState(4);
                             int current = getImageIndex1() + getImageIndex2() + getImageIndex3();
-                            if (current < getNeed()) {
+                            if (current < getNeed())
+                            {
                                 setHelp("Jammer, er moest nog " + (getNeed() - current) +
                                         " liter bij. Want " + current + " plus " +
                                         (getNeed() - current)  + " is " + getNeed() + "."
                                 );
-                            } else {
+                            }
+                            else
+                            {
                                 setHelp("Jammer, er moest " + (current - getNeed()) +
                                         " liter af. Want " + current + " min " +
                                         (current - getNeed())  + " is " + getNeed() + "."
@@ -158,27 +177,41 @@ public class Level5 extends UNLevel
 
         this.getPanel().add(button);
 
-        timerWellAnim = new Timer(250, new ActionListener() {
+        timerWellAnim = new Timer(250, new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket)) {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1)) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket))
+                {
+                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1))
+                    {
                         getBucket().setY(getBucket().getY() + 20);
                         setImageIndexWell(getImageIndexWell() + 1);
-                    } else {
-                        if (getImageIndexWell() > 0) {
-                            if (getImageIndexWell() < 4) {
+                    }
+                    else
+                    {
+                        if (getImageIndexWell() > 0)
+                        {
+                            if (getImageIndexWell() < 4)
+                            {
                                 getBucket().setY(getBucket().getY() - 20);
                             }
                             setImageIndexWell(getImageIndexWell() - 1);
-                        } else {
+                        }
+                        else
+                        {
                             timerWellAnim.stop();
                             getBucket().setClickable(true);
                         }
                     }
-                } else if (getImageIndexWell() < 5) {
+                }
+                else if (getImageIndexWell() < 5)
+                {
                     setImageIndexWell(getImageIndexWell() + 1);
-                } else {
+                }
+                else
+                {
                     setImageIndexWell(getImageIndexWell() - 1);
                     getBucket().setImage(getGameScreen().getSprites().get(spriteBucket));
                 }
@@ -186,11 +219,15 @@ public class Level5 extends UNLevel
             }
         });
 
-        timerWellCheck = new Timer(1, new ActionListener() {
+        timerWellCheck = new Timer(1, new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (getBucket().getHitbox().intersects(getWell().getHitbox())) {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1) && !timerWellAnim.isRunning() && !getBucket().getMouseHold()) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (getBucket().getHitbox().intersects(getWell().getHitbox()))
+                {
+                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1) && !timerWellAnim.isRunning() && !getBucket().getMouseHold())
+                    {
                         getBucket().setX(100);
                         getBucket().setY(340);
                         getBucket().setMouseHold(false);
@@ -198,25 +235,32 @@ public class Level5 extends UNLevel
                         timerWellAnim.start();
                     }
                 }
-                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket) && !getBucket().getMouseHold()) {
-                    if (getBucket().getHitbox().intersects(getCamel1().getHitbox())) {
-                        if (getImageIndex1() < 4) {
+                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket) && !getBucket().getMouseHold())
+                {
+                    if (getBucket().getHitbox().intersects(getCamel1().getHitbox()))
+                    {
+                        if (getImageIndex1() < 4)
+                        {
                             setImageIndex1(getImageIndex1() + 1);
                             getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex1() + 1));
                             getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
                             getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                         }
                     }
-                    if (getBucket().getHitbox().intersects(getCamel2().getHitbox())) {
-                        if (getImageIndex2() < 4) {
+                    if (getBucket().getHitbox().intersects(getCamel2().getHitbox()))
+                    {
+                        if (getImageIndex2() < 4)
+                        {
                             setImageIndex2(getImageIndex2() + 1);
                             getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex2() + 1));
                             getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
                             getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
                         }
                     }
-                    if (getBucket().getHitbox().intersects(getCamel3().getHitbox())) {
-                        if (getImageIndex3() < 4) {
+                    if (getBucket().getHitbox().intersects(getCamel3().getHitbox()))
+                    {
+                        if (getImageIndex3() < 4)
+                        {
                             setImageIndex3(getImageIndex3() + 1);
                             getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex3() + 1));
                             getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
@@ -224,30 +268,39 @@ public class Level5 extends UNLevel
                         }
                     }
                 }
-                if (getCamel1().isMouseClick()) {
+                if (getCamel1().isMouseClick())
+                {
                     getCamel1().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel1().getHitbox())) {
-                        if (getImageIndex1() > 0) {
+                    if (!getBucket().getHitbox().intersects(getCamel1().getHitbox()))
+                    {
+                        if (getImageIndex1() > 0)
+                        {
                             setImageIndex1(getImageIndex1() - 1);
                             getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex1() + 1));
                             getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                         }
                     }
                 }
-                if (getCamel2().isMouseClick()) {
+                if (getCamel2().isMouseClick())
+                {
                     getCamel2().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel2().getHitbox())) {
-                        if (getImageIndex2() > 0) {
+                    if (!getBucket().getHitbox().intersects(getCamel2().getHitbox()))
+                    {
+                        if (getImageIndex2() > 0)
+                        {
                             setImageIndex2(getImageIndex2() - 1);
                             getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex2() + 1));
                             getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
                         }
                     }
                 }
-                if (getCamel3().isMouseClick()) {
+                if (getCamel3().isMouseClick())
+                {
                     getCamel3().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel3().getHitbox())) {
-                        if (getImageIndex3() > 0) {
+                    if (!getBucket().getHitbox().intersects(getCamel3().getHitbox()))
+                    {
+                        if (getImageIndex3() > 0)
+                        {
                             setImageIndex3(getImageIndex3() - 1);
                             getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex3() + 1));
                             getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
@@ -258,13 +311,19 @@ public class Level5 extends UNLevel
         });
         timerWellCheck.start();
 
-        timerBird = new Timer(100, new ActionListener() {
+        timerBird = new Timer(100, new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                for (UNGraphicsObject bird : getBirds()) {
-                    if (getGameScreen().getSprites().indexOf(bird.getImage()) - spriteBird < 2) {
+            public void actionPerformed(ActionEvent e)
+            {
+                for (UNGraphicsObject bird : getBirds())
+                {
+                    if (getGameScreen().getSprites().indexOf(bird.getImage()) - spriteBird < 2)
+                    {
                         bird.setImage(getGameScreen().getSprites().get(getGameScreen().getSprites().indexOf(bird.getImage()) + 1));
-                    } else {
+                    }
+                    else
+                    {
                         bird.setImage(getGameScreen().getSprites().get(spriteBird));
                     }
                 }
@@ -273,131 +332,163 @@ public class Level5 extends UNLevel
         timerBird.start();
     }
 
-    public UNGraphicsObject getCamel1() {
+    public UNGraphicsObject getCamel1()
+    {
         return this.camel1;
     }
 
-    public void setCamel1(UNGraphicsObject camel1) {
+    public void setCamel1(UNGraphicsObject camel1)
+    {
         this.camel1 = camel1;
     }
 
-    public UNGraphicsObject getCamel2() {
+    public UNGraphicsObject getCamel2()
+    {
         return this.camel2;
     }
 
-    public void setCamel2(UNGraphicsObject camel2) {
+    public void setCamel2(UNGraphicsObject camel2)
+    {
         this.camel2 = camel2;
     }
 
-    public UNGraphicsObject getCamel3() {
+    public UNGraphicsObject getCamel3()
+    {
         return this.camel3;
     }
 
-    public void setCamel3(UNGraphicsObject camel3) {
+    public void setCamel3(UNGraphicsObject camel3)
+    {
         this.camel3 = camel3;
     }
 
-    public UNGraphicsObject getBucket() {
+    public UNGraphicsObject getBucket()
+    {
         return this.bucket;
     }
 
-    public void setBucket(UNGraphicsObject bucket) {
+    public void setBucket(UNGraphicsObject bucket)
+    {
         this.bucket = bucket;
     }
 
-    public UNGraphicsObject getWell() {
+    public UNGraphicsObject getWell()
+    {
         return this.well;
     }
 
-    public void setWell(UNGraphicsObject well) {
+    public void setWell(UNGraphicsObject well)
+    {
         this.well = well;
     }
 
-    public JLabel getLiter1() {
+    public JLabel getLiter1()
+    {
         return this.liter1;
     }
 
-    public void setLiter1(JLabel liter1) {
+    public void setLiter1(JLabel liter1)
+    {
         this.liter1 = liter1;
     }
 
-    public JLabel getLiter2() {
+    public JLabel getLiter2()
+    {
         return this.liter2;
     }
 
-    public void setLiter2(JLabel liter2) {
+    public void setLiter2(JLabel liter2)
+    {
         this.liter2 = liter2;
     }
 
-    public JLabel getLiter3() {
+    public JLabel getLiter3()
+    {
         return this.liter3;
     }
 
-    public void setLiter3(JLabel liter3) {
+    public void setLiter3(JLabel liter3)
+    {
         this.liter3 = liter3;
     }
 
-    public boolean isWinning() {
+    public boolean isWinning()
+    {
         return this.winning;
     }
 
-    public void setWinning(boolean winning) {
+    public void setWinning(boolean winning)
+    {
         this.winning = winning;
     }
 
-    public int getNeed() {
+    public int getNeed()
+    {
         return this.need;
     }
 
-    public void setNeed(int need) {
+    public void setNeed(int need)
+    {
         this.need = need;
     }
 
-    public int getImageIndex1() {
+    public int getImageIndex1()
+    {
         return this.imageIndex1;
     }
 
-    public void setImageIndex1(int imageIndex1) {
+    public void setImageIndex1(int imageIndex1)
+    {
         this.imageIndex1 = imageIndex1;
     }
 
-    public int getImageIndex2() {
+    public int getImageIndex2()
+    {
         return this.imageIndex2;
     }
 
-    public void setImageIndex2(int imageIndex2) {
+    public void setImageIndex2(int imageIndex2)
+    {
         this.imageIndex2 = imageIndex2;
     }
 
-    public int getImageIndex3() {
+    public int getImageIndex3()
+    {
         return this.imageIndex3;
     }
 
-    public void setImageIndex3(int imageIndex3) {
+    public void setImageIndex3(int imageIndex3)
+    {
         this.imageIndex3 = imageIndex3;
     }
 
-    public int getImageIndexWell() {
+    public int getImageIndexWell()
+    {
         return this.imageIndexWell;
     }
 
-    public void setImageIndexWell(int imageIndexWell) {
+    public void setImageIndexWell(int imageIndexWell)
+    {
         this.imageIndexWell = imageIndexWell;
     }
 
-    public String getLastHelp() {
+    public String getLastHelp()
+    {
         return this.lastHelp;
     }
 
-    public void setLastHelp(String lastHelp) {
+    public void setLastHelp(String lastHelp)
+    {
         this.lastHelp = lastHelp;
     }
 
-    public ArrayList<UNGraphicsObject> getBirds() {
+    public ArrayList<UNGraphicsObject> getBirds()
+    {
         return this.birds;
     }
 
-    public void setBirds(ArrayList<UNGraphicsObject> birds) {
+    public void setBirds(ArrayList<UNGraphicsObject> birds)
+    {
         this.birds = birds;
     }
 }
