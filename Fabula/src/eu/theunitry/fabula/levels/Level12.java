@@ -36,7 +36,7 @@ public class Level12 extends UNLevel
 
         this.need = 3 + new Random().nextInt(5);
 
-        this.setQuestion("Stop de aapjes in de kooi met een totaal gewicht van " + need + " kilogram");
+        this.setQuestion("Stop de aapjes in de kooi met een gewicht van " + need + " kilogram");
         this.addHelp("Jammer! Je moet een totaal gewicht van " + need + " kilogram hebben");
         this.addHelp("Helaas! Er moet een gewicht van " + need + " kilogram in de kooi zitten");
         this.setHelp("Sleep de aapjes in de kooi");
@@ -50,18 +50,18 @@ public class Level12 extends UNLevel
 
         this.color = new UNColor();
 
-        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(64), false, 96, 96);
+        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 50, 275, gameScreen.getSprites().get(64), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
-            monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
+            monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
+                    new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.getSprites()
                     .get(63), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
-            monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
+            monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
+                    new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.getSprites()
                     .get(62), true, 32, 32)
             );
         }
