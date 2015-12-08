@@ -11,14 +11,21 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 public class UNLevelLoader
 {
     private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
+    private UNGameScreen gameScreen;
 
     public UNLevelLoader(UNGameScreen gameScreen)
     {
-        gameScreen.resetProgress();
+        this.gameScreen = gameScreen;
+        this.gameScreen.resetProgress();
 
-        gameScreen.switchMusic(1, true);
-        gameScreen.getMusic().get(1).setVolume(0.1);
+        this.gameScreen.switchMusic(1, true);
+        this.gameScreen.getMusic().get(1).setVolume(0.1);
 
+        this.loadLevel(this.currentLevel);
+    }
+
+    private void loadLevel(int level)
+    {
         switch (this.currentLevel)
         {
             case 1:
@@ -72,6 +79,5 @@ public class UNLevelLoader
             default:
                 break;
         }
-
     }
 }
