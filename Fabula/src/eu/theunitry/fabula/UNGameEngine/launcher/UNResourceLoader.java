@@ -101,10 +101,11 @@ public class UNResourceLoader
 
     private void loadFonts()
     {
+        final String MINECRAFTIA = "res/fonts/Minecraftia.ttf";
         try
         {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File("res/fonts/Minecraftia.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(MINECRAFTIA)));
         }
         catch (IOException|FontFormatException e)
         {
@@ -115,7 +116,7 @@ public class UNResourceLoader
     private void loadMusic()
     {
         music.put("intro", TinySound.loadMusic("audio/intro.wav"));
-        music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo!!!
+        music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo! When I feel heavy-metal!
         music.put("avalange", TinySound.loadMusic("audio/avalange.wav"));
     }
 
@@ -123,11 +124,6 @@ public class UNResourceLoader
     {
         sounds.put("gibberish", TinySound.loadSound("audio/gibberish.wav"));
     }
-//
-//    private void loadSoundEffects()
-//    {
-//        sounds.add(0, TinySound.loadSound("audio/gibberish.wav"));
-//    }
 
     public Image getSprite(String folder, String file)
     {
@@ -143,12 +139,12 @@ public class UNResourceLoader
             }
         }
     }
-    public Image getSprite(String file)
+    private Image getSprite(String file)
     {
         return this.getSprite("", file);
     }
-//
-    public static Image getBackground(String file)
+
+    private static Image getBackground(String file)
     {
         try {
             return ImageIO.read(new File("res/backgrounds/" + file + ".png"));
@@ -159,15 +155,4 @@ public class UNResourceLoader
             return null;
         }
     }
-//
-//    public Map<String, Image> tuiltje;
-//
-//    private void loadSprites()
-//    {
-//        tuiltje = new HashMap<String, Image>();
-//
-//        for(int i = 0; i <= 9; i++) tuiltje.put("happy_" + String.valueOf(i), this.getSprite("tuiltje/happy/" + String.valueOf(i)));
-//    }
-
-
 }

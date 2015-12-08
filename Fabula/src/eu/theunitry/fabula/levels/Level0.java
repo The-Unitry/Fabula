@@ -3,10 +3,9 @@ package eu.theunitry.fabula.levels;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
-import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 0
+ * Maarten Bode
+ */
 public class Level0 extends UNGraphicsLevel
 {
     private Timer timer;
@@ -25,10 +28,9 @@ public class Level0 extends UNGraphicsLevel
     private int need, touch;
     private UNColor color;
     private String lastHelp;
-    private UNResourceLoader resourceLoader;
 
     /**
-     * Level 0
+     * Level 1
      * @param gameScreen
      * @param hudEnabled
      */
@@ -36,34 +38,31 @@ public class Level0 extends UNGraphicsLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.resourceLoader = gameScreen.unResourceLoader;
-
         this.need = 3 + new Random().nextInt(3);
 
         this.setQuestion("Vertrek met " + need + " appels in de mand");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(UNResourceLoader.getBackground("underwater"));
-
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest"));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.apples = new ArrayList<>();
+        this.apples = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, resourceLoader.getSprite("basket"), false, 96, 96);
+        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.unResourceLoader.sprites.get("2:1:2"), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), resourceLoader.getSprite("apple"), true, 32, 32)
+                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32)
             );
         }
 
-        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, resourceLoader.getSprite("apple"), true, 32, 32));
+        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, resourceLoader.getSprite("apple"), true, 32, 32));
+            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
         }
 
         this.addObject(basket);
@@ -90,7 +89,7 @@ public class Level0 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
-                    gameScreen.getSounds().get("gibberish").stop();
+                    gameScreen.getSounds().get(0).stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                         if (winning) {
                             gameScreen.addLevel();
@@ -144,17 +143,14 @@ public class Level0 extends UNGraphicsLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject apple : apples) {
-                    if (basket.getHitbox().intersects(apple.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject apple : apples) {
+                if (basket.getHitbox().intersects(apple.getHitbox())) {
+                    touch++;
                 }
-                winning = (touch == need);
             }
+            winning = (touch == need);
         });
 
         timer.start();
