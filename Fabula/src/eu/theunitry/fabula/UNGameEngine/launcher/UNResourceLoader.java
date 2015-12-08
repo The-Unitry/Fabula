@@ -23,10 +23,10 @@ public class UNResourceLoader
 
     public UNResourceLoader()
     {
-        music = new ArrayList<Music>();
-        sounds = new ArrayList<Sound>();
-        sprites = new ArrayList<Image>();
-        backgrounds = new ArrayList<Image>();
+        music = new ArrayList<>();
+        sounds = new ArrayList<>();
+        sprites = new ArrayList<>();
+        backgrounds = new ArrayList<>();
 
         this.loadResources();
     }
