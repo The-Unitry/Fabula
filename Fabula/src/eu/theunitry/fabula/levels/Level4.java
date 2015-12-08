@@ -161,7 +161,6 @@ public class Level4 extends UNLevel
                             },
                             500
                     );
-
                 }
                 if (machineIndex < 3)
                 {

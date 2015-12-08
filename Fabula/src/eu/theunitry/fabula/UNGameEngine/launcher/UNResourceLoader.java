@@ -207,6 +207,62 @@ public class UNResourceLoader
             sprites.add(62, ImageIO.read(new File(prefix_sprites + "aap_bruin.png")));
             sprites.add(63, ImageIO.read(new File(prefix_sprites + "aap_wit.png")));
             sprites.add(64, ImageIO.read(new File(prefix_sprites + "kooi.png")));
+
+            sprites.add(62, ImageIO.read(new File("res/sprites/Level4/Cable_1.png")));
+            sprites.add(63, ImageIO.read(new File("res/sprites/Level4/Cable_2.png")));
+            sprites.add(64, ImageIO.read(new File("res/sprites/Level4/Cable_3.png")));
+            sprites.add(65, ImageIO.read(new File("res/sprites/Level4/Cable_4.png")));
+            sprites.add(66, ImageIO.read(new File("res/sprites/Level4/Cable_5.png")));
+            sprites.add(67, ImageIO.read(new File("res/sprites/Level4/Cable_6.png")));
+
+            /**
+             * Level 4
+             */
+            sprites.add(68, ImageIO.read(new File("res/sprites/Level4/machine_1_0.png")));
+            sprites.add(69, ImageIO.read(new File("res/sprites/Level4/machine_2_0.png")));
+            sprites.add(70, ImageIO.read(new File("res/sprites/Level4/machine_3_0.png")));
+            sprites.add(71, ImageIO.read(new File("res/sprites/Level4/machine_4_0.png")));
+            sprites.add(72, ImageIO.read(new File("res/sprites/Level4/machine_1_1.png")));
+            sprites.add(73, ImageIO.read(new File("res/sprites/Level4/machine_2_1.png")));
+            sprites.add(74, ImageIO.read(new File("res/sprites/Level4/machine_3_1.png")));
+            sprites.add(75, ImageIO.read(new File("res/sprites/Level4/machine_4_1.png")));
+            sprites.add(76, ImageIO.read(new File("res/sprites/Level4/machine_1_2.png")));
+            sprites.add(77, ImageIO.read(new File("res/sprites/Level4/machine_2_2.png")));
+            sprites.add(78, ImageIO.read(new File("res/sprites/Level4/machine_3_2.png")));
+            sprites.add(79, ImageIO.read(new File("res/sprites/Level4/machine_4_2.png")));
+            sprites.add(80, ImageIO.read(new File("res/sprites/Level4/machine_1_3.png")));
+            sprites.add(81, ImageIO.read(new File("res/sprites/Level4/machine_2_3.png")));
+            sprites.add(82, ImageIO.read(new File("res/sprites/Level4/machine_3_3.png")));
+            sprites.add(83, ImageIO.read(new File("res/sprites/Level4/machine_4_3.png")));
+            sprites.add(84, ImageIO.read(new File("res/sprites/Level4/machine_1_4.png")));
+            sprites.add(85, ImageIO.read(new File("res/sprites/Level4/machine_2_4.png")));
+            sprites.add(86, ImageIO.read(new File("res/sprites/Level4/machine_3_4.png")));
+            sprites.add(87, ImageIO.read(new File("res/sprites/Level4/machine_4_4.png")));
+            sprites.add(88, ImageIO.read(new File("res/sprites/Level4/machine_1_5.png")));
+            sprites.add(89, ImageIO.read(new File("res/sprites/Level4/machine_2_5.png")));
+            sprites.add(90, ImageIO.read(new File("res/sprites/Level4/machine_3_5.png")));
+            sprites.add(91, ImageIO.read(new File("res/sprites/Level4/machine_4_5.png")));
+
+            sprites.add(92, ImageIO.read(new File("res/sprites/Level4/Support_0_1.png")));
+            sprites.add(93, ImageIO.read(new File("res/sprites/Level4/Support_0_2.png")));
+            sprites.add(94, ImageIO.read(new File("res/sprites/Level4/Support_0_3.png")));
+            sprites.add(95, ImageIO.read(new File("res/sprites/Level4/Support_0_4.png")));
+            sprites.add(96, ImageIO.read(new File("res/sprites/Level4/Support_0_5.png")));
+            sprites.add(97, ImageIO.read(new File("res/sprites/Level4/Support_0_6.png")));
+            sprites.add(98, ImageIO.read(new File("res/sprites/Level4/Support_0_7.png")));
+            sprites.add(99, ImageIO.read(new File("res/sprites/Level4/Support_1_1.png")));
+            sprites.add(100, ImageIO.read(new File("res/sprites/Level4/Support_1_2.png")));
+            sprites.add(101, ImageIO.read(new File("res/sprites/Level4/Support_1_3.png")));
+            sprites.add(102, ImageIO.read(new File("res/sprites/Level4/Support_1_4.png")));
+            sprites.add(103, ImageIO.read(new File("res/sprites/Level4/Support_1_5.png")));
+            sprites.add(104, ImageIO.read(new File("res/sprites/Level4/Support_1_6.png")));
+            sprites.add(105, ImageIO.read(new File("res/sprites/Level4/Support_1_7.png")));
+
+            sprites.add(106, ImageIO.read(new File("res/sprites/Level4/Rocket_0.png")));
+            sprites.add(107, ImageIO.read(new File("res/sprites/Level4/Rocket_1.png")));
+            sprites.add(108, ImageIO.read(new File("res/sprites/Level4/Rocket_2.png")));
+            sprites.add(109, ImageIO.read(new File("res/sprites/Level4/Rocket_3.png")));
+            sprites.add(110, ImageIO.read(new File("res/sprites/Level4/Rocket_4.png")));
         }
         catch (IOException e)
         {
