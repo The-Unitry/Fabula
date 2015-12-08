@@ -40,45 +40,30 @@ public class UNGraphicsView extends JPanel
         hud = new ArrayList<UNGraphicsObject>();
         if (hudEnabled)
         {
-            timer = new Timer(1, new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
+            timer = new Timer(1, e -> getPanel().repaint());
+            timerText = new Timer(100, e -> {
+                if (helpDraw.length() < getHelp().length())
                 {
-                    getPanel().repaint();
+                    helpDraw += getHelp().charAt(helpDraw.length());
+                    helperDoneTalking = false;
                 }
-            });
-            timerText = new Timer(100, new ActionListener()
-            {
-                @Override
-                public void actionPerformed(ActionEvent e)
+                else
                 {
-                    if (helpDraw.length() < getHelp().length())
+                    if (!helperDoneTalking)
                     {
-                        helpDraw += getHelp().charAt(helpDraw.length());
-                        helperDoneTalking = false;
-                    }
-                    else
-                    {
-                        if (!helperDoneTalking)
-                        {
-                            helperDoneTalking = true;
-                            getGameScreen().getSounds().get("gibberish").stop();
-                        }
+                        helperDoneTalking = true;
+                        getGameScreen().getSounds().get("gibberish").stop();
                     }
                 }
             });
-            timerQuestion = new Timer(50, new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (questionDraw.length() < getQuestion().length())
-                    {
-                        questionDraw += getQuestion().charAt(questionDraw.length());
-                    }
-                    else
-                    {
-                        getHelper().setQuestioningDone(true);
-                    }
+            timerQuestion = new Timer(50, e -> {
+                if (questionDraw.length() < getQuestion().length())
+                {
+                    questionDraw += getQuestion().charAt(questionDraw.length());
+                }
+                else
+                {
+                    getHelper().setQuestioningDone(true);
                 }
             });
             timer.start();
@@ -131,7 +116,6 @@ public class UNGraphicsView extends JPanel
             at.translate(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2);
             at.rotate(Math.toRadians(object.getAngle()));
             at.scale((double) 1 / image.getWidth() * object.getWidth(), (double) 1 / image.getHeight() * object.getHeight());
-            //at.translate(-image.getWidth() / 2, -image.getHeight() / 2);
             at.translate(-object.getXOffset(), -object.getYOffset());
 
             g2d.drawImage(image, at, null);
