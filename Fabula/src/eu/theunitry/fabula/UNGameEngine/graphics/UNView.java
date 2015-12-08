@@ -31,7 +31,7 @@ public class UNView extends JPanel
      */
     public UNView(UNGameScreen gameScreen, boolean hudEnabled)
     {
-        this.gameScreen = gameScreen;
+        this.setGameScreen(gameScreen);
         this.hudEnabled = hudEnabled;
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
@@ -60,7 +60,7 @@ public class UNView extends JPanel
                         if (!helperDoneTalking)
                         {
                             helperDoneTalking = true;
-                            gameScreen.getSounds().get(0).stop();
+                            getGameScreen().getSounds().get(0).stop();
                         }
                     }
                 }
@@ -139,7 +139,7 @@ public class UNView extends JPanel
     {
         if (hudEnabled)
         {
-            g.setColor(new Color(51, 51, 51, 230));
+            g.setColor(UNColor.HUD_COLOR);
             g.fillRect(0, 0, 768, 64);
             if (!getHelp().isEmpty())
             {
@@ -149,7 +149,7 @@ public class UNView extends JPanel
             g.setColor(Color.white);
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
-            g.drawString("Level " + gameScreen.getLevel() + "/" + gameScreen.getLevelMax(), 11, 38);
+            g.drawString("Level " + this.getGameScreen().getLevel() + "/" + this.getGameScreen().getLevelMax(), 11, 38);
 
             if (!getHelp().isEmpty())
             {
@@ -215,6 +215,14 @@ public class UNView extends JPanel
     public boolean isHelperDoneTalking()
     {
         return helperDoneTalking;
+    }
+
+    public UNGameScreen getGameScreen() {
+        return this.gameScreen;
+    }
+
+    public void setGameScreen(UNGameScreen gameScreen) {
+        this.gameScreen = gameScreen;
     }
 
     public class MouseHandler implements MouseListener, MouseMotionListener
