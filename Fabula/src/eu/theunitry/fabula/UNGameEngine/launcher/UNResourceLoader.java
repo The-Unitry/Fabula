@@ -96,9 +96,8 @@ public class UNResourceLoader
         }
     }
 
-
-
     private void loadSprites()
     {
+
     }
 }

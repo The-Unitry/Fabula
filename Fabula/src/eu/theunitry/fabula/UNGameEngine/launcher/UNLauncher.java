@@ -21,7 +21,6 @@ public class UNLauncher extends JPanel
 
     public UNLauncher(UNGameScreen gameScreen)
     {
-        UNGameScreen gameScreen1 = gameScreen;
         this.label = new JLabel("Fabula");
         this.startBtn = new JButton("Start");
 
@@ -30,6 +29,7 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
+                System.out.println(((JButton) e.getSource()).getText());
                 levelLoader = new UNLevelLoader(gameScreen);
             }
         });
@@ -73,5 +73,4 @@ public class UNLauncher extends JPanel
         this.startBtn.setFocusPainted(false);
         this.startBtn.setBorderPainted(false);
     }
-
 }
