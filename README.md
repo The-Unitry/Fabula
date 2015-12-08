@@ -2,7 +2,7 @@
 A fun way for kids to learn how to calculate.
 
 #### Current version
-1.0 (pre-release)
+1.0
 
 ## How to run
 This game is still in development and it is only possible to run this game using the IntelliJ IDE. We will add support for other platforms later.
