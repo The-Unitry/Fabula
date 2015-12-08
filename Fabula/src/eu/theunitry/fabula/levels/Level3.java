@@ -75,6 +75,7 @@ public class Level3 extends UNLevel
             stars.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), 0, gameScreen.getSprites().get(50), false, 7, 7));
         }
 
+
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 246, 330, gameScreen.getSprites().get(47), false, 96, 96));
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 276, 226, gameScreen.getSprites().get(48), false, 96, 96));
         ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() - gameScreen.getWindow().getContentWidth() / 3 - 306, 330, gameScreen.getSprites().get(49), false, 96, 96));
@@ -85,9 +86,23 @@ public class Level3 extends UNLevel
         this.answer = this.g1 + this.g2 + this.g3;
         this.fakeAnswer1 = this.answer + new Random().nextInt(4) + 1;
         this.fakeAnswer2 = this.answer - new Random().nextInt(4) - 1;
-        this.answers.add(new JLabel(Integer.toString(answer)));
-        this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
-        this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+
+        int randInt = new Random().nextInt(2) + 1;
+        if (randInt == 1){
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+        }
+        else if (randInt == 2){
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+        }
+        else if (randInt == 3){
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
+        }
 
         this.setQuestion("Wat is " + this.g1 + " plus " + this.g2  + " plus " + this.g3 + " ?");
         this.addHelp("Jammer! Probeer het nog eens");
@@ -142,17 +157,23 @@ public class Level3 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Doorgaan") {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (button.getText() == "Doorgaan")
+                {
                     gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
+                    if (gameScreen.getLevel() < gameScreen.getLevelMax())
+                    {
+                        if (winning)
+                        {
                             gameScreen.addLevel();
                         }
                         gameScreen.switchPanel(new Level3(gameScreen, true));
-                    } else {
+                    } else
+                    {
                         gameScreen.switchPanel(new UNLauncher(gameScreen));
                     }
                 }
