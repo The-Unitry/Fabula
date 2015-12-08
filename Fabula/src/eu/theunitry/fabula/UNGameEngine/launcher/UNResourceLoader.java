@@ -18,7 +18,8 @@ public class UNResourceLoader
 {
     public ArrayList<Music> music;
     public ArrayList<Sound> sounds;
-    public ArrayList<Image> sprites, backgrounds;
+    public ArrayList<Image> sprites;
+    private ArrayList<Image> backgrounds;
 
     public UNResourceLoader()
     {
@@ -27,9 +28,14 @@ public class UNResourceLoader
         sprites = new ArrayList<Image>();
         backgrounds = new ArrayList<Image>();
 
+        this.loadResources();
+    }
+
+    private void loadResources()
+    {
         this.loadFonts();
-        this.loadMusic();
         this.loadSoundEffects();
+        this.loadMusic();
         this.loadSprites();
     }
 
@@ -175,9 +181,9 @@ public class UNResourceLoader
             /**
              * Level 12
              */
+            sprites.add(64, ImageIO.read(new File("res/sprites/kooi.png")));
             sprites.add(62, ImageIO.read(new File("res/sprites/aap_bruin.png")));
             sprites.add(63, ImageIO.read(new File("res/sprites/aap_wit.png")));
-            sprites.add(64, ImageIO.read(new File("res/sprites/kooi.png")));
 
         }
         catch (IOException e)
