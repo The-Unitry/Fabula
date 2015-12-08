@@ -16,25 +16,26 @@ import java.awt.event.ActionEvent;
 public class UNLauncher extends JPanel
 {
     private JLabel label;
-    private JButton startBtn;
+    //private JButton startBtn;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
         UNGameScreen gameScreen1 = gameScreen;
         this.label = new JLabel("Fabula");
-        this.startBtn = new JButton("Start");
+        UNMenuButton btn = new UNMenuButton("Hello world");
+
 
         this.setStyling();
-        startBtn.addActionListener(new UNButtonListener(){
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                new UNLevelLoader(gameScreen);
-            }
-        });
+//        startBtn.addActionListener(new UNButtonListener(){
+//            @Override
+//            public void actionPerformed(ActionEvent e)
+//            {
+//                new UNLevelLoader(gameScreen);
+//            }
+//        });
 
         this.add(label, BorderLayout.CENTER);
-        this.add(startBtn, BorderLayout.SOUTH);
+        this.add(btn, BorderLayout.SOUTH);
     }
 
     public JPanel getPanel() {
@@ -56,21 +57,6 @@ public class UNLauncher extends JPanel
         this.label.setForeground(Color.white);
         this.label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
         this.label.setHorizontalAlignment(JLabel.CENTER);
-
-        /**
-         * Button Styling
-         */
-        this.startBtn.setPreferredSize(new Dimension(200,100));
-        this.startBtn.setBackground(Color.white);
-        this.startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
-        this.startBtn.setForeground(UNColor.PRIMARY_COLOR);
-        this.startBtn.setOpaque(true);
-
-        /**
-         * Default Styling Reset
-         */
-        this.startBtn.setFocusPainted(false);
-        this.startBtn.setBorderPainted(false);
     }
 
 }
