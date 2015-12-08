@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level13 extends UNLevel
+public class Level10 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject plank;
@@ -30,7 +30,7 @@ public class Level13 extends UNLevel
      * @param gameScreen
      * @param hudEnabled
      */
-    public Level13(UNGameScreen gameScreen, boolean hudEnabled)
+    public Level10(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
 
