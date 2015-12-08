@@ -1,5 +1,6 @@
 package eu.theunitry.fabula.UNGameEngine.graphics;
 
+import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 import eu.theunitry.fabula.helper.Helper;
 
 import javax.swing.*;
@@ -23,6 +24,7 @@ public class UNView extends JPanel
     private String question, questionDraw, help, helpDraw;
     private Helper helper;
     private Timer timer, timerText, timerQuestion;
+    private UNResourceLoader resourceLoader;
 
     /**
      * UNView
@@ -33,6 +35,7 @@ public class UNView extends JPanel
     {
         this.setGameScreen(gameScreen);
         this.hudEnabled = hudEnabled;
+        this.resourceLoader = new UNResourceLoader();
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
         if (hudEnabled)
@@ -94,7 +97,7 @@ public class UNView extends JPanel
         if (hudEnabled)
         {
             helper = new Helper(gameScreen);
-            helper.setImage(gameScreen.getSprites().get(0));
+            helper.setImage(resourceLoader.getSprite("tuiltje/idle", "0"));
         }
     }
 

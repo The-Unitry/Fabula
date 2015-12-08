@@ -3,6 +3,7 @@ package eu.theunitry.fabula.UNGameEngine.graphics;
 import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * UNWindow is our variant of JFrame, which it is based upon.
@@ -24,29 +25,33 @@ public class UNWindow extends UNObject
     {
         this.TITLE = title;
 
-
-
         this.WIDTH = width;
         this.HEIGHT = height;
         this.frame = new JFrame();
         this.init();
         this.frame.setVisible(true);
+        System.out.println(this.frame.getContentPane().getHeight());
     }
 
-    public void init()
+    private void init()
     {
         ImageIcon img = new ImageIcon("res/icons/icon.png");
         this.frame.setTitle(this.TITLE);
-        this.frame.setSize(this.WIDTH, this.HEIGHT);
+        //this.frame.setSize(this.WIDTH, this.HEIGHT);
+        this.frame.getContentPane().setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
-        this.frame.setUndecorated(true);
         this.frame.setIconImage(img.getImage());
+
+
     }
 
     public void addPanel(JPanel panel)
     {
+        panel.setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
+        this.frame.pack();
+        this.frame.setLocationRelativeTo(null);
         this.frame.add(panel);
     }
 

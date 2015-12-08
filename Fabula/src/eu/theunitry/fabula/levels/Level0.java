@@ -6,6 +6,7 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,7 @@ public class Level0 extends UNLevel
     private int need, touch;
     private UNColor color;
     private String lastHelp;
+    private UNResourceLoader resourceLoader;
 
     /**
      * Level 0
@@ -34,13 +36,16 @@ public class Level0 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
+        this.resourceLoader = new UNResourceLoader();
+
         this.need = 3 + new Random().nextInt(3);
 
         this.setQuestion("Vertrek met " + need + " appels in de mand");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(UNResourceLoader.getBackground("underwater"));
+
 
         this.winning = false;
         this.lastHelp = getHelp();
@@ -48,18 +53,17 @@ public class Level0 extends UNLevel
         this.apples = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
+        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, resourceLoader.getSprite("basket"), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(38), true, 32, 32)
+                    new Random().nextInt(300), 100 + new Random().nextInt(200), resourceLoader.getSprite("apple"), true, 32, 32)
             );
         }
 
-        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, resourceLoader.getSprite("apple"), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, resourceLoader.getSprite("apple"), true, 32, 32));
         }
 
         this.addObject(basket);

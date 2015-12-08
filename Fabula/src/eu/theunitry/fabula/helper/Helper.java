@@ -1,6 +1,7 @@
 package eu.theunitry.fabula.helper;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 import eu.theunitry.fabula.UNGameEngine.objects.UNTimer;
 
 import java.awt.*;
@@ -22,9 +23,9 @@ public class Helper
     private int imageIndex;
     private Image image;
     private int state;
+    private UNResourceLoader resourceLoader;
 
-    public Helper(UNGameScreen gameScreen)
-    {
+    public Helper(UNGameScreen gameScreen) {
         this.gameScreen = gameScreen;
         this.animIdle = new ArrayList<Image>();
         this.animFlapping = new ArrayList<Image>();
@@ -34,65 +35,38 @@ public class Helper
         this.imageIndex = 0;
         this.state = 2;
         this.questioningDone = false;
+        this.resourceLoader = new UNResourceLoader();
 
 
-        /**
-         * Idle
-         */
-        animIdle.add(0, gameScreen.getSprites().get(0));
-        animIdle.add(1, gameScreen.getSprites().get(1));
-        animIdle.add(2, gameScreen.getSprites().get(2));
-        animIdle.add(3, gameScreen.getSprites().get(3));
-        animIdle.add(4, gameScreen.getSprites().get(4));
-        animIdle.add(5, gameScreen.getSprites().get(5));
+        // Idle
+        for (int i = 0; i <= 5; i++)
+        {
+            animIdle.add(resourceLoader.getSprite("tuiltje/idle", String.valueOf(i)));
+        }
 
-        /**
-         * Flapping
-         */
-        animFlapping.add(0, gameScreen.getSprites().get(6));
-        animFlapping.add(1, gameScreen.getSprites().get(7));
-        animFlapping.add(2, gameScreen.getSprites().get(8));
-        animFlapping.add(3, gameScreen.getSprites().get(9));
-        animFlapping.add(4, gameScreen.getSprites().get(10));
-        animFlapping.add(5, gameScreen.getSprites().get(11));
+        // Flapping
+        for (int i = 0; i <= 5; i++)
+        {
+            animFlapping.add(resourceLoader.getSprite("tuiltje/flapping", String.valueOf(i)));
+        }
 
-        /**
-         * Sad
-         */
-        animSad.add(0, gameScreen.getSprites().get(12));
-        animSad.add(1, gameScreen.getSprites().get(13));
-        animSad.add(2, gameScreen.getSprites().get(14));
-        animSad.add(3, gameScreen.getSprites().get(15));
-        animSad.add(4, gameScreen.getSprites().get(16));
-        animSad.add(5, gameScreen.getSprites().get(17));
+        // Sad
+        for (int i = 0; i <= 5; i++)
+        {
+            animSad.add(resourceLoader.getSprite("tuiltje/sad", String.valueOf(i)));
+        }
 
-        /**
-         * Happy
-         */
-        animHappy.add(0, gameScreen.getSprites().get(18));
-        animHappy.add(1, gameScreen.getSprites().get(19));
-        animHappy.add(2, gameScreen.getSprites().get(20));
-        animHappy.add(3, gameScreen.getSprites().get(21));
-        animHappy.add(4, gameScreen.getSprites().get(22));
-        animHappy.add(5, gameScreen.getSprites().get(23));
-        animHappy.add(6, gameScreen.getSprites().get(24));
-        animHappy.add(7, gameScreen.getSprites().get(25));
-        animHappy.add(8, gameScreen.getSprites().get(26));
-        animHappy.add(9, gameScreen.getSprites().get(27));
+        // Happy
+        for (int i = 0; i <= 5; i++)
+        {
+            animHappy.add(0, resourceLoader.getSprite("tuiltje/happy", String.valueOf(i)));
+        }
 
-        /**
-         * Questioning
-         */
-        animQuestioning.add(0, gameScreen.getSprites().get(28));
-        animQuestioning.add(1, gameScreen.getSprites().get(29));
-        animQuestioning.add(2, gameScreen.getSprites().get(30));
-        animQuestioning.add(3, gameScreen.getSprites().get(31));
-        animQuestioning.add(4, gameScreen.getSprites().get(32));
-        animQuestioning.add(5, gameScreen.getSprites().get(33));
-        animQuestioning.add(6, gameScreen.getSprites().get(34));
-        animQuestioning.add(7, gameScreen.getSprites().get(35));
-        animQuestioning.add(8, gameScreen.getSprites().get(36));
-        animQuestioning.add(9, gameScreen.getSprites().get(37));
+        // Questioning
+        for (int i = 0; i <= 9; i++)
+        {
+            animQuestioning.add(0, resourceLoader.getSprite("tuiltje/questioning", String.valueOf(i)));
+        }
 
         animationTimerLoop = new Timer(50, new ActionListener() {
             @Override

@@ -44,8 +44,8 @@ public class UNGameScreen extends UNObject
 
         unResourceLoader = new UNResourceLoader();
 
-        unResourceLoader.music.get(0).play(true);
-        unResourceLoader.music.get(0).setVolume(0.1);
+//        unResourceLoader.music.get(0).play(true);
+//        unResourceLoader.music.get(0).setVolume(0.1);
 
         this.window.removePanel(splash);
         this.window.addPanel(launcher);
