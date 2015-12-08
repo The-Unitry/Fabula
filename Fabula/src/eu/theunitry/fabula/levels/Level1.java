@@ -40,7 +40,7 @@ public class Level1 extends UNGraphicsLevel
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest"));
 
         this.winning = false;
         this.lastHelp = getHelp();
@@ -48,18 +48,17 @@ public class Level1 extends UNGraphicsLevel
         this.apples = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.getSprites().get(39), false, 96, 96);
+        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.unResourceLoader.sprites.get("2:1:2"), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.getSprites()
-                    .get(38), true, 32, 32)
+                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32)
             );
         }
 
-        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
         }
 
         this.addObject(basket);

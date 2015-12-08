@@ -34,6 +34,7 @@ public class UNResourceLoader
         this.loadSprites();
         this.loadFonts();
         this.loadMusic();
+        this.loadBackgrounds();
         this.loadSound();
     }
 
@@ -57,6 +58,12 @@ public class UNResourceLoader
 
         // Sad
         for(int i = 0; i <= 5; i++) sprites.put("1:5:" + String.valueOf(i), this.getSprite("tuiltje/sad/" + String.valueOf(i)));
+
+        /**
+         * Level 1
+         */
+        sprites.put("2:1:1", this.getSprite("apple"));
+        sprites.put("2:1:2", this.getSprite("basket"));
     }
 
     private void loadBackgrounds()
