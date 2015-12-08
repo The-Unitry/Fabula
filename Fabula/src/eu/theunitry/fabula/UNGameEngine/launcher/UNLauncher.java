@@ -19,6 +19,7 @@ public class UNLauncher extends JPanel
 {
     private JLabel label;
     private JButton startBtn;
+    private UNLevelLoader levelLoader;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
@@ -31,12 +32,7 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                gameScreen.resetProgress();
-                UNView panel = new Level6(gameScreen, true);
-                gameScreen.switchMusic(1, true);
-                gameScreen.getMusic().get(1).setVolume(0.1);
-
-                gameScreen.switchPanel(panel);
+                levelLoader = new UNLevelLoader(gameScreen);
             }
         });
         
