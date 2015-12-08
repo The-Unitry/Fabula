@@ -2,12 +2,10 @@ package eu.theunitry.fabula.UNGameEngine.launcher;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
-import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 /**
  * UNLauncher is the main menu which loads levels & settings.
@@ -16,11 +14,11 @@ import java.awt.event.ActionEvent;
 public class UNLauncher extends JPanel
 {
     private JLabel label;
+    private JPanel menuItemsView;
     //private JButton startBtn;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
-        UNGameScreen gameScreen1 = gameScreen;
         this.label = new JLabel("Fabula");
         UNMenuButton btn = new UNMenuButton("Hello world");
 

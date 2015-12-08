@@ -27,6 +27,7 @@ public class UNMenuButton extends JButton
          * Set text
          */
         this.setText(title);
+
         /**
          * Default Styling Reset
          */

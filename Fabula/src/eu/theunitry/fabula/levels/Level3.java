@@ -4,7 +4,7 @@ package eu.theunitry.fabula.levels;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Level3 extends UNLevel
+public class Level3 extends UNGraphicsLevel
 {
     private Timer timer;
     private ArrayList<UNGraphicsObject> ufos, ufoAnswers, stars, rockets;
