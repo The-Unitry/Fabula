@@ -11,6 +11,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * UNGameScreen is the frame where the game is displayed.
@@ -21,7 +23,7 @@ public class UNGameScreen extends UNObject
     private UNLauncher launcher;
     private UNGraphicsView splash;
     private JPanel currentPanel;
-    private UNResourceLoader unResourceLoader;
+    public UNResourceLoader unResourceLoader;
 
     private int level, levelMax;
 
@@ -69,28 +71,28 @@ public class UNGameScreen extends UNObject
         return this.window;
     }
 
-    public void switchMusic(int index, boolean loop)
+    public void switchMusic(String index, boolean loop)
     {
-        unResourceLoader.music.get(0).stop();
+        unResourceLoader.music.get("intro").stop();
         unResourceLoader.music.get(index).play(loop);
     }
 
-    public ArrayList<Music> getMusic()
+    public Map<String, Music> getMusic()
     {
         return unResourceLoader.music;
     }
 
-    public ArrayList<Sound> getSounds()
+    public Map<String, Sound> getSounds()
     {
         return unResourceLoader.sounds;
     }
 
-    public ArrayList<Image> getSprites()
+    public Map<String, Image> getSprites()
     {
         return unResourceLoader.sprites;
     }
 
-    public ArrayList<Image> getBackgrounds()
+    public Map<String, Image> getBackgrounds()
     {
         return unResourceLoader.backgrounds;
     }

@@ -2,21 +2,16 @@ package eu.theunitry.fabula.helper;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
-import eu.theunitry.fabula.UNGameEngine.objects.UNTimer;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
 public class Helper
 {
-    private int animationID;
-    private boolean loopInfinite;
     private Timer animationTimerLoop;
-    private UNTimer animationTimerOnce;
     private UNGameScreen gameScreen;
     private ArrayList<Image> animIdle, animFlapping, animSad, animHappy, animQuestioning;
     private boolean questioningDone;
@@ -27,53 +22,48 @@ public class Helper
 
     public Helper(UNGameScreen gameScreen) {
         this.gameScreen = gameScreen;
-        this.animIdle = new ArrayList<Image>();
-        this.animFlapping = new ArrayList<Image>();
-        this.animSad = new ArrayList<Image>();
-        this.animHappy = new ArrayList<Image>();
-        this.animQuestioning = new ArrayList<Image>();
+        this.animIdle = new ArrayList<>();
+        this.animFlapping = new ArrayList<>();
+        this.animSad = new ArrayList<>();
+        this.animHappy = new ArrayList<>();
+        this.animQuestioning = new ArrayList<>();
         this.imageIndex = 0;
         this.state = 2;
         this.questioningDone = false;
-        this.resourceLoader = new UNResourceLoader();
+        this.resourceLoader = gameScreen.unResourceLoader;
 
 
         // Idle
         for (int i = 0; i <= 5; i++)
         {
-            animIdle.add(resourceLoader.getSprite("tuiltje/idle", String.valueOf(i)));
+            animIdle.add(resourceLoader.sprites.get("1:3:" + String.valueOf(i)));
         }
 
         // Flapping
         for (int i = 0; i <= 5; i++)
         {
-            animFlapping.add(resourceLoader.getSprite("tuiltje/flapping", String.valueOf(i)));
+            animFlapping.add(resourceLoader.sprites.get("1:1:" + String.valueOf(i)));
         }
 
         // Sad
         for (int i = 0; i <= 5; i++)
         {
-            animSad.add(resourceLoader.getSprite("tuiltje/sad", String.valueOf(i)));
+            animSad.add(resourceLoader.sprites.get("1:5:" + String.valueOf(i)));
         }
 
         // Happy
-        for (int i = 0; i <= 5; i++)
+        for (int i = 0; i <= 9; i++)
         {
-            animHappy.add(0, resourceLoader.getSprite("tuiltje/happy", String.valueOf(i)));
+            animHappy.add(resourceLoader.sprites.get("1:2:" + String.valueOf(i)));
         }
 
         // Questioning
         for (int i = 0; i <= 9; i++)
         {
-            animQuestioning.add(0, resourceLoader.getSprite("tuiltje/questioning", String.valueOf(i)));
+            animQuestioning.add(resourceLoader.sprites.get("1:4:" + String.valueOf(i)));
         }
 
-        animationTimerLoop = new Timer(50, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                animate();
-            }
-        });
+        animationTimerLoop = new Timer(50, e -> animate());
         animationTimerLoop.start();
     }
 

@@ -10,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
+ * UNLauncher
  * UNLauncher is the main menu which loads levels & settings.
  * Later, we will add support to switch between levels.
  */

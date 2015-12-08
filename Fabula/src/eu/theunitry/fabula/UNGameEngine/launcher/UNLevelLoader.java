@@ -18,8 +18,8 @@ public class UNLevelLoader
         this.gameScreen = gameScreen;
         this.gameScreen.resetProgress();
 
-        this.gameScreen.switchMusic(1, true);
-        this.gameScreen.getMusic().get(1).setVolume(0.1);
+        this.gameScreen.switchMusic("song2", true);
+        this.gameScreen.getMusic().get("song2").setVolume(0.1);
 
         this.loadLevel(this.currentLevel);
     }

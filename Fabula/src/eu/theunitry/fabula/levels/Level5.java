@@ -316,17 +316,17 @@ public class Level5 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                for (UNGraphicsObject bird : getBirds())
-                {
-                    if (getGameScreen().getSprites().indexOf(bird.getImage()) - spriteBird < 2)
-                    {
-                        bird.setImage(getGameScreen().getSprites().get(getGameScreen().getSprites().indexOf(bird.getImage()) + 1));
-                    }
-                    else
-                    {
-                        bird.setImage(getGameScreen().getSprites().get(spriteBird));
-                    }
-                }
+//                for (UNGraphicsObject bird : getBirds())
+//                {
+//                    if (getGameScreen().getSprites().indexOf(bird.getImage()) - spriteBird < 2)
+//                    {
+//                        bird.setImage(getGameScreen().getSprites().get(getGameScreen().getSprites().indexOf(bird.getImage()) + 1));
+//                    }
+//                    else
+//                    {
+//                        bird.setImage(getGameScreen().getSprites().get(spriteBird));
+//                    }
+//                }
             }
         });
         timerBird.start();

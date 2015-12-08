@@ -10,12 +10,11 @@ import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-// TODO: Remove all Helper code.
 /**
  * UNGraphicsView is a JPanel that is used to display UNGraphicObjects,
  * this is also where timers are created.
  */
-public class UNGraphicsView extends UNView
+public class UNGraphicsView extends JPanel
 {
     private Image backgroundImage;
     private ArrayList<UNGraphicsObject> objects;
@@ -36,7 +35,7 @@ public class UNGraphicsView extends UNView
     {
         this.setGameScreen(gameScreen);
         this.hudEnabled = hudEnabled;
-        this.resourceLoader = new UNResourceLoader();
+        this.resourceLoader = gameScreen.unResourceLoader;
         objects = new ArrayList<UNGraphicsObject>();
         hud = new ArrayList<UNGraphicsObject>();
         if (hudEnabled)
@@ -64,7 +63,7 @@ public class UNGraphicsView extends UNView
                         if (!helperDoneTalking)
                         {
                             helperDoneTalking = true;
-                            getGameScreen().getSounds().get(0).stop();
+                            getGameScreen().getSounds().get("gibberish").stop();
                         }
                     }
                 }
@@ -188,7 +187,7 @@ public class UNGraphicsView extends UNView
     {
         this.help = help;
         this.helpDraw = "";
-        gameScreen.getSounds().get(0).play();
+        gameScreen.getSounds().get("gibberish").play();
     }
 
     public String getHelp()
@@ -237,10 +236,10 @@ public class UNGraphicsView extends UNView
             for (UNGraphicsObject object : objects)
             {
                 if (e.getX() > object.getX()
-                    && e.getY() > object.getY()
-                    && e.getX() < object.getX() + object.getWidth()
-                    && e.getY() < object.getY() + object.getHeight()
-                    )
+                        && e.getY() > object.getY()
+                        && e.getX() < object.getX() + object.getWidth()
+                        && e.getY() < object.getY() + object.getHeight()
+                        )
                 {
                     object.setMouseClick(true);
 

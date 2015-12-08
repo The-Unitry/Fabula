@@ -36,7 +36,7 @@ public class Level0 extends UNGraphicsLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.resourceLoader = new UNResourceLoader();
+        this.resourceLoader = gameScreen.unResourceLoader;
 
         this.need = 3 + new Random().nextInt(3);
 
@@ -50,7 +50,7 @@ public class Level0 extends UNGraphicsLevel
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.apples = new ArrayList<UNGraphicsObject>();
+        this.apples = new ArrayList<>();
         this.color = new UNColor();
 
         this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, resourceLoader.getSprite("basket"), false, 96, 96);
@@ -90,7 +90,7 @@ public class Level0 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
+                    gameScreen.getSounds().get("gibberish").stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                         if (winning) {
                             gameScreen.addLevel();
