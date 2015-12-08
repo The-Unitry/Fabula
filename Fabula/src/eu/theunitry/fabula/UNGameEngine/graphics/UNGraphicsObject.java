@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The UNGraphicsObject class is used for objects that are displayed inside an UNView.
+ * The UNGraphicsObject class is used for objects that are displayed inside an UNGraphicsView.
  * By default, the objects has a hitbox that can be used for collision detection.
  * Also, it can display an image. Later we will add support for spritesheets.
  */

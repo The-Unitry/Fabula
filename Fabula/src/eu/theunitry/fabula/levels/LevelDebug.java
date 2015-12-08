@@ -1,11 +1,11 @@
 package eu.theunitry.fabula.levels;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
 
-public class LevelDebug extends UNLevel
+public class LevelDebug extends UNGraphicsLevel
 {
 
     public LevelDebug(UNGameScreen gameScreen, boolean hudEnabled)

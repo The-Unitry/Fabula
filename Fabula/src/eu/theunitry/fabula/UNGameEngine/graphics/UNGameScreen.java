@@ -19,7 +19,7 @@ public class UNGameScreen extends UNObject
 {
     private UNWindow window;
     private UNLauncher launcher;
-    private UNView splash;
+    private UNGraphicsView splash;
     private JPanel currentPanel;
     private UNResourceLoader unResourceLoader;
 
@@ -29,7 +29,7 @@ public class UNGameScreen extends UNObject
     {
         this.window = new UNWindow("Fabula", 768, 512);
         this.launcher = new UNLauncher(this);
-        this.splash = new UNView(this, false);
+        this.splash = new UNGraphicsView(this, false);
 
         try {
             this.splash.setBackgroundImage(ImageIO.read(new File("res/backgrounds/splash_unitry.png")));

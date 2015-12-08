@@ -1,21 +1,19 @@
 package eu.theunitry.fabula.UNGameEngine.graphics;
 
-import eu.theunitry.fabula.UNGameEngine.launcher.UNLevelLoader;
-
 import java.util.ArrayList;
 
 /**
- * All levels extends from this abstract UNLevel class.
- * It inherits from UNView, which means that it contains UNGraphicObjects
+ * All levels extends from this abstract UNGraphicsLevel class.
+ * It inherits from UNGraphicsView, which means that it contains UNGraphicObjects
  */
-public abstract class UNLevel extends UNView
+public abstract class UNGraphicsLevel extends UNGraphicsView
 {
     private boolean playerHasWon = false;
     private String question;
     private ArrayList<String> helpList;
     private int mistakes;
 
-    public UNLevel(UNGameScreen gameScreen, boolean hudEnabled)
+    public UNGraphicsLevel(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
         this.helpList = new ArrayList<String>();
