@@ -22,8 +22,8 @@ public class UNLevelLoader
                 gameScreen.switchPanel(panel1);
                 break;
             case 2:
-                //UNView panel2 = new Level2(gameScreen, true);
-                //gameScreen.switchPanel(panel2);
+                UNView panel2 = new Level2(gameScreen, true);
+                gameScreen.switchPanel(panel2);
                 break;
             case 3:
                 UNView panel3 = new Level3(gameScreen, true);
