@@ -56,6 +56,7 @@ public class UNResourceLoader
     {
         music.add(0, TinySound.loadMusic("audio/intro.wav"));
         music.add(1, TinySound.loadMusic("audio/song2.wav"));
+        music.add(2, TinySound.loadMusic("audio/avalange.wav"));
     }
 
     private void loadSoundEffects()

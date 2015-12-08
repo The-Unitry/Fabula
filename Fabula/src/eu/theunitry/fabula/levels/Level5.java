@@ -45,7 +45,7 @@ public class Level5 extends UNLevel
         this.addHelp("Jammer! Je moet " + this.getNeed() + " liter in de bakken stoppen");
         this.addHelp("Helaas! Er moet " + this.getNeed() + " liter in de bakken zitten");
         this.setHelp("Sleep water in de bakken van de kamelen om het getal te verhogen");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
+        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get(4));
 
         this.setWinning(false);
         this.setLastHelp(getHelp());
