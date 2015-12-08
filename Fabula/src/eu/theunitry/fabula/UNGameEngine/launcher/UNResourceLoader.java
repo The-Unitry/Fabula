@@ -263,6 +263,19 @@ public class UNResourceLoader
             sprites.add(108, ImageIO.read(new File("res/sprites/Level4/Rocket_2.png")));
             sprites.add(109, ImageIO.read(new File("res/sprites/Level4/Rocket_3.png")));
             sprites.add(110, ImageIO.read(new File("res/sprites/Level4/Rocket_4.png")));
+
+            /**
+             * Level 3
+             */
+            sprites.add(110, ImageIO.read(new File("res/sprites/Level3/rocket0.png")));
+            sprites.add(111, ImageIO.read(new File("res/sprites/Level3/rocket1.png")));
+            sprites.add(112, ImageIO.read(new File("res/sprites/Level3/rocket2.png")));
+            sprites.add(113, ImageIO.read(new File("res/sprites/Level3/rocket3.png")));
+            sprites.add(114, ImageIO.read(new File("res/sprites/Level3/moon0.png")));
+            sprites.add(115, ImageIO.read(new File("res/sprites/Level3/moon1.png")));
+            sprites.add(116, ImageIO.read(new File("res/sprites/Level3/ufoBlue.png")));
+            sprites.add(117, ImageIO.read(new File("res/sprites/Level3/ufoGreen.png")));
+            sprites.add(118, ImageIO.read(new File("res/sprites/Level3/ufoPink.png")));
         }
         catch (IOException e)
         {
