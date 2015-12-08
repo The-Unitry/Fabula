@@ -2,7 +2,9 @@ package eu.theunitry.fabula.UNGameEngine.launcher;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
+import eu.theunitry.fabula.levels.Level6;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +19,7 @@ public class UNLauncher extends JPanel
 {
     private JLabel label;
     private JButton startBtn;
+    private UNLevelLoader levelLoader;
 
     public UNLauncher(UNGameScreen gameScreen)
     {
@@ -29,10 +32,10 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new UNLevelLoader(gameScreen);
+                levelLoader = new UNLevelLoader(gameScreen);
             }
         });
-
+        
         this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }

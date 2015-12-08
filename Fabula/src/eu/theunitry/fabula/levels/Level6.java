@@ -2,7 +2,6 @@ package eu.theunitry.fabula.levels;
 
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
@@ -22,10 +21,10 @@ public class Level6 extends UNLevel
     private JButton button;
     private boolean questionDone, winning;
     private int answer, touch;
-    private UNColor color;
     private String lastHelp;
     private ArrayList<JLabel> snowballTexts, answers;
     private double reindeerIndex;
+    private int spriteSnowball = 41, spriteTree = 55, spriteReindeer = 47, spriteSnowflake = 1;
 
     /**
      * Level 6
@@ -35,93 +34,91 @@ public class Level6 extends UNLevel
     public Level6(UNGameScreen gameScreen, boolean hudEnabled) {
         super(gameScreen, hudEnabled);
 
-        snowballs = new ArrayList<UNGraphicsObject>();
-        snowballTexts = new ArrayList<JLabel>();
-        answers = new ArrayList<JLabel>();
-        snowballAnswers = new ArrayList<UNGraphicsObject>();
-        trees = new ArrayList<UNGraphicsObject>();
-        reindeers = new ArrayList<UNGraphicsObject>();
-        snow = new ArrayList<UNGraphicsObject>();
+        this.setSnowballs(new ArrayList<UNGraphicsObject>());
+        this.setSnowballTexts(new ArrayList<JLabel>());
+        this.setAnswers(new ArrayList<JLabel>());
+        this.setSnowballAnswers(new ArrayList<UNGraphicsObject>());
+        this.setTrees(new ArrayList<UNGraphicsObject>());
+        this.setReindeers(new ArrayList<UNGraphicsObject>());
+        this.setSnow(new ArrayList<UNGraphicsObject>());
 
-//        gameScreen.getMusic().get(2).play(true);
-//        gameScreen.getMusic().get(2).setVolume(0.1);
+        this.getGameScreen().getMusic().get(2).play(true);
+        this.getGameScreen().getMusic().get(2).setVolume(0.1);
 
-        snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
-        snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
-        snowballTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
-        this.answer = Integer.parseInt(snowballTexts.get(0).getText())
-                + Integer.parseInt(snowballTexts.get(1).getText())
-                + Integer.parseInt(snowballTexts.get(2).getText());
+        this.getSnowballTexts().add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.getSnowballTexts().add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.getSnowballTexts().add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
+        this.setAnswer(Integer.parseInt(this.getSnowballTexts().get(0).getText())
+                + Integer.parseInt(this.getSnowballTexts().get(1).getText())
+                + Integer.parseInt(this.getSnowballTexts().get(2).getText()));
 
         this.setQuestion("Tel de getallen van de 3 sneeuwballen op");
         this.addHelp("Jammer! Probeer het nog eens, daar komen ze weer");
         this.addHelp("Helaas! Hier komen ze nog een keer langs");
         this.setHelp("Daar komen ze aanrollen");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get(1));
 
-        this.winning = false;
-        this.questionDone = false;
-        this.lastHelp = getHelp();
-        this.reindeerIndex = 0;
+        this.setWinning(false);
+        this.setQuestionDone(false);
+        this.setLastHelp(getHelp());
+        this.setReindeerIndex(0);
 
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -300, 250, gameScreen.getSprites().get(40), false, 32, 32));
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -600, 250, gameScreen.getSprites().get(40), false, 32, 32));
-        snowballs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -900, 250, gameScreen.getSprites().get(40), false, 32, 32));
+        this.getSnowballs().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -300, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 32, 32));
+        this.getSnowballs().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -600, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 32, 32));
+        this.getSnowballs().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -900, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 32, 32));
 
         for (int i = 0; i < 55; i++)
         {
-            trees.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), gameScreen.getSprites().get((new Random().nextInt(2) == 1) ? 41 : 42), false, 13 * 3, 29 * 3));
+            this.getTrees().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), this.getGameScreen().getSprites().get((new Random().nextInt(2) == 1) ? spriteTree : (spriteTree + 1)), false, 13 * 3, 29 * 3));
         }
 
         for (int i = 0; i < 100; i++)
         {
-            snow.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), new Random().nextInt(gameScreen.getWindow().getContentHeight()), gameScreen.getSprites().get(46), false, 5, 5));
+            this.getSnow().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), new Random().nextInt(this.getGameScreen().getWindow().getContentWidth()), new Random().nextInt(this.getGameScreen().getWindow().getContentHeight()), this.getGameScreen().getSprites().get(spriteSnowflake), false, 5, 5));
         }
 
-        reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -100, 310, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
-        reindeers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -50, 330, gameScreen.getSprites().get(43), false, 17 * 2, 13 * 2));
+        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -100, 310, this.getGameScreen().getSprites().get(spriteReindeer), false, 17 * 2, 13 * 2));
+        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -50, 330, this.getGameScreen().getSprites().get(spriteReindeer), false, 17 * 2, 13 * 2));
 
-        for (UNGraphicsObject reindeer : reindeers)
+        for (UNGraphicsObject reindeer : this.getReindeers())
         {
-            addObject(reindeer);
+            this.addObject(reindeer);
         }
 
-        snowballAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 96, 250, gameScreen.getSprites().get(40), false, 96, 96));
-        snowballAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 96, 250, gameScreen.getSprites().get(40), false, 96, 96));
-        snowballAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() - gameScreen.getWindow().getContentWidth() / 3 - 96, 250, gameScreen.getSprites().get(40), false, 96, 96));
+        this.getSnowballAnswers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), this.getGameScreen().getWindow().getContentWidth() / 3 - 96, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 96, 96));
+        this.getSnowballAnswers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), this.getGameScreen().getWindow().getContentWidth() / 2 - 96, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 96, 96));
+        this.getSnowballAnswers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), this.getGameScreen().getWindow().getContentWidth() - this.getGameScreen().getWindow().getContentWidth() / 3 - 96, 250, this.getGameScreen().getSprites().get(spriteSnowball), false, 96, 96));
 
-        snowballAnswers.get(0).setAngle(new Random().nextInt(360));
-        snowballAnswers.get(1).setAngle(new Random().nextInt(360));
-        snowballAnswers.get(2).setAngle(new Random().nextInt(360));
+        this.getSnowballAnswers().get(0).setAngle(new Random().nextInt(360));
+        this.getSnowballAnswers().get(1).setAngle(new Random().nextInt(360));
+        this.getSnowballAnswers().get(2).setAngle(new Random().nextInt(360));
 
         if (new Random().nextInt(2) == 0) {
-            answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer())));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
         } else if (new Random().nextInt(2) == 0) {
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer)));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer())));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
         } else {
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer - 4 + new Random().nextInt(8))));
-            answers.add(new JLabel(Integer.toString(answer)));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer() - 4 + new Random().nextInt(8))));
+            this.getAnswers().add(new JLabel(Integer.toString(this.getAnswer())));
         }
 
-        this.color = new UNColor();
-
-        for (UNGraphicsObject tree : trees)
+        for (UNGraphicsObject tree : this.getTrees())
         {
             tree.setXOffset(6);
             tree.setYOffset(28);
             addObject(tree);
         }
 
-        for (UNGraphicsObject snowball : snowballs) {
+        for (UNGraphicsObject snowball : this.getSnowballs()) {
             addObject(snowball);
         }
 
-        for (JLabel snowballText : snowballTexts)
+        for (JLabel snowballText : this.getSnowballTexts())
         {
             snowballText.setFont(new Font("Minecraftia", Font.PLAIN, 20));
             snowballText.setForeground(new Color(51, 51, 51));
@@ -129,14 +126,14 @@ public class Level6 extends UNLevel
             add(snowballText);
         }
 
-        for (JLabel possibleAnswer : answers)
+        for (JLabel possibleAnswer : this.getAnswers())
         {
             possibleAnswer.setFont(new Font("Minecraftia", Font.PLAIN, 20));
             possibleAnswer.setForeground(new Color(51, 51, 51));
             possibleAnswer.setHorizontalAlignment(SwingConstants.CENTER);
         }
 
-        for (UNGraphicsObject snowflake : snow)
+        for (UNGraphicsObject snowflake : this.getSnow())
         {
             addObject(snowflake);
         }
@@ -160,14 +157,14 @@ public class Level6 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
+                    getGameScreen().getSounds().get(0).stop();
+                    if (getGameScreen().getLevel() < getGameScreen().getLevelMax()) {
+                        if (isWinning()) {
+                            getGameScreen().addLevel();
                         }
-                        gameScreen.switchPanel(new Level6(gameScreen, true));
+                        getGameScreen().switchPanel(new Level6(getGameScreen(), true));
                     } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
+                        getGameScreen().switchPanel(new UNLauncher(getGameScreen()));
                     }
                 }
             }
@@ -176,25 +173,11 @@ public class Level6 extends UNLevel
         timer = new Timer(10, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                for (UNGraphicsObject snowflake : snow)
-                {
-                    snowflake.setY(snowflake.getY() + 1);
-                    if (new Random().nextInt(2) == 0) {
-                        snowflake.setX(snowflake.getX() - 1);
-                    }
-                    if (snowflake.getY() > gameScreen.getWindow().getContentHeight())
-                    {
-                        snowflake.setY(snowflake.getY() - gameScreen.getWindow().getContentHeight());
-                    }
-                    if (snowflake.getX() < 0)
-                    {
-                        snowflake.setX(snowflake.getX() + gameScreen.getWindow().getContentWidth());
-                    }
-                }
+                snowflakeUpdate();
 
-                if (!questionDone)
+                if (!isQuestionDone())
                 {
-                    for (UNGraphicsObject snowball : snowballs)
+                    for (UNGraphicsObject snowball : getSnowballs())
                     {
                         snowball.setAngle(snowball.getAngle() + 2);
                         if (new Random().nextInt(10) == 0)
@@ -205,10 +188,10 @@ public class Level6 extends UNLevel
                             snowball.setY(290 - snowball.getHeight() / 256);
                             snowball.setYOffset(snowball.getImage().getHeight(null) / 2);
                         }
-                        if (snowball.getX() < gameScreen.getWindow().getContentWidth() || snowballs.indexOf(snowball) < 2)
+                        if (snowball.getX() < getGameScreen().getWindow().getContentWidth() || getSnowballs().indexOf(snowball) < 2)
                         {
                             snowball.setX(snowball.getX() + 1);
-                            for (UNGraphicsObject tree : trees)
+                            for (UNGraphicsObject tree : getTrees())
                             {
                                 if (snowball.getHitbox().intersects(tree.getHitbox()))
                                 {
@@ -221,53 +204,53 @@ public class Level6 extends UNLevel
                         }
                         else
                         {
-                            gameScreen.getMusic().get(2).stop();
-                            gameScreen.getMusic().get(1).play(true);
-                            questionDone = true;
+                            getGameScreen().getMusic().get(2).stop();
+                            getGameScreen().getMusic().get(1).play(true);
+                            setQuestionDone(true);
                             setHelp("Klik op het antwoord");
-                            lastHelp = getHelp();
+                            setLastHelp(getHelp());
 
-                            addObject(snowballAnswers.get(0));
-                            addObject(snowballAnswers.get(1));
-                            addObject(snowballAnswers.get(2));
+                            addObject(getSnowballAnswers().get(0));
+                            addObject(getSnowballAnswers().get(1));
+                            addObject(getSnowballAnswers().get(2));
 
-                            for (JLabel possibleAnswer : answers)
+                            for (JLabel possibleAnswer : getAnswers())
                             {
                                 add(possibleAnswer);
-                                possibleAnswer.setBounds(snowballAnswers.get(answers.indexOf(possibleAnswer)).getX(), snowballAnswers.get(answers.indexOf(possibleAnswer)).getY(), snowballAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), snowballAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
+                                possibleAnswer.setBounds(getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getX(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getY(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getWidth(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getHeight());
                             }
                         }
 
-                        snowballTexts.get(snowballs.indexOf(snowball)).setBounds(snowball.getX(), 290 - snowball.getHeight() / 128, snowball.getWidth(), 100);
+                        getSnowballTexts().get(getSnowballs().indexOf(snowball)).setBounds(snowball.getX(), 290 - snowball.getHeight() / 128, snowball.getWidth(), 100);
                     }
-                    if (reindeerIndex < 2)
+                    if (getReindeerIndex() < 2)
                     {
-                        reindeerIndex += 0.1;
+                        setReindeerIndex(getReindeerIndex() + 0.1);
                     }
                     else
                     {
-                        reindeerIndex = 0;
+                        setReindeerIndex(0);
                     }
-                    for (UNGraphicsObject reindeer : reindeers)
+                    for (UNGraphicsObject reindeer : getReindeers())
                     {
-                        reindeer.setImage(gameScreen.getSprites().get(43 + (int) Math.round(reindeerIndex)));
+                        reindeer.setImage(getGameScreen().getSprites().get(spriteReindeer + (int) Math.round(getReindeerIndex())));
                         reindeer.setX(reindeer.getX() + 1);
                     }
                 }
                 else
                 {
-                    for (UNGraphicsObject snowball : snowballAnswers)
+                    for (UNGraphicsObject snowball : getSnowballAnswers())
                     {
-                        if (snowball.isMouseClick() && !winning && isHelperDoneTalking())
+                        if (snowball.isMouseClick() && !isWinning() && isHelperDoneTalking())
                         {
                             snowball.setMouseClick(false);
-                            if (Integer.valueOf(answers.get(snowballAnswers.indexOf(snowball)).getText()) == answer)
+                            if (Integer.valueOf(getAnswers().get(getSnowballAnswers().indexOf(snowball)).getText()) == getAnswer())
                             {
                                 add(button);
                                 getHelper().setState(3);
-                                setHelp("Mooi hoor! Jij kan goed rekenen");
+                                setHelp("Mooi hoor! Jij kan goed rekenen!");
                                 button.setText("Door");
-                                winning = true;
+                                setWinning(true);
                             }
                             else
                             {
@@ -275,26 +258,26 @@ public class Level6 extends UNLevel
                                 if (getMistakes() < 3)
                                 {
                                     getHelper().setState(4);
-                                    while (lastHelp == getHelp())
+                                    while (getLastHelp() == getHelp())
                                     {
                                         setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                                     }
-                                    lastHelp = getHelp();
-                                    questionDone = false;
+                                    setLastHelp(getHelp());
+                                    setQuestionDone(false);
 
-                                    removeObject(snowballAnswers.get(0));
-                                    removeObject(snowballAnswers.get(1));
-                                    removeObject(snowballAnswers.get(2));
+                                    removeObject(getSnowballAnswers().get(0));
+                                    removeObject(getSnowballAnswers().get(1));
+                                    removeObject(getSnowballAnswers().get(2));
 
-                                    for (JLabel possibleAnswer : answers)
+                                    for (JLabel possibleAnswer : getAnswers())
                                     {
                                         remove(possibleAnswer);
                                     }
-                                    gameScreen.getMusic().get(2).play(true);
-                                    snowballs.get(0).setX(-800);
-                                    snowballs.get(1).setX(-1100);
-                                    snowballs.get(2).setX(-1400);
-                                    for (UNGraphicsObject snow : snowballs) {
+                                    getGameScreen().getMusic().get(2).play(true);
+                                    getSnowballs().get(0).setX(-800);
+                                    getSnowballs().get(1).setX(-1100);
+                                    getSnowballs().get(2).setX(-1400);
+                                    for (UNGraphicsObject snow : getSnowballs()) {
                                         snow.setWidth(8);
                                         snow.setHeight(8);
                                     }
@@ -302,14 +285,14 @@ public class Level6 extends UNLevel
                                 else
                                 {
                                     getHelper().setState(4);
-                                    setHelp("Jammer, het was " + answer + ". Want " + snowballTexts.get(0) + " plus " +
-                                            snowballTexts.get(1)  + " plus " + snowballTexts.get(2) + " is " + answer
+                                    setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballAnswers().get(0) + " plus " +
+                                            getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer()
                                     );
-                                    removeObject(snowballAnswers.get(0));
-                                    removeObject(snowballAnswers.get(1));
-                                    removeObject(snowballAnswers.get(2));
+                                    removeObject(getSnowballAnswers().get(0));
+                                    removeObject(getSnowballAnswers().get(1));
+                                    removeObject(getSnowballAnswers().get(2));
 
-                                    for (JLabel possibleAnswer : answers)
+                                    for (JLabel possibleAnswer : getAnswers())
                                     {
                                         remove(possibleAnswer);
                                     }
@@ -324,5 +307,136 @@ public class Level6 extends UNLevel
         });
 
         timer.start();
+    }
+
+    public void snowflakeUpdate()
+    {
+        for (UNGraphicsObject snowflake : this.getSnow())
+        {
+            snowflake.setY(snowflake.getY() + 1);
+            if (new Random().nextInt(2) == 0) {
+                snowflake.setX(snowflake.getX() - 1);
+            }
+            if (snowflake.getY() > this.getGameScreen().getWindow().getContentHeight())
+            {
+                snowflake.setY(snowflake.getY() - this.getGameScreen().getWindow().getContentHeight());
+            }
+            if (snowflake.getX() < 0)
+            {
+                snowflake.setX(snowflake.getX() + this.getGameScreen().getWindow().getContentWidth());
+            }
+        }
+    }
+
+    public ArrayList<UNGraphicsObject> getSnowballs() {
+        return this.snowballs;
+    }
+
+    public void setSnowballs(ArrayList<UNGraphicsObject> snowballs) {
+        this.snowballs = snowballs;
+    }
+
+    public ArrayList<UNGraphicsObject> getSnowballAnswers() {
+        return this.snowballAnswers;
+    }
+
+    public void setSnowballAnswers(ArrayList<UNGraphicsObject> snowballAnswers) {
+        this.snowballAnswers = snowballAnswers;
+    }
+
+    public ArrayList<UNGraphicsObject> getTrees() {
+        return this.trees;
+    }
+
+    public void setTrees(ArrayList<UNGraphicsObject> trees) {
+        this.trees = trees;
+    }
+
+    public ArrayList<UNGraphicsObject> getReindeers() {
+        return this.reindeers;
+    }
+
+    public void setReindeers(ArrayList<UNGraphicsObject> reindeers) {
+        this.reindeers = reindeers;
+    }
+
+    public ArrayList<UNGraphicsObject> getSnow() {
+        return this.snow;
+    }
+
+    public void setSnow(ArrayList<UNGraphicsObject> snow) {
+        this.snow = snow;
+    }
+
+    public double getImageIndex() {
+        return this.imageIndex;
+    }
+
+    public void setImageIndex(double imageIndex) {
+        this.imageIndex = imageIndex;
+    }
+
+    public boolean isQuestionDone() {
+        return this.questionDone;
+    }
+
+    public void setQuestionDone(boolean questionDone) {
+        this.questionDone = questionDone;
+    }
+
+    public boolean isWinning() {
+        return this.winning;
+    }
+
+    public void setWinning(boolean winning) {
+        this.winning = winning;
+    }
+
+    public int getAnswer() {
+        return this.answer;
+    }
+
+    public void setAnswer(int answer) {
+        this.answer = answer;
+    }
+
+    public int getTouch() {
+        return this.touch;
+    }
+
+    public void setTouch(int touch) {
+        this.touch = touch;
+    }
+
+    public String getLastHelp() {
+        return this.lastHelp;
+    }
+
+    public void setLastHelp(String lastHelp) {
+        this.lastHelp = lastHelp;
+    }
+
+    public double getReindeerIndex() {
+        return this.reindeerIndex;
+    }
+
+    public void setReindeerIndex(double reindeerIndex) {
+        this.reindeerIndex = reindeerIndex;
+    }
+
+    public ArrayList<JLabel> getSnowballTexts() {
+        return this.snowballTexts;
+    }
+
+    public void setSnowballTexts(ArrayList<JLabel> snowballTexts) {
+        this.snowballTexts = snowballTexts;
+    }
+
+    public ArrayList<JLabel> getAnswers() {
+        return this.answers;
+    }
+
+    public void setAnswers(ArrayList<JLabel> answers) {
+        this.answers = answers;
     }
 }
