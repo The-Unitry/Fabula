@@ -36,11 +36,11 @@ public class Level9 extends UNLevel
 
         this.need = 10 - new Random().nextInt(8);
 
-        this.setQuestion("De diamant weegt " + need + " kilo. 1 gewichtje weegt 1 kilo");
-        this.addHelp("Jammer! Je moet " + need + " gewichtjes op de plank hebben");
-        this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan");
-        this.addHelp("net niet goed, weet je zeker dat er " + need + " op de plank staan?");
-        this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank");
+        this.setQuestion("De diamant weegt " + need + " kilo. 1 gewichtje weegt 1 kilo.");
+        this.addHelp("Jammer! Je moet " + need + " gewichtjes op de plank hebben.");
+        this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan.");
+        this.addHelp("Net niet goed, weet je zeker dat er " + need + " op de plank staan?");
+        this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank.");
         this.setBackgroundImage(gameScreen.getBackgrounds().get(2));
 
         this.winning = false;
@@ -100,7 +100,7 @@ public class Level9 extends UNLevel
                 if (isHelperDoneTalking()) {
                     if (winning) {
                         getHelper().setState(3);
-                        setHelp("Goed gedaan, de diamant is van ons");
+                        setHelp("Goed gedaan, de diamant is van ons!!!");
                         for (UNGraphicsObject weight : weights) {
                             weight.setClickable(false);
                         }
@@ -156,10 +156,6 @@ public class Level9 extends UNLevel
                 {
                     if(!weight.getMouseHold() && !plank.getHitbox(true).intersects(weight.getHitbox())) {
                         weight.setY(weight.getY() + 1);
-                    }
-                    if(weight.getY() > 160)
-                    {
-                        weight.setClickable(true);
                     }
                 }
             }
