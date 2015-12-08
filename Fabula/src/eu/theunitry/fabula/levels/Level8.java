@@ -47,7 +47,7 @@ public class Level8 extends UNLevel
         this.addHelp("Dit is niet goed! Sleep het houweel naar het goede antwoord.");
         this.addHelp("Helaas, probeer het opnieuw!");
         this.addHelp("Dit is niet juist.");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get(5));
 
         this.winning = false;
         this.questionDone = false;

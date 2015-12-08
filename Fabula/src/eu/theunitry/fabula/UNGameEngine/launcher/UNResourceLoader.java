@@ -80,6 +80,7 @@ public class UNResourceLoader
             backgrounds.add(2, ImageIO.read(new File(prefix_bg + "space.png")));
             backgrounds.add(3, ImageIO.read(new File(prefix_bg + "supermarket.png")));
             backgrounds.add(4, ImageIO.read(new File(prefix_bg + "jungle.png")));
+            backgrounds.add(5, ImageIO.read(new File(prefix_bg + "mine.png")));
 
             /**
              * Tuiltje - Idle
