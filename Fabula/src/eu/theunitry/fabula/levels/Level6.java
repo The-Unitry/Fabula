@@ -24,7 +24,7 @@ public class Level6 extends UNLevel
     private String lastHelp;
     private ArrayList<JLabel> snowballTexts, answers;
     private double reindeerIndex;
-    private int spriteSnowball = 41, spriteTree = 55, spriteReindeer = 47, spriteSnowflake = 1;
+    private int spriteSnowball = 45, spriteTree = 41, spriteReindeer = 54, spriteSnowflake = 57;
 
     /**
      * Level 6
