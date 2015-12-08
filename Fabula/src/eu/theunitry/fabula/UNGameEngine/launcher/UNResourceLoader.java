@@ -60,10 +60,25 @@ public class UNResourceLoader
         for(int i = 0; i <= 5; i++) sprites.put("1:5:" + String.valueOf(i), this.getSprite("tuiltje/sad/" + String.valueOf(i)));
 
         /**
-         * Level 1
+         * Level 1 & 2
          */
         sprites.put("2:1:1", this.getSprite("apple"));
         sprites.put("2:1:2", this.getSprite("basket"));
+
+        /**
+         * Level 3
+         */
+        sprites.put("2:3:1", this.getSprite("levels/3/moon-0"));
+        sprites.put("2:3:2", this.getSprite("levels/3/moon-1"));
+        sprites.put("2:3:3", this.getSprite("levels/3/rocket-0"));
+        sprites.put("2:3:4", this.getSprite("levels/3/rocket-1"));
+        sprites.put("2:3:5", this.getSprite("levels/3/rocket-2"));
+        sprites.put("2:3:6", this.getSprite("levels/3/rocket-3"));
+        sprites.put("2:3:7", this.getSprite("levels/3/ufo-blue"));
+        sprites.put("2:3:8", this.getSprite("levels/3/ufo-green"));
+        sprites.put("2:3:9", this.getSprite("levels/3/ufo-pink"));
+        sprites.put("2:3:10", this.getSprite("levels/3/snowball"));
+
     }
 
     private void loadBackgrounds()

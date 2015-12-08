@@ -5,12 +5,13 @@ import eu.theunitry.fabula.levels.*;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 
 /**
+ * UNLevelLoader
  * This class is responsible for loading all levels. There is one variable
  * that controls all levels. This way it is very easy to load a level.
  */
 public class UNLevelLoader
 {
-    private int currentLevel = 1;      // The current level, this is temporary because the progress will be saved locally.
+    private int currentLevel = 5;      // The current level, this is temporary because the progress will be saved locally.
     private UNGameScreen gameScreen;
 
     public UNLevelLoader(UNGameScreen gameScreen)

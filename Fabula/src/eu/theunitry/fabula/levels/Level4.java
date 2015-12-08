@@ -13,6 +13,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Level 4
+ * Ruben Smit
+ */
 public class Level4 extends UNGraphicsLevel
 {
     private Timer timer;
@@ -33,12 +37,12 @@ public class Level4 extends UNGraphicsLevel
     public Level4(UNGameScreen gameScreen, boolean hudEnabled) {
         super(gameScreen, hudEnabled);
 
-        machines = new ArrayList<UNGraphicsObject>();
-        supportsL = new ArrayList<UNGraphicsObject>();
-        supportsR = new ArrayList<UNGraphicsObject>();
-        rockets = new ArrayList<UNGraphicsObject>();
-        cables = new ArrayList<UNGraphicsObject>();
-        gems = new ArrayList<UNGraphicsObject>();
+        machines = new ArrayList<>();
+        supportsL = new ArrayList<>();
+        supportsR = new ArrayList<>();
+        rockets = new ArrayList<>();
+        cables = new ArrayList<>();
+        gems = new ArrayList<>();
 
         gameScreen.getMusic().get(1).play(true);
         gameScreen.getMusic().get(1).setVolume(0.1);

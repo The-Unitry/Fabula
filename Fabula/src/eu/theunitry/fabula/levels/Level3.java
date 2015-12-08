@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 3
+ * Ruben Smit
+ */
 public class Level3 extends UNGraphicsLevel
 {
     private Timer timer;
@@ -35,22 +39,22 @@ public class Level3 extends UNGraphicsLevel
     public Level3(UNGameScreen gameScreen, boolean hudEnabled) {
         super(gameScreen, hudEnabled);
 
-        ufos = new ArrayList<UNGraphicsObject>();
-        ufosText = new ArrayList<JLabel>();
-        answers = new ArrayList<JLabel>();
-        ufoAnswers = new ArrayList<UNGraphicsObject>();
-        stars = new ArrayList<UNGraphicsObject>();
-        rockets = new ArrayList<UNGraphicsObject>();
+        ufos = new ArrayList<>();
+        ufosText = new ArrayList<>();
+        answers = new ArrayList<>();
+        ufoAnswers = new ArrayList<>();
+        stars = new ArrayList<>();
+        rockets = new ArrayList<>();
 
-        gameScreen.getMusic().get(1).play(true);
-        gameScreen.getMusic().get(1).setVolume(0.1);
+        gameScreen.getMusic().get("song2").play(true);
+        gameScreen.getMusic().get("song2").setVolume(0.1);
 
         this.randomUnity = new Random().nextInt(4);
         if (this.randomUnity == 1){
-            this.moon = new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 100, 50, gameScreen.getSprites().get(46), false, 96, 96);
+            this.moon = new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 100, 50, gameScreen.unResourceLoader.sprites.get("2:3:2"), false, 96, 96);
         }
         else{
-            this.moon = new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 100, 50, gameScreen.getSprites().get(45), false, 96, 96);
+            this.moon = new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 100, 50, gameScreen.unResourceLoader.sprites.get("2:3:1"), false, 96, 96);
         }
 
         this.addObject(moon);
@@ -59,26 +63,26 @@ public class Level3 extends UNGraphicsLevel
         ufosText.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         ufosText.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
 
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(2));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get("space"));
 
         this.winning = false;
         this.questionDone = false;
         this.lastHelp = getHelp();
         this.rocketIndex = 0;
 
-        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -300, 250, gameScreen.getSprites().get(47), false, 32, 32));
-        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -600, 250, gameScreen.getSprites().get(48), false, 32, 32));
-        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -900, 250, gameScreen.getSprites().get(49), false, 32, 32));
+        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -300, 250, gameScreen.unResourceLoader.sprites.get("2:3:7"), false, 32, 32));
+        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -600, 250, gameScreen.unResourceLoader.sprites.get("2:3:8"), false, 32, 32));
+        ufos.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), -900, 250, gameScreen.unResourceLoader.sprites.get("2:3:9"), false, 32, 32));
 
         for (int i = 0; i < 1; i++)
         {
-            stars.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), 0, gameScreen.getSprites().get(50), false, 7, 7));
+            stars.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), new Random().nextInt(gameScreen.getWindow().getContentWidth()), 0, gameScreen.unResourceLoader.sprites.get("2:3:10"), false, 7, 7));
         }
 
 
-        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 246, 330, gameScreen.getSprites().get(47), false, 96, 96));
-        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 276, 226, gameScreen.getSprites().get(48), false, 96, 96));
-        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() - gameScreen.getWindow().getContentWidth() / 3 - 306, 330, gameScreen.getSprites().get(49), false, 96, 96));
+        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 246, 330, gameScreen.unResourceLoader.sprites.get("2:3:7"), false, 96, 96));
+        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 2 - 276, 226, gameScreen.unResourceLoader.sprites.get("2:3:8"), false, 96, 96));
+        ufoAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() - gameScreen.getWindow().getContentWidth() / 3 - 306, 330, gameScreen.unResourceLoader.sprites.get("2:3:9"), false, 96, 96));
 
         this.g1 = new Random().nextInt(4) + 1;
         this.g2 = new Random().nextInt(4) + 1;
@@ -135,7 +139,7 @@ public class Level3 extends UNGraphicsLevel
             possibleAnswer.setHorizontalAlignment(SwingConstants.CENTER);
         }
 
-        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 520, 300, gameScreen.getSprites().get(41), false, 120 , 120));
+        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 520, 300, gameScreen.unResourceLoader.sprites.get("2:3:3"), false, 120 , 120));
 
         for (UNGraphicsObject rocket : rockets)
         {
@@ -157,192 +161,185 @@ public class Level3 extends UNGraphicsLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        button.addActionListener(e -> {
+            if (button.getText().equals("Doorgaan"))
             {
-                if (button.getText() == "Doorgaan")
+                gameScreen.getSounds().get("gibberish").stop();
+                if (gameScreen.getLevel() < gameScreen.getLevelMax())
                 {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax())
+                    if (winning)
                     {
-                        if (winning)
-                        {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level3(gameScreen, true));
-                    } else
-                    {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
+                        gameScreen.addLevel();
                     }
+                    gameScreen.switchPanel(new Level3(gameScreen, true));
+                } else
+                {
+                    gameScreen.switchPanel(new UNLauncher(gameScreen));
                 }
             }
         });
 
-        timer = new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (UNGraphicsObject star : stars)
-                {
-                    star.setY(star.getY() + 2);
-                    star.setX(star.getX() - 2);
+        timer = new Timer(10, e -> {
+            for (UNGraphicsObject star : stars)
+            {
+                star.setY(star.getY() + 2);
+                star.setX(star.getX() - 2);
 
-                    if (star.getY() > gameScreen.getWindow().getContentHeight())
+                if (star.getY() > gameScreen.getWindow().getContentHeight())
+                {
+                    star.setY(star.getY() - gameScreen.getWindow().getContentHeight());
+                }
+                if (star.getX() < 0)
+                {
+                    star.setX(star.getX() + gameScreen.getWindow().getContentWidth());
+                }
+            }
+
+            if (!questionDone)
+            {
+                for (UNGraphicsObject ufo : ufos)
+                {
+
+                    if (new Random().nextInt(10) == 0)
                     {
-                        star.setY(star.getY() - gameScreen.getWindow().getContentHeight());
+                        ufo.setWidth(ufo.getWidth() + 1);
+                        ufo.setHeight(ufo.getWidth());
+                        ufo.setXOffset(ufo.getImage().getWidth(null) / 2);
+                        ufo.setY(290 - ufo.getHeight() / 256);
+                        ufo.setYOffset(ufo.getImage().getHeight(null) / 2);
                     }
-                    if (star.getX() < 0)
+                    else
                     {
-                        star.setX(star.getX() + gameScreen.getWindow().getContentWidth());
+                        gameScreen.getMusic().get("song2").stop();
+                        gameScreen.getMusic().get("intro").play(true);
+                        questionDone = true;
+                        lastHelp = getHelp();
+
+                        addObject(ufoAnswers.get(0));
+                        addObject(ufoAnswers.get(1));
+                        addObject(ufoAnswers.get(2));
+
+                        for (JLabel possibleAnswer : answers)
+                        {
+                            add(possibleAnswer);
+                            possibleAnswer.setForeground(Color.white);
+                            possibleAnswer.setBounds(ufoAnswers.get(answers.indexOf(possibleAnswer)).getX(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getY() - 7, ufoAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
+                        }
                     }
+
+                    ufosText.get(ufos.indexOf(ufo)).setBounds(ufo.getX(), 290 - ufo.getHeight() / 128, ufo.getWidth(), 100);
                 }
 
-                if (!questionDone)
+            }
+            else
+            {
+                for (UNGraphicsObject ufoAnswer : ufoAnswers)
                 {
-                    for (UNGraphicsObject ufo : ufos)
+                    if (ufoAnswer.isMouseClick() && !winning && isHelperDoneTalking())
                     {
-
-                        if (new Random().nextInt(10) == 0)
+                        ufoAnswer.setMouseClick(false);
+                        if (Integer.valueOf(answers.get(ufoAnswers.indexOf(ufoAnswer)).getText()) == answer)
                         {
-                            ufo.setWidth(ufo.getWidth() + 1);
-                            ufo.setHeight(ufo.getWidth());
-                            ufo.setXOffset(ufo.getImage().getWidth(null) / 2);
-                            ufo.setY(290 - ufo.getHeight() / 256);
-                            ufo.setYOffset(ufo.getImage().getHeight(null) / 2);
+                            add(button);
+                            getHelper().setState(3);
+                            setHelp("Mooi hoor! Jij kan goed rekenen");
+                            button.setText("Doorgaan");
+                            winning = true;
                         }
                         else
                         {
-                            gameScreen.getMusic().get(1).stop();
-                            gameScreen.getMusic().get(0).play(true);
-                            questionDone = true;
-                            lastHelp = getHelp();
-
-                            addObject(ufoAnswers.get(0));
-                            addObject(ufoAnswers.get(1));
-                            addObject(ufoAnswers.get(2));
-
-                            for (JLabel possibleAnswer : answers)
+                            addMistake();
+                            if (getMistakes() < 2)
                             {
-                                add(possibleAnswer);
-                                possibleAnswer.setForeground(Color.white);
-                                possibleAnswer.setBounds(ufoAnswers.get(answers.indexOf(possibleAnswer)).getX(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getY() - 7, ufoAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
-                            }
-                        }
+                                getHelper().setState(4);
+                                while (lastHelp.equals(getHelp()))
+                                {
+                                    setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                                }
+                                lastHelp = getHelp();
+                                questionDone = false;
 
-                        ufosText.get(ufos.indexOf(ufo)).setBounds(ufo.getX(), 290 - ufo.getHeight() / 128, ufo.getWidth(), 100);
-                    }
+                                removeObject(ufoAnswers.get(0));
+                                removeObject(ufoAnswers.get(1));
+                                removeObject(ufoAnswers.get(2));
 
-                }
-                else
-                {
-                    for (UNGraphicsObject ufoAnswer : ufoAnswers)
-                    {
-                        if (ufoAnswer.isMouseClick() && !winning && isHelperDoneTalking())
-                        {
-                            ufoAnswer.setMouseClick(false);
-                            if (Integer.valueOf(answers.get(ufoAnswers.indexOf(ufoAnswer)).getText()) == answer)
-                            {
-                                add(button);
-                                getHelper().setState(3);
-                                setHelp("Mooi hoor! Jij kan goed rekenen");
-                                button.setText("Doorgaan");
-                                winning = true;
+                                for (JLabel possibleAnswer : answers)
+                                {
+                                    remove(possibleAnswer);
+                                }
+                                gameScreen.getMusic().get("song2").play(true);
+                                ufos.get(0).setX(-800);
+                                ufos.get(1).setX(-1100);
+                                ufos.get(2).setX(-1400);
+                                for (UNGraphicsObject snow : ufos) {
+                                    snow.setWidth(8);
+                                    snow.setHeight(8);
+                                }
                             }
                             else
                             {
-                                addMistake();
-                                if (getMistakes() < 2)
-                                {
-                                    getHelper().setState(4);
-                                    while (lastHelp == getHelp())
-                                    {
-                                        setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                                    }
-                                    lastHelp = getHelp();
-                                    questionDone = false;
+                                getHelper().setState(4);
+                                setHelp("Jammer, het was " + answer + ". Want " + g1 + " plus " +
+                                                g2  + " plus " + g3 + " is " + answer
+                                );
+                                removeObject(ufoAnswers.get(0));
+                                removeObject(ufoAnswers.get(1));
+                                removeObject(ufoAnswers.get(2));
 
-                                    removeObject(ufoAnswers.get(0));
-                                    removeObject(ufoAnswers.get(1));
-                                    removeObject(ufoAnswers.get(2));
-
-                                    for (JLabel possibleAnswer : answers)
-                                    {
-                                        remove(possibleAnswer);
-                                    }
-                                    gameScreen.getMusic().get(1).play(true);
-                                    ufos.get(0).setX(-800);
-                                    ufos.get(1).setX(-1100);
-                                    ufos.get(2).setX(-1400);
-                                    for (UNGraphicsObject snow : ufos) {
-                                        snow.setWidth(8);
-                                        snow.setHeight(8);
-                                    }
-                                }
-                                else
-                                {
-                                    getHelper().setState(4);
-                                    setHelp("Jammer, het was " + answer + ". Want " + g1 + " plus " +
-                                                    g2  + " plus " + g3 + " is " + answer
-                                    );
-                                    removeObject(ufoAnswers.get(0));
-                                    removeObject(ufoAnswers.get(1));
-                                    removeObject(ufoAnswers.get(2));
-
-                                    add(button);
-                                    button.setText("Doorgaan");
-                                }
+                                add(button);
+                                button.setText("Doorgaan");
                             }
                         }
                     }
                 }
-                if (rocketIndex < 2)
+            }
+            if (rocketIndex < 2)
+            {
+                rocketIndex += 0.1;
+            }
+            else {
+                rocketIndex = 0;
+            }
+
+            if (winning){
+
+                for (UNGraphicsObject ufo : ufoAnswers){
+                    ufo.setAngle(ufo.getAngle() + 1);
+                    ufo.setX(ufo.getX() - 1);
+                }
+
+                for (JLabel possibleAnswer : answers)
                 {
-                    rocketIndex += 0.1;
-                }
-                else {
-                    rocketIndex = 0;
+                    remove(possibleAnswer);
                 }
 
-                if (winning == true){
-
-                    for (UNGraphicsObject ufo : ufoAnswers){
-                        ufo.setAngle(ufo.getAngle() + 1);
-                        ufo.setX(ufo.getX() - 1);
+                for (UNGraphicsObject rocket : rockets) {
+                    if (rotationDone = true) {
+                        //rocket.setImage(gameScreen.getSprites().get(42 + (int) Math.round(rocketIndex)));
+                        // Will explain later       -Maarten
                     }
 
-                    for (JLabel possibleAnswer : answers)
-                    {
-                        remove(possibleAnswer);
+                    if (rocket.getWidth() != 20 && rocket.getWidth() != 20) {
+                        rocket.setWidth(rocket.getWidth() - 1);
+                        rocket.setHeight(rocket.getHeight() - 1);
                     }
 
-                    for (UNGraphicsObject rocket : rockets) {
-                        if (rotationDone = true) {
-                            rocket.setImage(gameScreen.getSprites().get(42 + (int) Math.round(rocketIndex)));
+                    if (rocket.getHitbox().intersects(moon.getHitbox())) {
+                        if (rocket.getAngle() <= 190) {
+                            rocket.setAngle(rocket.getAngle() + 1);
                         }
+                    } else {
+                        rocket.setX(rocket.getX() - 1);
+                        rocket.setY(rocket.getY() - 1);
+                    }
 
-                        if (rocket.getWidth() != 20 && rocket.getWidth() != 20) {
-                            rocket.setWidth(rocket.getWidth() - 1);
-                            rocket.setHeight(rocket.getHeight() - 1);
-                        }
-
-                        if (rocket.getHitbox().intersects(moon.getHitbox())) {
-                            if (rocket.getAngle() <= 190) {
-                                rocket.setAngle(rocket.getAngle() + 1);
-                            }
-                        } else {
+                    if (rocket.getAngle() >= 190) {
+                        if (rocket.getY() >= 133) {
                             rocket.setX(rocket.getX() - 1);
                             rocket.setY(rocket.getY() - 1);
-                        }
-
-                        if (rocket.getAngle() >= 190) {
-                            if (rocket.getY() >= 133) {
-                                rocket.setX(rocket.getX() - 1);
-                                rocket.setY(rocket.getY() - 1);
-                            } else {
-                                rotationDone = false;
-                                rocket.setImage(gameScreen.getSprites().get(41));
-                            }
+                        } else {
+                            rotationDone = false;
+                            rocket.setImage(gameScreen.unResourceLoader.sprites.get("2:3:3"));
                         }
                     }
                 }

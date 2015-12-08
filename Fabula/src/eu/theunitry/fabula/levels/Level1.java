@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 1
+ * Maarten Bode
+ */
 public class Level1 extends UNGraphicsLevel
 {
     private Timer timer;
