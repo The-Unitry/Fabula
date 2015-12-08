@@ -30,7 +30,6 @@ public class UNWindow extends UNObject
         this.frame = new JFrame();
         this.init();
         this.frame.setVisible(true);
-        System.out.println(this.frame.getContentPane().getHeight());
     }
 
     private void init()

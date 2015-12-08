@@ -56,7 +56,7 @@ public class UNResourceLoader
         for(int i = 0; i <= 9; i++) sprites.put("1:4:" + String.valueOf(i), this.getSprite("tuiltje/questioning/" + String.valueOf(i)));
 
         // Sad
-        for(int i = 0; i <= 5; i++) sprites.put("1:1:" + String.valueOf(i), this.getSprite("tuiltje/sad/" + String.valueOf(i)));
+        for(int i = 0; i <= 5; i++) sprites.put("1:5:" + String.valueOf(i), this.getSprite("tuiltje/sad/" + String.valueOf(i)));
     }
 
     private void loadBackgrounds()

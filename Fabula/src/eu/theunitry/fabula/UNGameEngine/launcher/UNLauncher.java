@@ -30,7 +30,6 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.out.println(((JButton) e.getSource()).getText());
                 levelLoader = new UNLevelLoader(gameScreen);
             }
         });
