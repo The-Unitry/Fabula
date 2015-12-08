@@ -4,17 +4,28 @@ import eu.theunitry.fabula.levels.*;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 
+/**
+ * This class is responsible for loading all levels. There is one variable
+ * that controls all levels. This way it is very easy to load a level.
+ */
 public class UNLevelLoader
 {
     private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
+    private UNGameScreen gameScreen;
 
     public UNLevelLoader(UNGameScreen gameScreen)
     {
-        gameScreen.resetProgress();
+        this.gameScreen = gameScreen;
+        this.gameScreen.resetProgress();
 
-        gameScreen.switchMusic(1, true);
-        gameScreen.getMusic().get(1).setVolume(0.1);
+        this.gameScreen.switchMusic(1, true);
+        this.gameScreen.getMusic().get(1).setVolume(0.1);
 
+        this.loadLevel(this.currentLevel);
+    }
+
+    private void loadLevel(int level)
+    {
         switch (this.currentLevel)
         {
             case 1:
@@ -22,8 +33,8 @@ public class UNLevelLoader
                 gameScreen.switchPanel(panel1);
                 break;
             case 2:
-                //UNView panel2 = new Level2(gameScreen, true);
-                //gameScreen.switchPanel(panel2);
+                UNView panel2 = new Level2(gameScreen, true);
+                gameScreen.switchPanel(panel2);
                 break;
             case 3:
                 UNView panel3 = new Level3(gameScreen, true);
@@ -68,6 +79,5 @@ public class UNLevelLoader
             default:
                 break;
         }
-
     }
 }
