@@ -180,14 +180,14 @@ public class UNResourceLoader
             /**
              * Level 7
              */
-            sprites.add(51, ImageIO.read(new File(prefix_sprites + "kist_dicht.png")));
-            sprites.add(52, ImageIO.read(new File(prefix_sprites + "kist_open.png")));
-            sprites.add(53, ImageIO.read(new File(prefix_sprites + "muntje.png")));
+            sprites.add(51, ImageIO.read(new File(prefix_sprites + "chest_closed.png")));
+            sprites.add(52, ImageIO.read(new File(prefix_sprites + "chest_open.png")));
+            sprites.add(53, ImageIO.read(new File(prefix_sprites + "coin.png")));
 
             /**
              * Level 8
              */
-            sprites.add(54, ImageIO.read(new File(prefix_sprites + "klomp.png")));
+            sprites.add(54, ImageIO.read(new File(prefix_sprites + "nugget.png")));
             sprites.add(55, ImageIO.read(new File(prefix_sprites + "pickaxe.png")));
 
             /**
