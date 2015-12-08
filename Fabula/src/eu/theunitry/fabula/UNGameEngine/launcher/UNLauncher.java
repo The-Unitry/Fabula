@@ -1,10 +1,10 @@
 package eu.theunitry.fabula.UNGameEngine.launcher;
 
-import eu.theunitry.fabula.fabula.levels.Level6;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
+import eu.theunitry.fabula.levels.Level6;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
