@@ -1,7 +1,9 @@
 package eu.theunitry.fabula.UNGameEngine.launcher;
 
+import eu.theunitry.fabula.fabula.levels.Level6;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
 import javax.swing.*;
@@ -29,10 +31,15 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                new UNLevelLoader(gameScreen);
+                gameScreen.resetProgress();
+                UNView panel = new Level6(gameScreen, true);
+                gameScreen.switchMusic(1, true);
+                gameScreen.getMusic().get(1).setVolume(0.1);
+
+                gameScreen.switchPanel(panel);
             }
         });
-
+        
         this.add(label, BorderLayout.CENTER);
         this.add(startBtn, BorderLayout.SOUTH);
     }
