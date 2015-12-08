@@ -67,6 +67,8 @@ public class UNResourceLoader
     {
         try
         {
+            String prefix_animations = "res/animations/";
+
             /**
              * Background
              */
@@ -81,7 +83,7 @@ public class UNResourceLoader
             /**
              * Tuiltje - Idle
              */
-            String prefix_idle = "res/animations/tuiltje/idle/";
+            String prefix_idle = prefix_animations + "tuiltje/idle/";
 
             sprites.add(0, ImageIO.read(new File(prefix_idle + "idle0.png")));
             sprites.add(1, ImageIO.read(new File(prefix_idle + "idle1.png")));
@@ -93,7 +95,7 @@ public class UNResourceLoader
             /**
              * Tuiltje - Flapping
              */
-            String prefix_flap = "res/animations/tuiltje/flapping/";
+            String prefix_flap = prefix_animations + "tuiltje/flapping/";
 
             sprites.add(6, ImageIO.read(new File(prefix_flap + "flapping0.png")));
             sprites.add(7, ImageIO.read(new File(prefix_flap + "flapping1.png")));
@@ -105,7 +107,7 @@ public class UNResourceLoader
             /**
              * Tuiltje - Sad
              */
-            String prefix_sad = "res/animations/tuiltje/sad/";
+            String prefix_sad = prefix_animations + "tuiltje/sad/";
 
             sprites.add(12, ImageIO.read(new File(prefix_sad + "sad0.png")));
             sprites.add(13, ImageIO.read(new File(prefix_sad + "sad1.png")));
@@ -117,7 +119,7 @@ public class UNResourceLoader
             /**
              * Tuiltje - Happy
              */
-            String prefix_happy = "res/animations/tuiltje/happy/";
+            String prefix_happy = prefix_animations + "tuiltje/happy/";
 
             sprites.add(18, ImageIO.read(new File(prefix_happy + "happy0.png")));
             sprites.add(19, ImageIO.read(new File(prefix_happy + "happy1.png")));
@@ -134,7 +136,8 @@ public class UNResourceLoader
              * Tuiltje - Questioning
              */
 
-            String prefix_question = "res/animations/tuiltje/questioning/";
+            String prefix_question = prefix_animations + "tuiltje/questioning/";
+
             sprites.add(28, ImageIO.read(new File(prefix_question + "questioning0.png")));
             sprites.add(29, ImageIO.read(new File(prefix_question + "questioning1.png")));
             sprites.add(30, ImageIO.read(new File(prefix_question + "questioning2.png")));
