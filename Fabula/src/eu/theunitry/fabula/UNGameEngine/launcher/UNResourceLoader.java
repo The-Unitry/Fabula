@@ -107,30 +107,32 @@ public class UNResourceLoader
         /**
          * Level 5
          */
-        sprites.put("2:5:1:1", this.getSprite("levels/5/bird-0"));
-        sprites.put("2:5:1:2", this.getSprite("levels/5/bird-1"));
-        sprites.put("2:5:1:3", this.getSprite("levels/5/bird-2"));
-        sprites.put("2:5:2:1", this.getSprite("levels/5/bucket-0"));
-        sprites.put("2:5:2:2", this.getSprite("levels/5/bucket-1"));
-        sprites.put("2:5:3:1", this.getSprite("levels/5/camel-0"));
-        sprites.put("2:5:3:2", this.getSprite("levels/5/camel-1"));
-        sprites.put("2:5:3:3", this.getSprite("levels/5/camel-2"));
-        sprites.put("2:5:3:4", this.getSprite("levels/5/camel-3"));
-        sprites.put("2:5:3:5", this.getSprite("levels/5/camel-4"));
-        sprites.put("2:5:4:1", this.getSprite("levels/5/well-0"));
-        sprites.put("2:5:4:2", this.getSprite("levels/5/well-0"));
-        sprites.put("2:5:4:3", this.getSprite("levels/5/well-0"));
+        sprites.put("2:5:1:0", this.getSprite("levels/5/bird-0"));
+        sprites.put("2:5:1:1", this.getSprite("levels/5/bird-1"));
+        sprites.put("2:5:1:2", this.getSprite("levels/5/bird-2"));
+        sprites.put("2:5:1:3", this.getSprite("levels/5/bird-3"));
+        sprites.put("2:5:2:0", this.getSprite("levels/5/bucket-0"));
+        sprites.put("2:5:2:1", this.getSprite("levels/5/bucket-1"));
+        sprites.put("2:5:3:0", this.getSprite("levels/5/camel-0"));
+        sprites.put("2:5:3:1", this.getSprite("levels/5/camel-1"));
+        sprites.put("2:5:3:2", this.getSprite("levels/5/camel-2"));
+        sprites.put("2:5:3:3", this.getSprite("levels/5/camel-3"));
+        sprites.put("2:5:3:4", this.getSprite("levels/5/camel-4"));
+        sprites.put("2:5:3:5", this.getSprite("levels/5/camel-5"));
+        sprites.put("2:5:4:0", this.getSprite("levels/5/well-0"));
+        sprites.put("2:5:4:1", this.getSprite("levels/5/well-1"));
+        sprites.put("2:5:4:2", this.getSprite("levels/5/well-2"));
 
         /**
          * Level 6
          */
-        sprites.put("2:6:1:1", this.getSprite("levels/6/reindeer-0"));
-        sprites.put("2:6:1:2", this.getSprite("levels/6/reindeer-1"));
-        sprites.put("2:6:1:3", this.getSprite("levels/6/reindeer-2"));
+        sprites.put("2:6:1:0", this.getSprite("levels/6/reindeer-0"));
+        sprites.put("2:6:1:1", this.getSprite("levels/6/reindeer-1"));
+        sprites.put("2:6:1:2", this.getSprite("levels/6/reindeer-2"));
         sprites.put("2:6:2", this.getSprite("levels/6/snow"));
         sprites.put("2:6:3", this.getSprite("levels/6/snowball"));
-        sprites.put("2:6:4:1", this.getSprite("levels/6/snowtree"));
-        sprites.put("2:6:4:2", this.getSprite("levels/6/snowtree-2"));
+        sprites.put("2:6:4:0", this.getSprite("levels/6/snowtree"));
+        sprites.put("2:6:4:1", this.getSprite("levels/6/snowtree-2"));
 
         /**
          * Level 7

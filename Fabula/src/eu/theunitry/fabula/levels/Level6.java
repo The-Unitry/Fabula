@@ -24,7 +24,7 @@ public class Level6 extends UNGraphicsLevel
     private String lastHelp;
     private ArrayList<JLabel> snowballTexts, answers;
     private double reindeerIndex;
-    private int spriteSnowball = 45, spriteTree = 41, spriteReindeer = 54, spriteSnowflake = 57;
+    private String spriteSnowball = "2:6:3", spriteTree = "2:6:4:", spriteReindeer = "2:6:1:", spriteSnowflake = "2:6:2";
 
     /**
      * Level 6
@@ -42,8 +42,8 @@ public class Level6 extends UNGraphicsLevel
         this.setReindeers(new ArrayList<UNGraphicsObject>());
         this.setSnow(new ArrayList<UNGraphicsObject>());
 
-        this.getGameScreen().getMusic().get(2).play(true);
-        this.getGameScreen().getMusic().get(2).setVolume(0.1);
+        this.getGameScreen().getMusic().get("avalange").play(true);
+        this.getGameScreen().getMusic().get("avalange").setVolume(0.1);
 
         this.getSnowballTexts().add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         this.getSnowballTexts().add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -56,7 +56,7 @@ public class Level6 extends UNGraphicsLevel
         this.addHelp("Jammer! Probeer het nog eens, daar komen ze weer");
         this.addHelp("Helaas! Hier komen ze nog een keer langs");
         this.setHelp("Daar komen ze aanrollen");
-        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get(1));
+        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("snow"));
 
         this.setWinning(false);
         this.setQuestionDone(false);
@@ -69,7 +69,7 @@ public class Level6 extends UNGraphicsLevel
 
         for (int i = 0; i < 55; i++)
         {
-            this.getTrees().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), this.getGameScreen().getSprites().get((new Random().nextInt(2) == 1) ? spriteTree : (spriteTree + 1)), false, 13 * 3, 29 * 3));
+            this.getTrees().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -20 + i * 15, 280 + new Random().nextInt(50), this.getGameScreen().getSprites().get((new Random().nextInt(2) == 1) ? spriteTree + "0" : (spriteTree + "1")), false, 13 * 3, 29 * 3));
         }
 
         for (int i = 0; i < 100; i++)
@@ -77,8 +77,8 @@ public class Level6 extends UNGraphicsLevel
             this.getSnow().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), new Random().nextInt(this.getGameScreen().getWindow().getContentWidth()), new Random().nextInt(this.getGameScreen().getWindow().getContentHeight()), this.getGameScreen().getSprites().get(spriteSnowflake), false, 5, 5));
         }
 
-        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -100, 310, this.getGameScreen().getSprites().get(spriteReindeer), false, 17 * 2, 13 * 2));
-        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -50, 330, this.getGameScreen().getSprites().get(spriteReindeer), false, 17 * 2, 13 * 2));
+        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -100, 310, this.getGameScreen().getSprites().get(spriteReindeer + "0"), false, 17 * 2, 13 * 2));
+        this.getReindeers().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), -50, 330, this.getGameScreen().getSprites().get(spriteReindeer + "0"), false, 17 * 2, 13 * 2));
 
         for (UNGraphicsObject reindeer : this.getReindeers())
         {
@@ -157,7 +157,7 @@ public class Level6 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
-                    getGameScreen().getSounds().get(0).stop();
+                    getGameScreen().getSounds().get("gibberish").stop();
                     if (getGameScreen().getLevel() < getGameScreen().getLevelMax()) {
                         if (isWinning()) {
                             getGameScreen().addLevel();
@@ -204,8 +204,8 @@ public class Level6 extends UNGraphicsLevel
                         }
                         else
                         {
-                            getGameScreen().getMusic().get(2).stop();
-                            getGameScreen().getMusic().get(1).play(true);
+                            getGameScreen().getMusic().get("avalange").stop();
+                            getGameScreen().getMusic().get("song2").play(true);
                             setQuestionDone(true);
                             setHelp("Klik op het antwoord");
                             setLastHelp(getHelp());
@@ -233,7 +233,7 @@ public class Level6 extends UNGraphicsLevel
                     }
                     for (UNGraphicsObject reindeer : getReindeers())
                     {
-                        reindeer.setImage(getGameScreen().getSprites().get(spriteReindeer + (int) Math.round(getReindeerIndex())));
+                        reindeer.setImage(getGameScreen().getSprites().get(spriteReindeer + String.valueOf(Math.round(getReindeerIndex()))));
                         reindeer.setX(reindeer.getX() + 1);
                     }
                 }
@@ -273,7 +273,7 @@ public class Level6 extends UNGraphicsLevel
                                     {
                                         remove(possibleAnswer);
                                     }
-                                    getGameScreen().getMusic().get(2).play(true);
+                                    getGameScreen().getMusic().get("avalange").play(true);
                                     getSnowballs().get(0).setX(-800);
                                     getSnowballs().get(1).setX(-1100);
                                     getSnowballs().get(2).setX(-1400);

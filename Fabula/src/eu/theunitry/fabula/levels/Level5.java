@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -23,12 +24,13 @@ public class Level5 extends UNGraphicsLevel
     private Timer timerWellAnim, timerWellCheck, timerBird;
     private UNGraphicsObject camel1, camel2, camel3, bucket, well;
     private ArrayList<UNGraphicsObject> birds;
+    private ArrayList<Integer> birdsFrames;
     private JLabel liter1, liter2, liter3;
     private JButton button;
     private boolean winning;
     private int need, imageIndex1, imageIndex2, imageIndex3, imageIndexWell;
     private String lastHelp;
-    private int spriteCamel = 50, spriteBucket = 45, spriteWell = 60, spriteBird = 33;
+    private String spriteCamel = "2:5:3:", spriteBucket = "2:5:2:", spriteWell = "2:5:4:", spriteBird = "2:5:1:";
 
     /**
      * Level 5
@@ -39,6 +41,7 @@ public class Level5 extends UNGraphicsLevel
     {
         super(gameScreen, hudEnabled);
 
+        this.birdsFrames = new ArrayList<Integer>();
         this.setImageIndex1(new Random().nextInt(3));
         this.setImageIndex2(new Random().nextInt(4));
         this.setImageIndex3(new Random().nextInt(3));
@@ -49,16 +52,31 @@ public class Level5 extends UNGraphicsLevel
         this.addHelp("Jammer! Je moet " + this.getNeed() + " liter in de bakken stoppen");
         this.addHelp("Helaas! Er moet " + this.getNeed() + " liter in de bakken zitten");
         this.setHelp("Sleep water in de bakken van de kamelen om het getal te verhogen");
-        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get(4));
+        this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("desert"));
 
         this.setWinning(false);
         this.setLastHelp(getHelp());
 
-        this.setCamel1(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 250, 380, this.getGameScreen().getSprites().get(spriteCamel), false, 19 * 4, 14 * 4));
-        this.setCamel2(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 340, 390, this.getGameScreen().getSprites().get(spriteCamel), false, 19 * 4, 14 * 4));
-        this.setCamel3(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 440, 360, this.getGameScreen().getSprites().get(spriteCamel), false, 19 * 4, 14 * 4));
-        this.setBucket(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 100, 340, this.getGameScreen().getSprites().get(spriteBucket), true, 8 * 4, 8 * 4));
-        this.setWell(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 70, 320, this.getGameScreen().getSprites().get(spriteWell), false, 22 * 4, 30 * 4));
+        this.setBirds(new ArrayList<UNGraphicsObject>());
+        double birdScale;
+
+        for (int i = 0; i < 5; i++)
+        {
+            birdScale = 0.5 + new Random().nextDouble();
+            this.getBirds().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), new Random().nextInt(this.getGameScreen().getWindow().getContentWidth()), 70 + new Random().nextInt(130), this.getGameScreen().getSprites().get(spriteBird + "0"), false, (int) (15.0 * birdScale), (int) (18.0 * birdScale)));
+            this.birdsFrames.add(new Random().nextInt(3));
+        }
+
+        for (UNGraphicsObject bird : this.getBirds())
+        {
+            this.addObject(bird);
+        }
+
+        this.setCamel1(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 250, 380, this.getGameScreen().getSprites().get(spriteCamel + "0"), false, 19 * 4, 14 * 4));
+        this.setCamel2(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 340, 390, this.getGameScreen().getSprites().get(spriteCamel + "0"), false, 19 * 4, 14 * 4));
+        this.setCamel3(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 440, 360, this.getGameScreen().getSprites().get(spriteCamel + "0"), false, 19 * 4, 14 * 4));
+        this.setBucket(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 100, 340, this.getGameScreen().getSprites().get(spriteBucket + "0"), true, 8 * 4, 8 * 4));
+        this.setWell(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 70, 320, this.getGameScreen().getSprites().get(spriteWell + "0"), false, 22 * 4, 30 * 4));
         this.setImageIndexWell(0);
 
         this.addObject(this.getCamel1());
@@ -83,17 +101,9 @@ public class Level5 extends UNGraphicsLevel
         this.getLiter3().setForeground(new Color(51, 51, 51));
         this.add(this.getLiter3());
 
-        this.getCamel1().setImage(gameScreen.getSprites().get(spriteCamel + this.getImageIndex1() + 1));
-        this.getCamel2().setImage(gameScreen.getSprites().get(spriteCamel + this.getImageIndex2() + 1));
-        this.getCamel3().setImage(gameScreen.getSprites().get(spriteCamel + this.getImageIndex3() + 1));
-
-        this.setBirds(new ArrayList<UNGraphicsObject>());
-        this.getBirds().add(new UNGraphicsObject(this.getGameScreen().getWindow().getFrame(), 70, 80, this.getGameScreen().getSprites().get(spriteBird), false, 12 * 3, 6 * 3));
-
-        for (UNGraphicsObject bird : this.getBirds())
-        {
-            this.addObject(bird);
-        }
+        this.getCamel1().setImage(gameScreen.getSprites().get(spriteCamel + String.valueOf(this.getImageIndex1() + 1)));
+        this.getCamel2().setImage(gameScreen.getSprites().get(spriteCamel + String.valueOf(this.getImageIndex2() + 1)));
+        this.getCamel3().setImage(gameScreen.getSprites().get(spriteCamel + String.valueOf(this.getImageIndex3() + 1)));
 
         this.button = new JButton("Vertrek");
 
@@ -115,9 +125,9 @@ public class Level5 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (button.getText() == "Door")
+                if (Objects.equals(button.getText(), "Door"))
                 {
-                    getGameScreen().getSounds().get(0).stop();
+                    getGameScreen().getSounds().get("gibberish").stop();
                     if (getGameScreen().getLevel() < getGameScreen().getLevelMax())
                     {
                         if (isWinning())
@@ -186,9 +196,9 @@ public class Level5 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket))
+                if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0"))
                 {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1))
+                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1"))
                     {
                         getBucket().setY(getBucket().getY() + 20);
                         setImageIndexWell(getImageIndexWell() + 1);
@@ -217,9 +227,9 @@ public class Level5 extends UNGraphicsLevel
                 else
                 {
                     setImageIndexWell(getImageIndexWell() - 1);
-                    getBucket().setImage(getGameScreen().getSprites().get(spriteBucket));
+                    getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "0"));
                 }
-                getWell().setImage(getGameScreen().getSprites().get(spriteWell + Math.min(getImageIndexWell(), 2)));
+                getWell().setImage(getGameScreen().getSprites().get(spriteWell + String.valueOf(Math.min(getImageIndexWell(), 2))));
             }
         });
 
@@ -230,7 +240,7 @@ public class Level5 extends UNGraphicsLevel
             {
                 if (getBucket().getHitbox().intersects(getWell().getHitbox()))
                 {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + 1) && !timerWellAnim.isRunning() && !getBucket().getMouseHold())
+                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1") && !timerWellAnim.isRunning() && !getBucket().getMouseHold())
                     {
                         getBucket().setX(100);
                         getBucket().setY(340);
@@ -239,15 +249,15 @@ public class Level5 extends UNGraphicsLevel
                         timerWellAnim.start();
                     }
                 }
-                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket) && !getBucket().getMouseHold())
+                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0") && !getBucket().getMouseHold())
                 {
                     if (getBucket().getHitbox().intersects(getCamel1().getHitbox()))
                     {
                         if (getImageIndex1() < 4)
                         {
                             setImageIndex1(getImageIndex1() + 1);
-                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex1() + 1));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
+                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
+                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
                             getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                         }
                     }
@@ -256,8 +266,8 @@ public class Level5 extends UNGraphicsLevel
                         if (getImageIndex2() < 4)
                         {
                             setImageIndex2(getImageIndex2() + 1);
-                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex2() + 1));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
+                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
+                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
                             getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
                         }
                     }
@@ -266,8 +276,8 @@ public class Level5 extends UNGraphicsLevel
                         if (getImageIndex3() < 4)
                         {
                             setImageIndex3(getImageIndex3() + 1);
-                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex3() + 1));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + 1));
+                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
+                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
                             getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
                         }
                     }
@@ -280,7 +290,7 @@ public class Level5 extends UNGraphicsLevel
                         if (getImageIndex1() > 0)
                         {
                             setImageIndex1(getImageIndex1() - 1);
-                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex1() + 1));
+                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
                             getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                         }
                     }
@@ -293,7 +303,7 @@ public class Level5 extends UNGraphicsLevel
                         if (getImageIndex2() > 0)
                         {
                             setImageIndex2(getImageIndex2() - 1);
-                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex2() + 1));
+                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
                             getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
                         }
                     }
@@ -306,7 +316,7 @@ public class Level5 extends UNGraphicsLevel
                         if (getImageIndex3() > 0)
                         {
                             setImageIndex3(getImageIndex3() - 1);
-                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + getImageIndex3() + 1));
+                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
                             getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
                         }
                     }
@@ -320,17 +330,23 @@ public class Level5 extends UNGraphicsLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-//                for (UNGraphicsObject bird : getBirds())
-//                {
-//                    if (getGameScreen().getSprites().indexOf(bird.getImage()) - spriteBird < 2)
-//                    {
-//                        bird.setImage(getGameScreen().getSprites().get(getGameScreen().getSprites().indexOf(bird.getImage()) + 1));
-//                    }
-//                    else
-//                    {
-//                        bird.setImage(getGameScreen().getSprites().get(spriteBird));
-//                    }
-//                }
+                for (UNGraphicsObject bird : getBirds())
+                {
+                    if (birdsFrames.get(getBirds().indexOf(bird)) < 3)
+                    {
+                        birdsFrames.set(getBirds().indexOf(bird), birdsFrames.get(getBirds().indexOf(bird)) + 1);
+                    }
+                    else
+                    {
+                        birdsFrames.set(getBirds().indexOf(bird), 0);
+                    }
+                    bird.setImage(getGameScreen().getSprites().get(spriteBird + String.valueOf(birdsFrames.get(getBirds().indexOf(bird)))));
+                    bird.setX(bird.getX() + Math.max((bird.getWidth() / 10), 1));
+                    if (bird.getX() > getGameScreen().getWindow().getContentWidth() + 30)
+                    {
+                        bird.setX(-30);
+                    }
+                }
             }
         });
         timerBird.start();
