@@ -45,7 +45,7 @@ public class Level9 extends UNGraphicsLevel
         this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan.");
         this.addHelp("Net niet goed, weet je zeker dat er " + need + " op de plank staan?");
         this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank.");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(2));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("desert"));     // TODO: Set to correct background
 
         this.winning = false;
         this.lastHelp = getHelp();
@@ -53,15 +53,14 @@ public class Level9 extends UNGraphicsLevel
         this.weights = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
-        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 565, 280, gameScreen.getSprites().get(45), false, 160, 32);
+        this.plank = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 565, 280, gameScreen.unResourceLoader.sprites.get("2:9:2"), false, 160, 32);
         this.plank.setHitbox(0, 0, 160, 1);
 
-        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.getSprites().get(43), false, 32, 32);
+        this.diamond = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.unResourceLoader.sprites.get("2:9:1"), false, 32, 32);
 
         for (int i = 0; i <10; i++) {
             weights.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 550 +
-                    new Random().nextInt(150), 250, gameScreen.getSprites()
-                    .get(44), true, 32, 32));
+                    new Random().nextInt(150), 250, gameScreen.unResourceLoader.sprites.get("2:9:3:1"), true, 32, 32));
         }
 
 
@@ -90,7 +89,7 @@ public class Level9 extends UNGraphicsLevel
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
+                if (button.getText().equals("Door")) {
                     gameScreen.getSounds().get(0).stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                         if (winning) {
@@ -113,7 +112,7 @@ public class Level9 extends UNGraphicsLevel
                         addMistake();
                         if (getMistakes() < 3) {
                             getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
+                            while(lastHelp.equals(getHelp())) {
                                 setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                             }
                             lastHelp = getHelp();
@@ -145,22 +144,19 @@ public class Level9 extends UNGraphicsLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject weight : weights) {
-                    if (plank.getHitbox().intersects(weight.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject weight : weights) {
+                if (plank.getHitbox().intersects(weight.getHitbox())) {
+                    touch++;
                 }
-                winning = (touch == need);
+            }
+            winning = (touch == need);
 
-                for(UNGraphicsObject weight : weights)
-                {
-                    if(!weight.getMouseHold() && !plank.getHitbox(true).intersects(weight.getHitbox())) {
-                        weight.setY(weight.getY() + 1);
-                    }
+            for(UNGraphicsObject weight : weights)
+            {
+                if(!weight.getMouseHold() && !plank.getHitbox(true).intersects(weight.getHitbox())) {
+                    weight.setY(weight.getY() + 1);
                 }
             }
         });
