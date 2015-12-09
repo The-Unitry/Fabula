@@ -45,55 +45,50 @@ public class Level11 extends UNGraphicsLevel
         this.addHelp("Jammer! Je moet voor " + need + " euro aan fruit kopen");
         this.addHelp("Helaas! Je moet voor " + need + " euro aan fruit inslaan");
         this.setHelp("Sleep het aantal fruit wat je kan betalen naar de kassa");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("supermarket"));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.apples = new ArrayList<UNGraphicsObject>();
-        this.pears = new ArrayList<UNGraphicsObject>();
-        this.grapes = new ArrayList<UNGraphicsObject>();
-        this.oranges = new ArrayList<UNGraphicsObject>();
-        this.bananas = new ArrayList<UNGraphicsObject>();
+        this.apples = new ArrayList<>();
+        this.pears = new ArrayList<>();
+        this.grapes = new ArrayList<>();
+        this.oranges = new ArrayList<>();
+        this.bananas = new ArrayList<>();
 
         this.color = new UNColor();
 
-        this.cashdesk = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 5, 280, gameScreen.getSprites().get(61), false, 270, 102);
+        this.cashdesk = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 5, 280, gameScreen.unResourceLoader.sprites.get("2:11:3"), false, 270, 102);
 
         this.addObject(cashdesk);
 
         for (int i = 0; i < 5; i++){
             apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 65 +
-                    new Random().nextInt(50), 80 + new Random().nextInt(80), gameScreen.getSprites()
-                    .get(56), true, 32, 32)
+                    new Random().nextInt(50), 80 + new Random().nextInt(80), gameScreen.unResourceLoader.sprites.get("2:11:1"), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             pears.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 165 +
-                    new Random().nextInt(50), 80 + new Random().nextInt(80), gameScreen.getSprites()
-                    .get(57), true, 32, 32)
+                    new Random().nextInt(50), 80 + new Random().nextInt(80), gameScreen.unResourceLoader.sprites.get("2:11:6"), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             grapes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 470 +
-                    new Random().nextInt(180), 70 + new Random().nextInt(45), gameScreen.getSprites()
-                    .get(58), true, 32, 32)
+                    new Random().nextInt(180), 70 + new Random().nextInt(45), gameScreen.unResourceLoader.sprites.get("2:11:4"), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             oranges.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 680 +
-                    new Random().nextInt(30), 120 + new Random().nextInt(130), gameScreen.getSprites()
-                    .get(59), true, 32, 32)
+                    new Random().nextInt(30), 120 + new Random().nextInt(130), gameScreen.unResourceLoader.sprites.get("2:11:5"), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             bananas.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 430 +
-                    new Random().nextInt(170), 180 + new Random().nextInt(50), gameScreen.getSprites()
-                    .get(60), true, 32, 32)
+                    new Random().nextInt(170), 180 + new Random().nextInt(50), gameScreen.unResourceLoader.sprites.get("2:11:2"), true, 32, 32)
             );
         }
 
@@ -135,8 +130,8 @@ public class Level11 extends UNGraphicsLevel
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
+                if (button.getText().equals("Door")) {
+                    gameScreen.getSounds().get("gibberish").stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                         if (winning) {
                             gameScreen.addLevel();
@@ -170,7 +165,7 @@ public class Level11 extends UNGraphicsLevel
                         addMistake();
                         if (getMistakes() < 3) {
                             getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
+                            while(lastHelp.equals(getHelp())) {
                                 setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                             }
                             lastHelp = getHelp();
@@ -211,37 +206,34 @@ public class Level11 extends UNGraphicsLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject apple : apples) {
-                    if (cashdesk.getHitbox().intersects(apple.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject apple : apples) {
+                if (cashdesk.getHitbox().intersects(apple.getHitbox())) {
+                    touch++;
                 }
-                for (UNGraphicsObject pear : pears) {
-                    if (cashdesk.getHitbox().intersects(pear.getHitbox())) {
-                        touch = touch + 3;
-                    }
-                }
-                for (UNGraphicsObject grape : grapes) {
-                    if (cashdesk.getHitbox().intersects(grape.getHitbox())) {
-                        touch = touch + 4;
-                    }
-                }
-                for (UNGraphicsObject orange : oranges) {
-                    if (cashdesk.getHitbox().intersects(orange.getHitbox())) {
-                        touch = touch + 4;
-                    }
-                }
-                for (UNGraphicsObject banana : bananas) {
-                    if (cashdesk.getHitbox().intersects(banana.getHitbox())) {
-                        touch = touch + 2;
-                    }
-                }
-                winning = (touch == need);
             }
+            for (UNGraphicsObject pear : pears) {
+                if (cashdesk.getHitbox().intersects(pear.getHitbox())) {
+                    touch = touch + 3;
+                }
+            }
+            for (UNGraphicsObject grape : grapes) {
+                if (cashdesk.getHitbox().intersects(grape.getHitbox())) {
+                    touch = touch + 4;
+                }
+            }
+            for (UNGraphicsObject orange : oranges) {
+                if (cashdesk.getHitbox().intersects(orange.getHitbox())) {
+                    touch = touch + 4;
+                }
+            }
+            for (UNGraphicsObject banana : bananas) {
+                if (cashdesk.getHitbox().intersects(banana.getHitbox())) {
+                    touch = touch + 2;
+                }
+            }
+            winning = (touch == need);
         });
 
         timer.start();
