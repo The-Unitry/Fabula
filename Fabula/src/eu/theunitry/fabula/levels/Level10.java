@@ -20,9 +20,9 @@ import java.util.Random;
 public class Level10 extends UNGraphicsLevel
 {
     private Timer timer;
-    private UNGraphicsObject plank;
-    private UNGraphicsObject diamond;
+    private UNGraphicsObject snail;
     private ArrayList<UNGraphicsObject> acorn;
+    private UNGraphicsObject selecter;
     private JButton button;
     private boolean winning;
     private int need, touch, g1, g2;
@@ -43,32 +43,23 @@ public class Level10 extends UNGraphicsLevel
         this.need = g1 * g2;
 
         this.setQuestion("hoeveel groepen van " + g1 + " eikeltjes vallen uit de boom");
-        this.addHelp("Jammer! Je moet " + need + " gewichtjes op de plank hebben");
-        this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan");
-        this.addHelp("net niet goed, weet je zeker dat er " + need + " op de plank staan?");
+        this.addHelp("Jammer! Je moet " + need + " gewichtjes op de snail hebben");
+        this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de snail staan");
+        this.addHelp("net niet goed, weet je zeker dat er " + need + " op de snail staan?");
         this.setHelp("Klik op het juiste getal om te antwoorden");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(3));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest-background"));
 
         this.winning = false;
         this.lastHelp = getHelp();
-
+        this.selecter = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 32, 32);
+        this.snail = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.unResourceLoader.sprites.get("2:10:2"), true, 32, 32);
         this.acorn = new ArrayList<UNGraphicsObject>();
         this.color = new UNColor();
 
         for (int i = 0; i < need; i++)
         {
-            acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(),50 + new Random().nextInt(400), 10, gameScreen.getSprites().get(46), false, 16, 16));
+            acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(),50 + new Random().nextInt(400), 65, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 16, 16));
         }
-
-        //If (button.getText () == "Begin) {
-
-
-
-   // }
-
-        acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 180, gameScreen.getSprites().get(46), true, 64, 64));
-        acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 250, gameScreen.getSprites().get(46), true, 64, 64));
-        acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 320, gameScreen.getSprites().get(46), true, 64, 64));
 
         this.button = new JButton("begin");
         this.setLayout(null);
@@ -77,6 +68,8 @@ public class Level10 extends UNGraphicsLevel
         this.button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
         this.button.setForeground(Color.white);
         this.button.setOpaque(true);
+        addObject(selecter);
+        addObject(snail);
 
         /**
          * Reset Default Styling
@@ -102,8 +95,8 @@ public class Level10 extends UNGraphicsLevel
                     if (winning) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, de diamant is van ons");
-                        for (UNGraphicsObject weight : acorn) {
-                            weight.setClickable(false);
+                        for (UNGraphicsObject acorns : acorn) {
+                            acorns.setClickable(false);
                         }
                         button.setText("Door");
                     } else {
@@ -128,11 +121,6 @@ public class Level10 extends UNGraphicsLevel
                                 );
                             }
 
-                            for (UNGraphicsObject weight : acorn)
-                            {
-                                weight.setClickable(false);
-                            }
-
                             button.setText("Door");
                         }
                     }
@@ -144,8 +132,29 @@ public class Level10 extends UNGraphicsLevel
         {
             addObject(acorns);
         }
-        this.getPanel().add(button);
 
-        //timer.start();
+            addObject(snail);
+
+
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject acorns : acorn) {
+                if (snail.getHitbox().intersects(acorns.getHitbox())) {
+                    touch++;
+                }
+            }
+            winning = (touch == need);
+
+            for(UNGraphicsObject acorns : acorn)
+            {
+                if(!acorns.getMouseHold() && !snail.getHitbox(true).intersects(acorns.getHitbox())) {
+                    acorns.setY(acorns.getY() + 1);
+                }
+            }
+        });
+
+            this.getPanel().add(button);
+
+        timer.start();
     }
 }

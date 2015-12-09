@@ -11,7 +11,7 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
  */
 public class UNLevelLoader
 {
-    private int currentLevel = 1;      // The current level, this is temporary because the progress will be saved locally.
+    private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
     private UNGameScreen gameScreen;
 
     public UNLevelLoader(UNGameScreen gameScreen)

@@ -160,6 +160,7 @@ public class UNResourceLoader
          * Level 10
          */
         sprites.put("2:10:1", this.getSprite("levels/10/acorn"));
+        sprites.put("2:10:2", this.getSprite("levels/10/snail"));
 
         /**
          * Level 11

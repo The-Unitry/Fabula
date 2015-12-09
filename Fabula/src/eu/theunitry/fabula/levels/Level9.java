@@ -45,7 +45,7 @@ public class Level9 extends UNGraphicsLevel
         this.addHelp("Helaas! Er moeten " + need + " gewichtjes op de plank staan.");
         this.addHelp("Net niet goed, weet je zeker dat er " + need + " op de plank staan?");
         this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank.");
-        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("desert"));     // TODO: Set to correct background
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("cave"));
 
         this.winning = false;
         this.lastHelp = getHelp();
