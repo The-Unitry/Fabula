@@ -11,23 +11,27 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
  */
 public class UNLevelLoader
 {
-    private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
+    //private int currentLevel = 10;      // The current level, this is temporary because the progress will be saved locally.
     private UNGameScreen gameScreen;
 
     public UNLevelLoader(UNGameScreen gameScreen)
     {
         this.gameScreen = gameScreen;
+    }
+
+    public void loadLevel(int level)
+    {
         this.gameScreen.resetProgress();
 
         this.gameScreen.switchMusic("song2", true);
         this.gameScreen.getMusic().get("song2").setVolume(0.1);
 
-        this.loadLevel(this.currentLevel);
+        this.switchToLevel(level);
     }
 
-    private void loadLevel(int level)
+    private void switchToLevel(int level)
     {
-        switch (this.currentLevel)
+        switch (level)
         {
             case 0:
                 UNGraphicsView panel0 = new Level0(gameScreen, true);
