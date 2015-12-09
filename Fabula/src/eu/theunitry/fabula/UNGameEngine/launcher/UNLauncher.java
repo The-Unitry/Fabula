@@ -47,7 +47,8 @@ public class UNLauncher extends JPanel
         this.controlView.add(label, BorderLayout.NORTH);
         this.controlView.add(startBtn, BorderLayout.SOUTH);
 
-        this.add(controlView, BorderLayout.WEST);
+        this.add(controlView);
+        this.add(levelView);
     }
 
     public JPanel getPanel() {
@@ -59,7 +60,6 @@ public class UNLauncher extends JPanel
         /**
          * Panel Styling
          */
-        this.setBackground(UNColor.WHITE_COLOR);
         this.setLayout(new BorderLayout());
 
         /**
@@ -72,6 +72,8 @@ public class UNLauncher extends JPanel
         /**
          * LevelView styling
          */
+        this.levelView.setBackground(Color.white);
+        this.levelView.setBounds(controlView.getWidth(), 0, 768 - controlView.getWidth(), 512);
 
         /**
          * Label Styling
