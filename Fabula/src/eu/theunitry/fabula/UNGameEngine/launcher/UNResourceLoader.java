@@ -111,6 +111,50 @@ public class UNResourceLoader
         sprites.put("2:6:3", this.getSprite("levels/6/snowball"));
         sprites.put("2:6:4:1", this.getSprite("levels/6/snowtree"));
         sprites.put("2:6:4:2", this.getSprite("levels/6/snowtree-2"));
+
+        /**
+         * Level 7
+         */
+        sprites.put("2:7:1:1", this.getSprite("levels/7/chest-closed"));
+        sprites.put("2:7:1:2", this.getSprite("levels/7/chest-open"));
+        sprites.put("2:7:2", this.getSprite("levels/7/coin"));
+
+        /**
+         * Level 8
+         */
+        sprites.put("2:8:1", this.getSprite("levels/8/nugget"));
+        sprites.put("2:8:2", this.getSprite("levels/8/pickaxe"));
+
+        /**
+         * Level 9
+         */
+        sprites.put("2:9:1", this.getSprite("levels/9/diamond"));
+        sprites.put("2:9:2", this.getSprite("levels/9/shelf"));
+        sprites.put("2:9:3:1", this.getSprite("levels/9/weight-1"));
+        sprites.put("2:9:3:2", this.getSprite("levels/9/weight-2"));
+        sprites.put("2:9:3:3", this.getSprite("levels/9/weight-3"));
+
+        /**
+         * Level 10
+         */
+        sprites.put("2:10:1", this.getSprite("levels/10/acorn"));
+
+        /**
+         * Level 11
+         */
+        sprites.put("2:11:1", this.getSprite("levels/11/apple"));
+        sprites.put("2:11:2", this.getSprite("levels/11/banana"));
+        sprites.put("2:11:3", this.getSprite("levels/11/cashdesk"));
+        sprites.put("2:11:4", this.getSprite("levels/11/grape"));
+        sprites.put("2:11:5", this.getSprite("levels/11/orange"));
+        sprites.put("2:11:6", this.getSprite("levels/11/pear"));
+
+        /**
+         * Level 12
+         */
+        sprites.put("2:12:1", this.getSprite("levels/12/cage"));
+        sprites.put("2:12:2:1", this.getSprite("levels/12/monkey-brown"));
+        sprites.put("2:12:2:2", this.getSprite("levels/12/monkey-white"));
     }
 
     private void loadBackgrounds()
@@ -162,6 +206,7 @@ public class UNResourceLoader
         try {
             return ImageIO.read(new File("res/sprites/" + folder + "/" + file + ".png"));
         } catch (IOException e) {
+            System.out.println("UNResourceLoader: Cannot find '" + file + "'");
             e.printStackTrace();
             try {
                 return ImageIO.read(new File("res/default.png"));
