@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 5
+ * Allan de Wit
+ */
 public class Level5 extends UNGraphicsLevel
 {
     private Timer timerWellAnim, timerWellCheck, timerBird;
