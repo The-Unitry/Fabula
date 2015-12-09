@@ -91,22 +91,18 @@ public class UNResourceLoader
             for(int i = 0; i <= 5; i++) sprites.put("2:4:2:" + String.valueOf(i), this.getSprite("levels/4/machine-3-" + String.valueOf(i)));
             // State 4
             for(int i = 0; i <= 5; i++) sprites.put("2:4:3:" + String.valueOf(i), this.getSprite("levels/4/machine-4-" + String.valueOf(i)));
-            // State 5
-            for(int i = 0; i <= 5; i++) sprites.put("2:4:4:" + String.valueOf(i), this.getSprite("levels/4/machine-4-" + String.valueOf(i)));
-            // State 6
-            for(int i = 0; i <= 5; i++) sprites.put("2:4:5:" + String.valueOf(i), this.getSprite("levels/4/machine-4-" + String.valueOf(i)));
 
         // Cable
-        for(int i = 1; i <= 6; i++) sprites.put("2:4:6:" + String.valueOf(i), this.getSprite("levels/4/cable-" + String.valueOf(i)));
+        for(int i = 1; i <= 6; i++) sprites.put("2:4:4:" + String.valueOf(i), this.getSprite("levels/4/cable-" + String.valueOf(i)));
 
         // Support
             // Right
-            for(int i = 1; i <= 7; i++) sprites.put("2:4:7:" + String.valueOf(i), this.getSprite("levels/4/support-0-" + String.valueOf(i)));
+            for(int i = 1; i <= 7; i++) sprites.put("2:4:5:" + String.valueOf(i), this.getSprite("levels/4/support-0-" + String.valueOf(i)));
             // Left
-            for(int i = 1; i <= 7; i++) sprites.put("2:4:8:" + String.valueOf(i), this.getSprite("Levels/4/support-1-" + String.valueOf(i)));
+            for(int i = 1; i <= 7; i++) sprites.put("2:4:6:" + String.valueOf(i), this.getSprite("Levels/4/support-1-" + String.valueOf(i)));
 
         // Rocket
-        for(int i = 0; i <= 4; i++) sprites.put("2:4:9:" + String.valueOf(i), this.getSprite("Levels/4/rocket-" + String.valueOf(i)));
+        for(int i = 0; i <= 4; i++) sprites.put("2:4:7:" + String.valueOf(i), this.getSprite("Levels/4/rocket-" + String.valueOf(i)));
 
         /**
          * Level 5
