@@ -101,7 +101,7 @@ public class UNResourceLoader
             // Left
             for(int i = 1; i <= 7; i++) sprites.put("1:1:7" + String.valueOf(i), this.getSprite("Levels/4/support-1-" + String.valueOf(i)));
 
-        //Rocket
+        // Rocket
         for(int i = 0; i <= 4; i++) sprites.put("1:1:8" + String.valueOf(i), this.getSprite("Levels/4/rocket-" + String.valueOf(i)));
 
         /**
@@ -212,7 +212,7 @@ public class UNResourceLoader
     private void loadMusic()
     {
         music.put("intro", TinySound.loadMusic("audio/intro.wav"));
-        music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo! When I feel heavy-metal!
+        music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo! When I feel heavy-metal!!!
         music.put("avalange", TinySound.loadMusic("audio/avalange.wav"));
     }
 
