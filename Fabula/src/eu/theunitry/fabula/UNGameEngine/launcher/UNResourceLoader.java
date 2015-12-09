@@ -216,6 +216,7 @@ public class UNResourceLoader
             }
         }
     }
+
     private Image getSprite(String file)
     {
         return this.getSprite("", file);

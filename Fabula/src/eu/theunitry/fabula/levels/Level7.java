@@ -44,19 +44,19 @@ public class Level7 extends UNGraphicsLevel
         this.addHelp("Jammer! Dit is niet goed! Doe het nog eens over!");
         this.addHelp("Helaas! Dit is niet het juiste aantal, probeer het nog eens!");
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(0));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("underwater"));
 
         this.lastHelp = getHelp();
 
-        this.coins = new ArrayList<UNGraphicsObject>();
+        this.coins = new ArrayList<>();
         this.color = new UNColor();
 
-        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.getSprites().get(52), false, 96, 96);
+        this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.unResourceLoader.sprites.get("2:7:1:2"), false, 96, 96);
         this.chest.setHitbox(0, 60, 96, 1);
 
         for (int i = 0; i < 20; i++){
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.getSprites().get(53), false, 32, 32)
+                new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.unResourceLoader.sprites.get("2:7:2"), false, 32, 32)
             );
         }
 
@@ -83,8 +83,8 @@ public class Level7 extends UNGraphicsLevel
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
+                if (button.getText().equals("Door")) {
+                    gameScreen.getSounds().get("gibberish").stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                         if (winning) {
                             gameScreen.addLevel();
@@ -107,7 +107,7 @@ public class Level7 extends UNGraphicsLevel
                         addMistake();
                         if (getMistakes() < 3) {
                             getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
+                            while(lastHelp.equals(getHelp())) {
                                 setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                             }
                             lastHelp = getHelp();
@@ -139,27 +139,24 @@ public class Level7 extends UNGraphicsLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(15, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject coin : coins) {
-                    if (chest.getHitbox().intersects(coin.getHitbox())) {
-                        touch++;
-                    }
+        timer = new Timer(15, e -> {
+            touch = 0;
+            for (UNGraphicsObject coin : coins) {
+                if (chest.getHitbox().intersects(coin.getHitbox())) {
+                    touch++;
                 }
-                winning = (touch == (need + need2));
+            }
+            winning = (touch == (need + need2));
 
-                for(UNGraphicsObject coin : coins)
-                {
-                    if(!coin.getMouseHold() && !chest.getHitbox(true).intersects(coin.getHitbox())) {
-                        coin.setY(coin.getY() + 1);
-                    }
-                        if(coin.getY() > 64)
-                        {
-                            coin.setClickable(true);
-                        }
+            for(UNGraphicsObject coin : coins)
+            {
+                if(!coin.getMouseHold() && !chest.getHitbox(true).intersects(coin.getHitbox())) {
+                    coin.setY(coin.getY() + 1);
                 }
+                    if(coin.getY() > 64)
+                    {
+                        coin.setClickable(true);
+                    }
             }
         });
 
