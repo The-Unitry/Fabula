@@ -16,7 +16,6 @@ import java.util.ArrayList;
 /**
  * UNLauncher
  * UNLauncher is the main menu which loads levels & settings.
- * Later, we will add support to switch between levels.
  */
 public class UNLauncher extends JPanel
 {
