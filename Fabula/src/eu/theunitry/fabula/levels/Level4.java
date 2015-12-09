@@ -44,19 +44,19 @@ public class Level4 extends UNGraphicsLevel
         cables = new ArrayList<>();
         gems = new ArrayList<>();
 
-        gameScreen.getMusic().get(1).play(true);
-        gameScreen.getMusic().get(1).setVolume(0.1);
+        gameScreen.getMusic().get("song2").play(true);
+        gameScreen.getMusic().get("song2").setVolume(0.1);
 
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get("space"));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
         this.rocketIndex = 0;
         this.machineIndex = 0;
-        this.supportLIndex = 0;
-        this.supportRIndex = 0;
-        this.cableIndex = 0;
+        this.supportLIndex = 1;
+        this.supportRIndex = 1;
+        this.cableIndex = 1;
 
         this.setQuestion("Wat is  plus plus ?");
         this.addHelp("Jammer! Probeer het nog eens");
@@ -65,11 +65,11 @@ public class Level4 extends UNGraphicsLevel
 
         this.color = new UNColor();
 
-        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 400, 265, gameScreen.getSprites().get(68), false, 170 , 200));
-        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 193, 358, gameScreen.getSprites().get(62), false, 205, 105));
-        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 130, 315, gameScreen.getSprites().get(99), false, 95, 150));
-        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 315, gameScreen.getSprites().get(92), false, 95, 150));
-        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 175, 220, gameScreen.getSprites().get(106), false, 160,250));
+        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 400, 265, gameScreen.getSprites().get("2:4:0:1"), false, 170 , 200));
+        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 193, 358, gameScreen.getSprites().get("2:4:6:1"), false, 205, 105));
+        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 130, 315, gameScreen.getSprites().get("2:4:8:1"), false, 95, 150));
+        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 315, gameScreen.getSprites().get("2:4:7:1"), false, 95, 150));
+        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 175, 220, gameScreen.getSprites().get("2:4:9:0"), false, 160,250));
 
         for (UNGraphicsObject rocket : rockets)
         {
@@ -122,7 +122,7 @@ public class Level4 extends UNGraphicsLevel
             {
                 if (button.getText() == "Doorgaan")
                 {
-                    gameScreen.getSounds().get(0).stop();
+                    gameScreen.getSounds().get("gibberish").stop();
                     if (gameScreen.getLevel() < gameScreen.getLevelMax())
                     {
                         if (winning)
@@ -153,7 +153,7 @@ public class Level4 extends UNGraphicsLevel
                     }
                     for (UNGraphicsObject rocket : rockets) {
 
-                        rocket.setImage(gameScreen.getSprites().get(107 + (int) Math.round(rocketIndex)));
+                        rocket.setImage(gameScreen.getSprites().get("2:4:9:" + (int) Math.round(rocketIndex)));
                     }
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
@@ -180,34 +180,34 @@ public class Level4 extends UNGraphicsLevel
                 for (UNGraphicsObject machine : machines) {
                     switch (machineState) {
                         case 1:
-                            machine.setImage(gameScreen.getSprites().get(68 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:0:" + (int) Math.round(machineIndex)));
                             break;
                         case 2:
-                            machine.setImage(gameScreen.getSprites().get(72 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:1:" + (int) Math.round(machineIndex)));
 
                             break;
                         case 3:
-                            machine.setImage(gameScreen.getSprites().get(76 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:2:" + (int) Math.round(machineIndex)));
                             break;
                         case 4:
-                            machine.setImage(gameScreen.getSprites().get(80 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:3:" + (int) Math.round(machineIndex)));
                             break;
                         case 5:
-                            machine.setImage(gameScreen.getSprites().get(84 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:4:" + (int) Math.round(machineIndex)));
                             break;
                         case 6:
-                            machine.setImage(gameScreen.getSprites().get(88 + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:5:" + (int) Math.round(machineIndex)));
                             cableRelease = true;
                             break;
                     }
                 }
 
                 if (cableRelease) {
-                    if (cableIndex < 5) {
+                    if (cableIndex < 6) {
                         cableIndex += 0.07;
                     }
                     for (UNGraphicsObject cable : cables) {
-                        cable.setImage(gameScreen.getSprites().get(62 + (int) Math.round(cableIndex)));
+                        cable.setImage(gameScreen.getSprites().get("2:4:6:" + (int) Math.round(cableIndex)));
                     }
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
@@ -232,20 +232,20 @@ public class Level4 extends UNGraphicsLevel
                             },
                             200
                     );
-                    if (supportRIndex < 6) {
+                    if (supportRIndex < 7) {
                         supportRIndex += 0.05;
                     }
 
                     for (UNGraphicsObject supportR : supportsR) {
 
-                        supportR.setImage(gameScreen.getSprites().get(92 + (int) Math.round(supportRIndex)));
+                        supportR.setImage(gameScreen.getSprites().get("2:4:7:" + (int) Math.round(supportRIndex)));
                     }
-                    if (supportLIndex < 6) {
+                    if (supportLIndex < 7) {
                         supportLIndex += 0.05;
                     }
                     for (UNGraphicsObject supportL : supportsL) {
 
-                        supportL.setImage(gameScreen.getSprites().get(99 + (int) Math.round(supportLIndex)));
+                        supportL.setImage(gameScreen.getSprites().get("2:4:8:" + (int) Math.round(supportLIndex)));
                     }
 
                 }
