@@ -44,7 +44,7 @@ public class Level12 extends UNGraphicsLevel
         this.addHelp("Jammer! Je moet een totaal gewicht van " + need + " kilogram hebben");
         this.addHelp("Helaas! Er moet een gewicht van " + need + " kilogram in de kooi zitten");
         this.setHelp("Sleep de aapjes in de kooi");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(4));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get("jungle"));
 
         this.winning = false;
         this.lastHelp = getHelp();
@@ -54,30 +54,28 @@ public class Level12 extends UNGraphicsLevel
 
         this.color = new UNColor();
 
-        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 50, 275, gameScreen.getSprites().get(64), false, 96, 96);
+        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 50, 275, gameScreen.unResourceLoader.sprites.get("2:12:1"), false, 96, 96);
 
         for (int i = 0; i < 5; i++){
             monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
-                    new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.getSprites()
-                    .get(63), true, 32, 32)
+                new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32)
             );
         }
 
         for (int i = 0; i < 5; i++){
             monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
-                    new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.getSprites()
-                    .get(62), true, 32, 32)
+                new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32)
             );
         }
 
-        this.monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        this.monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+            monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32));
         }
 
-        this.monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.getSprites().get(38), true, 32, 32));
+        this.monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32));
         if (new Random().nextInt(2) == 1) {
-            monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.getSprites().get(38), true, 32, 32));
+            monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32));
         }
 
         for (UNGraphicsObject monkey_white : monkeys_white) {
@@ -105,60 +103,57 @@ public class Level12 extends UNGraphicsLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level0(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
-                }
-                if (isHelperDoneTalking()) {
+        button.addActionListener(e -> {
+            if (button.getText().equals("Door")) {
+                gameScreen.getSounds().get(0).stop();
+                if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                     if (winning) {
-                        getHelper().setState(3);
-                        setHelp("Goed gedaan! Het past allemaal precies!");
+                        gameScreen.addLevel();
+                    }
+                    gameScreen.switchPanel(new Level0(gameScreen, true));
+                } else {
+                    gameScreen.switchPanel(new UNLauncher(gameScreen));
+                }
+            }
+            if (isHelperDoneTalking()) {
+                if (winning) {
+                    getHelper().setState(3);
+                    setHelp("Goed gedaan! Het past allemaal precies!");
+                    for (UNGraphicsObject monkey_white : monkeys_white) {
+                        monkey_white.setClickable(false);
+                    }
+                    for (UNGraphicsObject monkey_brown : monkeys_brown) {
+                        monkey_brown.setClickable(false);
+                    }
+                    button.setText("Door");
+                } else {
+                    addMistake();
+                    if (getMistakes() < 3) {
+                        getHelper().setState(4);
+                        while(lastHelp.equals(getHelp())) {
+                            setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                        }
+                        lastHelp = getHelp();
+                    } else {
+                        getHelper().setState(4);
+                        if (touch < need) {
+                            setHelp("Jammer, je moest nog een gewicht van " + (need - touch) + " erbij doen. Want " +
+                                    (need - touch) + " plus " + touch + " is " + need
+                            );
+                        } else {
+                            setHelp("Jammer, je had een gewicht van " + (touch - need) + " teveel bij gedaan. Want " +
+                                    touch + " min " + (touch - need) + " is " + need
+                            );
+                        }
+
                         for (UNGraphicsObject monkey_white : monkeys_white) {
                             monkey_white.setClickable(false);
                         }
                         for (UNGraphicsObject monkey_brown : monkeys_brown) {
                             monkey_brown.setClickable(false);
                         }
+
                         button.setText("Door");
-                    } else {
-                        addMistake();
-                        if (getMistakes() < 3) {
-                            getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
-                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                            }
-                            lastHelp = getHelp();
-                        } else {
-                            getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, je moest nog een gewicht van " + (need - touch) + " erbij doen. Want " +
-                                        (need - touch) + " plus " + touch + " is " + need
-                                );
-                            } else {
-                                setHelp("Jammer, je had een gewicht van " + (touch - need) + " teveel bij gedaan. Want " +
-                                        touch + " min " + (touch - need) + " is " + need
-                                );
-                            }
-
-                            for (UNGraphicsObject monkey_white : monkeys_white) {
-                                monkey_white.setClickable(false);
-                            }
-                            for (UNGraphicsObject monkey_brown : monkeys_brown) {
-                                monkey_brown.setClickable(false);
-                            }
-
-                            button.setText("Door");
-                        }
                     }
                 }
             }
@@ -166,22 +161,19 @@ public class Level12 extends UNGraphicsLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                touch = 0;
-                for (UNGraphicsObject monkey_white : monkeys_white) {
-                    if (cage.getHitbox().intersects(monkey_white.getHitbox())) {
-                        touch = touch + 1;
-                    }
+        timer = new Timer(1, e -> {
+            touch = 0;
+            for (UNGraphicsObject monkey_white : monkeys_white) {
+                if (cage.getHitbox().intersects(monkey_white.getHitbox())) {
+                    touch = touch + 1;
                 }
-                for (UNGraphicsObject monkey_brown : monkeys_brown) {
-                    if (cage.getHitbox().intersects(monkey_brown.getHitbox())) {
-                        touch = touch + 2;
-                    }
-                }
-                winning = (touch == need);
             }
+            for (UNGraphicsObject monkey_brown : monkeys_brown) {
+                if (cage.getHitbox().intersects(monkey_brown.getHitbox())) {
+                    touch = touch + 2;
+                }
+            }
+            winning = (touch == need);
         });
 
         timer.start();

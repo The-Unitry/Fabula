@@ -86,57 +86,54 @@ public class Level9 extends UNGraphicsLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText().equals("Door")) {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level9(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
-                }
-                if (isHelperDoneTalking()) {
+        button.addActionListener(e -> {
+            if (button.getText().equals("Door")) {
+                gameScreen.getSounds().get("gibberish").stop();
+                if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
                     if (winning) {
-                        getHelper().setState(3);
-                        setHelp("Goed gedaan, de diamant is van ons!!!");
-                        for (UNGraphicsObject weight : weights) {
+                        gameScreen.addLevel();
+                    }
+                    gameScreen.switchPanel(new Level9(gameScreen, true));
+                } else {
+                    gameScreen.switchPanel(new UNLauncher(gameScreen));
+                }
+            }
+            if (isHelperDoneTalking()) {
+                if (winning) {
+                    getHelper().setState(3);
+                    setHelp("Goed gedaan, de diamant is van ons!!!");
+                    for (UNGraphicsObject weight : weights) {
+                        weight.setClickable(false);
+                    }
+                    button.setText("Door");
+                } else {
+                    addMistake();
+                    if (getMistakes() < 3) {
+                        getHelper().setState(4);
+                        while(lastHelp.equals(getHelp())) {
+                            setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                        }
+                        lastHelp = getHelp();
+                    } else {
+                        getHelper().setState(4);
+                        if (touch < need) {
+                            setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
+                                    " gewichtjes" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                    (need - touch)  + " is " + need
+                            );
+                        } else {
+                            setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
+                                    " gewicht" + ((touch - need == 1) ? "" : "jes")  + " af. Want " + touch + " min " +
+                                    (touch - need)  + " is " + need
+                            );
+                        }
+
+                        for (UNGraphicsObject weight : weights)
+                        {
                             weight.setClickable(false);
                         }
+
                         button.setText("Door");
-                    } else {
-                        addMistake();
-                        if (getMistakes() < 3) {
-                            getHelper().setState(4);
-                            while(lastHelp.equals(getHelp())) {
-                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                            }
-                            lastHelp = getHelp();
-                        } else {
-                            getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " gewichtjes" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                        (need - touch)  + " is " + need
-                                );
-                            } else {
-                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " gewicht" + ((touch - need == 1) ? "" : "jes")  + " af. Want " + touch + " min " +
-                                        (touch - need)  + " is " + need
-                                );
-                            }
-
-                            for (UNGraphicsObject weight : weights)
-                            {
-                                weight.setClickable(false);
-                            }
-
-                            button.setText("Door");
-                        }
                     }
                 }
             }

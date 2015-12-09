@@ -38,13 +38,13 @@ public class Level8 extends UNGraphicsLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.nuggets = new ArrayList<UNGraphicsObject>();
-        this.nuggetAnswers = new ArrayList<UNGraphicsObject>();
-        this.nuggetTexts = new ArrayList<JLabel>();
-        this.answers = new ArrayList<JLabel>();
+        this.nuggets = new ArrayList<>();
+        this.nuggetAnswers = new ArrayList<>();
+        this.nuggetTexts = new ArrayList<>();
+        this.answers = new ArrayList<>();
         this.firstInt = 1 + new Random().nextInt(5);
         this.secondInt = 1 + new Random().nextInt(5);
-        this.pickaxes = new ArrayList<UNGraphicsObject>();
+        this.pickaxes = new ArrayList<>();
         this.newRand = new Random().nextInt(4) + 1;
 
         this.setQuestion("Hoeveel is " + firstInt + " * " + secondInt + "?");
