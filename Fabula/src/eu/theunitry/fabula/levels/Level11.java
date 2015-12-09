@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 11
+ * Jeroen Bronkhorst
+ */
 public class Level11 extends UNGraphicsLevel
 {
     private Timer timer;

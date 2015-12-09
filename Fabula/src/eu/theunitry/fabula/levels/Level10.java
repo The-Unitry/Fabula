@@ -13,6 +13,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 10
+ * Wesley Meijer
+ */
 public class Level10 extends UNGraphicsLevel
 {
     private Timer timer;

@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 12
+ * Jeroen Bronkhorst
+ */
 public class Level12 extends UNGraphicsLevel
 {
     private Timer timer;
@@ -26,7 +30,7 @@ public class Level12 extends UNGraphicsLevel
     private String lastHelp;
 
     /**
-     * Level 11
+     * Level 12
      * @param gameScreen
      * @param hudEnabled
      */
