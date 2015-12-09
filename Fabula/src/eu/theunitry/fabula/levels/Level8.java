@@ -13,6 +13,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Level 8
+ * Jelmer Portegijs
+ */
 public class Level8 extends UNGraphicsLevel
 {
     private Timer timer;
@@ -47,7 +51,7 @@ public class Level8 extends UNGraphicsLevel
         this.addHelp("Dit is niet goed! Sleep het houweel naar het goede antwoord.");
         this.addHelp("Helaas, probeer het opnieuw!");
         this.addHelp("Dit is niet juist.");
-        this.setBackgroundImage(gameScreen.getBackgrounds().get(5));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("cave"));
 
         this.winning = false;
         this.questionDone = false;
@@ -69,11 +73,11 @@ public class Level8 extends UNGraphicsLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 20, 368, gameScreen.getSprites().get(54), true, 96, 96));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 90, 310, gameScreen.getSprites().get(54), true, 48, 48));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 110, 240, gameScreen.getSprites().get(54), true, 64, 64));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 240, gameScreen.getSprites().get(54), true, 48, 48));
-        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 245, 380, gameScreen.getSprites().get(54), true, 84, 84));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 20, 368, gameScreen.unResourceLoader.sprites.get("2:8:1"), true, 96, 96));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 90, 310, gameScreen.unResourceLoader.sprites.get("2:8:1"), true, 48, 48));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 110, 240, gameScreen.unResourceLoader.sprites.get("2:8:1"), true, 64, 64));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 220, 240, gameScreen.unResourceLoader.sprites.get("2:8:1"), true, 48, 48));
+        this.nuggets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 245, 380, gameScreen.unResourceLoader.sprites.get("2:8:1"), true, 84, 84));
 
         for(UNGraphicsObject nugget : nuggets)
         {
@@ -81,11 +85,11 @@ public class Level8 extends UNGraphicsLevel
             nugget.setClickable(false);
         }
 
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 235, 368, gameScreen.getSprites().get(54), false, 96, 96));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 165, 310, gameScreen.getSprites().get(54), false, 48, 48));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 148, 240, gameScreen.getSprites().get(54), false, 64, 64));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 38, 240, gameScreen.getSprites().get(54), false, 48, 48));
-        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 12, 380, gameScreen.getSprites().get(54), false, 84, 84));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 235, 368, gameScreen.unResourceLoader.sprites.get("2:8:1"), false, 96, 96));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 165, 310, gameScreen.unResourceLoader.sprites.get("2:8:1"), false, 48, 48));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 148, 240, gameScreen.unResourceLoader.sprites.get("2:8:1"), false, 64, 64));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 38, 240, gameScreen.unResourceLoader.sprites.get("2:8:1"), false, 48, 48));
+        this.nuggetAnswers.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), gameScreen.getWindow().getContentWidth() / 3 - 12, 380, gameScreen.unResourceLoader.sprites.get("2:8:1"), false, 84, 84));
 
         this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
         this.nuggetTexts.add(new JLabel(Integer.toString(1 + new Random().nextInt(4))));
@@ -145,7 +149,7 @@ public class Level8 extends UNGraphicsLevel
             this.answers.add(new JLabel(Integer.toString(fakeAnswer3)));
         }
 
-        this.pickaxes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 250, 300, gameScreen.getSprites().get(55), true, 56, 56));
+        this.pickaxes.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 250, 300, gameScreen.unResourceLoader.sprites.get("2:8:2"), true, 56, 56));
 
         for (JLabel nuggetText : nuggetTexts)
         {
@@ -209,7 +213,12 @@ public class Level8 extends UNGraphicsLevel
                     for (JLabel possibleAnswer : answers)
                     {
                         add(possibleAnswer);
-                        possibleAnswer.setBounds(nuggetAnswers.get(answers.indexOf(possibleAnswer)).getX(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getY(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), nuggetAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
+                        possibleAnswer.setBounds(
+                            nuggetAnswers.get(answers.indexOf(possibleAnswer)).getX(),
+                            nuggetAnswers.get(answers.indexOf(possibleAnswer)).getY(),
+                            nuggetAnswers.get(answers.indexOf(possibleAnswer)).getWidth(),
+                            nuggetAnswers.get(answers.indexOf(possibleAnswer)).getHeight()
+                        );
                     }
 
                     for(UNGraphicsObject pickaxe : pickaxes)
