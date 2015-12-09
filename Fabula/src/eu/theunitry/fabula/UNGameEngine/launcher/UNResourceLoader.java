@@ -162,7 +162,7 @@ public class UNResourceLoader
         backgrounds.put("cave", getBackground("cave"));
         backgrounds.put("desert", getBackground("desert"));
         backgrounds.put("forest", getBackground("forest"));
-        backgrounds.put("forest_background", getBackground("forest_background"));
+        backgrounds.put("forest-background", getBackground("forest-background"));
         backgrounds.put("jungle", getBackground("jungle"));
         backgrounds.put("mine", getBackground("mine"));
         backgrounds.put("moon", getBackground("moon"));
