@@ -2,9 +2,11 @@ package eu.theunitry.fabula.UNGameEngine.launcher;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -18,6 +20,7 @@ public class UNLauncher extends JPanel
 {
     private JLabel label;
     private JButton startBtn;
+    private UNView controlView, levelView;
     private UNLevelLoader levelLoader;
 
     public UNLauncher(UNGameScreen gameScreen)
@@ -25,7 +28,11 @@ public class UNLauncher extends JPanel
         this.label = new JLabel("Fabula");
         this.startBtn = new JButton("Start");
 
+        this.controlView = new UNView();
+        this.levelView = new UNView();
+
         this.setStyling();
+
         startBtn.addActionListener(new UNButtonListener(){
             @Override
             public void actionPerformed(ActionEvent e)
@@ -33,9 +40,14 @@ public class UNLauncher extends JPanel
                 levelLoader = new UNLevelLoader(gameScreen);
             }
         });
-        
-        this.add(label, BorderLayout.CENTER);
-        this.add(startBtn, BorderLayout.SOUTH);
+
+        this.controlView.setLayout(new BorderLayout());
+        this.levelView.setLayout(new BorderLayout());
+
+        this.controlView.add(label, BorderLayout.NORTH);
+        this.controlView.add(startBtn, BorderLayout.SOUTH);
+
+        this.add(controlView, BorderLayout.WEST);
     }
 
     public JPanel getPanel() {
@@ -47,9 +59,19 @@ public class UNLauncher extends JPanel
         /**
          * Panel Styling
          */
-        this.setBackground(UNColor.PRIMARY_COLOR);
+        this.setBackground(UNColor.WHITE_COLOR);
         this.setLayout(new BorderLayout());
-        this.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        /**
+         * ControlView styling
+         */
+        this.controlView.setBounds(0,0,192,512);
+        this.controlView.setBackground(UNColor.PRIMARY_COLOR);
+        this.controlView.setBorder(new EmptyBorder(20, 20, 20, 20));
+
+        /**
+         * LevelView styling
+         */
 
         /**
          * Label Styling
@@ -61,7 +83,7 @@ public class UNLauncher extends JPanel
         /**
          * Button Styling
          */
-        this.startBtn.setPreferredSize(new Dimension(200,100));
+        this.startBtn.setPreferredSize(new Dimension(180,60));
         this.startBtn.setBackground(Color.white);
         this.startBtn.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         this.startBtn.setForeground(UNColor.PRIMARY_COLOR);
