@@ -6,6 +6,7 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
+import eu.theunitry.fabula.UNGameEngine.launcher.UNLevelLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +28,6 @@ public class Level5 extends UNLevel
     private ArrayList<Integer> birdsFrames;
     private JLabel liter1, liter2, liter3;
     private JButton button;
-    private boolean winning;
     private int need, imageIndex1, imageIndex2, imageIndex3, imageIndexWell;
     private String lastHelp;
     private String spriteCamel = "2:5:3:", spriteBucket = "2:5:2:", spriteWell = "2:5:4:", spriteBird = "2:5:1:";
@@ -54,7 +54,7 @@ public class Level5 extends UNLevel
         this.setHelp("Sleep water in de bakken van de kamelen om het getal te verhogen");
         this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("desert"));
 
-        this.setWinning(false);
+        this.setPlayerHasWon(false);
         this.setLastHelp(getHelp());
 
         this.setBirds(new ArrayList<UNGraphicsObject>());
@@ -127,19 +127,7 @@ public class Level5 extends UNLevel
             {
                 if (Objects.equals(button.getText(), "Door"))
                 {
-                    getGameScreen().getSounds().get("gibberish").stop();
-                    if (getGameScreen().getLevel() < getGameScreen().getLevelMax())
-                    {
-                        if (isWinning())
-                        {
-                            getGameScreen().addLevel();
-                        }
-                        getGameScreen().switchPanel(new Level5(getGameScreen(), true));
-                    }
-                    else
-                    {
-                        getGameScreen().switchPanel(new UNLauncher(getGameScreen()));
-                    }
+                    levelDone(5);
                 }
                 if (isHelperDoneTalking())
                 {
@@ -147,7 +135,7 @@ public class Level5 extends UNLevel
                     {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, we kunnen er weer tegen aan!");
-                        setWinning(true);
+                        setPlayerHasWon(true);
                         getBucket().setClickable(false);
                         button.setText("Door");
                     }
@@ -430,16 +418,6 @@ public class Level5 extends UNLevel
     public void setLiter3(JLabel liter3)
     {
         this.liter3 = liter3;
-    }
-
-    public boolean isWinning()
-    {
-        return this.winning;
-    }
-
-    public void setWinning(boolean winning)
-    {
-        this.winning = winning;
     }
 
     public int getNeed()

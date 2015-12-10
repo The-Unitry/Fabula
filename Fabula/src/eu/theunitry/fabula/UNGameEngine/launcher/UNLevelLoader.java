@@ -29,7 +29,7 @@ public class UNLevelLoader
         this.switchToLevel(level);
     }
 
-    private void switchToLevel(int level)
+    public void switchToLevel(int level)
     {
         switch (level)
         {
