@@ -143,13 +143,23 @@ public class Level12 extends UNLevel
         timer = new Timer(1, e -> {
             touch = 0;
             for (UNGraphicsObject monkey_white : monkeys_white) {
-                if (cage.getHitbox().intersects(monkey_white.getHitbox())) {
+                if (monkey_white.getY() < 310 && !monkey_white.getMouseHold()) {
+                    monkey_white.setY(monkey_white.getY() + 1);
+                }
+                if(!monkey_white.getMouseHold() && cage.getHitbox().intersects(monkey_white.getHitbox())) {
+
                     touch = touch + 2;
+
                 }
             }
             for (UNGraphicsObject monkey_brown : monkeys_brown) {
-                if (cage.getHitbox().intersects(monkey_brown.getHitbox())) {
+                if (monkey_brown.getY() < 310 && !monkey_brown.getMouseHold()) {
+                    monkey_brown.setY(monkey_brown.getY() + 1);
+                }
+                if(!monkey_brown.getMouseHold() && cage.getHitbox().intersects(monkey_brown.getHitbox())) {
+
                     touch = touch + 1;
+
                 }
             }
 
