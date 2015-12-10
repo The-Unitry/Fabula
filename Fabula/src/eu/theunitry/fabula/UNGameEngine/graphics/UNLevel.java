@@ -31,11 +31,7 @@ public abstract class UNLevel extends UNGraphicsView
             @Override
             public void actionPerformed(ActionEvent e) {
                 super.actionPerformed(e);
-                gameScreen.switchPanel(new UNLauncher(gameScreen));
-                gameScreen.getMusic().get("song2").stop();
-                gameScreen.getSounds().get("gibberish").stop();
-                gameScreen.getMusic().get("intro").play(true);
-                gameScreen.getMusic().get("intro").setVolume(0.1);
+                gameScreen.switchToLauncher();
             }
         });
         super.add(btn);

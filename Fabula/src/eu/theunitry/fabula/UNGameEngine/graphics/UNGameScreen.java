@@ -74,6 +74,20 @@ public class UNGameScreen extends UNObject
         return this.window;
     }
 
+    public void stopAudio()
+    {
+        this.getMusic().get("song2").stop();
+        this.getSounds().get("gibberish").stop();
+    }
+
+    public void switchToLauncher()
+    {
+        this.switchPanel(new UNLauncher(this));
+        this.stopAudio();
+        this.getMusic().get("intro").play(true);
+        this.getMusic().get("intro").setVolume(0.1);
+    }
+
     public void switchMusic(String index, boolean loop)
     {
         unResourceLoader.music.get("intro").stop();
