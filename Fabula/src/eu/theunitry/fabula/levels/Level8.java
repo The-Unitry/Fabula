@@ -24,7 +24,7 @@ public class Level8 extends UNLevel
     private UNColor color;
     private String lastHelp;
     private int answer, firstInt, secondInt, fakeAnswer1, fakeAnswer2, fakeAnswer3, fakeAnswer4, newRand;
-    private boolean questionDone, winning, buttonClicked;
+    private boolean questionDone, buttonClicked;
     private ArrayList<JLabel> nuggetTexts, answers;
     private ArrayList<UNGraphicsObject> nuggets, nuggetAnswers, pickaxes;
 
@@ -53,7 +53,6 @@ public class Level8 extends UNLevel
         this.addHelp("Dit is niet juist. Probeer " + firstInt + " keer het getal" + secondInt + "op te tellen.");
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("mine"));
 
-        this.winning = false;
         this.questionDone = false;
         this.buttonClicked = false;
         this.lastHelp = getHelp();
@@ -172,21 +171,9 @@ public class Level8 extends UNLevel
             public void actionPerformed(ActionEvent e)
             {
                 buttonClicked = true;
-                if(button.getText() == "Door")
+                if(button.getText() == "Doorgaan")
                 {
-                    gameScreen.getSounds().get("gibberish").stop();
-                    if(gameScreen.getLevel() < gameScreen.getLevelMax())
-                    {
-                        if(winning)
-                        {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level8(gameScreen, true));
-                    }
-                    else
-                    {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
+                   levelDone(8);
                 }
             }
         });
@@ -233,7 +220,7 @@ public class Level8 extends UNLevel
                         {
                             for(UNGraphicsObject pickaxe : pickaxes)
                             {
-                                if(!winning && isHelperDoneTalking())
+                                if(!hasPlayerWon() && isHelperDoneTalking())
                                 {
                                     if(pickaxe.getHitbox().intersects(nugget.getHitbox()) && buttonClicked)
                                     {
@@ -241,14 +228,14 @@ public class Level8 extends UNLevel
                                             add(button);
                                             getHelper().setState(3);
                                             setHelp("Goed gedaan! Dit is het juiste antwoord!");
-                                            button.setText("Door");
+                                            button.setText("Doorgaan");
                                             buttonClicked = false;
-                                            winning = true;
+                                            setPlayerHasWon(true);
                                             pickaxe.setClickable(false);
                                         }
                                         else
                                         {
-                                            button.setText("Door");
+                                            button.setText("Doorgaan");
                                             buttonClicked = false;
                                             pickaxe.setClickable(false);
                                             getHelper().setState(4);
