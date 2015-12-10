@@ -33,6 +33,7 @@ public abstract class UNLevel extends UNGraphicsView
                 super.actionPerformed(e);
                 gameScreen.switchPanel(new UNLauncher(gameScreen));
                 gameScreen.getMusic().get("song2").stop();
+                gameScreen.getSounds().get("gibberish").stop();
                 gameScreen.getMusic().get("intro").play(true);
                 gameScreen.getMusic().get("intro").setVolume(0.1);
             }
