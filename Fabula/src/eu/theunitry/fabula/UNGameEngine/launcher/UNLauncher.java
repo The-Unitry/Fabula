@@ -61,6 +61,7 @@ public class UNLauncher extends JPanel
         levelList.add(new ImageIcon("res/levels/9.png"));
         levelList.add(new ImageIcon("res/levels/10.png"));
         levelList.add(new ImageIcon("res/levels/11.png"));
+        levelList.add(new ImageIcon("res/levels/12.png"));
 
         this.controlView.setLayout(new BorderLayout());
         this.levelView.setLayout(new BorderLayout());
@@ -73,7 +74,7 @@ public class UNLauncher extends JPanel
 
         ArrayList<JButton> levelButtons = new ArrayList<>();
 
-        for(int i = 0; i <= 10; i++) levelButtons.add(new JButton("Level " + i));
+        for(int i = 0; i <= 11; i++) levelButtons.add(new JButton("Level " + i));
 
         for (JButton btn : levelButtons)
         {
@@ -98,7 +99,8 @@ public class UNLauncher extends JPanel
                 case 7: levelLoaded = 9; break;
                 case 8: levelLoaded = 4; break;
                 case 9: levelLoaded = 10; break;
-                case 10: levelLoaded = 1; break;
+                case 10: levelLoaded = 8; break;
+                case 11: levelLoaded = 1; break;
             }
 
             final int finalLevelLoaded = levelLoaded;
