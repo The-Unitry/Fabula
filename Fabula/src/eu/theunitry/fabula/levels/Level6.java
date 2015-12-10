@@ -52,10 +52,10 @@ public class Level6 extends UNLevel
                 + Integer.parseInt(this.getSnowballTexts().get(1).getText())
                 + Integer.parseInt(this.getSnowballTexts().get(2).getText()));
 
-        this.setQuestion("Tel de getallen van de 3 sneeuwballen op");
-        this.addHelp("Jammer! Probeer het nog eens, daar komen ze weer");
-        this.addHelp("Helaas! Hier komen ze nog een keer langs");
-        this.setHelp("Daar komen ze aanrollen");
+        this.setQuestion("Tel de getallen van de 3 sneeuwballen op.");
+        this.addHelp("Jammer! Probeer het nog eens, daar komen ze weer!");
+        this.addHelp("Helaas! Hier komen ze nog een keer langs.");
+        this.setHelp("Daar komen ze aanrollen!");
         this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("snow"));
 
         this.setPlayerHasWon(false);
@@ -154,7 +154,7 @@ public class Level6 extends UNLevel
         this.button.setBorderPainted(false);
 
         button.addActionListener(e -> {
-            if (button.getText() == "Door") {
+            if (button.getText() == "Doorgaan") {
                 levelDone(6);
             }
         });
@@ -194,7 +194,7 @@ public class Level6 extends UNLevel
                         getGameScreen().getMusic().get("avalange").stop();
                         getGameScreen().getMusic().get("song2").play(true);
                         setQuestionDone(true);
-                        setHelp("Klik op het antwoord");
+                        setHelp("Klik op het juiste antwoord.");
                         setLastHelp(getHelp());
 
                         addObject(getSnowballAnswers().get(0));
@@ -273,7 +273,7 @@ public class Level6 extends UNLevel
                             {
                                 getHelper().setState(4);
                                 setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballAnswers().get(0) + " plus " +
-                                        getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer()
+                                        getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer() + "."
                                 );
                                 removeObject(getSnowballAnswers().get(0));
                                 removeObject(getSnowballAnswers().get(1));
@@ -284,7 +284,7 @@ public class Level6 extends UNLevel
                                     remove(possibleAnswer);
                                 }
 
-                                button.setText("Door");
+                                button.setText("Doorgaan");
                             }
                         }
                     }
