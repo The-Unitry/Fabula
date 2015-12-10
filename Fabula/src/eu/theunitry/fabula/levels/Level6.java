@@ -153,144 +153,138 @@ public class Level6 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    levelDone(6);
-                }
+        button.addActionListener(e -> {
+            if (button.getText() == "Door") {
+                levelDone(6);
             }
         });
 
-        timer = new Timer(10, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                snowflakeUpdate();
+        timer = new Timer(10, e -> {
+            snowflakeUpdate();
 
-                if (!isQuestionDone())
+            if (!isQuestionDone())
+            {
+                for (UNGraphicsObject snowball : getSnowballs())
                 {
-                    for (UNGraphicsObject snowball : getSnowballs())
+                    snowball.setAngle(snowball.getAngle() + 2);
+                    if (new Random().nextInt(10) == 0)
                     {
-                        snowball.setAngle(snowball.getAngle() + 2);
-                        if (new Random().nextInt(10) == 0)
+                        snowball.setWidth(snowball.getWidth() + 1);
+                        snowball.setHeight(snowball.getWidth());
+                        snowball.setXOffset(snowball.getImage().getWidth(null) / 2);
+                        snowball.setY(290 - snowball.getHeight() / 256);
+                        snowball.setYOffset(snowball.getImage().getHeight(null) / 2);
+                    }
+                    if (snowball.getX() < getGameScreen().getWindow().getContentWidth() || getSnowballs().indexOf(snowball) < 2)
+                    {
+                        snowball.setX(snowball.getX() + 1);
+                        for (UNGraphicsObject tree : getTrees())
                         {
-                            snowball.setWidth(snowball.getWidth() + 1);
-                            snowball.setHeight(snowball.getWidth());
-                            snowball.setXOffset(snowball.getImage().getWidth(null) / 2);
-                            snowball.setY(290 - snowball.getHeight() / 256);
-                            snowball.setYOffset(snowball.getImage().getHeight(null) / 2);
-                        }
-                        if (snowball.getX() < getGameScreen().getWindow().getContentWidth() || getSnowballs().indexOf(snowball) < 2)
-                        {
-                            snowball.setX(snowball.getX() + 1);
-                            for (UNGraphicsObject tree : getTrees())
+                            if (snowball.getHitbox().intersects(tree.getHitbox()))
                             {
-                                if (snowball.getHitbox().intersects(tree.getHitbox()))
+                                if (tree.getAngle() < 85 + new Random().nextInt(10))
                                 {
-                                    if (tree.getAngle() < 85 + new Random().nextInt(10))
-                                    {
-                                        tree.setAngle(tree.getAngle() + 2);
-                                    }
+                                    tree.setAngle(tree.getAngle() + 2);
                                 }
                             }
                         }
-                        else
-                        {
-                            getGameScreen().getMusic().get("avalange").stop();
-                            getGameScreen().getMusic().get("song2").play(true);
-                            setQuestionDone(true);
-                            setHelp("Klik op het antwoord");
-                            setLastHelp(getHelp());
-
-                            addObject(getSnowballAnswers().get(0));
-                            addObject(getSnowballAnswers().get(1));
-                            addObject(getSnowballAnswers().get(2));
-
-                            for (JLabel possibleAnswer : getAnswers())
-                            {
-                                add(possibleAnswer);
-                                possibleAnswer.setBounds(getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getX(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getY(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getWidth(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getHeight());
-                            }
-                        }
-
-                        getSnowballTexts().get(getSnowballs().indexOf(snowball)).setBounds(snowball.getX(), 290 - snowball.getHeight() / 128, snowball.getWidth(), 100);
-                    }
-                    if (getReindeerIndex() < 2)
-                    {
-                        setReindeerIndex(getReindeerIndex() + 0.1);
                     }
                     else
                     {
-                        setReindeerIndex(0);
+                        getGameScreen().getMusic().get("avalange").stop();
+                        getGameScreen().getMusic().get("song2").play(true);
+                        setQuestionDone(true);
+                        setHelp("Klik op het antwoord");
+                        setLastHelp(getHelp());
+
+                        addObject(getSnowballAnswers().get(0));
+                        addObject(getSnowballAnswers().get(1));
+                        addObject(getSnowballAnswers().get(2));
+
+                        for (JLabel possibleAnswer : getAnswers())
+                        {
+                            add(possibleAnswer);
+                            possibleAnswer.setBounds(getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getX(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getY(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getWidth(), getSnowballAnswers().get(getAnswers().indexOf(possibleAnswer)).getHeight());
+                        }
                     }
-                    for (UNGraphicsObject reindeer : getReindeers())
-                    {
-                        reindeer.setImage(getGameScreen().getSprites().get(spriteReindeer + String.valueOf(Math.round(getReindeerIndex()))));
-                        reindeer.setX(reindeer.getX() + 1);
-                    }
+
+                    getSnowballTexts().get(getSnowballs().indexOf(snowball)).setBounds(snowball.getX(), 290 - snowball.getHeight() / 128, snowball.getWidth(), 100);
+                }
+                if (getReindeerIndex() < 2)
+                {
+                    setReindeerIndex(getReindeerIndex() + 0.1);
                 }
                 else
                 {
-                    for (UNGraphicsObject snowball : getSnowballAnswers())
+                    setReindeerIndex(0);
+                }
+                for (UNGraphicsObject reindeer : getReindeers())
+                {
+                    reindeer.setImage(getGameScreen().getSprites().get(spriteReindeer + String.valueOf(Math.round(getReindeerIndex()))));
+                    reindeer.setX(reindeer.getX() + 1);
+                }
+            }
+            else
+            {
+                for (UNGraphicsObject snowball : getSnowballAnswers())
+                {
+                    if (snowball.isMouseClick() && !hasPlayerWon() && isHelperDoneTalking())
                     {
-                        if (snowball.isMouseClick() && !hasPlayerWon() && isHelperDoneTalking())
+                        snowball.setMouseClick(false);
+                        if (Integer.valueOf(getAnswers().get(getSnowballAnswers().indexOf(snowball)).getText()) == getAnswer())
                         {
-                            snowball.setMouseClick(false);
-                            if (Integer.valueOf(getAnswers().get(getSnowballAnswers().indexOf(snowball)).getText()) == getAnswer())
+                            add(button);
+                            getHelper().setState(3);
+                            setHelp("Mooi hoor! Jij kan goed rekenen!");
+                            button.setText("Door");
+                            setPlayerHasWon(true);
+                        }
+                        else
+                        {
+                            addMistake();
+                            if (getMistakes() < 3)
                             {
-                                add(button);
-                                getHelper().setState(3);
-                                setHelp("Mooi hoor! Jij kan goed rekenen!");
-                                button.setText("Door");
-                                setPlayerHasWon(true);
+                                getHelper().setState(4);
+                                while (getLastHelp() == getHelp())
+                                {
+                                    setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                                }
+                                setLastHelp(getHelp());
+                                setQuestionDone(false);
+
+                                removeObject(getSnowballAnswers().get(0));
+                                removeObject(getSnowballAnswers().get(1));
+                                removeObject(getSnowballAnswers().get(2));
+
+                                for (JLabel possibleAnswer : getAnswers())
+                                {
+                                    remove(possibleAnswer);
+                                }
+                                getGameScreen().getMusic().get("avalange").play(true);
+                                getSnowballs().get(0).setX(-800);
+                                getSnowballs().get(1).setX(-1100);
+                                getSnowballs().get(2).setX(-1400);
+                                for (UNGraphicsObject snow : getSnowballs()) {
+                                    snow.setWidth(8);
+                                    snow.setHeight(8);
+                                }
                             }
                             else
                             {
-                                addMistake();
-                                if (getMistakes() < 3)
+                                getHelper().setState(4);
+                                setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballAnswers().get(0) + " plus " +
+                                        getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer()
+                                );
+                                removeObject(getSnowballAnswers().get(0));
+                                removeObject(getSnowballAnswers().get(1));
+                                removeObject(getSnowballAnswers().get(2));
+
+                                for (JLabel possibleAnswer : getAnswers())
                                 {
-                                    getHelper().setState(4);
-                                    while (getLastHelp() == getHelp())
-                                    {
-                                        setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                                    }
-                                    setLastHelp(getHelp());
-                                    setQuestionDone(false);
-
-                                    removeObject(getSnowballAnswers().get(0));
-                                    removeObject(getSnowballAnswers().get(1));
-                                    removeObject(getSnowballAnswers().get(2));
-
-                                    for (JLabel possibleAnswer : getAnswers())
-                                    {
-                                        remove(possibleAnswer);
-                                    }
-                                    getGameScreen().getMusic().get("avalange").play(true);
-                                    getSnowballs().get(0).setX(-800);
-                                    getSnowballs().get(1).setX(-1100);
-                                    getSnowballs().get(2).setX(-1400);
-                                    for (UNGraphicsObject snow : getSnowballs()) {
-                                        snow.setWidth(8);
-                                        snow.setHeight(8);
-                                    }
+                                    remove(possibleAnswer);
                                 }
-                                else
-                                {
-                                    getHelper().setState(4);
-                                    setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballAnswers().get(0) + " plus " +
-                                            getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer()
-                                    );
-                                    removeObject(getSnowballAnswers().get(0));
-                                    removeObject(getSnowballAnswers().get(1));
-                                    removeObject(getSnowballAnswers().get(2));
 
-                                    for (JLabel possibleAnswer : getAnswers())
-                                    {
-                                        remove(possibleAnswer);
-                                    }
-
-                                    button.setText("Door");
-                                }
+                                button.setText("Door");
                             }
                         }
                     }
