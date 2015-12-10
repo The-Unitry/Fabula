@@ -42,16 +42,16 @@ public class Level8 extends UNGraphicsLevel
         this.nuggetAnswers = new ArrayList<>();
         this.nuggetTexts = new ArrayList<>();
         this.answers = new ArrayList<>();
-        this.firstInt = 1 + new Random().nextInt(5);
-        this.secondInt = 1 + new Random().nextInt(5);
+        this.firstInt = 1 + new Random().nextInt(9);
+        this.secondInt = 1 + new Random().nextInt(4);
         this.pickaxes = new ArrayList<>();
         this.newRand = new Random().nextInt(4) + 1;
 
         this.setQuestion("Hoeveel is " + firstInt + " * " + secondInt + "?");
         this.addHelp("Dit is niet goed! Sleep het houweel naar het goede antwoord.");
         this.addHelp("Helaas, probeer het opnieuw!");
-        this.addHelp("Dit is niet juist.");
-        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("cave"));
+        this.addHelp("Dit is niet juist. Probeer " + firstInt + " keer het getal" + secondInt + "op te tellen.");
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("mine"));
 
         this.winning = false;
         this.questionDone = false;
@@ -174,7 +174,7 @@ public class Level8 extends UNGraphicsLevel
                 buttonClicked = true;
                 if(button.getText() == "Door")
                 {
-                    gameScreen.getSounds().get(0).stop();
+                    gameScreen.getSounds().get("gibberish").stop();
                     if(gameScreen.getLevel() < gameScreen.getLevelMax())
                     {
                         if(winning)
