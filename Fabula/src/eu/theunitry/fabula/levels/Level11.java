@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Level 11
+ * Level 11.
  * Jeroen Bronkhorst
  */
 
