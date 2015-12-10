@@ -141,4 +141,12 @@ public class UNLauncher extends JPanel
         this.startBtn.setFocusPainted(false);
         this.startBtn.setBorderPainted(false);
     }
+
+    public UNLevelLoader getLevelLoader() {
+        return this.levelLoader;
+    }
+
+    public void setLevelLoader(UNLevelLoader levelLoader) {
+        this.levelLoader = levelLoader;
+    }
 }

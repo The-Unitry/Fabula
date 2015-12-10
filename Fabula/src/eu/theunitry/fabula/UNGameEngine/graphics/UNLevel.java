@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * All levels extends from this abstract UNLevel class.
@@ -47,6 +48,38 @@ public abstract class UNLevel extends UNGraphicsView
         btn.setForeground(UNColor.WHITE_COLOR);
         btn.setOpaque(true);
         btn.setBounds(0,0,64,64);
+    }
+
+    public void levelDone(int currentLevel)
+    {
+        getGameScreen().getSounds().get("gibberish").stop();
+        if (getGameScreen().getLevel() < getGameScreen().getLevelMax())
+        {
+            if (this.hasPlayerWon())
+            {
+                if (this.getGameScreen().isAdventure())
+                {
+                    this.getGameScreen().addLevel();
+                    int newLevel = 1 + new Random().nextInt(11);
+                    while (newLevel == currentLevel) {
+                        newLevel = 1 + new Random().nextInt(11);
+                    }
+                    this.getGameScreen().getLauncher().getLevelLoader().switchToLevel(newLevel);
+                }
+                else
+                {
+                    this.getGameScreen().switchPanel(new UNLauncher(this.getGameScreen()));
+                }
+            }
+            else
+            {
+                this.getGameScreen().getLauncher().getLevelLoader().switchToLevel(currentLevel);
+            }
+        }
+        else
+        {
+            this.getGameScreen().switchPanel(new UNLauncher(this.getGameScreen()));
+        }
     }
 
     public boolean hasPlayerWon()

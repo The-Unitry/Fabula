@@ -24,6 +24,7 @@ public class UNGameScreen extends UNObject
     private UNGraphicsView splash;
     private JPanel currentPanel;
     public UNResourceLoader unResourceLoader;
+    private boolean adventure;
 
     private int level, levelMax;
 
@@ -56,6 +57,8 @@ public class UNGameScreen extends UNObject
 
         this.level = 1;
         this.levelMax = 5;
+
+        this.setAdventure(false);
     }
 
     public void switchPanel(JPanel panel)
@@ -117,5 +120,19 @@ public class UNGameScreen extends UNObject
         this.level = 1;
     }
 
+    public UNLauncher getLauncher() {
+        return this.launcher;
+    }
 
+    public void setLauncher(UNLauncher launcher) {
+        this.launcher = launcher;
+    }
+
+    public boolean isAdventure() {
+        return this.adventure;
+    }
+
+    public void setAdventure(boolean adventure) {
+        this.adventure = adventure;
+    }
 }
