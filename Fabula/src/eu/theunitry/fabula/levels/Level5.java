@@ -125,7 +125,7 @@ public class Level5 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (Objects.equals(button.getText(), "Door"))
+                if (Objects.equals(button.getText(), "Doorgaan"))
                 {
                     levelDone(5);
                 }
@@ -137,7 +137,7 @@ public class Level5 extends UNLevel
                         setHelp("Goed gedaan, we kunnen er weer tegen aan!");
                         setPlayerHasWon(true);
                         getBucket().setClickable(false);
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     }
                     else
                     {
@@ -170,7 +170,7 @@ public class Level5 extends UNLevel
                                 );
                             }
 
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                         }
                     }
                 }
@@ -179,161 +179,146 @@ public class Level5 extends UNLevel
 
         this.getPanel().add(button);
 
-        timerWellAnim = new Timer(250, new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        timerWellAnim = new Timer(250, e -> {
+            if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0"))
             {
-                if (getImageIndexWell() <= 2 || getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0"))
+                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1"))
                 {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1"))
-                    {
-                        getBucket().setY(getBucket().getY() + 20);
-                        setImageIndexWell(getImageIndexWell() + 1);
-                    }
-                    else
-                    {
-                        if (getImageIndexWell() > 0)
-                        {
-                            if (getImageIndexWell() < 4)
-                            {
-                                getBucket().setY(getBucket().getY() - 20);
-                            }
-                            setImageIndexWell(getImageIndexWell() - 1);
-                        }
-                        else
-                        {
-                            timerWellAnim.stop();
-                            getBucket().setClickable(true);
-                        }
-                    }
-                }
-                else if (getImageIndexWell() < 5)
-                {
+                    getBucket().setY(getBucket().getY() + 20);
                     setImageIndexWell(getImageIndexWell() + 1);
                 }
                 else
                 {
-                    setImageIndexWell(getImageIndexWell() - 1);
-                    getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "0"));
+                    if (getImageIndexWell() > 0)
+                    {
+                        if (getImageIndexWell() < 4)
+                        {
+                            getBucket().setY(getBucket().getY() - 20);
+                        }
+                        setImageIndexWell(getImageIndexWell() - 1);
+                    }
+                    else
+                    {
+                        timerWellAnim.stop();
+                        getBucket().setClickable(true);
+                    }
                 }
-                getWell().setImage(getGameScreen().getSprites().get(spriteWell + String.valueOf(Math.min(getImageIndexWell(), 2))));
             }
+            else if (getImageIndexWell() < 5)
+            {
+                setImageIndexWell(getImageIndexWell() + 1);
+            }
+            else
+            {
+                setImageIndexWell(getImageIndexWell() - 1);
+                getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "0"));
+            }
+            getWell().setImage(getGameScreen().getSprites().get(spriteWell + String.valueOf(Math.min(getImageIndexWell(), 2))));
         });
 
-        timerWellCheck = new Timer(1, new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        timerWellCheck = new Timer(1, e -> {
+            if (getBucket().getHitbox().intersects(getWell().getHitbox()))
             {
-                if (getBucket().getHitbox().intersects(getWell().getHitbox()))
+                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1") && !timerWellAnim.isRunning() && !getBucket().getMouseHold())
                 {
-                    if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "1") && !timerWellAnim.isRunning() && !getBucket().getMouseHold())
+                    getBucket().setX(100);
+                    getBucket().setY(340);
+                    getBucket().setMouseHold(false);
+                    getBucket().setClickable(false);
+                    timerWellAnim.start();
+                }
+            }
+            if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0") && !getBucket().getMouseHold())
+            {
+                if (getBucket().getHitbox().intersects(getCamel1().getHitbox()))
+                {
+                    if (getImageIndex1() < 4)
                     {
-                        getBucket().setX(100);
-                        getBucket().setY(340);
-                        getBucket().setMouseHold(false);
-                        getBucket().setClickable(false);
-                        timerWellAnim.start();
+                        setImageIndex1(getImageIndex1() + 1);
+                        getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
+                        getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
+                        getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                     }
                 }
-                if (getBucket().getImage() == getGameScreen().getSprites().get(spriteBucket + "0") && !getBucket().getMouseHold())
+                if (getBucket().getHitbox().intersects(getCamel2().getHitbox()))
                 {
-                    if (getBucket().getHitbox().intersects(getCamel1().getHitbox()))
+                    if (getImageIndex2() < 4)
                     {
-                        if (getImageIndex1() < 4)
-                        {
-                            setImageIndex1(getImageIndex1() + 1);
-                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
-                            getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
-                        }
-                    }
-                    if (getBucket().getHitbox().intersects(getCamel2().getHitbox()))
-                    {
-                        if (getImageIndex2() < 4)
-                        {
-                            setImageIndex2(getImageIndex2() + 1);
-                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
-                            getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
-                        }
-                    }
-                    if (getBucket().getHitbox().intersects(getCamel3().getHitbox()))
-                    {
-                        if (getImageIndex3() < 4)
-                        {
-                            setImageIndex3(getImageIndex3() + 1);
-                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
-                            getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
-                            getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
-                        }
+                        setImageIndex2(getImageIndex2() + 1);
+                        getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
+                        getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
+                        getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
                     }
                 }
-                if (getCamel1().isMouseClick())
+                if (getBucket().getHitbox().intersects(getCamel3().getHitbox()))
                 {
-                    getCamel1().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel1().getHitbox()))
+                    if (getImageIndex3() < 4)
                     {
-                        if (getImageIndex1() > 0)
-                        {
-                            setImageIndex1(getImageIndex1() - 1);
-                            getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
-                            getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
-                        }
+                        setImageIndex3(getImageIndex3() + 1);
+                        getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
+                        getBucket().setImage(getGameScreen().getSprites().get(spriteBucket + "1"));
+                        getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
                     }
                 }
-                if (getCamel2().isMouseClick())
+            }
+            if (getCamel1().isMouseClick())
+            {
+                getCamel1().setMouseClick(false);
+                if (!getBucket().getHitbox().intersects(getCamel1().getHitbox()))
                 {
-                    getCamel2().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel2().getHitbox()))
+                    if (getImageIndex1() > 0)
                     {
-                        if (getImageIndex2() > 0)
-                        {
-                            setImageIndex2(getImageIndex2() - 1);
-                            getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
-                            getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
-                        }
+                        setImageIndex1(getImageIndex1() - 1);
+                        getCamel1().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex1() + 1)));
+                        getLiter1().setText(String.valueOf(getImageIndex1()) + "l");
                     }
                 }
-                if (getCamel3().isMouseClick())
+            }
+            if (getCamel2().isMouseClick())
+            {
+                getCamel2().setMouseClick(false);
+                if (!getBucket().getHitbox().intersects(getCamel2().getHitbox()))
                 {
-                    getCamel3().setMouseClick(false);
-                    if (!getBucket().getHitbox().intersects(getCamel3().getHitbox()))
+                    if (getImageIndex2() > 0)
                     {
-                        if (getImageIndex3() > 0)
-                        {
-                            setImageIndex3(getImageIndex3() - 1);
-                            getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
-                            getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
-                        }
+                        setImageIndex2(getImageIndex2() - 1);
+                        getCamel2().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex2() + 1)));
+                        getLiter2().setText(String.valueOf(getImageIndex2()) + "l");
+                    }
+                }
+            }
+            if (getCamel3().isMouseClick())
+            {
+                getCamel3().setMouseClick(false);
+                if (!getBucket().getHitbox().intersects(getCamel3().getHitbox()))
+                {
+                    if (getImageIndex3() > 0)
+                    {
+                        setImageIndex3(getImageIndex3() - 1);
+                        getCamel3().setImage(getGameScreen().getSprites().get(spriteCamel + String.valueOf(getImageIndex3() + 1)));
+                        getLiter3().setText(String.valueOf(getImageIndex3()) + "l");
                     }
                 }
             }
         });
         timerWellCheck.start();
 
-        timerBird = new Timer(100, new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent e)
+        timerBird = new Timer(100, e -> {
+            for (UNGraphicsObject bird : getBirds())
             {
-                for (UNGraphicsObject bird : getBirds())
+                if (birdsFrames.get(getBirds().indexOf(bird)) < 3)
                 {
-                    if (birdsFrames.get(getBirds().indexOf(bird)) < 3)
-                    {
-                        birdsFrames.set(getBirds().indexOf(bird), birdsFrames.get(getBirds().indexOf(bird)) + 1);
-                    }
-                    else
-                    {
-                        birdsFrames.set(getBirds().indexOf(bird), 0);
-                    }
-                    bird.setImage(getGameScreen().getSprites().get(spriteBird + String.valueOf(birdsFrames.get(getBirds().indexOf(bird)))));
-                    bird.setX(bird.getX() + Math.max((bird.getWidth() / 10), 1));
-                    if (bird.getX() > getGameScreen().getWindow().getContentWidth() + 30)
-                    {
-                        bird.setX(-30);
-                    }
+                    birdsFrames.set(getBirds().indexOf(bird), birdsFrames.get(getBirds().indexOf(bird)) + 1);
+                }
+                else
+                {
+                    birdsFrames.set(getBirds().indexOf(bird), 0);
+                }
+                bird.setImage(getGameScreen().getSprites().get(spriteBird + String.valueOf(birdsFrames.get(getBirds().indexOf(bird)))));
+                bird.setX(bird.getX() + Math.max((bird.getWidth() / 10), 1));
+                if (bird.getX() > getGameScreen().getWindow().getContentWidth() + 30)
+                {
+                    bird.setX(-30);
                 }
             }
         });

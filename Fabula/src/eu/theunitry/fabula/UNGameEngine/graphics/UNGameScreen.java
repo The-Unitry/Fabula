@@ -77,8 +77,12 @@ public class UNGameScreen extends UNObject
 
     public void stopAudio()
     {
-        this.getMusic().get("song2").stop();
-        this.getSounds().get("gibberish").stop();
+        for (Map.Entry<String, Music> music : this.getMusic().entrySet()) {
+            music.getValue().stop();
+        }
+        for (Map.Entry<String, Sound> sound : this.getSounds().entrySet()) {
+            sound.getValue().stop();
+        }
     }
 
     public void switchToLauncher()
@@ -155,6 +159,16 @@ public class UNGameScreen extends UNObject
     public int getSubLevel4()
     {
         return subLevel4;
+    }
+
+    public void setSubLevel4(int subLevel4)
+    {
+        this.subLevel4 = subLevel4;
+    }
+
+    public void resetSubLevel4()
+    {
+        this.subLevel4 = 1;
     }
 
     public void addSubLevel4()

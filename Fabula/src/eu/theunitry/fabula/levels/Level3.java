@@ -22,8 +22,8 @@ public class Level3 extends UNLevel
     private ArrayList<UNGraphicsObject> ufos, ufoAnswers, stars, rockets;
     private UNGraphicsObject moon;
     private JButton button;
-    private boolean questionDone, winning, rotationDone;
-    private int answer, fakeAnswer1, fakeAnswer2, touch, g1, g2, g3, randomUnity;
+    private boolean questionDone, rotationDone;
+    private int answer, fakeAnswer1, fakeAnswer2, touch, g1, g2, g3, randomUnity, randInt;
     private UNColor color;
     private String lastHelp;
     private ArrayList<JLabel> ufosText, answers;
@@ -63,7 +63,7 @@ public class Level3 extends UNLevel
 
         this.setBackgroundImage(gameScreen.getBackgrounds().get("space"));
 
-        this.winning = false;
+        setPlayerHasWon(false);
         this.questionDone = false;
         this.lastHelp = getHelp();
         this.rocketIndex = 0;
@@ -89,20 +89,20 @@ public class Level3 extends UNLevel
         this.fakeAnswer1 = this.answer + new Random().nextInt(4) + 1;
         this.fakeAnswer2 = this.answer - new Random().nextInt(4) - 1;
 
-        int randInt = new Random().nextInt(2) + 1;
-        if (randInt == 1){
+        this.randInt = new Random().nextInt(3);
+        if (randInt == 0){
             this.answers.add(new JLabel(Integer.toString(answer)));
             this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+        }
+        else if (randInt == 1){
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(answer)));
             this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
         }
         else if (randInt == 2){
             this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
-            this.answers.add(new JLabel(Integer.toString(answer)));
             this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
-        }
-        else if (randInt == 3){
-            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
-            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
             this.answers.add(new JLabel(Integer.toString(answer)));
         }
 
@@ -162,18 +162,7 @@ public class Level3 extends UNLevel
         button.addActionListener(e -> {
             if (button.getText().equals("Doorgaan"))
             {
-                gameScreen.getSounds().get("gibberish").stop();
-                if (gameScreen.getLevel() < gameScreen.getLevelMax())
-                {
-                    if (winning)
-                    {
-                        gameScreen.addLevel();
-                    }
-                    gameScreen.switchPanel(new Level3(gameScreen, true));
-                } else
-                {
-                    gameScreen.switchPanel(new UNLauncher(gameScreen));
-                }
+               levelDone(3);
             }
         });
 
@@ -208,8 +197,7 @@ public class Level3 extends UNLevel
                     }
                     else
                     {
-                        gameScreen.getMusic().get("song2").stop();
-                        gameScreen.getMusic().get("intro").play(true);
+                        gameScreen.getMusic().get("song2").play(true);
                         questionDone = true;
                         lastHelp = getHelp();
 
@@ -224,8 +212,6 @@ public class Level3 extends UNLevel
                             possibleAnswer.setBounds(ufoAnswers.get(answers.indexOf(possibleAnswer)).getX(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getY() - 7, ufoAnswers.get(answers.indexOf(possibleAnswer)).getWidth(), ufoAnswers.get(answers.indexOf(possibleAnswer)).getHeight());
                         }
                     }
-
-                    ufosText.get(ufos.indexOf(ufo)).setBounds(ufo.getX(), 290 - ufo.getHeight() / 128, ufo.getWidth(), 100);
                 }
 
             }
@@ -233,7 +219,7 @@ public class Level3 extends UNLevel
             {
                 for (UNGraphicsObject ufoAnswer : ufoAnswers)
                 {
-                    if (ufoAnswer.isMouseClick() && !winning && isHelperDoneTalking())
+                    if (ufoAnswer.isMouseClick() && !hasPlayerWon() && isHelperDoneTalking())
                     {
                         ufoAnswer.setMouseClick(false);
                         if (Integer.valueOf(answers.get(ufoAnswers.indexOf(ufoAnswer)).getText()) == answer)
@@ -242,7 +228,7 @@ public class Level3 extends UNLevel
                             getHelper().setState(3);
                             setHelp("Mooi hoor! Jij kan goed rekenen");
                             button.setText("Doorgaan");
-                            winning = true;
+                            setPlayerHasWon(true);
                         }
                         else
                         {
@@ -299,7 +285,7 @@ public class Level3 extends UNLevel
                 rocketIndex = 0;
             }
 
-            if (winning){
+            if (hasPlayerWon()){
 
                 for (UNGraphicsObject ufo : ufoAnswers){
                     ufo.setAngle(ufo.getAngle() + 1);
