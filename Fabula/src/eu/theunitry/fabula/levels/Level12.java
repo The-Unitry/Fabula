@@ -54,28 +54,18 @@ public class Level12 extends UNGraphicsLevel
 
         this.color = new UNColor();
 
-        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 50, 275, gameScreen.unResourceLoader.sprites.get("2:12:1"), false, 96, 96);
+        this.cage = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 40, 260, gameScreen.unResourceLoader.sprites.get("2:12:1"), false, 128, 128);
 
         for (int i = 0; i < 5; i++){
             monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
-                new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32)
+                new Random().nextInt(360), 315 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 64, 64)
             );
         }
 
         for (int i = 0; i < 5; i++){
             monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 150 +
-                new Random().nextInt(350), 340 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32)
+                new Random().nextInt(360), 315 + new Random().nextInt(1), gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 64, 64)
             );
-        }
-
-        this.monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32));
-        if (new Random().nextInt(2) == 1) {
-            monkeys_white.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:12:2:1"), true, 32, 32));
-        }
-
-        this.monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32));
-        if (new Random().nextInt(2) == 1) {
-            monkeys_brown.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:12:2:2"), true, 32, 32));
         }
 
         for (UNGraphicsObject monkey_white : monkeys_white) {
@@ -137,11 +127,11 @@ public class Level12 extends UNGraphicsLevel
                     } else {
                         getHelper().setState(4);
                         if (touch < need) {
-                            setHelp("Jammer, je moest nog een gewicht van " + (need - touch) + " erbij doen. Want " +
+                            setHelp("Jammer, je moest nog " + (need - touch) + " kilogram erbij doen. Want " +
                                     (need - touch) + " plus " + touch + " is " + need
                             );
                         } else {
-                            setHelp("Jammer, je had een gewicht van " + (touch - need) + " teveel bij gedaan. Want " +
+                            setHelp("Jammer, je had " + (touch - need) + " kilogram teveel bij gedaan. Want " +
                                     touch + " min " + (touch - need) + " is " + need
                             );
                         }
@@ -165,12 +155,12 @@ public class Level12 extends UNGraphicsLevel
             touch = 0;
             for (UNGraphicsObject monkey_white : monkeys_white) {
                 if (cage.getHitbox().intersects(monkey_white.getHitbox())) {
-                    touch = touch + 1;
+                    touch = touch + 2;
                 }
             }
             for (UNGraphicsObject monkey_brown : monkeys_brown) {
                 if (cage.getHitbox().intersects(monkey_brown.getHitbox())) {
-                    touch = touch + 2;
+                    touch = touch + 1;
                 }
             }
             winning = (touch == need);
