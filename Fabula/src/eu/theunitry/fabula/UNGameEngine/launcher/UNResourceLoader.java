@@ -196,6 +196,7 @@ public class UNResourceLoader
         backgrounds.put("splash_unitry", getBackground("splash_unitry"));
         backgrounds.put("supermarket", getBackground("supermarket"));
         backgrounds.put("underwater", getBackground("underwater"));
+        backgrounds.put("the-end", getBackground("the-end"));
     }
 
 

@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -44,12 +45,12 @@ public class Level1 extends UNLevel
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
-        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest"));
+        this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
 
         this.winning = false;
         this.lastHelp = getHelp();
 
-        this.apples = new ArrayList<UNGraphicsObject>();
+        this.apples = new ArrayList<>();
         this.color = new UNColor();
 
         this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.unResourceLoader.sprites.get("2:1:2"), false, 96, 96);
@@ -70,7 +71,7 @@ public class Level1 extends UNLevel
             addObject(apple);
         }
 
-        this.button = new JButton("Vertrek");
+        this.button = new JButton("Vuren!");
 
         this.setLayout(null);
         this.button.setBounds(618, 64, 150, 50);
@@ -85,57 +86,47 @@ public class Level1 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level0(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
+        button.addActionListener(e -> {
+            if (button.getText().equals("Doorgaan"))
+            {
+                levelDone(5);
+            }
+            if (isHelperDoneTalking()) {
+                if (winning) {
+                    getHelper().setState(3);
+                    setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
+                    for (UNGraphicsObject apple : apples) {
+                        apple.setClickable(false);
                     }
-                }
-                if (isHelperDoneTalking()) {
-                    if (winning) {
-                        getHelper().setState(3);
-                        setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
-                        for (UNGraphicsObject apple : apples) {
+                    button.setText("Door");
+                } else {
+                    addMistake();
+                    if (getMistakes() < 3) {
+                        getHelper().setState(4);
+                        while(lastHelp.equals(getHelp())) {
+                            setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                        }
+                        lastHelp = getHelp();
+                    } else {
+                        getHelper().setState(4);
+                        if (touch < need) {
+                            setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
+                                    " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
+                                    (need - touch)  + " is " + need
+                            );
+                        } else {
+                            setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
+                                    " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
+                                    (touch - need)  + " is " + need
+                            );
+                        }
+
+                        for (UNGraphicsObject apple : apples)
+                        {
                             apple.setClickable(false);
                         }
+
                         button.setText("Door");
-                    } else {
-                        addMistake();
-                        if (getMistakes() < 3) {
-                            getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
-                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                            }
-                            lastHelp = getHelp();
-                        } else {
-                            getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " appel" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
-                                        (need - touch)  + " is " + need
-                                );
-                            } else {
-                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " appel" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " min " +
-                                        (touch - need)  + " is " + need
-                                );
-                            }
-
-                            for (UNGraphicsObject apple : apples)
-                            {
-                                apple.setClickable(false);
-                            }
-
-                            button.setText("Door");
-                        }
                     }
                 }
             }
