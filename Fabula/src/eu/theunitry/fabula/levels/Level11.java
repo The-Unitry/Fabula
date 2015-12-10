@@ -6,7 +6,6 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * Level 11
+ * Level 11.
  * Jeroen Bronkhorst
  */
 
@@ -25,13 +24,12 @@ public class Level11 extends UNLevel
     private UNGraphicsObject cashdesk;
     private ArrayList<UNGraphicsObject> apples, pears, grapes, oranges, bananas;
     private JButton button;
-    private boolean winning;
     private int need, touch;
     private UNColor color;
     private String lastHelp;
 
     /**
-     * Level 0
+     * Level 11
      * @param gameScreen
      * @param hudEnabled
      */
@@ -48,7 +46,7 @@ public class Level11 extends UNLevel
         this.setHelp("Sleep het aantal fruit wat je kan betalen naar de kassa");
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("supermarket"));
 
-        this.winning = false;
+        this.setPlayerHasWon (false);
         this.lastHelp = getHelp();
 
         this.apples = new ArrayList<>();
@@ -131,19 +129,11 @@ public class Level11 extends UNLevel
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (button.getText().equals("Door")) {
-                    gameScreen.getSounds().get("gibberish").stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level1(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
+                if (button.getText().equals("Doorgaan")) {
+                    levelDone(11);
                 }
                 if (isHelperDoneTalking()) {
-                    if (winning) {
+                    if (hasPlayerWon()) {
                         getHelper().setState(3);
                         setHelp("Puik rekenwerk! Ze zien er vers uit!");
                         for (UNGraphicsObject apple : apples) {
@@ -161,7 +151,7 @@ public class Level11 extends UNLevel
                         for (UNGraphicsObject banana : bananas) {
                             banana.setClickable(false);
                         }
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     } else {
                         addMistake();
                         if (getMistakes() < 3) {
@@ -198,7 +188,7 @@ public class Level11 extends UNLevel
                                 banana.setClickable(false);
                             }
 
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                         }
                     }
                 }
@@ -234,7 +224,9 @@ public class Level11 extends UNLevel
                     touch = touch + 2;
                 }
             }
-            winning = (touch == need);
+
+            setPlayerHasWon(touch == need);
+
         });
 
         timer.start();

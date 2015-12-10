@@ -22,7 +22,6 @@ public class Level12 extends UNLevel
     private UNGraphicsObject cage;
     private ArrayList<UNGraphicsObject> monkeys_white, monkeys_brown;
     private JButton button;
-    private boolean winning;
     private int need, touch;
     private UNColor color;
     private String lastHelp;
@@ -44,7 +43,7 @@ public class Level12 extends UNLevel
         this.setHelp("Sleep de aapjes in de kooi");
         this.setBackgroundImage(gameScreen.getBackgrounds().get("jungle"));
 
-        this.winning = false;
+        this.setPlayerHasWon (false);
         this.lastHelp = getHelp();
 
         this.monkeys_white = new ArrayList<UNGraphicsObject>();
@@ -92,19 +91,11 @@ public class Level12 extends UNLevel
         this.button.setBorderPainted(false);
 
         button.addActionListener(e -> {
-            if (button.getText().equals("Door")) {
-                gameScreen.getSounds().get(0).stop();
-                if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                    if (winning) {
-                        gameScreen.addLevel();
-                    }
-                    gameScreen.switchPanel(new Level0(gameScreen, true));
-                } else {
-                    gameScreen.switchPanel(new UNLauncher(gameScreen));
-                }
+            if (button.getText().equals("Doorgaan")) {
+                levelDone(12);
             }
             if (isHelperDoneTalking()) {
-                if (winning) {
+                if (hasPlayerWon()) {
                     getHelper().setState(3);
                     setHelp("Goed gedaan! Het past allemaal precies!");
                     for (UNGraphicsObject monkey_white : monkeys_white) {
@@ -113,7 +104,7 @@ public class Level12 extends UNLevel
                     for (UNGraphicsObject monkey_brown : monkeys_brown) {
                         monkey_brown.setClickable(false);
                     }
-                    button.setText("Door");
+                    button.setText("Doorgaan");
                 } else {
                     addMistake();
                     if (getMistakes() < 3) {
@@ -141,7 +132,7 @@ public class Level12 extends UNLevel
                             monkey_brown.setClickable(false);
                         }
 
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     }
                 }
             }
@@ -161,7 +152,9 @@ public class Level12 extends UNLevel
                     touch = touch + 1;
                 }
             }
-            winning = (touch == need);
+
+            setPlayerHasWon(touch == need);
+
         });
 
         timer.start();

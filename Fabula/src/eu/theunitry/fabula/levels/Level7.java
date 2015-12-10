@@ -40,7 +40,7 @@ public class Level7 extends UNLevel
         this.need = 1 + new Random().nextInt(8);
         this.need2 = 1 + new Random().nextInt(8);
 
-        this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
+        this.setQuestion("Hoeveel is " + need + " + " + need2 + "?");
         this.addHelp("Jammer! Dit is niet goed! Doe het nog eens over!");
         this.addHelp("Helaas! Dit is niet het juiste aantal, probeer het nog eens!");
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
