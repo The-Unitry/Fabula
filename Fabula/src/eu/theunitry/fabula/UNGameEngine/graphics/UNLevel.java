@@ -3,17 +3,17 @@ package eu.theunitry.fabula.UNGameEngine.graphics;
 import java.util.ArrayList;
 
 /**
- * All levels extends from this abstract UNGraphicsLevel class.
+ * All levels extends from this abstract UNLevel class.
  * It inherits from UNGraphicsView, which means that it contains UNGraphicObjects
  */
-public abstract class UNGraphicsLevel extends UNGraphicsView
+public abstract class UNLevel extends UNGraphicsView
 {
     private boolean playerHasWon = false;
     private String question;
     private ArrayList<String> helpList;
     private int mistakes;
 
-    public UNGraphicsLevel(UNGameScreen gameScreen, boolean hudEnabled)
+    public UNLevel(UNGameScreen gameScreen, boolean hudEnabled)
     {
         super(gameScreen, hudEnabled);
         this.helpList = new ArrayList<String>();

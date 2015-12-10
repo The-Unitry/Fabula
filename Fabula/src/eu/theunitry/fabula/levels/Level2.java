@@ -3,7 +3,7 @@ package eu.theunitry.fabula.levels;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
@@ -18,7 +18,7 @@ import java.util.Random;
  * Level 2
  * Maarten Bode
  */
-public class Level2 extends UNGraphicsLevel
+public class Level2 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject basket;

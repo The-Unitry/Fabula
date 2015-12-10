@@ -4,7 +4,7 @@ package eu.theunitry.fabula.levels;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
 import javax.swing.*;
@@ -18,7 +18,7 @@ import java.util.Random;
  * Level 11
  * Jeroen Bronkhorst
  */
-public class Level11 extends UNGraphicsLevel
+public class Level11 extends UNLevel
 {
     private Timer timer;
     private UNGraphicsObject cashdesk;

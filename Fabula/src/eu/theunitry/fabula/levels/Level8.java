@@ -2,7 +2,7 @@ package eu.theunitry.fabula.levels;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
-import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsLevel;
+import eu.theunitry.fabula.UNGameEngine.graphics.UNLevel;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGraphicsObject;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLauncher;
 
@@ -17,7 +17,7 @@ import java.util.Random;
  * Level 8
  * Jelmer Portegijs
  */
-public class Level8 extends UNGraphicsLevel
+public class Level8 extends UNLevel
 {
     private Timer timer;
     private JButton button;

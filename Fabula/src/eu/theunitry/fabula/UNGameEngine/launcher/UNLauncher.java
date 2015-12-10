@@ -5,13 +5,16 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * UNLauncher
@@ -44,15 +47,28 @@ public class UNLauncher extends JPanel
             }
         });
 
+        ArrayList<ImageIcon> levelList= new ArrayList<>();
+        levelList.add(new ImageIcon("res/backgrounds/forest.png"));
+        levelList.add(new ImageIcon("res/backgrounds/forest-background.png"));
+        levelList.add(new ImageIcon("res/backgrounds/forest.png"));
+        levelList.add(new ImageIcon("res/backgrounds/space.png"));
+        levelList.add(new ImageIcon("res/backgrounds/snow.png"));
+        levelList.add(new ImageIcon("res/backgrounds/desert.png"));
+        levelList.add(new ImageIcon("res/backgrounds/desert.png"));
+        levelList.add(new ImageIcon("res/backgrounds/underwater.png"));
+        levelList.add(new ImageIcon("res/backgrounds/mine.png"));
+        levelList.add(new ImageIcon("res/backgrounds/cave.png"));
+        levelList.add(new ImageIcon("res/backgrounds/forest-background.png"));
+        levelList.add(new ImageIcon("res/backgrounds/supermarket.png"));
+        levelList.add(new ImageIcon("res/backgrounds/jungle.png"));
+
         this.controlView.setLayout(new BorderLayout());
         this.levelView.setLayout(new BorderLayout());
 
         this.controlView.add(label, BorderLayout.NORTH);
         this.controlView.add(startBtn, BorderLayout.SOUTH);
 
-        GridLayout ex = new GridLayout(0,3);
-
-        levelView.setLayout(ex);
+        levelView.setLayout(new GridLayout(0,3));
         levelView.setBorder(new EmptyBorder(20,212,20,20));
 
         ArrayList<JButton> levelButtons = new ArrayList<>();
@@ -62,8 +78,10 @@ public class UNLauncher extends JPanel
 
         for (JButton btn : levelButtons)
         {
-            levelView.add(btn);
+            btn.setBorder(new EmptyBorder(5,5,5,5));
             int parsedButtonTextToInt = Integer.parseInt(btn.getText().replaceAll("\\D+",""));
+            btn.setIcon(levelList.get(parsedButtonTextToInt));
+            levelView.add(btn);
             btn.addActionListener(e -> this.loadLevel(parsedButtonTextToInt));
         }
 
