@@ -85,7 +85,6 @@ public class UNLauncher extends JPanel
             btn.setIcon(levelList.get(parsedButtonTextToInt));
             levelView.add(btn);
             gameScreen.setAdventure(false);
-            System.out.println(parsedButtonTextToInt);
 
             int levelLoaded = 0;
             switch (parsedButtonTextToInt)
