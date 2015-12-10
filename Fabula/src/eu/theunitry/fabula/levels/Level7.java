@@ -37,8 +37,8 @@ public class Level7 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
-        this.need = 1 + new Random().nextInt(10);
-        this.need2 = 1 + new Random().nextInt(10);
+        this.need = 1 + new Random().nextInt(8);
+        this.need2 = 1 + new Random().nextInt(8);
 
         this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
         this.addHelp("Jammer! Dit is niet goed! Doe het nog eens over!");
@@ -54,14 +54,16 @@ public class Level7 extends UNLevel
         this.chest = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 479, 360, gameScreen.unResourceLoader.sprites.get("2:7:1:2"), false, 96, 96);
         this.chest.setHitbox(0, 60, 96, 1);
 
-        for (int i = 0; i < 20; i++){
+        for (int i = 0; i < 20; i++)
+        {
             coins.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
                 new Random().nextInt(380), -100 - new Random().nextInt(150), gameScreen.unResourceLoader.sprites.get("2:7:2"), false, 32, 32)
             );
         }
 
         this.addObject(chest);
-        for (UNGraphicsObject coin : coins) {
+        for (UNGraphicsObject coin : coins)
+        {
             addObject(coin);
         }
 
@@ -80,13 +82,18 @@ public class Level7 extends UNLevel
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener()
+        {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                if (button.getText().equals("Door")) {
+            public void actionPerformed(ActionEvent e)
+            {
+                if (button.getText().equals("Door"))
+                {
                     gameScreen.getSounds().get("gibberish").stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
+                    if (gameScreen.getLevel() < gameScreen.getLevelMax())
+                    {
+                        if (winning)
+                        {
                             gameScreen.addLevel();
                         }
                         gameScreen.switchPanel(new Level7(gameScreen, true));
@@ -95,30 +102,38 @@ public class Level7 extends UNLevel
                     }
                 }
 
-                if (isHelperDoneTalking()) {
+                if (isHelperDoneTalking())
+                {
                     if (winning) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, nu zijn we rijk!");
-                        for (UNGraphicsObject coin : coins) {
+                        for (UNGraphicsObject coin : coins)
+                        {
                             coin.setClickable(false);
                         }
                         button.setText("Door");
-                    } else {
+                    } else
+                    {
                         addMistake();
-                        if (getMistakes() < 3) {
+                        if (getMistakes() < 3)
+                        {
                             getHelper().setState(4);
-                            while(lastHelp.equals(getHelp())) {
+                            while(lastHelp.equals(getHelp()))
+                            {
                                 setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
                             }
                             lastHelp = getHelp();
-                        } else {
+                        } else
+                        {
                             getHelper().setState(4);
-                            if (touch < need + need2) {
+                            if (touch < need + need2)
+                            {
                                 setHelp("Jammer, er moest" + ((need + need2 - touch == 1) ? "" : "en") + " nog " + (need + need2 - touch) +
                                         " muntje" + ((need + need2 - touch == 1) ? "" : "s")  + " bij. Want " + touch + " plus " +
                                         (need + need2 - touch)  + " is " + (need + need2)
                                 );
-                            } else {
+                            } else
+                            {
                                 setHelp("Jammer, er moest" + ((touch - need - need2 == 1) ? "" : "en") + " " + (touch - need - need2) +
                                         " muntje" + ((touch - need - need2 == 1) ? "" : "s")  + " af. Want " + touch + " min " +
                                         (touch + need - need2)  + " is " + (need - need2)
@@ -139,10 +154,13 @@ public class Level7 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(15, e -> {
+        timer = new Timer(15, e ->
+        {
             touch = 0;
-            for (UNGraphicsObject coin : coins) {
-                if (chest.getHitbox().intersects(coin.getHitbox())) {
+            for (UNGraphicsObject coin : coins)
+            {
+                if (chest.getHitbox().intersects(coin.getHitbox()))
+                {
                     touch++;
                 }
             }
@@ -150,7 +168,8 @@ public class Level7 extends UNLevel
 
             for(UNGraphicsObject coin : coins)
             {
-                if(!coin.getMouseHold() && !chest.getHitbox(true).intersects(coin.getHitbox())) {
+                if(!coin.getMouseHold() && !chest.getHitbox(true).intersects(coin.getHitbox()))
+                {
                     coin.setY(coin.getY() + 1);
                 }
                     if(coin.getY() > 64)
