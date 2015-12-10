@@ -133,9 +133,9 @@ public class Level4 extends UNLevel
         add(button);
         button.setText("Nakijken");
 
-//        for (int i = 0; i < 4; i++){
-//            gameScreen.addSubLevel4();
-//        }
+        for (int i = 0; i < 4; i++){
+            gameScreen.addSubLevel4();
+        }
         machineState = gameScreen.getSubLevel4();
 
         button.addActionListener(new ActionListener()
@@ -182,7 +182,7 @@ public class Level4 extends UNLevel
                                 button.setText("Doorgaan");
                                 getHelper().setState(4);
                                 if (touch < answer) {
-                                    setHelp("Jammer, er moest" + ((answer - touch == 1) ? "" : "en ") + " nog " + (answer - touch) +
+                                    setHelp("Jammer, er moest" + ((answer - touch == 1) ? "" : "en") + " nog " + (answer - touch) +
                                                     " diamant" + ((answer - touch == 1) ? "" : "en") + " bij. Want " + g1 + " min " +
                                                     g2 + " is " + answer + ". Jij had er " + touch + "."
                                     );
