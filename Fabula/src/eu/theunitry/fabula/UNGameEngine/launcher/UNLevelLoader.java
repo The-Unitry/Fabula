@@ -50,8 +50,8 @@ public class UNLevelLoader
                 gameScreen.switchPanel(panel3);
                 break;
             case 4:
-                //UNGraphicsView panel4 = new Level4(gameScreen, true);
-                //gameScreen.switchPanel(panel4);
+                UNGraphicsView panel4 = new Level4(gameScreen, true);
+                gameScreen.switchPanel(panel4);
                 break;
             case 5:
                 UNGraphicsView panel5 = new Level5(gameScreen, true);

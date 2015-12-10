@@ -48,10 +48,10 @@ public class Level5 extends UNLevel
         this.setNeed(this.getImageIndex1() + this.getImageIndex2() + this.getImageIndex3() + 1 + new Random().nextInt(11));
         this.setNeed(Math.min(this.getNeed(), 12));
 
-        this.setQuestion("Vertrek met " + this.getNeed() + " liter in de bakken van de kamelen");
-        this.addHelp("Jammer! Je moet " + this.getNeed() + " liter in de bakken stoppen");
-        this.addHelp("Helaas! Er moet " + this.getNeed() + " liter in de bakken zitten");
-        this.setHelp("Sleep water in de bakken van de kamelen om het getal te verhogen");
+        this.setQuestion("Vertrek met " + this.getNeed() + " liter in de bakken van de kamelen.");
+        this.addHelp("Jammer! Je moet " + this.getNeed() + " liter in de bakken stoppen.");
+        this.addHelp("Helaas! Er moet " + this.getNeed() + " liter in de bakken zitten.");
+        this.setHelp("Sleep water in de bakken van de kamelen om het getal te verhogen.");
         this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("desert"));
 
         this.setPlayerHasWon(false);
