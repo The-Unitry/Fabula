@@ -202,13 +202,14 @@ public class Level4 extends UNLevel
                 }
                 else{
                     winning = true;
-                    button.remove(button);
+                    setPlayerHasWon(true);
+                    remove(button);
+                    //button.remove(button);
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
                                 @Override
                                 public void run() {
                                     levelDone(4);
-                                    gameScreen.addLevel();
                                 }
                             },
                             4500
