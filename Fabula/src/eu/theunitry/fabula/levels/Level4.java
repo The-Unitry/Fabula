@@ -31,7 +31,7 @@ public class Level4 extends UNLevel
     private int machineState, g1, g2, answer, fakeAnswer1, fakeAnswer2, touch;
 
     /**
-     * Level 3
+     * Level 4
      * @param gameScreen
      * @param hudEnabled
      */
@@ -133,9 +133,6 @@ public class Level4 extends UNLevel
         add(button);
         button.setText("Nakijken");
 
-        for (int i = 0; i < 4; i++){
-            gameScreen.addSubLevel4();
-        }
         machineState = gameScreen.getSubLevel4();
 
         button.addActionListener(new ActionListener()
@@ -163,6 +160,7 @@ public class Level4 extends UNLevel
                             }
                         }
                         if (touch == answer){
+                            getHelper().setState(3);
                             if (gameScreen.getSubLevel4() == 5) {
                                 button.setText("Lanceren!");
                                 setHelp("Hoera! Nu kunnen we naar de maan.");
@@ -182,12 +180,12 @@ public class Level4 extends UNLevel
                                 button.setText("Doorgaan");
                                 getHelper().setState(4);
                                 if (touch < answer) {
-                                    setHelp("Jammer, er moest" + ((answer - touch == 1) ? "" : "en") + " nog " + (answer - touch) +
+                                    setHelp("Bijna, er moest" + ((answer - touch == 1) ? "" : "en") + " nog " + (answer - touch) +
                                                     " diamant" + ((answer - touch == 1) ? "" : "en") + " bij. Want " + g1 + " min " +
                                                     g2 + " is " + answer + ". Jij had er " + touch + "."
                                     );
                                 } else {
-                                    setHelp("Jammer, er moest" + ((touch - answer == 1) ? "" : "en") + " " + (touch - answer) +
+                                    setHelp("Bijna, er moest" + ((touch - answer == 1) ? "" : "en") + " " + (touch - answer) +
                                                     " diamant" + ((touch - answer == 1) ? "" : "en") + " af. Want " + g1 + " min " +
                                                     g2 + " is " + answer + ". Jij had er " + touch + "."
                                     );
@@ -210,7 +208,7 @@ public class Level4 extends UNLevel
                                 @Override
                                 public void run() {
                                     levelDone(4);
-                                    gameScreen.addSubLevel4();
+                                    gameScreen.addLevel();
                                 }
                             },
                             4500
