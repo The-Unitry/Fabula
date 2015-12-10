@@ -50,18 +50,8 @@ public class UNLauncher extends JPanel
         });
 
         ArrayList<ImageIcon> levelList= new ArrayList<>();
-        levelList.add(new ImageIcon("res/levels/1.png"));
-        levelList.add(new ImageIcon("res/levels/2.png"));
-        levelList.add(new ImageIcon("res/levels/3.png"));
-        levelList.add(new ImageIcon("res/levels/4.png"));
-        levelList.add(new ImageIcon("res/levels/5.png"));
-        levelList.add(new ImageIcon("res/levels/6.png"));
-        levelList.add(new ImageIcon("res/levels/7.png"));
-        levelList.add(new ImageIcon("res/levels/8.png"));
-        levelList.add(new ImageIcon("res/levels/9.png"));
-        levelList.add(new ImageIcon("res/levels/10.png"));
-        levelList.add(new ImageIcon("res/levels/11.png"));
-        levelList.add(new ImageIcon("res/levels/12.png"));
+
+        for (int i = 1; i <= 12; i++) levelList.add(new ImageIcon("res/levels/" + String.valueOf(i) + ".png"));;
 
         this.controlView.setLayout(new BorderLayout());
         this.levelView.setLayout(new BorderLayout());
