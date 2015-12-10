@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  * UNLauncher
@@ -43,7 +44,8 @@ public class UNLauncher extends JPanel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                levelLoader = new UNLevelLoader(gameScreen);
+                gameScreen.setAdventure(true);
+                loadLevel(1 + new Random().nextInt(11));
             }
         });
 
@@ -54,7 +56,7 @@ public class UNLauncher extends JPanel
         levelList.add(new ImageIcon("res/backgrounds/space.png"));
         levelList.add(new ImageIcon("res/backgrounds/snow.png"));
         levelList.add(new ImageIcon("res/backgrounds/desert.png"));
-        levelList.add(new ImageIcon("res/backgrounds/desert.png"));
+        levelList.add(new ImageIcon("res/backgrounds/snow.png"));
         levelList.add(new ImageIcon("res/backgrounds/underwater.png"));
         levelList.add(new ImageIcon("res/backgrounds/mine.png"));
         levelList.add(new ImageIcon("res/backgrounds/cave.png"));
@@ -82,6 +84,7 @@ public class UNLauncher extends JPanel
             int parsedButtonTextToInt = Integer.parseInt(btn.getText().replaceAll("\\D+",""));
             btn.setIcon(levelList.get(parsedButtonTextToInt));
             levelView.add(btn);
+            gameScreen.setAdventure(false);
             btn.addActionListener(e -> this.loadLevel(parsedButtonTextToInt));
         }
 
