@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Level 4
@@ -27,7 +28,7 @@ public class Level4 extends UNLevel
     private String lastHelp;
     private ArrayList<JLabel> ufosText, answers;
     private double rocketIndex, machineIndex, supportLIndex, supportRIndex, cableIndex;
-    private int machineState;
+    private int machineState, g1, g2, answer, fakeAnswer1, fakeAnswer2, touch;
 
     /**
      * Level 3
@@ -47,9 +48,10 @@ public class Level4 extends UNLevel
         gameScreen.getMusic().get("song2").play(true);
         gameScreen.getMusic().get("song2").setVolume(0.1);
 
-        this.setBackgroundImage(gameScreen.getBackgrounds().get("space"));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get("snow"));
 
-        this.winning = false;
+        setPlayerHasWon(false);
+        winning = false;
         this.lastHelp = getHelp();
 
         this.rocketIndex = 0;
@@ -58,18 +60,32 @@ public class Level4 extends UNLevel
         this.supportRIndex = 1;
         this.cableIndex = 1;
 
-        this.setQuestion("Wat is  plus plus ?");
-        this.addHelp("Jammer! Probeer het nog eens");
+
+        this.g1 = new Random().nextInt(5) + 5;
+        this.g2 = new Random().nextInt(4) + 1;
+        this.answer = g1 - g2;
+
+        this.setQuestion("Wat is " + g1 +" min " + g2 + "?");
+        this.addHelp("Jammer! Probeer het nog eens.");
         this.addHelp("Helaas! Probeer het nog een keer!");
-        this.setHelp("Klik op de UFO met het goede antwoord.");
+        this.setHelp("Sleep het aantal diamanten naar de machine.");
 
         this.color = new UNColor();
 
-        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 400, 265, gameScreen.getSprites().get("2:4:0:1"), false, 170 , 200));
-        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 193, 358, gameScreen.getSprites().get("2:4:6:1"), false, 205, 105));
-        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 130, 315, gameScreen.getSprites().get("2:4:8:1"), false, 95, 150));
-        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 315, gameScreen.getSprites().get("2:4:7:1"), false, 95, 150));
-        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 175, 220, gameScreen.getSprites().get("2:4:9:0"), false, 160,250));
+        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 400, 265, gameScreen.getSprites().get("2:4:0:0"), false, 170 , 200));
+        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 193, 358, gameScreen.getSprites().get("2:4:4:1"), false, 205, 105));
+        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 315, gameScreen.getSprites().get("2:4:5:1"), false, 95, 150));
+        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 130, 315, gameScreen.getSprites().get("2:4:6:1"), false, 95, 150));
+        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 175, 220, gameScreen.getSprites().get("2:4:7:0"), false, 160,250));
+
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 180, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 230, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 330, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 380, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 430, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 480, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 530, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
 
         for (UNGraphicsObject rocket : rockets)
         {
@@ -91,6 +107,10 @@ public class Level4 extends UNLevel
         {
             addObject(cable);
         }
+        for (UNGraphicsObject gem : gems)
+        {
+            addObject(gem);
+        }
 
 
         this.button = new JButton("Nakijken");
@@ -109,12 +129,13 @@ public class Level4 extends UNLevel
         this.button.setBorderPainted(false);
 
         add(button);
-        button.setText("Lanceer!");
+        button.setText("Nakijken");
 
-        for (int i = 0; i < 4; i++){
-            gameScreen.addLevel();
-        }
-        machineState = gameScreen.getLevel();
+//        for (int i = 0; i < 4; i++){
+//            gameScreen.addSubLevel4();
+//        }
+        machineState = gameScreen.getSubLevel4();
+
         button.addActionListener(new ActionListener()
         {
             @Override
@@ -122,22 +143,62 @@ public class Level4 extends UNLevel
             {
                 if (button.getText() == "Doorgaan")
                 {
-                    gameScreen.getSounds().get("gibberish").stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax())
+                    if (gameScreen.getSubLevel4() <= 5)
                     {
                         if (winning)
                         {
-                            gameScreen.addLevel();
+                            gameScreen.addSubLevel4();
                         }
-                        gameScreen.switchPanel(new Level3(gameScreen, true));
-                    } else
-                    {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
+                        gameScreen.switchPanel(new Level4(gameScreen, true));
+                        gameScreen.setSubLevel4(gameScreen.getSubLevel4());
+                    }
+                }
+                else if (button.getText() == "Nakijken"){
+                    for (UNGraphicsObject gem : gems) {
+                        for (UNGraphicsObject machine : machines){
+                            if (machine.getHitbox().intersects(gem.getHitbox())) {
+                                touch++;
+                            }
+                        }
+                        if (touch == answer){
+                            if (gameScreen.getSubLevel4() == 5) {
+                                button.setText("Lanceren!");
+                                setHelp("Hoera! Nu kunnen we naar de maan.");
+                            }
+                            else{
+                                setHelp("Jij kan goed rekenen!");
+                                winning = true;
+                            }
+                            for (UNGraphicsObject ge : gems) {
+                                removeObject(ge);
+                            }
+
+                        }
+                        else{
+                            addMistake();
+                            if (getMistakes() > 3){
+                                button.setText("Doorgaan");
+                                setHelp("Helaas. Dit was niet goed.");
+                                winning = false;
+                            }
+                        }
                     }
                 }
                 else{
                     winning = true;
+                    button.remove(button);
+                    new java.util.Timer().schedule(
+                            new java.util.TimerTask() {
+                                @Override
+                                public void run() {
+                                    levelDone(4);
+                                    gameScreen.addSubLevel4();
+                                }
+                            },
+                            4500
+                    );
                 }
+
             }
         });
 
@@ -146,14 +207,14 @@ public class Level4 extends UNLevel
             public void actionPerformed(ActionEvent e) {
 
                 if (rocketRelease) {
-                    if (rocketIndex < 2) {
+                    if (rocketIndex < 3) {
                         rocketIndex += 0.07;
                     } else {
-                        rocketIndex = 0;
+                        rocketIndex = 1;
                     }
                     for (UNGraphicsObject rocket : rockets) {
 
-                        rocket.setImage(gameScreen.getSprites().get("2:4:9:" + (int) Math.round(rocketIndex)));
+                        rocket.setImage(gameScreen.getSprites().get("2:4:7:" + (int) Math.round(rocketIndex)));
                     }
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
@@ -180,23 +241,22 @@ public class Level4 extends UNLevel
                 for (UNGraphicsObject machine : machines) {
                     switch (machineState) {
                         case 1:
-                            machine.setImage(gameScreen.getSprites().get("2:4:0:" + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":0"));
                             break;
                         case 2:
-                            machine.setImage(gameScreen.getSprites().get("2:4:1:" + (int) Math.round(machineIndex)));
-
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":1"));
                             break;
                         case 3:
-                            machine.setImage(gameScreen.getSprites().get("2:4:2:" + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":2"));
                             break;
                         case 4:
-                            machine.setImage(gameScreen.getSprites().get("2:4:3:" + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":3"));
                             break;
                         case 5:
-                            machine.setImage(gameScreen.getSprites().get("2:4:4:" + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":4"));
                             break;
                         case 6:
-                            machine.setImage(gameScreen.getSprites().get("2:4:5:" + (int) Math.round(machineIndex)));
+                            machine.setImage(gameScreen.getSprites().get("2:4:" + (int) Math.round(machineIndex) + ":5"));
                             cableRelease = true;
                             break;
                     }
@@ -207,7 +267,7 @@ public class Level4 extends UNLevel
                         cableIndex += 0.07;
                     }
                     for (UNGraphicsObject cable : cables) {
-                        cable.setImage(gameScreen.getSprites().get("2:4:6:" + (int) Math.round(cableIndex)));
+                        cable.setImage(gameScreen.getSprites().get("2:4:4:" + (int) Math.round(cableIndex)));
                     }
                     new java.util.Timer().schedule(
                             new java.util.TimerTask() {
@@ -226,7 +286,12 @@ public class Level4 extends UNLevel
                                 @Override
                                 public void run() {
                                     for (UNGraphicsObject rocket : rockets){
-                                        rocket.setY(rocket.getY() - 2);
+                                        if (rocket.getX() < 200) {
+                                            rocket.setY(rocket.getY() - 2);
+                                        }
+                                        else{
+                                            removeObject(rocket);
+                                        }
                                     }
                                 }
                             },
@@ -238,16 +303,16 @@ public class Level4 extends UNLevel
 
                     for (UNGraphicsObject supportR : supportsR) {
 
-                        supportR.setImage(gameScreen.getSprites().get("2:4:7:" + (int) Math.round(supportRIndex)));
+                        supportR.setImage(gameScreen.getSprites().get("2:4:5:" + (int) Math.round(supportRIndex)));
                     }
                     if (supportLIndex < 7) {
                         supportLIndex += 0.05;
                     }
                     for (UNGraphicsObject supportL : supportsL) {
 
-                        supportL.setImage(gameScreen.getSprites().get("2:4:8:" + (int) Math.round(supportLIndex)));
+                        supportL.setImage(gameScreen.getSprites().get("2:4:6:" + (int) Math.round(supportLIndex)));
                     }
-
+                    gameScreen.resetSubLevel4();
                 }
             }
         });

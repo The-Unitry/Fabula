@@ -23,7 +23,6 @@ public class Level7 extends UNLevel
     private UNGraphicsObject chest;
     private ArrayList<UNGraphicsObject> coins;
     private JButton button;
-    private boolean winning;
     private int need, need2, touch;
     private UNColor color;
     private String lastHelp;
@@ -40,7 +39,7 @@ public class Level7 extends UNLevel
         this.need = 1 + new Random().nextInt(8);
         this.need2 = 1 + new Random().nextInt(8);
 
-        this.setQuestion("Hoeveel is " + need + " plus " + need2 + "?");
+        this.setQuestion("Hoeveel is " + need + " + " + need2 + "?");
         this.addHelp("Jammer! Dit is niet goed! Doe het nog eens over!");
         this.addHelp("Helaas! Dit is niet het juiste aantal, probeer het nog eens!");
         this.setHelp("Sleep het juiste aantal muntjes in de schatkist!");
@@ -87,31 +86,21 @@ public class Level7 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (button.getText().equals("Door"))
+                if (button.getText().equals("Doorgaan"))
                 {
-                    gameScreen.getSounds().get("gibberish").stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax())
-                    {
-                        if (winning)
-                        {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level7(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
+                   levelDone(7);
                 }
 
                 if (isHelperDoneTalking())
                 {
-                    if (winning) {
+                    if (hasPlayerWon()) {
                         getHelper().setState(3);
                         setHelp("Goed gedaan, nu zijn we rijk!");
                         for (UNGraphicsObject coin : coins)
                         {
                             coin.setClickable(false);
                         }
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     } else
                     {
                         addMistake();
@@ -145,7 +134,7 @@ public class Level7 extends UNLevel
                                 coin.setClickable(false);
                             }
 
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                         }
                     }
                 }
@@ -164,7 +153,7 @@ public class Level7 extends UNLevel
                     touch++;
                 }
             }
-            winning = (touch == (need + need2));
+            setPlayerHasWon((touch == (need + need2)));
 
             for(UNGraphicsObject coin : coins)
             {

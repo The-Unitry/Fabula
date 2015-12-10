@@ -26,7 +26,7 @@ public class UNGameScreen extends UNObject
     public UNResourceLoader unResourceLoader;
     private boolean adventure;
 
-    private int level, levelMax;
+    private int level, levelMax, subLevel4;
 
     public UNGameScreen()
     {
@@ -56,6 +56,7 @@ public class UNGameScreen extends UNObject
         this.window.getFrame().setVisible(true);
 
         this.level = 1;
+        this.subLevel4 = 1;
         this.levelMax = 5;
 
         this.setAdventure(false);
@@ -148,5 +149,26 @@ public class UNGameScreen extends UNObject
 
     public void setAdventure(boolean adventure) {
         this.adventure = adventure;
+    }
+
+    //For Level 4
+    public int getSubLevel4()
+    {
+        return subLevel4;
+    }
+
+    public void setSubLevel4(int subLevel4)
+    {
+        this.subLevel4 = subLevel4;
+    }
+
+    public void resetSubLevel4()
+    {
+        this.subLevel4 = 1;
+    }
+
+    public void addSubLevel4()
+    {
+        this.subLevel4++;
     }
 }
