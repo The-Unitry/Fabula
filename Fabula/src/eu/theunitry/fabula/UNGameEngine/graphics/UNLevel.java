@@ -65,7 +65,7 @@ public abstract class UNLevel extends UNGraphicsView
                 }
                 else
                 {
-                    this.getGameScreen().switchPanel(new UNLauncher(this.getGameScreen()));
+                    getGameScreen().switchToLauncher();
                 }
             }
             else
@@ -75,7 +75,7 @@ public abstract class UNLevel extends UNGraphicsView
         }
         else
         {
-            this.getGameScreen().switchPanel(new UNLauncher(this.getGameScreen()));
+            getGameScreen().switchToLauncher();
         }
     }
 
