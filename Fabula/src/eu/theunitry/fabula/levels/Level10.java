@@ -19,17 +19,13 @@ import java.util.Random;
  */
 public class Level10 extends UNLevel
 {
-    private Timer timer;
-    private UNGraphicsObject snail1;
-    private UNGraphicsObject snail2;
-    private UNGraphicsObject snail3;
-    private ArrayList<UNGraphicsObject> acorn;
+    private ArrayList<UNGraphicsObject> acorn, snails;
     private UNGraphicsObject pointer;
     private JButton button;
-    private boolean winning;
-    private int need, touch, g1, g2;
-    private UNColor color;
+    private int need, g1, g2, fakeAnswer1, fakeAnswer2, newRand;
     private String lastHelp;
+    private ArrayList<JLabel> snailsText, answers;
+    private Timer timer;
 
     /**
      * Level 10
@@ -40,8 +36,14 @@ public class Level10 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
+        this.snailsText = new ArrayList<>();
+        this.answers = new ArrayList<>();
+        this.snails = new ArrayList<>();
+        this.newRand = new Random().nextInt(2) + 1;
+
         this.g1 = 1+ new Random().nextInt(4);
         this.g2 = 1+ new Random().nextInt(4);
+        this.acorn = new ArrayList<UNGraphicsObject>();
         this.need = g1 * g2;
 
         if (g1 == 1)
@@ -55,23 +57,54 @@ public class Level10 extends UNLevel
         this.addHelp("Helaas! gebruik je wel de tafel van " + g1 + " ?");
         this.addHelp("net niet goed, weet je zeker dat je goed hebt getelt?");
         this.setHelp("Sleep het grote eikeltje naar de slak met het juiste antwoord.");
+        this.lastHelp = getHelp();
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest-background"));
 
-        this.winning = false;
+        this.setPlayerHasWon(false);
         this.lastHelp = getHelp();
-        this.pointer = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 32, 32);
-        this.snail1 = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 200, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60);
-        this.snail2 = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 270, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60);
-        this.snail3 = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 340, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60);
-        this.acorn = new ArrayList<UNGraphicsObject>();
-        this.color = new UNColor();
+        this.snails.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 150, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60));
+        this.snails.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 220, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60));
+        this.snails.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 557, 290, gameScreen.unResourceLoader.sprites.get("2:10:2"), false, 60, 60));
+
+        this.pointer = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 342, 285, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 50, 50);
+
+        this.snailsText.add(new JLabel(Integer.toString(g2)));
+        this.snailsText.add(new JLabel(Integer.toString(g2 +1)));
+        this.snailsText.add(new JLabel(Integer.toString(g2 -1)));
 
         for (int i = 0; i < need; i++)
         {
-            acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(),50 + new Random().nextInt(400), 65, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 16, 16));
+            acorn.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(),50 + new Random().nextInt(400), 65, gameScreen.unResourceLoader.sprites.get("2:10:1"), true, 32, 32));
         }
 
-        this.button = new JButton("begin");
+        for(UNGraphicsObject snail : snails)
+        {
+            this.addObject(snail);
+            snail.setClickable(false);
+        }
+
+        this.fakeAnswer1 = this.g2 + 1;
+        this.fakeAnswer2 = this.g2 - 1;
+
+        if (newRand == 1)
+        {
+            this.answers.add(new JLabel(Integer.toString(g2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+        }
+        else if (newRand == 2)
+        {
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(g2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+        }
+        else if (newRand == 3) {
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer2)));
+            this.answers.add(new JLabel(Integer.toString(fakeAnswer1)));
+            this.answers.add(new JLabel(Integer.toString(g2)));
+        }
+
+        this.button = new JButton("nakijken");
         this.setLayout(null);
         this.button.setBounds(618, 64, 150, 50);
         this.button.setBackground(new Color(51, 51, 51));
@@ -79,9 +112,21 @@ public class Level10 extends UNLevel
         this.button.setForeground(Color.white);
         this.button.setOpaque(true);
         addObject(pointer);
-        addObject(snail1);
-        addObject(snail2);
-        addObject(snail3);
+
+        for (JLabel snailText : snailsText)
+        {
+            snailText.setFont(new Font("Minecraftia", Font.PLAIN, 20));
+            snailText.setForeground(new Color(51, 51, 51));
+            snailText.setHorizontalAlignment(SwingConstants.CENTER);
+            add(snailText);
+        }
+
+        for (JLabel possibleAnswer : answers)
+        {
+            possibleAnswer.setFont(new Font("Minecraftia", Font.PLAIN, 20));
+            possibleAnswer.setForeground(new Color(51, 51, 51));
+            possibleAnswer.setHorizontalAlignment(SwingConstants.CENTER);
+        }
 
         /**
          * Reset Default Styling
@@ -92,48 +137,47 @@ public class Level10 extends UNLevel
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (button.getText() == "Door") {
-                    gameScreen.getSounds().get(0).stop();
-                    if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                        if (winning) {
-                            gameScreen.addLevel();
-                        }
-                        gameScreen.switchPanel(new Level9(gameScreen, true));
-                    } else {
-                        gameScreen.switchPanel(new UNLauncher(gameScreen));
-                    }
-                }
-                if (isHelperDoneTalking()) {
-                    if (winning) {
-                        getHelper().setState(3);
-                        setHelp("Goed gedaan, jij kent de tafels goed!");
-                        for (UNGraphicsObject acorns : acorn) {
-                            acorns.setClickable(false);
-                        }
-                        button.setText("Door");
-                    } else {
-                        addMistake();
-                        if (getMistakes() < 3) {
-                            getHelper().setState(4);
-                            while(lastHelp == getHelp()) {
-                                setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
-                            }
-                            lastHelp = getHelp();
-                        } else {
-                            getHelper().setState(4);
-                            if (touch < need) {
-                                setHelp("Jammer, er moest" + ((need - touch == 1) ? "" : "en") + " nog " + (need - touch) +
-                                        " groep(en)" + ((need - touch == 1) ? "" : "s")  + " bij. Want " + touch + " keer " +
-                                        (need - touch)  + " is " + need
-                                );
+                if (button.getText() == "Doorgaan") {
+                    levelDone(10);
+                } else {
+                    for (UNGraphicsObject snail : snails) {
+                        if (pointer.getHitbox().intersects(snail.getHitbox())) {
+                            if (Integer.parseInt(answers.get(snails.indexOf(snail)).getText()) == g2) {
+                                setHelp("Goedzo, jij kent je tafels goed!");
+                                setPlayerHasWon(true);
+                                button.setText("Doorgaan");
+                                getHelper().setState(3);
                             } else {
-                                setHelp("Jammer, er moest" + ((touch - need == 1) ? "" : "en") + " " + (touch - need) +
-                                        " groep(en)" + ((touch - need == 1) ? "" : "s")  + " af. Want " + touch + " keer " +
-                                        (touch - need)  + " is " + need
-                                );
-                            }
+                                addMistake();
+                                if (getMistakes() < 3)
+                                {
+                                    getHelper().setState(4);
+                                    while(lastHelp == getHelp())
+                                    {
+                                        setHelp(getHelpList().get(new Random().nextInt(getHelpList().size())));
+                                    }
+                                    lastHelp = getHelp();
+                                }
+                                else
+                                {
+                                    getHelper().setState(4);
+                                    int current = Integer.parseInt(answers.get(snails.indexOf(snail)).getText());
+                                    if (current < g2)
+                                    {
+                                        setHelp("Jammer, er moest nog 1 groepje bij. Want " + g1 + " keer " +
+                                                g2  + " is " + need + "."
+                                        );
+                                    }
+                                    else
+                                    {
+                                        setHelp("Jammer, er moest nog 1 groepje af. Want " + g1 + " keer " +
+                                                g2  + " is " + need + "."
+                                        );
+                                    }
 
-                            button.setText("Door");
+                                    button.setText("Doorgaan");
+                                }
+                            }
                         }
                     }
                 }
@@ -145,26 +189,24 @@ public class Level10 extends UNLevel
             addObject(acorns);
         }
 
+        for (JLabel possibleAnswer : answers)
+        {
+            add(possibleAnswer);
+            possibleAnswer.setForeground(Color.white);
+            possibleAnswer.setBounds(snails.get(answers.indexOf(possibleAnswer)).getX() + 8, snails.get(answers.indexOf(possibleAnswer)).getY() - 6, snails.get(answers.indexOf(possibleAnswer)).getWidth(), snails.get(answers.indexOf(possibleAnswer)).getHeight());
+        }
+        this.getPanel().add(button);
 
-        timer = new Timer(1, e -> {
-            touch = 0;
-            for (UNGraphicsObject acorns : acorn) {
-                if (snail1.getHitbox().intersects(acorns.getHitbox())) {
-                    touch++;
-                }
-            }
-            winning = (touch == need);
-
-            for(UNGraphicsObject acorns : acorn)
-            {
-                if(!acorns.getMouseHold() && !snail2.getHitbox(true).intersects(acorns.getHitbox())) {
-                    acorns.setY(acorns.getY() + 1);
+        timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                for (UNGraphicsObject cavia : acorn) {
+                    if(!cavia.getMouseHold()) {
+                        cavia.setY(cavia.getY() +1);
+                    }
                 }
             }
         });
-
-            this.getPanel().add(button);
-
         timer.start();
     }
 }
