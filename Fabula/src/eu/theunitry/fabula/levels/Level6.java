@@ -236,7 +236,7 @@ public class Level6 extends UNLevel
                             add(button);
                             getHelper().setState(3);
                             setHelp("Mooi hoor! Jij kan goed rekenen!");
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                             setPlayerHasWon(true);
                         }
                         else
