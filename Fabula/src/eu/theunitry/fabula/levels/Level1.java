@@ -40,7 +40,7 @@ public class Level1 extends UNLevel
 
         this.need = 3 + new Random().nextInt(3);
 
-        this.setQuestion("Vertrek met " + need + " appels in de mand");
+        this.setQuestion("Blobby probeert de wereld te vernietigen. Stop hem!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
