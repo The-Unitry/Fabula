@@ -125,7 +125,7 @@ public class Level5 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                if (Objects.equals(button.getText(), "Door"))
+                if (Objects.equals(button.getText(), "Doorgaan"))
                 {
                     levelDone(5);
                 }
@@ -137,7 +137,7 @@ public class Level5 extends UNLevel
                         setHelp("Goed gedaan, we kunnen er weer tegen aan!");
                         setPlayerHasWon(true);
                         getBucket().setClickable(false);
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     }
                     else
                     {
@@ -170,7 +170,7 @@ public class Level5 extends UNLevel
                                 );
                             }
 
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                         }
                     }
                 }

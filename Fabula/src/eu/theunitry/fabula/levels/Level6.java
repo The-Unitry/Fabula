@@ -19,7 +19,7 @@ public class Level6 extends UNLevel
     private ArrayList<UNGraphicsObject> snowballs, snowballAnswers, trees, reindeers, snow;
     private double imageIndex;
     private JButton button;
-    private boolean questionDone, winning;
+    private boolean questionDone;
     private int answer, touch;
     private String lastHelp;
     private ArrayList<JLabel> snowballTexts, answers;
@@ -58,7 +58,7 @@ public class Level6 extends UNLevel
         this.setHelp("Daar komen ze aanrollen");
         this.setBackgroundImage(this.getGameScreen().getBackgrounds().get("snow"));
 
-        this.setWinning(false);
+        this.setPlayerHasWon(false);
         this.setQuestionDone(false);
         this.setLastHelp(getHelp());
         this.setReindeerIndex(0);
@@ -157,15 +157,7 @@ public class Level6 extends UNLevel
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (button.getText() == "Door") {
-                    getGameScreen().getSounds().get("gibberish").stop();
-                    if (getGameScreen().getLevel() < getGameScreen().getLevelMax()) {
-                        if (isWinning()) {
-                            getGameScreen().addLevel();
-                        }
-                        getGameScreen().switchPanel(new Level6(getGameScreen(), true));
-                    } else {
-                        getGameScreen().switchPanel(new UNLauncher(getGameScreen()));
-                    }
+                    levelDone(6);
                 }
             }
         });
@@ -241,7 +233,7 @@ public class Level6 extends UNLevel
                 {
                     for (UNGraphicsObject snowball : getSnowballAnswers())
                     {
-                        if (snowball.isMouseClick() && !isWinning() && isHelperDoneTalking())
+                        if (snowball.isMouseClick() && !hasPlayerWon() && isHelperDoneTalking())
                         {
                             snowball.setMouseClick(false);
                             if (Integer.valueOf(getAnswers().get(getSnowballAnswers().indexOf(snowball)).getText()) == getAnswer())
@@ -250,7 +242,7 @@ public class Level6 extends UNLevel
                                 getHelper().setState(3);
                                 setHelp("Mooi hoor! Jij kan goed rekenen!");
                                 button.setText("Door");
-                                setWinning(true);
+                                setPlayerHasWon(true);
                             }
                             else
                             {
@@ -382,14 +374,6 @@ public class Level6 extends UNLevel
 
     public void setQuestionDone(boolean questionDone) {
         this.questionDone = questionDone;
-    }
-
-    public boolean isWinning() {
-        return this.winning;
-    }
-
-    public void setWinning(boolean winning) {
-        this.winning = winning;
     }
 
     public int getAnswer() {
