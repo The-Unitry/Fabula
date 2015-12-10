@@ -50,19 +50,17 @@ public class UNLauncher extends JPanel
         });
 
         ArrayList<ImageIcon> levelList= new ArrayList<>();
-        levelList.add(new ImageIcon("res/backgrounds/forest.png"));
-        levelList.add(new ImageIcon("res/backgrounds/forest-background.png"));
-        levelList.add(new ImageIcon("res/backgrounds/forest.png"));
-        levelList.add(new ImageIcon("res/backgrounds/space.png"));
-        levelList.add(new ImageIcon("res/backgrounds/snow.png"));
-        levelList.add(new ImageIcon("res/backgrounds/desert.png"));
-        levelList.add(new ImageIcon("res/backgrounds/snow.png"));
-        levelList.add(new ImageIcon("res/backgrounds/underwater.png"));
-        levelList.add(new ImageIcon("res/backgrounds/mine.png"));
-        levelList.add(new ImageIcon("res/backgrounds/cave.png"));
-        levelList.add(new ImageIcon("res/backgrounds/forest-background.png"));
-        levelList.add(new ImageIcon("res/backgrounds/supermarket.png"));
-        levelList.add(new ImageIcon("res/backgrounds/jungle.png"));
+        levelList.add(new ImageIcon("res/levels/1.png"));
+        levelList.add(new ImageIcon("res/levels/2.png"));
+        levelList.add(new ImageIcon("res/levels/3.png"));
+        levelList.add(new ImageIcon("res/levels/4.png"));
+        levelList.add(new ImageIcon("res/levels/5.png"));
+        levelList.add(new ImageIcon("res/levels/6.png"));
+        levelList.add(new ImageIcon("res/levels/7.png"));
+        levelList.add(new ImageIcon("res/levels/8.png"));
+        levelList.add(new ImageIcon("res/levels/9.png"));
+        levelList.add(new ImageIcon("res/levels/10.png"));
+        levelList.add(new ImageIcon("res/levels/11.png"));
 
         this.controlView.setLayout(new BorderLayout());
         this.levelView.setLayout(new BorderLayout());
@@ -75,17 +73,36 @@ public class UNLauncher extends JPanel
 
         ArrayList<JButton> levelButtons = new ArrayList<>();
 
-
-        for(int i = 1; i <= 12; i++) levelButtons.add(new JButton("Level " + i));
+        for(int i = 0; i <= 10; i++) levelButtons.add(new JButton("Level " + i));
 
         for (JButton btn : levelButtons)
         {
-            btn.setBorder(new EmptyBorder(5,5,5,5));
+            btn.setBorderPainted(false);
             int parsedButtonTextToInt = Integer.parseInt(btn.getText().replaceAll("\\D+",""));
+            btn.setText("");
             btn.setIcon(levelList.get(parsedButtonTextToInt));
             levelView.add(btn);
             gameScreen.setAdventure(false);
-            btn.addActionListener(e -> this.loadLevel(parsedButtonTextToInt));
+            System.out.println(parsedButtonTextToInt);
+
+            int levelLoaded = 0;
+            switch (parsedButtonTextToInt)
+            {
+                case 1: levelLoaded = 7; break;
+                case 2: levelLoaded = 11; break;
+                case 3: levelLoaded = 12; break;
+                case 4: levelLoaded = 3; break;
+                case 5: levelLoaded = 5; break;
+                case 6: levelLoaded = 6; break;
+                case 7: levelLoaded = 9; break;
+                case 8: levelLoaded = 4; break;
+                case 9: levelLoaded = 10; break;
+                case 10: levelLoaded = 1; break;
+            }
+
+            final int finalLevelLoaded = levelLoaded;
+            btn.addActionListener(e -> this.loadLevel(finalLevelLoaded));
+
         }
 
         this.add(controlView);
