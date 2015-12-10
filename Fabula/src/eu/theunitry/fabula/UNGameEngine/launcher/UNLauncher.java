@@ -54,7 +54,7 @@ public class UNLauncher extends JPanel
         levelList.add(new ImageIcon("res/backgrounds/space.png"));
         levelList.add(new ImageIcon("res/backgrounds/snow.png"));
         levelList.add(new ImageIcon("res/backgrounds/desert.png"));
-        levelList.add(new ImageIcon("res/backgrounds/desert.png"));
+        levelList.add(new ImageIcon("res/backgrounds/snow.png"));
         levelList.add(new ImageIcon("res/backgrounds/underwater.png"));
         levelList.add(new ImageIcon("res/backgrounds/mine.png"));
         levelList.add(new ImageIcon("res/backgrounds/cave.png"));
