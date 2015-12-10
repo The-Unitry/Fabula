@@ -136,7 +136,7 @@ public class UNGraphicsView extends JPanel
             g.setColor(Color.white);
 
             g.setFont(new Font("Minecraftia", Font.PLAIN, 18));
-            g.drawString("Level " + this.getGameScreen().getLevel() + "/" + this.getGameScreen().getLevelMax(), 11, 38);
+            g.drawString("Level " + this.getGameScreen().getLevel() + "/" + this.getGameScreen().getLevelMax(), 80, 38);
 
             if (!getHelp().isEmpty())
             {
