@@ -131,9 +131,9 @@ public class Level4 extends UNLevel
         add(button);
         button.setText("Nakijken");
 
-        for (int i = 0; i < 4; i++){
-            gameScreen.addSubLevel4();
-        }
+//        for (int i = 0; i < 4; i++){
+//            gameScreen.addSubLevel4();
+//        }
         machineState = gameScreen.getSubLevel4();
 
         button.addActionListener(new ActionListener()
@@ -150,6 +150,7 @@ public class Level4 extends UNLevel
                             gameScreen.addSubLevel4();
                         }
                         gameScreen.switchPanel(new Level4(gameScreen, true));
+                        gameScreen.setSubLevel4(gameScreen.getSubLevel4());
                     }
                 }
                 else if (button.getText() == "Nakijken"){
@@ -311,6 +312,7 @@ public class Level4 extends UNLevel
 
                         supportL.setImage(gameScreen.getSprites().get("2:4:6:" + (int) Math.round(supportLIndex)));
                     }
+                    gameScreen.resetSubLevel4();
                 }
             }
         });

@@ -157,6 +157,16 @@ public class UNGameScreen extends UNObject
         return subLevel4;
     }
 
+    public void setSubLevel4(int subLevel4)
+    {
+        this.subLevel4 = subLevel4;
+    }
+
+    public void resetSubLevel4()
+    {
+        this.subLevel4 = 1;
+    }
+
     public void addSubLevel4()
     {
         this.subLevel4++;
