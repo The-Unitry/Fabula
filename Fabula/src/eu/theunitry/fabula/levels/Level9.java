@@ -22,7 +22,6 @@ public class Level9 extends UNLevel
     private UNGraphicsObject diamond;
     private ArrayList<UNGraphicsObject> weights;
     private JButton button;
-    private boolean winning;
     private int need, touch;
     private UNColor color;
     private String lastHelp;
@@ -45,7 +44,7 @@ public class Level9 extends UNLevel
         this.setHelp("Zorg dat de diamant evenveel weegt als de gewichtjes op de plank.");
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("cave"));
 
-        this.winning = false;
+        this.setPlayerHasWon(false);
         this.lastHelp = getHelp();
 
         this.weights = new ArrayList<UNGraphicsObject>();
@@ -85,25 +84,18 @@ public class Level9 extends UNLevel
         this.button.setBorderPainted(false);
 
         button.addActionListener(e -> {
-            if (button.getText().equals("Door")) {
-                gameScreen.getSounds().get("gibberish").stop();
-                if (gameScreen.getLevel() < gameScreen.getLevelMax()) {
-                    if (winning) {
-                        gameScreen.addLevel();
-                    }
-                    gameScreen.switchPanel(new Level9(gameScreen, true));
-                } else {
-                    gameScreen.switchPanel(new UNLauncher(gameScreen));
-                }
+            if (button.getText().equals("Doorgaan"))
+            {
+                levelDone(9);
             }
             if (isHelperDoneTalking()) {
-                if (winning) {
+                if (hasPlayerWon()) {
                     getHelper().setState(3);
                     setHelp("Goed gedaan, de diamant is van ons!!!");
                     for (UNGraphicsObject weight : weights) {
                         weight.setClickable(false);
                     }
-                    button.setText("Door");
+                    button.setText("Doorgaan");
                 } else {
                     addMistake();
                     if (getMistakes() < 3) {
@@ -131,7 +123,7 @@ public class Level9 extends UNLevel
                             weight.setClickable(false);
                         }
 
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     }
                 }
             }
@@ -146,7 +138,7 @@ public class Level9 extends UNLevel
                     touch++;
                 }
             }
-            winning = (touch == need);
+            setPlayerHasWon((touch == need));
 
             for(UNGraphicsObject weight : weights)
             {
