@@ -77,8 +77,12 @@ public class UNGameScreen extends UNObject
 
     public void stopAudio()
     {
-        this.getMusic().get("song2").stop();
-        this.getSounds().get("gibberish").stop();
+        for (Map.Entry<String, Music> music : this.getMusic().entrySet()) {
+            music.getValue().stop();
+        }
+        for (Map.Entry<String, Sound> sound : this.getSounds().entrySet()) {
+            sound.getValue().stop();
+        }
     }
 
     public void switchToLauncher()
