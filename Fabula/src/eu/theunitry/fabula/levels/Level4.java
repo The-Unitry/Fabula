@@ -78,14 +78,16 @@ public class Level4 extends UNLevel
         supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 145, 315, gameScreen.getSprites().get("2:4:6:1"), false, 95, 150));
         rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 190, 220, gameScreen.getSprites().get("2:4:7:0"), false, 160,250));
 
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 545, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 595, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 645, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 695, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 545, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 595, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 570, 120, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 620, 120, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 670, 120, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 570, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 620, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 670, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 590, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
         gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 645, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 695, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
 
         for (UNGraphicsObject rocket : rockets)
         {
@@ -176,9 +178,25 @@ public class Level4 extends UNLevel
                         }
                         else{
                             addMistake();
-                            if (getMistakes() > 3){
+                            if (getMistakes() > 3) {
                                 button.setText("Doorgaan");
-                                setHelp("Helaas. Dit was niet goed.");
+                                getHelper().setState(4);
+                                if (touch < answer) {
+                                    setHelp("Jammer, er moest" + ((answer - touch == 1) ? "" : "en ") + " nog " + (answer - touch) +
+                                                    " diamant" + ((answer - touch == 1) ? "" : "en") + " bij. Want " + g1 + " min " +
+                                                    g2 + " is " + answer + ". Jij had er " + touch + "."
+                                    );
+                                } else {
+                                    setHelp("Jammer, er moest" + ((touch - answer == 1) ? "" : "en") + " " + (touch - answer) +
+                                                    " diamant" + ((touch - answer == 1) ? "" : "en") + " af. Want " + g1 + " min " +
+                                                    g2 + " is " + answer + ". Jij had er " + touch + "."
+                                    );
+
+                                }
+
+                                for (UNGraphicsObject ge : gems) {
+                                    ge.setClickable(false);
+                                }
                                 winning = false;
                             }
                         }
