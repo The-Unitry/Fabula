@@ -48,14 +48,14 @@ public class Level10 extends UNLevel
 
         if (g1 == 1)
         {
-            this.setQuestion("hoeveel groepen van " + g1 + " eikeltje vallen uit de boom");
+            this.setQuestion("Hoeveel groepen van " + g1 + " eikeltje vallen uit de boom?");
         } else {
-            this.setQuestion("hoeveel groepen van " + g1 + " eikeltjes vallen uit de boom");
+            this.setQuestion("Hoeveel groepen van " + g1 + " eikeltjes vallen uit de boom?");
         }
         
         this.addHelp("Jammer! Je moet kijken hoevel groepen van " + g1 + " eikeltjes op de grond liggen");
         this.addHelp("Helaas! gebruik je wel de tafel van " + g1 + " ?");
-        this.addHelp("net niet goed, weet je zeker dat je goed hebt getelt?");
+        this.addHelp("Net niet goed, kijk of de eikeltjes niet in elkaar vastzitten!");
         this.setHelp("Sleep het grote eikeltje naar de slak met het juiste antwoord.");
         this.lastHelp = getHelp();
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("forest-background"));
