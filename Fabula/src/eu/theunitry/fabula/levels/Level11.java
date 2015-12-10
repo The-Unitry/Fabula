@@ -151,7 +151,7 @@ public class Level11 extends UNLevel
                         for (UNGraphicsObject banana : bananas) {
                             banana.setClickable(false);
                         }
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     } else {
                         addMistake();
                         if (getMistakes() < 3) {
@@ -188,7 +188,7 @@ public class Level11 extends UNLevel
                                 banana.setClickable(false);
                             }
 
-                            button.setText("Door");
+                            button.setText("Doorgaan");
                         }
                     }
                 }

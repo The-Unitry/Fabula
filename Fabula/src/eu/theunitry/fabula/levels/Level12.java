@@ -104,7 +104,7 @@ public class Level12 extends UNLevel
                     for (UNGraphicsObject monkey_brown : monkeys_brown) {
                         monkey_brown.setClickable(false);
                     }
-                    button.setText("Door");
+                    button.setText("Doorgaan");
                 } else {
                     addMistake();
                     if (getMistakes() < 3) {
@@ -132,7 +132,7 @@ public class Level12 extends UNLevel
                             monkey_brown.setClickable(false);
                         }
 
-                        button.setText("Door");
+                        button.setText("Doorgaan");
                     }
                 }
             }
