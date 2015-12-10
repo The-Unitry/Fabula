@@ -78,6 +78,7 @@ public class UNLauncher extends JPanel
         for (JButton btn : levelButtons)
         {
             btn.setBorderPainted(false);
+            btn.setBackground(Color.white);
             int parsedButtonTextToInt = Integer.parseInt(btn.getText().replaceAll("\\D+",""));
             btn.setText("");
             btn.setIcon(levelList.get(parsedButtonTextToInt));
