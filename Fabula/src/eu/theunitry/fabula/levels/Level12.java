@@ -131,7 +131,7 @@ public class Level12 extends UNGraphicsLevel
                                     (need - touch) + " plus " + touch + " is " + need
                             );
                         } else {
-                            setHelp("Jammer, je had " + (touch - need) + " kilogram teveel bij gedaan. Want " +
+                            setHelp("Jammer, je had er " + (touch - need) + " kilogram teveel bij gedaan. Want " +
                                     touch + " min " + (touch - need) + " is " + need
                             );
                         }
