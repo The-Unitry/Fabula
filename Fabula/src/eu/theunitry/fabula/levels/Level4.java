@@ -48,7 +48,7 @@ public class Level4 extends UNLevel
         gameScreen.getMusic().get("song2").play(true);
         gameScreen.getMusic().get("song2").setVolume(0.1);
 
-        this.setBackgroundImage(gameScreen.getBackgrounds().get("snow"));
+        this.setBackgroundImage(gameScreen.getBackgrounds().get("silo"));
 
         setPlayerHasWon(false);
         winning = false;
@@ -72,20 +72,20 @@ public class Level4 extends UNLevel
 
         this.color = new UNColor();
 
-        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 400, 265, gameScreen.getSprites().get("2:4:0:0"), false, 170 , 200));
-        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 193, 358, gameScreen.getSprites().get("2:4:4:1"), false, 205, 105));
-        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 315, gameScreen.getSprites().get("2:4:5:1"), false, 95, 150));
-        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 130, 315, gameScreen.getSprites().get("2:4:6:1"), false, 95, 150));
-        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 175, 220, gameScreen.getSprites().get("2:4:7:0"), false, 160,250));
+        machines.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 415, 265, gameScreen.getSprites().get("2:4:0:0"), false, 170 , 200));
+        cables.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 208, 358, gameScreen.getSprites().get("2:4:4:1"), false, 205, 105));
+        supportsR.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 295, 315, gameScreen.getSprites().get("2:4:5:1"), false, 95, 150));
+        supportsL.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 145, 315, gameScreen.getSprites().get("2:4:6:1"), false, 95, 150));
+        rockets.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 190, 220, gameScreen.getSprites().get("2:4:7:0"), false, 160,250));
 
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 180, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 230, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 280, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 330, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 380, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 430, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 480, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
-        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 530, 150, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 545, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 595, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 645, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 695, 175, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 545, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 595, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 645, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
+        gems.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 695, 235, gameScreen.getSprites().get("2:9:1"), true, 40, 40));
 
         for (UNGraphicsObject rocket : rockets)
         {

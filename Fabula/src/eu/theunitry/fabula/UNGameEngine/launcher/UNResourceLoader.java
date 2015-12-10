@@ -191,6 +191,7 @@ public class UNResourceLoader
         backgrounds.put("moon", getBackground("moon"));
         backgrounds.put("snow", getBackground("snow"));
         backgrounds.put("space", getBackground("space"));
+        backgrounds.put("silo", getBackground("silo"));
         backgrounds.put("splash", getBackground("splash"));
         backgrounds.put("splash_unitry", getBackground("splash_unitry"));
         backgrounds.put("supermarket", getBackground("supermarket"));
