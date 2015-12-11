@@ -2,6 +2,7 @@ package eu.theunitry.fabula.helper;
 
 import eu.theunitry.fabula.UNGameEngine.graphics.UNGameScreen;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNResourceLoader;
+import eu.theunitry.fabula.UNGameEngine.objects.UNObject;
 
 import java.awt.*;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 
-public class Helper
+public class Helper extends UNObject
 {
     private Timer animationTimerLoop;
     private UNGameScreen gameScreen;

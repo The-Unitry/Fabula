@@ -22,12 +22,9 @@ import java.util.Random;
 public class Level1 extends UNLevel
 {
     private Timer timer;
-    private UNGraphicsObject basket;
-    private ArrayList<UNGraphicsObject> apples;
     private JButton button;
     private boolean winning;
     private int need, touch;
-    private UNColor color;
     private String lastHelp;
 
     /**
@@ -39,37 +36,20 @@ public class Level1 extends UNLevel
     {
         super(gameScreen, hudEnabled);
 
+        gameScreen.stopAudio();
+
         this.need = 3 + new Random().nextInt(3);
 
-        this.setQuestion("Blobby probeert de wereld te vernietigen. Stop hem!");
+        this.setQuestion("Oh nee! Blobby probeert de wereld te vernietigen. Stop hem!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
+        gameScreen.getMusic().get("the-end").play(true);
+        gameScreen.getMusic().get("the-end").setVolume(0.1);
 
         this.winning = false;
         this.lastHelp = getHelp();
-
-        this.apples = new ArrayList<>();
-        this.color = new UNColor();
-
-        this.basket = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 600, 200, gameScreen.unResourceLoader.sprites.get("2:1:2"), false, 96, 96);
-
-        for (int i = 0; i < 5; i++){
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 64 +
-                    new Random().nextInt(300), 100 + new Random().nextInt(200), gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32)
-            );
-        }
-
-        this.apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 610, 210, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
-        if (new Random().nextInt(2) == 1) {
-            apples.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 646, 240, gameScreen.unResourceLoader.sprites.get("2:1:1"), true, 32, 32));
-        }
-
-        this.addObject(basket);
-        for (UNGraphicsObject apple : apples) {
-            addObject(apple);
-        }
 
         this.button = new JButton("Vuren!");
 
@@ -95,9 +75,7 @@ public class Level1 extends UNLevel
                 if (winning) {
                     getHelper().setState(3);
                     setHelp("Goed gedaan, dat wordt smikkelen en smullen!");
-                    for (UNGraphicsObject apple : apples) {
-                        apple.setClickable(false);
-                    }
+
                     button.setText("Door");
                 } else {
                     addMistake();
@@ -121,11 +99,6 @@ public class Level1 extends UNLevel
                             );
                         }
 
-                        for (UNGraphicsObject apple : apples)
-                        {
-                            apple.setClickable(false);
-                        }
-
                         button.setText("Door");
                     }
                 }
@@ -134,14 +107,18 @@ public class Level1 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, e -> {
-            touch = 0;
-            for (UNGraphicsObject apple : apples) {
-                if (basket.getHitbox().intersects(apple.getHitbox())) {
-                    touch++;
-                }
+
+
+        timer = new Timer(1, new ActionListener() {
+
+            int i = 0;
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                touch = 0;
+                System.out.println(i++);
+                winning = (touch == need);
             }
-            winning = (touch == need);
         });
 
         timer.start();

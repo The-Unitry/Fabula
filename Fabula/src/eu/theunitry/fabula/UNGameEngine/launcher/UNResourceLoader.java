@@ -60,10 +60,9 @@ public class UNResourceLoader
         for(int i = 0; i <= 5; i++) sprites.put("1:5:" + String.valueOf(i), this.getSprite("tuiltje/sad/" + String.valueOf(i)));
 
         /**
-         * Level 1 & 2
+         * Level 1
          */
-        sprites.put("2:1:1", this.getSprite("apple"));
-        sprites.put("2:1:2", this.getSprite("basket"));
+        sprites.put("2:1:1", this.getSprite("levels/1/blobby"));
 
         /**
          * Level 3
@@ -219,6 +218,7 @@ public class UNResourceLoader
         music.put("intro", TinySound.loadMusic("audio/intro.wav"));
         music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo! When I feel heavy-metal!!!
         music.put("avalange", TinySound.loadMusic("audio/avalange.wav"));
+        music.put("the-end", TinySound.loadMusic("audio/the-end.wav"));
     }
 
     private void loadSound()
