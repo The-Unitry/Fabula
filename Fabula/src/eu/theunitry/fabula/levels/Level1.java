@@ -40,32 +40,39 @@ public class Level1 extends UNLevel
 
         this.need = 3 + new Random().nextInt(3);
 
+        // Load questions & help texts
         this.setQuestion("Oh nee! Blobby probeert de wereld te vernietigen. Stop hem!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Sleep het aantal appels in de mand");
+
+        //  Set resources/audio
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
+
         gameScreen.getMusic().get("the-end").play(true);
         gameScreen.getMusic().get("the-end").setVolume(0.1);
 
+        // Set variables
         this.winning = false;
         this.lastHelp = getHelp();
 
         this.button = new JButton("Vuren!");
 
+        // Standard styling
         this.setLayout(null);
+
+        // Set button styling
         this.button.setBounds(618, 64, 150, 50);
         this.button.setBackground(new Color(51, 51, 51));
         this.button.setFont(new Font("Minecraftia", Font.PLAIN, 15));
         this.button.setForeground(Color.white);
         this.button.setOpaque(true);
 
-        /**
-         * Reset Default Styling
-         */
+        // Makes it look good on Mac
         this.button.setFocusPainted(false);
         this.button.setBorderPainted(false);
 
+        // Speaks for itself
         button.addActionListener(e -> {
             if (button.getText().equals("Doorgaan"))
             {
@@ -106,8 +113,6 @@ public class Level1 extends UNLevel
         });
 
         this.getPanel().add(button);
-
-
 
         timer = new Timer(1, new ActionListener() {
             @Override
