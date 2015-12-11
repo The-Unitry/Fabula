@@ -110,13 +110,9 @@ public class Level1 extends UNLevel
 
 
         timer = new Timer(1, new ActionListener() {
-
-            int i = 0;
-
             @Override
             public void actionPerformed(ActionEvent e) {
                 touch = 0;
-                System.out.println(i++);
                 winning = (touch == need);
             }
         });
