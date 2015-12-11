@@ -49,7 +49,7 @@ public class Level1 extends UNLevel
 
         //  Set resources/audio
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
-        this.blobby = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, -50, gameScreen.getSprites().get("2:1:1"), false, 38 * 3, 50 * 3);
+        this.blobby = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, -50, gameScreen.getSprites().get("2:1:1:1"), false, 38 * 3, 70 * 3);
 
         this.addObject(blobby);
 
@@ -120,10 +120,19 @@ public class Level1 extends UNLevel
 
         timer = new Timer(100, new ActionListener() {
             int i = blobby.getY();
+            int frame = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(i <= 100) blobby.setY(i = i + 5);
-                if(i >= 100) {
+                if(frame < 3)
+                {
+                    frame++;
+                } else {
+                    frame = 0;
+                }
+                blobby.setImage(gameScreen.getSprites().get("2:1:1:" + String.valueOf(frame)));
+
+                if(i <= 90) blobby.setY(i = i + 10);
+                if(i >= 90) {
                     shakeBlobby();
                 }
                 touch = 0;
