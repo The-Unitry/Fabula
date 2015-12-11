@@ -26,6 +26,7 @@ public class Level1 extends UNLevel
     private boolean winning;
     private int need, touch;
     private String lastHelp;
+    public UNGraphicsObject blobby;
 
     /**
      * Level 1
@@ -44,10 +45,13 @@ public class Level1 extends UNLevel
         this.setQuestion("Oh nee! Blobby probeert de wereld te vernietigen. Stop hem!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
-        this.setHelp("Sleep het aantal appels in de mand");
+        this.setHelp("Om het wapen af te vuren moet je het goede draadje doorknippen");
 
         //  Set resources/audio
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
+        this.blobby = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, -50, gameScreen.getSprites().get("2:1:1"), false, 38 * 3, 50 * 3);
+
+        this.addObject(blobby);
 
         gameScreen.getMusic().get("the-end").play(true);
         gameScreen.getMusic().get("the-end").setVolume(0.1);
@@ -114,14 +118,39 @@ public class Level1 extends UNLevel
 
         this.getPanel().add(button);
 
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(100, new ActionListener() {
+            int i = blobby.getY();
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(i <= 100) blobby.setY(i = i + 5);
+                if(i >= 100) {
+                    shakeBlobby();
+                }
                 touch = 0;
                 winning = (touch == need);
             }
         });
 
         timer.start();
+    }
+
+    public void shakeBlobby()
+    {
+        if(Math.random() < 0.5)
+        {
+            blobby.setX(blobby.getX() + 1);
+        }
+        if(Math.random() < 0.5)
+        {
+            blobby.setY(blobby.getY() + 1);
+        }
+        if(Math.random() < 0.5)
+        {
+            blobby.setX(blobby.getX() - 1);
+        }
+        if(Math.random() < 0.5)
+        {
+            blobby.setY(blobby.getY() - 1);
+        }
     }
 }
