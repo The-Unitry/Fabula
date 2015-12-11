@@ -183,7 +183,6 @@ public class Level1 extends UNLevel
                 if(bombs.get(1).isMouseClick())
                 {
                     bombs.get(1).setMouseClick(false);
-                    System.out.println("test");
                     timer.stop();
                     die();
                 }

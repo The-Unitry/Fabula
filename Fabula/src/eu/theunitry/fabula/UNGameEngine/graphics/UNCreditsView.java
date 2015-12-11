@@ -76,7 +76,6 @@ public class UNCreditsView extends JPanel
             {
                 creditsMusic.stop();
                 gameScreen.switchToLauncher();
-
             }
         });
     }
