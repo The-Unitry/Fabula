@@ -19,8 +19,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 /**
- * UNLauncher
- * UNLauncher is the main menu which loads levels & settings.
+ * UNCreditsViews is the main menu which loads levels & settings.
  */
 public class UNCreditsView extends JPanel
 {
@@ -29,21 +28,41 @@ public class UNCreditsView extends JPanel
     private UNView creditsView;
     private UNLevelLoader levelLoader;
     private UNGameScreen gameScreen;
+    private ArrayList<JLabel> labels;
 
     public UNCreditsView(UNGameScreen gameScreen)
     {
-        this.label = new JLabel("Fabula");
-        this.stopBtn = new JButton("Klaar");
+        labels = new ArrayList<>();
+
+        labels.add(new JLabel("Gemaakt door:"));
+        labels.add(new JLabel("Jeroen"));
+        labels.add(new JLabel("Allan"));
+        labels.add(new JLabel("Wesley"));
+        labels.add(new JLabel("Jelmer"));
+        labels.add(new JLabel("Ruben"));
+        labels.add(new JLabel("Maarten"));
+        labels.add(new JLabel("Een beetje Omar"));
+        labels.add(new JLabel(""));
+
+        this.stopBtn = new JButton("Afsluiten");
         this.gameScreen = gameScreen;
 
-        gameScreen.stopAudio();
+        this.gameScreen.stopAudio();
 
         this.creditsView = new UNView();
 
         this.setStyling();
 
+        for (JLabel lbl : labels)
+        {
+            lbl.setForeground(Color.white);
+            lbl.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+            lbl.setHorizontalAlignment(JLabel.CENTER);
+            creditsView.add(lbl);
+        }
+
         creditsView.add(stopBtn, BorderLayout.SOUTH);
-        creditsView.add(label, BorderLayout.NORTH);
+
 
         stopBtn.addActionListener(new UNButtonListener(){
             @Override
@@ -54,16 +73,8 @@ public class UNCreditsView extends JPanel
         });
 
         this.add(creditsView);
-    }
+        this.gameScreen.switchMusic("credits", false);
 
-    private void loadLevel(int level)
-    {
-        levelLoader = new UNLevelLoader(this.gameScreen);
-        levelLoader.loadLevel(level);
-    }
-
-    public JPanel getPanel() {
-        return this;
     }
 
     private void setStyling()
@@ -76,15 +87,14 @@ public class UNCreditsView extends JPanel
         /**
          * Credits styling
          */
+        this.creditsView.setLayout(new GridLayout(0,1));
         this.creditsView.setBackground(UNColor.BLACK_COLOR);
         this.creditsView.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         /**
          * Label Styling
          */
-        this.label.setForeground(Color.white);
-        this.label.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
-        this.label.setHorizontalAlignment(JLabel.CENTER);
+
 
         /**
          * Button Styling
@@ -100,13 +110,5 @@ public class UNCreditsView extends JPanel
          */
         this.stopBtn.setFocusPainted(false);
         this.stopBtn.setBorderPainted(false);
-    }
-
-    public UNLevelLoader getLevelLoader() {
-        return this.levelLoader;
-    }
-
-    public void setLevelLoader(UNLevelLoader levelLoader) {
-        this.levelLoader = levelLoader;
     }
 }

@@ -236,6 +236,7 @@ public class UNResourceLoader
         music.put("song2", TinySound.loadMusic("audio/song2.wav"));         // Wooooohoooooooo! When I feel heavy-metal!!!
         music.put("avalange", TinySound.loadMusic("audio/avalange.wav"));
         music.put("the-end", TinySound.loadMusic("audio/the-end.wav"));
+        music.put("credits", TinySound.loadMusic("audio/credits.wav"));
     }
 
     private void loadSound()
