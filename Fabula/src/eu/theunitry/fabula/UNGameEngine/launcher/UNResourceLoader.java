@@ -69,6 +69,18 @@ public class UNResourceLoader
         sprites.put("2:1:1:3", this.getSprite("levels/1/blobby-3"));
         sprites.put("2:1:2", this.getSprite("levels/1/bomb"));
 
+        sprites.put("2:1:3:0", this.getSprite("levels/1/blobby-dying-0"));
+        sprites.put("2:1:3:1", this.getSprite("levels/1/blobby-dying-1"));
+        sprites.put("2:1:3:2", this.getSprite("levels/1/blobby-dying-2"));
+        sprites.put("2:1:3:3", this.getSprite("levels/1/blobby-dying-3"));
+        sprites.put("2:1:3:4", this.getSprite("levels/1/blobby-dying-4"));
+        sprites.put("2:1:3:5", this.getSprite("levels/1/blobby-dying-5"));
+        sprites.put("2:1:3:6", this.getSprite("levels/1/blobby-dying-6"));
+        sprites.put("2:1:3:7", this.getSprite("levels/1/blobby-dying-7"));
+        sprites.put("2:1:3:8", this.getSprite("levels/1/blobby-dying-8"));
+
+
+
         /**
          * Level 3
          */

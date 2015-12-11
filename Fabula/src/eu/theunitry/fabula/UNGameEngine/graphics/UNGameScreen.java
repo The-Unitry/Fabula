@@ -93,6 +93,12 @@ public class UNGameScreen extends UNObject
         this.getMusic().get("intro").setVolume(0.1);
     }
 
+    public void switchToCredits()
+    {
+        this.switchPanel(new UNCreditsView(this));
+        this.stopAudio();
+    }
+
     public void switchMusic(String index, boolean loop)
     {
         unResourceLoader.music.get("intro").stop();

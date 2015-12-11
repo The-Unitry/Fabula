@@ -28,6 +28,8 @@ public class Level1 extends UNLevel
     private String lastHelp;
     public UNGraphicsObject blobby;
     public ArrayList<UNGraphicsObject> bombs;
+    private ArrayList<Integer> answers;
+    private ArrayList<JLabel> answerLabels;
 
     /**
      * Level 1
@@ -42,8 +44,16 @@ public class Level1 extends UNLevel
 
         this.need = 3 + new Random().nextInt(3);
 
+        int num1 = 4;
+        int num2 = 2;
+        int num3 = 3;
+
+        String question = "(" + String.valueOf(num1) + " + " + String.valueOf(num2) + ") x " + String.valueOf(num3);
+
+        int correctAnswer = (num1 + num2) * num3;
+
         // Load questions & help texts
-        this.setQuestion("De geheime formule is 4 + 8 * 3. Klik op de juiste bom! Snel!");
+        this.setQuestion("De geheime formule is " + question + ". Klik op de juiste bom! Snel!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
         this.setHelp("Blobby probeert de wereld te vernietigen. We moeten haar neerhalen!");
@@ -61,10 +71,29 @@ public class Level1 extends UNLevel
         this.winning = false;
         this.lastHelp = getHelp();
         bombs = new ArrayList<>();
+        answerLabels = new ArrayList<>();
 
-        bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 340, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        answerLabels.add(new JLabel(String.valueOf(correctAnswer - 2)));
+        answerLabels.add(new JLabel(String.valueOf(correctAnswer)));
+        answerLabels.add(new JLabel(String.valueOf(correctAnswer + 3)));
+
+        for (JLabel label : answerLabels)
+        {
+            label.setForeground(UNColor.WHITE_COLOR);
+            label.setFont(new Font("Minecraftia", Font.PLAIN, 20));
+        }
+
         bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 240, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        answerLabels.get(0).setBounds(bombs.get(0).getX() + 17, bombs.get(0).getY(), 64, 64);
+        this.add(answerLabels.get(0));
+        bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 340, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        answerLabels.get(1).setBounds(bombs.get(1).getX() + 17, bombs.get(1).getY(), 64, 64);
+        this.add(answerLabels.get(1));
         bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 440, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        answerLabels.get(2).setBounds(bombs.get(2).getX() + 17, bombs.get(2).getY(), 64, 64);
+        this.add(answerLabels.get(2));
+
+
 
         for (UNGraphicsObject bomb : bombs)
         {
@@ -148,17 +177,37 @@ public class Level1 extends UNLevel
                 }
                 touch = 0;
                 winning = (touch == need);
-                for(UNGraphicsObject bomb : bombs)
+                if(bombs.get(1).isMouseClick())
                 {
-                    if (bomb.isMouseClick())
-                    {
-                        bomb.setMouseClick(false);
-                    }
+                    bombs.get(1).setMouseClick(false);
+                    System.out.println("test");
+                    timer.stop();
+                    die();
                 }
             }
         });
 
 
+
+        timer.start();
+    }
+
+    public void die()
+    {
+        timer = new Timer(200, new ActionListener() {
+            int i = 0;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(i < 8) {
+                    blobby.setImage(getGameScreen().getSprites().get("2:1:3:" + String.valueOf(i)));
+                    i++;
+                } else {
+                    blobby.setHeight(0);
+                    blobby.setWidth(0);
+                    getGameScreen().switchToCredits();
+                }
+            }
+        });
 
         timer.start();
     }
