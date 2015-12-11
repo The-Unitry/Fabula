@@ -159,8 +159,6 @@ public class Level1 extends UNLevel
             }
         });
 
-        this.getPanel().add(button);
-
         timer = new Timer(100, new ActionListener() {
             int i = blobby.getY();
             int frame = 0;
