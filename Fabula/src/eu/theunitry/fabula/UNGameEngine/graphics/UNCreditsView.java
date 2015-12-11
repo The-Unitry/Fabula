@@ -5,6 +5,9 @@ import eu.theunitry.fabula.UNGameEngine.graphics.UNColor;
 import eu.theunitry.fabula.UNGameEngine.graphics.UNView;
 import eu.theunitry.fabula.UNGameEngine.launcher.UNLevelLoader;
 import eu.theunitry.fabula.UNGameEngine.objects.UNButtonListener;
+import kuusisto.tinysound.Music;
+import kuusisto.tinysound.Sound;
+import kuusisto.tinysound.TinySound;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,8 +76,8 @@ public class UNCreditsView extends JPanel
         });
 
         this.add(creditsView);
-        this.gameScreen.switchMusic("credits", false);
-
+        Sound creditsMusic = TinySound.loadSound("audio/credits.wav");
+        creditsMusic.play();
     }
 
     private void setStyling()

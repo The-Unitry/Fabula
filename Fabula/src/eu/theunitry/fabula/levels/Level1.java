@@ -44,9 +44,12 @@ public class Level1 extends UNLevel
 
         this.need = 3 + new Random().nextInt(3);
 
-        int num1 = 4;
-        int num2 = 2;
-        int num3 = 3;
+        Random rn = new Random();
+        int max = 5;
+        int min = 2;
+        int num1 = rn.nextInt(max - min + 1) + min;
+        int num2 = rn.nextInt(max - min + 1) + min;
+        int num3 = rn.nextInt(max - min + 1) + min;
 
         String question = "(" + String.valueOf(num1) + " + " + String.valueOf(num2) + ") x " + String.valueOf(num3);
 
@@ -202,9 +205,13 @@ public class Level1 extends UNLevel
                     blobby.setImage(getGameScreen().getSprites().get("2:1:3:" + String.valueOf(i)));
                     i++;
                 } else {
-                    blobby.setHeight(0);
-                    blobby.setWidth(0);
-                    getGameScreen().switchToCredits();
+                    if(i != 9001) {
+                        blobby.setHeight(0);
+                        blobby.setWidth(0);
+                        getGameScreen().switchToCredits();
+                        i = 9001;
+                    }
+
                 }
             }
         });
