@@ -45,7 +45,8 @@ public class UNLauncher extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 gameScreen.setAdventure(true);
-                loadLevel(1 + new Random().nextInt(11));
+                int level = 3 + new Random().nextInt(9);
+                loadLevel(level);
             }
         });
 

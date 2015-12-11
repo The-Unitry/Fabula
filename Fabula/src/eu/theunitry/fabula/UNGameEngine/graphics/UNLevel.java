@@ -57,9 +57,9 @@ public abstract class UNLevel extends UNGraphicsView
                 if (this.getGameScreen().isAdventure())
                 {
                     this.getGameScreen().addLevel();
-                    int newLevel = 1 + new Random().nextInt(11);
+                    int newLevel = 3 + new Random().nextInt(9);
                     while (newLevel == currentLevel) {
-                        newLevel = 1 + new Random().nextInt(11);
+                        newLevel = 3 + new Random().nextInt(9);
                     }
                     this.getGameScreen().getLauncher().getLevelLoader().switchToLevel(newLevel);
                 }
