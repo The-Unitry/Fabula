@@ -27,6 +27,7 @@ public class Level1 extends UNLevel
     private int need, touch;
     private String lastHelp;
     public UNGraphicsObject blobby;
+    public ArrayList<UNGraphicsObject> bombs;
 
     /**
      * Level 1
@@ -42,10 +43,10 @@ public class Level1 extends UNLevel
         this.need = 3 + new Random().nextInt(3);
 
         // Load questions & help texts
-        this.setQuestion("Oh nee! Blobby probeert de wereld te vernietigen. Stop hem!");
+        this.setQuestion("De geheime formule is 4 + 8 * 3. Klik op de juiste bom! Snel!");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
-        this.setHelp("Om het wapen af te vuren moet je het goede draadje doorknippen");
+        this.setHelp("Blobby probeert de wereld te vernietigen. We moeten haar neerhalen!");
 
         //  Set resources/audio
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
@@ -59,6 +60,16 @@ public class Level1 extends UNLevel
         // Set variables
         this.winning = false;
         this.lastHelp = getHelp();
+        bombs = new ArrayList<>();
+
+        bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 340, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 240, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+        bombs.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 440, 350, gameScreen.getSprites().get("2:1:2"), false, 64, 64));
+
+        for (UNGraphicsObject bomb : bombs)
+        {
+            this.addObject(bomb);
+        }
 
         this.button = new JButton("Vuren!");
 
@@ -137,8 +148,17 @@ public class Level1 extends UNLevel
                 }
                 touch = 0;
                 winning = (touch == need);
+                for(UNGraphicsObject bomb : bombs)
+                {
+                    if (bomb.isMouseClick())
+                    {
+                        bomb.setMouseClick(false);
+                    }
+                }
             }
         });
+
+
 
         timer.start();
     }
