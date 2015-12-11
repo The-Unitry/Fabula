@@ -64,7 +64,7 @@ public class UNLauncher extends JPanel
 
         ArrayList<JButton> levelButtons = new ArrayList<>();
 
-        for(int i = 0; i <= 11; i++) levelButtons.add(new JButton("Level " + i));
+        for(int i = 1; i <= 11; i++) levelButtons.add(new JButton("Level " + i));
 
         for (JButton btn : levelButtons)
         {
