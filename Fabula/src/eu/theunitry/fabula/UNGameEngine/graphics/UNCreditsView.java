@@ -66,18 +66,19 @@ public class UNCreditsView extends JPanel
 
         creditsView.add(stopBtn, BorderLayout.SOUTH);
 
+        this.add(creditsView);
+        Sound creditsMusic = TinySound.loadSound("audio/credits.wav");
+        creditsMusic.play();
 
         stopBtn.addActionListener(new UNButtonListener(){
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                System.exit(0);
+                creditsMusic.stop();
+                gameScreen.switchToLauncher();
+
             }
         });
-
-        this.add(creditsView);
-        Sound creditsMusic = TinySound.loadSound("audio/credits.wav");
-        creditsMusic.play();
     }
 
     private void setStyling()
