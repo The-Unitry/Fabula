@@ -36,14 +36,11 @@ public class UNWindow extends UNObject
     {
         ImageIcon img = new ImageIcon("res/icons/icon.png");
         this.frame.setTitle(this.TITLE);
-        //this.frame.setSize(this.WIDTH, this.HEIGHT);
         this.frame.getContentPane().setPreferredSize(new Dimension(this.WIDTH, this.HEIGHT));
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setResizable(false);
         this.frame.setLocationRelativeTo(null);
         this.frame.setIconImage(img.getImage());
-
-
     }
 
     public void addPanel(JPanel panel)

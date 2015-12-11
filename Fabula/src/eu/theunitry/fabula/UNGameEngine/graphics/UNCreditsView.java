@@ -44,7 +44,6 @@ public class UNCreditsView extends JPanel
         labels.add(new JLabel("Jelmer"));
         labels.add(new JLabel("Ruben"));
         labels.add(new JLabel("Maarten"));
-        labels.add(new JLabel("Een beetje Omar"));
         labels.add(new JLabel(""));
 
         this.stopBtn = new JButton("Afsluiten");
