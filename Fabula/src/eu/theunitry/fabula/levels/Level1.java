@@ -306,6 +306,7 @@ public class Level1 extends UNLevel
                     {
                         hasShieldUp = true;
                         addObject(shield);
+                        getHelper().setState(4);
                         getGameScreen().getSounds().get("blocked").play(0.1);
                     }
                 }
@@ -316,6 +317,7 @@ public class Level1 extends UNLevel
                         showExplosion = true;
                         explosion.setAngle(new Random().nextInt(360));
                         addObject(explosion);
+                        getHelper().setState(3);
                         getGameScreen().getSounds().get("explosion").play(0.1);
                     }
                 }
