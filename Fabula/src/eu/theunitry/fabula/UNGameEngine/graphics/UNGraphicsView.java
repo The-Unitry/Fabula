@@ -163,6 +163,7 @@ public class UNGraphicsView extends JPanel
     public void setQuestion(String question)
     {
         this.question = question;
+        this.questionDraw = "";
     }
 
     public String getQuestion()

@@ -16,7 +16,6 @@ import java.util.Random;
 public abstract class UNLevel extends UNGraphicsView
 {
     private boolean playerHasWon = false;
-    private String question;
     private ArrayList<String> helpList;
     private int mistakes;
 
@@ -75,7 +74,9 @@ public abstract class UNLevel extends UNGraphicsView
         }
         else
         {
-            getGameScreen().switchToLauncher();
+            getGameScreen().setAdventure(false);
+            this.getGameScreen().getLauncher().getLevelLoader().switchToLevel(1);
+            //getGameScreen().switchToLauncher();
         }
     }
 
@@ -87,16 +88,6 @@ public abstract class UNLevel extends UNGraphicsView
     public void setPlayerHasWon(boolean playerHasWon)
     {
         this.playerHasWon = playerHasWon;
-    }
-
-    public String getQuestion()
-    {
-        return question;
-    }
-
-    public void setQuestion(String question)
-    {
-        this.question = question;
     }
 
     public void addHelp(String help)

@@ -242,7 +242,7 @@ public class Level6 extends UNLevel
                         else
                         {
                             addMistake();
-                            if (getMistakes() < 3)
+                            if (getMistakes() < 2)
                             {
                                 getHelper().setState(4);
                                 while (getLastHelp() == getHelp())
@@ -272,8 +272,8 @@ public class Level6 extends UNLevel
                             else
                             {
                                 getHelper().setState(4);
-                                setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballAnswers().get(0) + " plus " +
-                                        getSnowballTexts().get(1)  + " plus " + getSnowballAnswers().get(2) + " is " + getAnswer() + "."
+                                setHelp("Jammer, het was " + getAnswer() + ". Want " + getSnowballTexts().get(0).getText() + " plus " +
+                                        getSnowballTexts().get(1).getText()  + " plus " + getSnowballTexts().get(2).getText() + " is " + getAnswer() + "."
                                 );
                                 removeObject(getSnowballAnswers().get(0));
                                 removeObject(getSnowballAnswers().get(1));
@@ -283,7 +283,7 @@ public class Level6 extends UNLevel
                                 {
                                     remove(possibleAnswer);
                                 }
-
+                                add(button);
                                 button.setText("Doorgaan");
                             }
                         }

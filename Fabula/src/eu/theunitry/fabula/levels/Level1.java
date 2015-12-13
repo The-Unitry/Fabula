@@ -23,11 +23,11 @@ public class Level1 extends UNLevel
 {
     private Timer timer;
     private JButton button;
-    private boolean winning;
-    private int need, touch;
+    private boolean winning, hasShieldUp, showExplosion, alarm;
+    private int need, touch, xstart, ystart, correctAnswer, clicked;
     private String lastHelp;
-    public UNGraphicsObject blobby;
-    public ArrayList<UNGraphicsObject> bombs;
+    public UNGraphicsObject blobby, shield, explosion, blobbyBomb;
+    public ArrayList<UNGraphicsObject> bombs, blobbyHP;
     private ArrayList<Integer> answers;
     private ArrayList<JLabel> answerLabels;
 
@@ -44,41 +44,63 @@ public class Level1 extends UNLevel
 
         this.need = 3 + new Random().nextInt(3);
 
-        Random rn = new Random();
+        blobbyHP = new ArrayList<UNGraphicsObject>();
+        answerLabels = new ArrayList<>();
+
+        answerLabels.add(new JLabel());
+        answerLabels.add(new JLabel());
+        answerLabels.add(new JLabel());
+
+        /*Random rn = new Random();
         int max = 5;
         int min = 2;
         int num1 = rn.nextInt(max - min + 1) + min;
         int num2 = rn.nextInt(max - min + 1) + min;
         int num3 = rn.nextInt(max - min + 1) + min;
 
+
         String question = "(" + String.valueOf(num1) + " + " + String.valueOf(num2) + ") x " + String.valueOf(num3);
 
-        int correctAnswer = (num1 + num2) * num3;
+        correctAnswer = (num1 + num2) * num3;*/
+
+        changeQuestion();
 
         // Load questions & help texts
-        this.setQuestion("De geheime formule is " + question + ". Klik op de juiste bom! Snel!");
+        //this.setQuestion("Wat is " + question + "?");
         this.addHelp("Jammer! Je moet " + need + " appels in de mand stoppen");
         this.addHelp("Helaas! Er moeten " + need + " appels in de mand zitten");
-        this.setHelp("Blobby probeert de wereld te vernietigen. We moeten haar neerhalen!");
+        this.setHelp("Blobby probeert de wereld te vernietigen. Klik op het juiste antwoord!");
 
         //  Set resources/audio
         this.setBackgroundImage(gameScreen.unResourceLoader.backgrounds.get("the-end"));
         this.blobby = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, -50, gameScreen.getSprites().get("2:1:1:1"), false, 38 * 3, 70 * 3);
-
+        this.shield = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, 90, gameScreen.getSprites().get("2:1:5"), false, 38 * 3, 70 * 3);
+        this.explosion = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 320, 90, gameScreen.getSprites().get("2:1:6"), false, 36 * 3, 34 * 3);
+        this.blobbyBomb = new UNGraphicsObject(gameScreen.getWindow().getFrame(), 160 + new Random().nextInt(320) , -100, gameScreen.getSprites().get("2:1:7"), false, 16 * 3, 28 * 3);
+        this.hasShieldUp = false;
+        this.showExplosion = false;
+        this.clicked = -1;
         this.addObject(blobby);
+        this.addObject(blobbyBomb);
 
         gameScreen.getMusic().get("the-end").play(true);
         gameScreen.getMusic().get("the-end").setVolume(0.1);
 
+        gameScreen.getMusic().get("alarm").setVolume(0.05);
+
         // Set variables
         this.winning = false;
         this.lastHelp = getHelp();
-        bombs = new ArrayList<>();
-        answerLabels = new ArrayList<>();
+        this.bombs = new ArrayList<>();
+        this.alarm = false;
 
-        answerLabels.add(new JLabel(String.valueOf(correctAnswer - 2)));
-        answerLabels.add(new JLabel(String.valueOf(correctAnswer)));
-        answerLabels.add(new JLabel(String.valueOf(correctAnswer + 3)));
+        for (int i = 0; i < 3; i++)
+        {
+            blobbyHP.add(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 32 + (i * 40), 96, gameScreen.getSprites().get("2:1:4:0"), false, 32, 32));
+            addObject(new UNGraphicsObject(gameScreen.getWindow().getFrame(), 32 + (i * 40), 96, gameScreen.getSprites().get("2:1:4:1"), false, 32, 32));
+            addObject(blobbyHP.get(i));
+        }
+
 
         for (JLabel label : answerLabels)
         {
@@ -121,9 +143,9 @@ public class Level1 extends UNLevel
 
         // Speaks for itself
         button.addActionListener(e -> {
-            if (button.getText().equals("Doorgaan"))
+            if (button.getText().equals("Opnieuw"))
             {
-                levelDone(5);
+                levelDone(1);
             }
             if (isHelperDoneTalking()) {
                 if (winning) {
@@ -174,15 +196,62 @@ public class Level1 extends UNLevel
 
                 if(i <= 90) blobby.setY(i = i + 10);
                 if(i >= 90) {
+                    if (xstart == 0)
+                    {
+                        xstart = blobby.getX();
+                        ystart = blobby.getY();
+                    }
                     shakeBlobby();
                 }
                 touch = 0;
                 winning = (touch == need);
-                if(bombs.get(1).isMouseClick())
+                if (clicked == -1)
                 {
-                    bombs.get(1).setMouseClick(false);
-                    timer.stop();
-                    die();
+                    checkBombClick(0);
+                    checkBombClick(1);
+                    checkBombClick(2);
+                }
+                else
+                {
+                    checkBombClick(clicked);
+                    int temp1, temp2;
+                    temp1 = clicked - 1;
+                    temp2 = clicked + 1;
+                    if (temp1 < 0) {temp1 += 3;}
+                    if (temp2 < 0) {temp2 += 3;}
+                    if (temp1 > 2) {temp1 -= 3;}
+                    if (temp2 > 2) {temp2 -= 3;}
+                    bombs.get(temp1).setMouseClick(false);
+                    bombs.get(temp2).setMouseClick(false);
+                }
+
+                /*if (new Random().nextInt(10) == 1 && !alarm)
+                {
+                    alarm = true;
+                    gameScreen.getMusic().get("alarm").play(true);
+                }*/
+
+                if (alarm)
+                {
+                    if (blobbyBomb.getY() < 300)
+                    {
+                        blobbyBomb.setY(blobbyBomb.getY() + 6);
+                        if (blobbyBomb.isMouseClick())
+                        {
+                            blobbyBomb.setMouseClick(false);
+                            blobbyBomb.setY(-100);
+                            blobbyBomb.setX(160 + new Random().nextInt(320));
+                            gameScreen.getMusic().get("alarm").stop();
+                            alarm = false;
+                        }
+                    }
+                    else
+                    {
+                        gameScreen.getMusic().get("alarm").stop();
+                        alarm = false;
+                        button.setText("Opnieuw");
+                        add(button);
+                    }
                 }
             }
         });
@@ -216,23 +285,141 @@ public class Level1 extends UNLevel
         timer.start();
     }
 
+    public void checkBombClick(int bombID)
+    {
+        if(bombs.get(bombID).isMouseClick())
+        {
+            if (clicked == -1) {
+                clicked = bombID;
+                getGameScreen().getSounds().get("swoosh").play(0.1);
+            }
+            if (bombs.get(bombID).getWidth() > 10 && !hasShieldUp || hasShieldUp && bombs.get(bombID).getWidth() > 20)
+            {
+                bombs.get(bombID).setX(bombs.get(bombID).getX() + 1 + ((blobby.getX() + blobby.getWidth() / 2) - (bombs.get(bombID).getX() + bombs.get(bombID).getWidth() / 2)) / 10);
+                bombs.get(bombID).setY(bombs.get(bombID).getY() - (int) (bombs.get(bombID).getY() / 1.1 - blobby.getY()) / 10);
+                bombs.get(bombID).setWidth(bombs.get(bombID).getWidth() - 2);
+                bombs.get(bombID).setHeight(bombs.get(bombID).getHeight() - 2);
+
+                if (Integer.parseInt(answerLabels.get(bombID).getText()) != correctAnswer)
+                {
+                    if (bombs.get(bombID).getWidth() < 32 && !hasShieldUp)
+                    {
+                        hasShieldUp = true;
+                        addObject(shield);
+                        getGameScreen().getSounds().get("blocked").play(0.1);
+                    }
+                }
+                else
+                {
+                    if (bombs.get(bombID).getWidth() < 20 && !showExplosion)
+                    {
+                        showExplosion = true;
+                        explosion.setAngle(new Random().nextInt(360));
+                        addObject(explosion);
+                        getGameScreen().getSounds().get("explosion").play(0.1);
+                    }
+                }
+            }
+            else
+            {
+                if (Integer.parseInt(answerLabels.get(bombID).getText()) == correctAnswer)
+                {
+                    removeObject(blobbyHP.get(blobbyHP.size() - 1));
+                    blobbyHP.remove(blobbyHP.get(blobbyHP.size() - 1));
+                    showExplosion = false;
+                    removeObject(explosion);
+                }
+                else
+                {
+                    hasShieldUp = false;
+                    removeObject(shield);
+                }
+                changeQuestion();
+                bombs.get(bombID).setX(240 + (100 * bombID));
+                bombs.get(bombID).setY(350);
+                bombs.get(bombID).setWidth(64);
+                bombs.get(bombID).setHeight(64);
+                bombs.get(bombID).setMouseClick(false);
+                clicked = -1;
+
+                if (blobbyHP.size() == 0)
+                {
+                    timer.stop();
+                    die();
+                }
+            }
+        }
+    }
+
     public void shakeBlobby()
     {
-        if(Math.random() < 0.5)
+        if(Math.random() < 0.5 && blobby.getX() - xstart < 10)
         {
             blobby.setX(blobby.getX() + 1);
         }
-        if(Math.random() < 0.5)
+        if(Math.random() < 0.5 && blobby.getY() - ystart < 10)
         {
             blobby.setY(blobby.getY() + 1);
         }
-        if(Math.random() < 0.5)
+        if(Math.random() < 0.5 && blobby.getX() - xstart > -10)
         {
             blobby.setX(blobby.getX() - 1);
         }
-        if(Math.random() < 0.5)
+        if(Math.random() < 0.5 && blobby.getY() - ystart > -10)
         {
             blobby.setY(blobby.getY() - 1);
+        }
+    }
+
+    public void changeQuestion()
+    {
+        Random rn = new Random();
+        int max = 5;
+        int min = 2;
+        int num1 = rn.nextInt(max - min + 1) + min;
+        int num2 = rn.nextInt(max - min + 1) + min;
+        int num3 = rn.nextInt(max - min + 1) + min;
+
+        boolean plus = rn.nextBoolean();
+        String question = "";
+        if (plus)
+        {
+            question = "(" + String.valueOf(num1) + " + " + String.valueOf(num2) + ") x " + String.valueOf(num3);
+            correctAnswer = (num1 + num2) * num3;
+        }
+        else
+        {
+            num2 = Math.min(num2, num1 - 1);
+            question = "(" + String.valueOf(num1) + " - " + String.valueOf(num2) + ") x " + String.valueOf(num3);
+            correctAnswer = (num1 - num2) * num3;
+        }
+
+        setQuestion("Wat is " + question + "?");
+        boolean correctUsed = false;
+        int wrongUsed = 0;
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == 2 && !correctUsed)
+            {
+                answerLabels.get(i).setText(String.valueOf(correctAnswer));
+            }
+            else
+            {
+                int randomAnswer = correctAnswer - 3 + rn.nextInt(6);
+                while (randomAnswer == correctAnswer && correctUsed || randomAnswer == wrongUsed)
+                {
+                    randomAnswer = correctAnswer - 3 + rn.nextInt(6);
+                }
+                if (randomAnswer != correctAnswer)
+                {
+                    wrongUsed = randomAnswer;
+                }
+                else
+                {
+                    correctUsed = true;
+                }
+                answerLabels.get(i).setText(String.valueOf(randomAnswer));
+            }
         }
     }
 }

@@ -79,6 +79,13 @@ public class UNResourceLoader
         sprites.put("2:1:3:7", this.getSprite("levels/1/blobby-dying-7"));
         sprites.put("2:1:3:8", this.getSprite("levels/1/blobby-dying-8"));
 
+        sprites.put("2:1:4:0", this.getSprite("levels/1/heart-0"));
+        sprites.put("2:1:4:1", this.getSprite("levels/1/heart-1"));
+
+        sprites.put("2:1:5", this.getSprite("levels/1/shield"));
+        sprites.put("2:1:6", this.getSprite("levels/1/explosion"));
+        sprites.put("2:1:7", this.getSprite("levels/1/blobby-bomb"));
+
 
 
         /**
@@ -237,11 +244,15 @@ public class UNResourceLoader
         music.put("avalange", TinySound.loadMusic("audio/avalange.wav"));
         music.put("the-end", TinySound.loadMusic("audio/the-end.wav"));
         music.put("credits", TinySound.loadMusic("audio/credits.wav"));
+        music.put("alarm", TinySound.loadMusic("audio/alarm.wav"));
     }
 
     private void loadSound()
     {
         sounds.put("gibberish", TinySound.loadSound("audio/gibberish.wav"));
+        sounds.put("explosion", TinySound.loadSound("audio/explosion.wav"));
+        sounds.put("blocked", TinySound.loadSound("audio/blocked.wav"));
+        sounds.put("swoosh", TinySound.loadSound("audio/swoosh.wav"));
     }
 
     public Image getSprite(String folder, String file)
