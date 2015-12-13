@@ -307,6 +307,15 @@ public class Level1 extends UNLevel
                         hasShieldUp = true;
                         addObject(shield);
                         getHelper().setState(4);
+                        addMistake();
+                        if (getMistakes() >= 5) {
+                            button.setText("Opnieuw");
+                            add(button);
+                            setHelp("Jammer, Blobby was te sterk. Probeer het opnieuw!");
+                            removeObject(bombs.get(0));
+                            removeObject(bombs.get(1));
+                            removeObject(bombs.get(2));
+                        }
                         getGameScreen().getSounds().get("blocked").play(0.1);
                     }
                 }
