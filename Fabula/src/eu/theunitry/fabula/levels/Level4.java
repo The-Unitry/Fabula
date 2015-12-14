@@ -159,44 +159,45 @@ public class Level4 extends UNLevel
                                 touch++;
                             }
                         }
-                        if (touch == answer){
-                            getHelper().setState(3);
-                            if (gameScreen.getSubLevel4() == 5) {
-                                button.setText("Lanceren!");
-                                setHelp("Hoera! Nu kunnen we naar de maan.");
-                            }
-                            else{
-                                setHelp("Jij kan goed rekenen!");
-                                winning = true;
-                            }
-                            for (UNGraphicsObject ge : gems) {
-                                removeObject(ge);
-                            }
-
+                    }
+                    if (touch == answer){
+                        getHelper().setState(3);
+                        if (gameScreen.getSubLevel4() == 5) {
+                            button.setText("Lanceren!");
+                            setHelp("Hoera! Nu kunnen we naar de maan.");
                         }
                         else{
-                            addMistake();
-                            if (getMistakes() > 3) {
-                                button.setText("Doorgaan");
-                                getHelper().setState(4);
-                                if (touch < answer) {
-                                    setHelp("Bijna, er moest" + ((answer - touch == 1) ? "" : "en") + " nog " + (answer - touch) +
-                                                    " diamant" + ((answer - touch == 1) ? "" : "en") + " bij. Want " + g1 + " min " +
-                                                    g2 + " is " + answer + ". Jij had er " + touch + "."
-                                    );
-                                } else {
-                                    setHelp("Bijna, er moest" + ((touch - answer == 1) ? "" : "en") + " " + (touch - answer) +
-                                                    " diamant" + ((touch - answer == 1) ? "" : "en") + " af. Want " + g1 + " min " +
-                                                    g2 + " is " + answer + ". Jij had er " + touch + "."
-                                    );
+                            button.setText("Doorgaan");
+                            setHelp("Jij kan goed rekenen!");
+                            winning = true;
+                        }
+                        for (UNGraphicsObject ge : gems) {
+                            removeObject(ge);
+                        }
 
-                                }
+                    }
+                    else{
+                        addMistake();
+                        if (getMistakes() > 3) {
+                            button.setText("Doorgaan");
+                            getHelper().setState(4);
+                            if (touch < answer) {
+                                setHelp("Bijna, er moest" + ((answer - touch == 1) ? "" : "en") + " nog " + (answer - touch) +
+                                                " diamant" + ((answer - touch == 1) ? "" : "en") + " bij. Want " + g1 + " min " +
+                                                g2 + " is " + answer + ". Jij had er " + touch + "."
+                                );
+                            } else {
+                                setHelp("Bijna, er moest" + ((touch - answer == 1) ? "" : "en") + " " + (touch - answer) +
+                                                " diamant" + ((touch - answer == 1) ? "" : "en") + " af. Want " + g1 + " min " +
+                                                g2 + " is " + answer + ". Jij had er " + touch + "."
+                                );
 
-                                for (UNGraphicsObject ge : gems) {
-                                    ge.setClickable(false);
-                                }
-                                winning = false;
                             }
+
+                            for (UNGraphicsObject ge : gems) {
+                                ge.setClickable(false);
+                            }
+                            winning = false;
                         }
                     }
                 }
