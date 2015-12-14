@@ -275,6 +275,7 @@ public class Level3 extends UNLevel
                             }
                         }
                     }
+                    ufoAnswer.setMouseClick(false);
                 }
             }
             if (rocketIndex < 2)

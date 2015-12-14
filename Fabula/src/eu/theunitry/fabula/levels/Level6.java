@@ -288,6 +288,7 @@ public class Level6 extends UNLevel
                             }
                         }
                     }
+                    snowball.setMouseClick(false);
                 }
             }
         });
